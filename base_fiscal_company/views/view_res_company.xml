@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2015-Today GRAP (http://www.grap.coop)
+@author: Julien WESTE
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+
+<openerp><data>
+
+    <record id="view_res_company_search" model="ir.ui.view">
+        <field name="model">res.company</field>
+        <field name="arch" type="xml">
+            <search>
+               <field name="name" filter_domain="['|', ('name','ilike',self), ('code','=',self)]"/>
+                <field name="fiscal_type"/>
+                <field name="fiscal_company"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_res_company_tree" model="ir.ui.view">
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="colors">brown: fiscal_type=='fiscal_mother'; blue: fiscal_type=='fiscal_child'; black: fiscal_type=='normal'</attribute>
+            </xpath>
+            <field name="name" position="before">
+                <field name="code"/>
+            </field>
+            <field name="name" position="after">
+                <field name="fiscal_company"/>
+                <field name="fiscal_type" invisible="1"/>
+            </field>
+            <field name="partner_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_res_company_form" model="ir.ui.view">
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <field name="parent_id" position="after">
+                <field name="fiscal_type"/>
+                <field name="fiscal_company"/>
+                <field name="code"/>
+                <field name="administrative_department_email" />
+            </field>
+            <notebook position="inside">
+                <page string="Fiscal information">
+                    <field name="fiscal_childs" />
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+</data></openerp>
+

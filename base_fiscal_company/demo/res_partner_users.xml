@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2015-Today GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+
+<openerp><data>
+
+<!-- Updating base.user_root -->
+        <record model="res.users" id="base.user_root">
+            <field name="groups_id" eval="[
+                (4, ref('base.group_multi_company')),
+                (4, ref('base_fiscal_company.res_group_administrative_manager')),
+                (4, ref('base.group_sale_manager')),
+                (4, ref('base.group_no_one'))]"/>
+            <field name="company_ids" eval="[
+                (4, ref('base.main_company')),
+                (4, ref('company_fiscal_mother')),
+                (4, ref('company_fiscal_child_1')),
+                (4, ref('company_fiscal_child_2'))]"/>
+        </record>
+
+<!-- Create user associated to all companies and partner associated -->
+    <record model="res.partner" id="partner_accountant">
+        <field name="name">Accountant User</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <record model="res.users" id="user_accountant">
+        <field name="partner_id" ref="partner_accountant"/>
+        <field name="login">accountant</field>
+        <field name="password">accountant</field>
+        <field name="company_id" ref="company_fiscal_mother"/>
+        <field name="groups_id" eval="[
+            (4, ref('base.group_sale_manager')),
+            (4, ref('base.group_multi_company')),
+            (4, ref('base_fiscal_company.res_group_administrative_manager'))]"/>
+        <field name="company_ids" eval="[
+            (4, ref('company_fiscal_mother')),
+            (4, ref('company_fiscal_child_1')),
+            (4, ref('company_fiscal_child_2'))]"/>
+    </record>
+
+<!-- Create user associated to company 2 and partner associated -->
+    <record model="res.partner" id="partner_worker">
+        <field name="name">Worker User</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <record model="res.users" id="user_worker">
+        <field name="partner_id" ref="partner_worker"/>
+        <field name="login">worker</field>
+        <field name="password">worker</field>
+        <field name="company_id" ref="company_fiscal_child_2"/>
+        <field name="groups_id" eval="[
+            (4, ref('base.group_sale_manager')),
+            (4, ref('base.group_multi_company'))]"/>
+        <field name="company_ids" eval="[(4, ref('company_fiscal_child_2'))]"/>
+    </record>
+
+</data></openerp>

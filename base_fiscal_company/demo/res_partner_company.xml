@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2015-Today GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+
+<openerp><data>
+
+<!-- Updating base.main_company-->
+    <record model="res.company" id="base.main_company">
+        <field name="fiscal_type">normal</field>
+        <field name="fiscal_company" ref="base.main_company" />
+        <field name="code" >COM</field>
+    </record>
+
+<!-- Create fiscal mother company and partner associated -->
+    <record model="res.partner" id="partner_fiscal_mother">
+        <field name="name">Your Mother Company</field>
+        <field name="company_id" eval="None"/>
+        <field name="is_company" eval="True"/>
+    </record>
+
+    <record model="res.company" id="company_fiscal_mother">
+        <field name="name">Your Mother Company</field>
+        <field name="code">MOT</field>
+        <field name="partner_id" ref="partner_fiscal_mother"/>
+        <field name="fiscal_type">fiscal_mother</field>
+        <field name="administrative_department_email">administrative@mother-company.com</field>
+    </record>
+
+    <record model="res.partner" id="partner_fiscal_mother">
+        <field name="company_id" ref="company_fiscal_mother"/>
+    </record>
+    
+<!-- Create fiscal child company 1 and partner associated -->
+    <record model="res.partner" id="partner_fiscal_child_1">
+        <field name="name">Your Child Company 1 (Service)</field>
+        <field name="company_id" eval="None"/>
+        <field name="is_company" eval="True"/>
+    </record>
+
+    <record model="res.company" id="company_fiscal_child_1">
+        <field name="name">Your Child Company 1 (Service)</field>
+        <field name="code">CH1</field>
+        <field name="partner_id" ref="partner_fiscal_child_1"/>
+        <field name="parent_id" ref="company_fiscal_mother" />
+        <field name="fiscal_company" ref="company_fiscal_mother"/>
+        <field name="fiscal_type">fiscal_child</field>
+    </record>
+
+    <record model="res.partner" id="partner_fiscal_child_1">
+        <field name="company_id" ref="company_fiscal_child_1"/>
+    </record>
+
+<!-- Create fiscal child company 2 and partner associated -->
+    <record model="res.partner" id="partner_fiscal_child_2">
+        <field name="name">Your Child Company 2 (Production)</field>
+        <field name="company_id" eval="None"/>
+        <field name="is_company" eval="True"/>
+    </record>
+
+    <record model="res.company" id="company_fiscal_child_2">
+        <field name="name">Your Child Company 2 (Production)</field>
+        <field name="code">CH2</field>
+        <field name="partner_id" ref="partner_fiscal_child_2"/>
+        <field name="parent_id" ref="company_fiscal_mother" />
+        <field name="fiscal_company" ref="company_fiscal_mother"/>
+        <field name="fiscal_type">fiscal_child</field>
+    </record>
+
+    <record model="res.partner" id="partner_fiscal_child_2">
+        <field name="company_id" ref="company_fiscal_child_2"/>
+    </record>
+
+</data></openerp>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2015-Today GRAP (http://www.grap.coop)
+@author: Julien WESTE
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+
+<openerp><data>
+
+    <record id="view_res_company_create_wizard_form" model="ir.ui.view">
+        <field name="model">res.company.create.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create a New Company" version="7.0">
+                <field name="state" invisible="1"/>
+                <group col="4">
+                    <separator string="General Information" colspan="4"/>
+                    <field name="name"/>
+                    <field name="type" on_change="onchange_type_mother_company(type, mother_company)"/>
+                    <field name="mother_company" on_change="onchange_type_mother_company(type, mother_company)"/>
+                    <field name="code"/>
+                    <field name="company_id" invisible="1"/>
+                    <field name="fiscal_company" invisible="1"/>
+                </group>
+                <notebook>
+                    <page string="Accounting" states="init">
+                        <group>
+                        <field name="vat" attrs="{'invisible': [('type','not in',('associated'))]}"/>
+                        </group>
+                    </page>
+                </notebook>
+                <group states="done">
+                    <separator string="User Information" colspan="4"/>
+                    <field name="password" string="Password"/>
+                </group>
+                <footer>
+                    <div states="init">
+                        <button name="button_begin" string="Begin" type="object" class="oe_highlight"/>
+                        <span>or</span>
+                        <button special="cancel" string="Cancel" class="oe_link"/>
+                    </div>
+                    <div states="pending">
+                        <button name="button_finish" string="Finish" type="object" class="oe_highlight"/>
+                    </div>
+                    <div states="done">
+                        <button special="cancel" string="Close" class="oe_link"/>
+                    </div>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</data></openerp>
+
