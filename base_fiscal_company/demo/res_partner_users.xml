@@ -5,21 +5,21 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 
-<openerp><data>
+<odoo>
 
-<!-- Updating base.user_root -->
-        <record model="res.users" id="base.user_root">
-            <field name="groups_id" eval="[
-                (4, ref('base.group_multi_company')),
-                (4, ref('base_fiscal_company.res_group_administrative_manager')),
-                (4, ref('base.group_sale_manager')),
-                (4, ref('base.group_no_one'))]"/>
-            <field name="company_ids" eval="[
-                (4, ref('base.main_company')),
-                (4, ref('company_fiscal_mother')),
-                (4, ref('company_fiscal_child_1')),
-                (4, ref('company_fiscal_child_2'))]"/>
-        </record>
+    <record model="res.users" id="base.user_root">
+        <field name="groups_id" eval="[
+            (4, ref('base.group_no_one')),
+            (4, ref('base.group_multi_company')),
+            (4, ref('base_fiscal_company.fiscal_company_manager')),
+            ]"/>
+        <field name="company_ids" eval="[
+            (4, ref('base.main_company')),
+            (4, ref('company_fiscal_mother')),
+            (4, ref('company_fiscal_child_1')),
+            (4, ref('company_fiscal_child_2')),
+            ]"/>
+    </record>
 
 <!-- Create user associated to all companies and partner associated -->
     <record model="res.partner" id="partner_accountant">
@@ -32,14 +32,17 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
         <field name="login">accountant</field>
         <field name="password">accountant</field>
         <field name="company_id" ref="company_fiscal_mother"/>
-        <field name="groups_id" eval="[
-            (4, ref('base.group_sale_manager')),
-            (4, ref('base.group_multi_company')),
-            (4, ref('base_fiscal_company.res_group_administrative_manager'))]"/>
+        <field name="groups_id" eval="[(6, 0, [
+            ref('base.group_user'),
+            ref('base.group_partner_manager'),
+            ref('base.group_multi_company'),
+            ref('base_fiscal_company.fiscal_company_manager'),
+            ])]"/>
         <field name="company_ids" eval="[
             (4, ref('company_fiscal_mother')),
             (4, ref('company_fiscal_child_1')),
-            (4, ref('company_fiscal_child_2'))]"/>
+            (4, ref('company_fiscal_child_2')),
+            ]"/>
     </record>
 
 <!-- Create user associated to company 2 and partner associated -->
@@ -53,10 +56,9 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
         <field name="login">worker</field>
         <field name="password">worker</field>
         <field name="company_id" ref="company_fiscal_child_2"/>
-        <field name="groups_id" eval="[
-            (4, ref('base.group_sale_manager')),
-            (4, ref('base.group_multi_company'))]"/>
+        <field name="groups_id" eval="[(4, ref('base.group_multi_company'))]"/>
         <field name="company_ids" eval="[(4, ref('company_fiscal_child_2'))]"/>
     </record>
 
-</data></openerp>
+
+</odoo>

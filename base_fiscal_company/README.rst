@@ -17,16 +17,20 @@ companies. People in a child company should have access only to their activity.
 (account moves, customers, suppliers, products, etc...)
 
 In a fiscal and legal point of view, there is only one company (the parent one)
-so there is only on chart of accounts. So accounting moves of the child
+so there is only on chart of accounts. Accounting moves of the child
 companies are written in the child company, but associated to the account of
 the parent company.
 
 Companies feature
 -----------------
 
-* Add a trigram field on res_company
-* Add field 'fiscal_company' that and 'fiscal_type' in the table res_company;
-* A company can be 'normal', 'fiscal_mother' or 'fiscal_child';
+* Add a new field on company `fiscal_type`:
+    * `normal` : classical company
+    * `fiscal_mother`: CAE company, that can host many child companies
+    * `fiscal_child`: child company, hosted by the CAE
+
+* Add a new field on company `fiscal_code` that is required for fiscal
+  child companies, and that is used to identify simply a company.
 
 Add a wizard to create more easily child companies.
 
@@ -49,14 +53,8 @@ More information about CAE [FR]
 Limits / Roadmaps / TODO
 ------------------------
 
-- rename odoo-addons-cis -> odoo-addons-cae;
-- rename xxx_fiscal_company -> cae
-- rename 'fiscal_type' into cae_type : normal / cae_child / cae_parent
-- rename 'fiscal_company' into 'fiscal_company_id'
-
 * Created partner from users / companies, must be disabled by default.
   (maybe create a new module for that feature)
-* Add a m2m fields on company to have the list of users.
 
 Installation
 ============

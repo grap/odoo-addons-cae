@@ -6,49 +6,76 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 
-<openerp><data>
+<odoo>
 
     <record id="view_res_company_create_wizard_form" model="ir.ui.view">
         <field name="model">res.company.create.wizard</field>
         <field name="arch" type="xml">
-            <form string="Create a New Company" version="7.0">
-                <field name="state" invisible="1"/>
-                <group col="4">
-                    <separator string="General Information" colspan="4"/>
-                    <field name="name"/>
-                    <field name="type" on_change="onchange_type_mother_company(type, mother_company)"/>
-                    <field name="mother_company" on_change="onchange_type_mother_company(type, mother_company)"/>
-                    <field name="code"/>
+            <form>
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <group string="General Information" col="4">
+                    <field name="company_name" attrs="{'readonly': [('state', '!=', 'init')]}"/>
+                    <field name="fiscal_code" attrs="{'readonly': [('state', '!=', 'init')]}"/>
+                    <field name="fiscal_type" attrs="{'readonly': [('state', '!=', 'init')]}"/>
+                    <field name="fiscal_company_id" attrs="{'readonly': ['|', ('state', '!=', 'init'), ('fiscal_type', '!=', 'fiscal_child')]}"/>
+                    <field name="parent_company_id" attrs="{'readonly': ['|', ('state', '!=', 'init'), ('fiscal_type', '=', 'fiscal_child')]}"/>
                     <field name="company_id" invisible="1"/>
-                    <field name="fiscal_company" invisible="1"/>
+
                 </group>
                 <notebook>
-                    <page string="Accounting" states="init">
+                    <page string="Company Contact" states="init">
+                        <group col="4">
+                            <group colspan="2">
+                            <label for="street" string="Address"/>
+                            <div class="o_address_format">
+                                <field name="company_street" placeholder="Street..." class="o_address_street"/>
+                                <field name="company_street2" placeholder="Street 2..." class="o_address_street"/>
+                                <field name="company_city" placeholder="City" class="o_address_city"/>
+                                <field name="company_state_id" class="o_address_state" placeholder="State"/>
+                                <field name="company_zip" placeholder="ZIP" class="o_address_zip"/>
+                                <field name="company_country_id" placeholder="Country" class="o_address_country"/>
+                            </div>
+                            </group>
+                            <group colspan="2">
+                            <field name="company_website" widget="url"/>
+                            <field name="company_phone"/>
+                            <field name="company_email"/>
+                            </group>
+                        </group>
+
+                    </page>
+                    <page string="Administrative information">
                         <group>
-                        <field name="vat" attrs="{'invisible': [('type','not in',('associated'))]}"/>
+                            <field name="company_registry" attrs="{'readonly': ['|', ('state', '!=', 'init')]}"/>
+                            <field name="vat" attrs="{'readonly': ['|', ('state', '!=', 'init'), ('fiscal_type','=', ('fiscal_child'))]}"/>
+
+                        </group>
+                    </page>
+                    <page string="User Information" states="init">
+                        <field name="create_user"/>
+                        <group attrs="{'invisible': [('create_user', '=', False)]}">
+                            <field name="user_name" />
+                            <field name="user_login" />
+                            <field name="user_password" />
                         </group>
                     </page>
                 </notebook>
-                <group states="done">
-                    <separator string="User Information" colspan="4"/>
-                    <field name="password" string="Password"/>
-                </group>
                 <footer>
                     <div states="init">
-                        <button name="button_begin" string="Begin" type="object" class="oe_highlight"/>
-                        <span>or</span>
-                        <button special="cancel" string="Cancel" class="oe_link"/>
+                        <button name="button_begin" string="Begin" type="object" class="btn-primary"/>
+                        <button special="cancel" string="Cancel" class="btn-default"/>
                     </div>
                     <div states="pending">
-                        <button name="button_finish" string="Finish" type="object" class="oe_highlight"/>
+                        <button name="button_finish" string="Finish" type="object" class="btn-primary"/>
                     </div>
                     <div states="done">
-                        <button special="cancel" string="Close" class="oe_link"/>
+                        <button special="cancel" string="Close" class="btn-default"/>
                     </div>
                 </footer>
             </form>
         </field>
     </record>
 
-</data></openerp>
-
+</odoo>

@@ -7,197 +7,197 @@
 import string
 from random import choice
 
-from openerp.osv import fields
-from openerp.osv.orm import TransientModel
+from odoo import api, fields, models
+
+from .res_company import _RES_COMPANY_FISCAL_TYPE
 
 
-class ResCompanyCreateWizard(TransientModel):
+class ResCompanyCreateWizard(models.TransientModel):
     _name = 'res.company.create.wizard'
 
     _PASSWORD_SIZE = 8
 
-    _COMPANY_TYPE = [
-        ('integrated', 'Integrated Company'),
-        ('associated', 'Associated Company'),
-        # TODO ('mother', 'Mother'),
+    _STATE_SELECTION = [
+        ('init', 'Start'),
+        ('pending', 'Pending'),
+        ('done', 'Done'),
     ]
 
-    _columns = {
-        'state': fields.selection(
-            [('init', 'init'), ('pending', 'pending'), ('done', 'done')],
-            'Status', readonly=True),
-        'name': fields.char('Name', required=True, size=128),
-        'mother_company': fields.many2one(
-            'res.company', 'Mother Company', required=True,
-            domain="[('fiscal_type', '!=', 'fiscal_child')]"),
-        'company_id': fields.many2one(
-            'res.company', 'Company'),
-        'fiscal_company': fields.related(
-            'company_id', 'fiscal_company', type='many2one',
-            relation='res.company', string='Fiscal Company'),
-        'vat': fields.char(
-            'Tax ID', size=32),
-        'type': fields.selection(
-            _COMPANY_TYPE, 'Type', required=True),
-        'code': fields.char(
-            'Code', size=3, required=True,
-            help="""This field is used as a prefix to generate automatic and"""
-            """ unique reference for items (product, ...)."""
-            """Warning, changing this value will change the reference of all"""
-            """ items of this company.""",
-        ),
-        'password': fields.char(
-            'Password', size=_PASSWORD_SIZE, readonly=True),
-    }
+    state = fields.Selection(
+        selection=_STATE_SELECTION, string='State', readonly=True,
+        default='init')
+
+    company_name = fields.Char(string='Name', required=True)
+
+    fiscal_type = fields.Selection(
+        selection=_RES_COMPANY_FISCAL_TYPE, string='Fiscal Type',
+        required=True)
+
+    fiscal_code = fields.Char(
+        string='Fiscal Code', required=True)
+
+    fiscal_company_id = fields.Many2one(
+        comodel_name='res.company', string='Fiscal Company',
+        domain="[('fiscal_type', '=', 'fiscal_mother')]")
+
+    parent_company_id = fields.Many2one(
+        comodel_name='res.company', string='Parent Company',
+        domain="[('fiscal_type', '=', 'normal')]")
+
+    vat = fields.Char(string='Tax ID')
+
+    company_registry = fields.Char(string='Company Registry')
+
+    # Partner and company fields
+    company_street = fields.Char(string='Street')
+
+    company_street2 = fields.Char(string='Street complement')
+
+    company_city = fields.Char(string='City')
+
+    company_zip = fields.Char(string='ZIP')
+
+    company_state_id = fields.Many2one(
+        comodel_name='res.country.state', string='State')
+
+    company_country_id = fields.Many2one(
+        comodel_name='res.country', string='Country')
+
+    company_website = fields.Char(string='Website')
+
+    company_email = fields.Char(string='Email')
+
+    company_phone = fields.Char(string='Phone')
+
+    # User Fields
+    create_user = fields.Boolean(string='Create User')
+
+    user_name = fields.Char(string='Name')
+
+    user_login = fields.Char(string='Login')
+
+    user_password = fields.Char(string='Password')
+
+    # Technical hidden fields
+    company_id = fields.Many2one(comodel_name='res.company')
+
+    user_id = fields.Many2one(comodel_name='res.users')
 
     # Default Section
-    _defaults = {
-        'state': 'init',
-    }
+    def _default_user_password(self):
+        characters = string.ascii_letters + string.digits
+        return "".join(choice(characters) for x in range(8))
 
-    # Constraint Section
-    def _check_mother_company(self, cr, uid, ids, context=None):
-        for rccw in self.browse(cr, uid, ids, context=context):
-            if rccw.type == 'integrated':
-                if rccw.mother_company.fiscal_type != 'fiscal_mother':
-                    return False
-            if rccw.type == 'associated':
-                if (rccw.mother_company.fiscal_type != 'normal' or
-                        rccw.mother_company.parent_id):
-                    return False
-        return True
-
-    _constraints = [
-        (
-            _check_mother_company,
-            """Error on Mother Company: Please select a normal Parent"""
-            """ Company if the company is 'associated' and and a Fiscal"""
-            """ Mother Company, if the company is 'integrated'""",
-            ['type', 'mother_company']),
-    ]
-
-    # View Section
-    def onchange_type_mother_company(
-            self, cr, uid, ids, type, mother_company, context=None):
-        """Overloadable function"""
-        return {'value': {}}
-
-    def button_begin(self, cr, uid, ids, context=None):
-        id = ids[0]
-        self.begin(cr, uid, id, context=context)
-        self.write(cr, uid, [id], {
-            'state': 'pending'}, context=context)
+    @api.multi
+    def button_begin(self):
+        self.ensure_one()
+        self._begin()
+        self.state = 'pending'
         return {
             'type': 'ir.actions.act_window',
             'res_model': 'res.company.create.wizard',
             'view_mode': 'form',
             'view_type': 'form',
-            'res_id': id,
+            'res_id': self.id,
             'views': [(False, 'form')],
             'target': 'new',
         }
 
-    def button_finish(self, cr, uid, ids, context=None):
-        id = ids[0]
-        self.finish(cr, uid, id, context=context)
-        self.write(cr, uid, [id], {
-            'state': 'done'}, context=context)
+    @api.multi
+    def button_finish(self):
+        self.ensure_one()
+        self._finish()
+        self.state = 'done'
         return {
             'type': 'ir.actions.act_window',
             'res_model': 'res.company.create.wizard',
             'view_mode': 'form',
             'view_type': 'form',
-            'res_id': id,
+            'res_id': self.id,
             'views': [(False, 'form')],
             'target': 'new',
         }
 
     # Overloadable Function
-    def res_company_values(self, cr, uid, id, context=None):
-        return {}
+    @api.multi
+    def _prepare_company(self):
+        self.ensure_one()
+        vals = {
+            'name': self.company_name,
+            'fiscal_code': self.fiscal_code,
+            'fiscal_type': self.fiscal_type,
+            'street': self.company_street,
+            'street2': self.company_street2,
+            'city': self.company_city,
+            'state_id': self.company_state_id,
+            'country_id': self.company_country_id,
+            'website': self.company_website,
+            'email': self.company_email,
+            'phone': self.company_phone,
+            'vat': self.vat,
+            'company_registry': self.company_registry,
+        }
+        if self.fiscal_type == 'fiscal_child':
+            vals['parent_id'] = self.fiscal_company_id.id
+            vals['fiscal_company_id'] = self.fiscal_company_id.id
+            vals['rml_header'] = self.fiscal_company_id.rml_header
+        else:
+            vals['parent_id'] = self.parent_company_id.id
+        return vals
 
-    def res_users_values(self, cr, uid, id, context=None):
+    @api.multi
+    def _prepare_partner(self):
+        self.ensure_one()
         return {
             'customer': False,
         }
 
-    def res_groups_values(self, cr, uid, context=None):
-        res = ['base.group_sale_manager']
-        return res
-
-    def begin(self, cr, uid, id, context=None):
-        rccw = self.browse(cr, uid, id, context=context)
-        rc_obj = self.pool['res.company']
-        rg_obj = self.pool['res.groups']
-        rp_obj = self.pool['res.partner']
-        ru_obj = self.pool['res.users']
-        imd_obj = self.pool['ir.model.data']
-        # Create Company
-        vals = self.res_company_values(cr, uid, id, context=context)
-        vals.update({
-            'name': rccw.name,
-            'code': rccw.code,
-            'parent_id': rccw.mother_company.id,
-        })
-        if rccw.type == 'integrated':
-            vals['fiscal_type'] = 'fiscal_child'
-            vals['fiscal_company'] = rccw.mother_company.id
-            vals['rml_header'] = rccw.mother_company.rml_header
-        else:
-            vals['fiscal_type'] = 'normal'
-            vals['fiscal_company'] = False
-        rc_id = rc_obj.create(cr, uid, vals, context=context)
-
-        # Set Current User to the new company
-        ru_obj.write(cr, uid, [uid], {
-            'company_id': rc_id,
-            'company_ids': [(4, rc_id)],
-            }, context=context)
-
-        # Manage Extra Data in Partner associated
-        vals = {'customer': False}
-        if rccw.type == 'integrated':
-            vals['vat'] = rccw.mother_company.vat
-        else:
-            vals['vat'] = rccw.vat
-        rc = rc_obj.browse(cr, uid, rc_id, context=context)
-        rp_obj.write(cr, uid, [rc.partner_id.id], vals, context=context)
-
-        # Create Generic User
-        characters = string.ascii_letters + string.digits
-        password = "".join(choice(characters) for x in range(8))
-        vals = self.res_users_values(cr, uid, id, context=context)
-
-        vals.update({
-            'name': rccw.name,
-            'login': rccw.code,
-            'new_password': password,
-            'company_id': rc_id,
-            'company_ids': [(4, rc_id)],
-        })
-        ru_id = ru_obj.create(cr, uid, vals, context=context)
-        self.write(cr, uid, id, {
-            'password': password,
-            'company_id': rc_id,
-        }, context=context)
-        ru = ru_obj.browse(cr, uid, ru_id, context=context)
-
-        # Add user to groups
-        for group in self.res_groups_values(cr, uid, context=context):
-            tab = group.split('.')
-            rg_id = imd_obj.get_object_reference(cr, uid, tab[0], tab[1])[1]
-            rg = rg_obj.browse(cr, uid, rg_id, context=context)
-            users = [x.id for x in rg.users]
-            users.append(ru.id)
-            rg_obj.write(
-                cr, uid, [rg_id], {'users': [[6, False, users]]},
-                context=context)
-
+    @api.multi
+    def _prepare_user(self):
+        self.ensure_one()
         return {
-            'company_id': rc_id,
-            'user_id': ru_id,
-            'partner_id': ru.partner_id,
+            'customer': False,
+            'name': self.user_name,
+            'login': self.user_login,
+            'new_password': self.user_password,
+            'company_id': self.company_id.id,
+            'company_ids': [(4, self.company_id.id)],
         }
 
-    def finish(self, cr, uid, id, context=None):
+    @api.multi
+    def _prepare_user_groups(self):
+        """Overload this function. Should return a list of xml ids of groups"""
+        return []
+
+    @api.multi
+    def _begin(self):
+        self.ensure_one()
+        company_obj = self.env['res.company']
+        user_obj = self.env['res.users']
+        model_data_obj = self.env['ir.model.data']
+        # Create Company
+        self.company_id = company_obj.create(self._prepare_company())
+
+        # Swith current user to the new company
+        self.env.user.write({
+            'company_id': self.company_id.id,
+            'company_ids': [(4, self.company_id.id)],
+        })
+
+        # Manage Extra Data in associated partner
+        self.company_id.partner_id.write(self._prepare_partner())
+
+        # Create User if required
+        if self.create_user:
+            self.user_id = user_obj.create(self._prepare_user())
+            for group in self._prepare_user_groups():
+                val = group.split('.')
+                group = model_data_obj.get_object_reference(val[0], val[1])
+                group.write({
+                    'users': [(4, self.user_id.id)],
+                })
+
+    @api.multi
+    def _finish(self):
+        self.ensure_one()
         return {}

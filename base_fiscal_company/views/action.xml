@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 Copyright (C) 2013-Today: GRAP (http://www.grap.coop)
-@author:
-    Julien WESTE
-    Sylvain LE GAL (https://twitter.com/legalsylvain)
+@author: Julien WESTE
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 
-<openerp><data>
+<odoo>
 
     <record id="action_res_company_create_wizard" model="ir.actions.act_window">
         <field name="name">Create New Company</field>
@@ -18,5 +17,5 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="target">new</field>
     </record>
 
-</data></openerp>
+</odoo>
 

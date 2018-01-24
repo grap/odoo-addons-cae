@@ -1,34 +1,27 @@
-<?xml version="1.0" ?>
-<!-- ********************************************************************** -->
-<!--Fiscal Company for Base Module for Odoo                                 -->
-<!--Copyright (C) 2013-Today GRAP (http://www.grap.coop)                    -->
-<!--@author Julien Weste                                                    -->
-<!--@author Sylvain LE GAL (https://twitter.com/legalsylvain)               -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2013-Today GRAP (http://www.grap.coop)
+@author Julien Weste
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
 
-<!--This program is free software: you can redistribute it and/or modify    -->
-<!--it under the terms of the GNU Affero General Public License as          -->
-<!--published by the Free Software Foundation, either version 3 of the      -->
-<!--License, or (at your option) any later version.                         -->
+<odoo>
 
-<!--This program is distributed in the hope that it will be useful,         -->
-<!--but WITHOUT ANY WARRANTY; without even the implied warranty of          -->
-<!--MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           -->
-<!--GNU Affero General Public License for more details.                     -->
+<!--    <record id="base.res_company_rule" model="ir.rule">-->
+<!--        <field name="domain_force"></field>-->
+<!--    </record>-->
 
-<!--You should have received a copy of the GNU Affero General Public License-->
-<!--along with this program.  If not, see <http://www.gnu.org/licenses/>.   -->
-<!-- ********************************************************************** -->
-<openerp>
-    <data>
-        <record id="base.res_company_rule" model="ir.rule">
-            <field name="domain_force"></field>
-        </record>
-        <record id="base.res_partner_rule" model="ir.rule">
-            <field name="domain_force">['|','|','|',
-                ('company_id','=',user.company_id.id),
-                ('company_id','=',user.company_id.fiscal_company.id),
-                ('company_id','in',[c.id for c in user.company_id.fiscal_childs]),
-                ('company_id','=',False)]</field>
-        </record>
-    </data>
-</openerp>
+<!--        <record model="ir.rule" id="res_partner_rule">-->
+<!--            <field name="name">res.partner company</field>-->
+<!--            <field name="model_id" ref="model_res_partner"/>-->
+
+<!--    <record id="base.res_partner_rule" model="ir.rule">-->
+<!--        <field name="domain_force">['|','|','|',-->
+<!--            ('company_id', '=', user.company_id.id),-->
+<!--            ('company_id', '=', user.company_id.fiscal_company_id.id),-->
+<!--            ('company_id', 'in', [c.id for c in user.company_id.fiscal_child_ids]),-->
+<!--            ('company_id', '=', False)]</field>-->
+<!--    </record>-->
+
+</odoo>

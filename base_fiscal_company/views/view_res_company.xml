@@ -14,7 +14,7 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
             <search>
                <field name="name" filter_domain="['|', ('name','ilike',self), ('code','=',self)]"/>
                 <field name="fiscal_type"/>
-                <field name="fiscal_company"/>
+                <field name="fiscal_company_id"/>
             </search>
         </field>
     </record>
@@ -26,15 +26,14 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
             <xpath expr="//tree" position="attributes">
                 <attribute name="colors">brown: fiscal_type=='fiscal_mother'; blue: fiscal_type=='fiscal_child'; black: fiscal_type=='normal'</attribute>
             </xpath>
+            <field name="sequence" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
             <field name="name" position="before">
-                <field name="code"/>
+                <field name="fiscal_code"/>
             </field>
             <field name="name" position="after">
-                <field name="fiscal_company"/>
                 <field name="fiscal_type" invisible="1"/>
-            </field>
-            <field name="partner_id" position="attributes">
-                <attribute name="invisible">1</attribute>
             </field>
         </field>
     </record>
@@ -43,19 +42,20 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
         <field name="model">res.company</field>
         <field name="inherit_id" ref="base.view_company_form"/>
         <field name="arch" type="xml">
-            <field name="parent_id" position="after">
-                <field name="fiscal_type"/>
-                <field name="fiscal_company"/>
-                <field name="code"/>
-                <field name="administrative_department_email" />
-            </field>
             <notebook position="inside">
-                <page string="Fiscal information">
-                    <field name="fiscal_childs" />
+                <page string="Fiscal Settings">
+                    <group>
+                        <field name="fiscal_type"/>
+                        <field name="fiscal_company_id"/>
+                        <field name="fiscal_code"/>
+                    </group>
+                    <field name="fiscal_child_ids" nolabel="1" />
                 </page>
             </notebook>
         </field>
     </record>
+
+
 
 </data></openerp>
 
