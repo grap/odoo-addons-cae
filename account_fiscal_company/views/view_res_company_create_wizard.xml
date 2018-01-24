@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+Copyright (C) 2013-Today: GRAP (http://www.grap.coop)
+@author:
+    * Julien WESTE
+    * Sylvain LE GAL (https://twitter.com/legalsylvain)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+ -->
+<openerp>
+    <data>
+
+<!-- Model: res.company.create.wizard -->
+        <record id="view_res_company_create_wizard_form" model="ir.ui.view">
+            <field name="model">res.company.create.wizard</field>
+            <field name="inherit_id" ref="base_fiscal_company.view_res_company_create_wizard_form"/>
+            <field name="arch" type="xml">
+                <field name="vat" position="after">
+                    <field name="complete_tax_set" invisible="1"/>
+                    <field name="chart_template_id"
+                        widget="selection"
+                        on_change="onchange_chart_template_id(chart_template_id)"
+                        attrs="{'invisible': [('type', 'not in', ('associated'))]}"/>
+                    <field name="date_start"
+                        attrs="{'invisible': [('type', 'not in', ('associated'))]}"/>
+                    <field name="date_stop"
+                        attrs="{'invisible': [('type', 'not in', ('associated'))]}"/>
+                    <field name="code_digits"
+                        attrs="{'invisible': [('chart_template_id','=',False)]}"/>
+                    <field name="sale_tax"
+                        attrs="{'invisible': ['|', ('chart_template_id','=',False), ('complete_tax_set','=',False)]}"
+                        domain="[('chart_template_id', '=', chart_template_id),('parent_id','=',False),('type_tax_use','in',('sale','all'))]"/>
+                    <field name="purchase_tax"
+                        attrs="{'invisible': ['|', ('chart_template_id','=',False), ('complete_tax_set','=',False)]}"
+                        domain="[('chart_template_id', '=', chart_template_id),('parent_id','=',False),('type_tax_use','in',('purchase', 'all'))]"/>
+                    <field name="sale_tax_rate"
+                        attrs="{'invisible': ['|', ('chart_template_id','=',False), ('complete_tax_set','=',True)]}"
+                        on_change="onchange_tax_rate(sale_tax_rate)"/>
+                    <field name="purchase_tax_rate"
+                        attrs="{'invisible': ['|', ('chart_template_id','=',False), ('complete_tax_set','=',True)]}"/>
+
+                </field>
+                <notebook position="inside">
+                    <page string="Account Property" states="pending">
+                        <group>
+                            <field name="account_receivable_id"/>
+                            <field name="account_payable_id"/>
+                            <field name="category_line_ids" attrs="{'invisible': [('type', 'not in', ('associated'))]}" nolabel="1">
+                                <tree string="Product Categories" editable="top">
+                                    <field name="category_id"/>
+                                    <field name="company_id" invisible="1"/>
+                                    <field name="expense_account_id"/>
+                                    <field name="income_account_id"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </notebook>
+                    <group states="done">
+                        <separator string="Extra task To Do" colspan="4"/>
+                        <label string="Please create extra paiement journals" />
+
+                        <label string="Please create Taxes Group" />
+                        <label string="Please create Point Of Sale " />
+                        <label string="Please change the sequences of the new journals POS / SO / PO" />
+                    </group>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+

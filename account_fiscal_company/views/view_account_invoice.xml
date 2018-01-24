@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+Copyright (C) 2013-Today: GRAP (http://www.grap.coop)
+@author:
+    * Julien WESTE
+    * Sylvain LE GAL (https://twitter.com/legalsylvain)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+ -->
+<openerp>
+    <data>
+        <record id="view_invoice_line_form_inherit" model="ir.ui.view">
+            <field name="name">account.invoice.line.inherit</field>
+            <field name="model">account.invoice.line</field>
+            <field name="inherit_id" ref="account.view_invoice_line_form"/>
+            <field name="arch" type="xml">
+                <field name="account_id" position="attributes">
+                    <attribute name="domain">[('journal_id', '=', parent.journal_id), ('type', '&lt;&gt;', 'view')]</attribute> 
+                </field>
+                <field name="invoice_line_tax_id" position="attributes">
+                    <attribute name="domain">[('parent_id','=',False)]</attribute> 
+                </field>
+                <field name="account_analytic_id" position="attributes">
+                    <attribute name="domain">[('type','&lt;&gt;','view')]</attribute> 
+                </field>
+            </field>
+        </record>
+        
+        <record id="invoice_form_inherit" model="ir.ui.view">
+            <field name="name">account.invoice.inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <field name="account_id" position="attributes">
+                    <attribute name="domain">[('type','=', 'receivable')]</attribute> 
+                </field>
+                <xpath expr="//tree[@string='Invoice Lines']/field[@name='account_id']" position="attributes">
+                    <attribute name="domain">[('journal_id', '=', parent.journal_id), ('type', '=', 'other')]</attribute> 
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="view_invoice_tax_form_inherit" model="ir.ui.view">
+            <field name="name">account.invoice.tax.inherit</field>
+            <field name="model">account.invoice.tax</field>
+            <field name="inherit_id" ref="account.view_invoice_tax_form"/>
+            <field name="arch" type="xml">
+                <field name="account_analytic_id" position="attributes">
+                    <attribute name="domain">[('type','&lt;&gt;','view')]</attribute> 
+                </field>
+            </field>
+        </record>
+        
+        <record id="invoice_supplier_form_inherit" model="ir.ui.view">
+            <field name="name">account.invoice.supplier.form.inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <field name="account_id" position="attributes">
+                    <attribute name="domain">[('type','=', 'payable')]</attribute> 
+                </field>
+                <xpath expr="//tree[@string='Invoice lines']/field[@name='account_id']" position="attributes">
+                    <attribute name="domain">[('journal_id', '=', parent.journal_id), ('type', '=', 'other')]</attribute> 
+                </xpath>
+                <xpath expr="//tree[@string='Invoice lines']/field[@name='account_analytic_id']" position="attributes">
+                    <attribute name="domain">[('type','!=','view')]</attribute> 
+                </xpath>
+                <xpath expr="//tree[@string='Invoice lines']/field[@name='invoice_line_tax_id']" position="attributes">
+                    <attribute name="domain">[('parent_id','=',False)]</attribute> 
+                </xpath>
+                <xpath expr="//field[@name='tax_line']/tree/field[@name='account_analytic_id']" position="attributes">
+                    <attribute name="domain">[('type','&lt;&gt;','view')]</attribute> 
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

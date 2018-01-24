@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="account.fiscalyear" id="account_fiscalyear">
+            <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+            <field name="name" eval="'Fiscal Year X '+time.strftime('%Y')"/>
+            <field name="code" eval="'FY'+time.strftime('%Y')"/>
+            <field name="date_start" eval="time.strftime('%Y')+'-01-01'"/>
+            <field name="date_stop" eval="time.strftime('%Y')+'-12-31'"/>
+        </record>
+    </data>
+</openerp>

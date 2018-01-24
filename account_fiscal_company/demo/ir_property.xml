@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2013-Today GRAP (http://www.grap.coop)
+@author Julien Weste
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <!-- Receivable Properties-->
+    <record id="property_account_receivable_CH1" model="ir.property">
+        <field name="name">CAE - property_account_receivable CH1</field>
+        <field name="company_id" ref="base_fiscal_company.company_fiscal_child_1"/>
+        <field name="fields_id" ref="account.field_res_partner_property_account_receivable_id"/>
+        <field name="value" eval="'account.account,'+str(account_receivable)"/>
+    </record>
+
+    <record id="property_account_receivable_CH2" model="ir.property">
+        <field name="name">CAE - property_account_receivable CH2</field>
+        <field name="company_id" ref="base_fiscal_company.company_fiscal_child_2"/>
+        <field name="fields_id" ref="account.field_res_partner_property_account_receivable_id"/>
+        <field name="value" eval="'account.account,'+str(account_receivable)"/>
+    </record>
+
+    <!-- Payable Properties-->
+    <record id="property_account_payable_CH1" model="ir.property">
+        <field name="name">CAE - property_account_payable CH1</field>
+        <field name="company_id" ref="base_fiscal_company.company_fiscal_child_2"/>
+        <field name="fields_id" ref="account.field_res_partner_property_account_payable_id"/>
+        <field name="value" eval="'account.account,'+str(account_payable)"/>
+    </record>
+
+    <record id="property_account_payable_CH2" model="ir.property">
+        <field name="name">CAE - property_account_payable CH2</field>
+        <field name="company_id" ref="base_fiscal_company.company_fiscal_child_2"/>
+        <field name="fields_id" ref="account.field_res_partner_property_account_payable_id"/>
+        <field name="value" eval="'account.account,'+str(account_payable)"/>
+    </record>
+
+<!--    <record model="ir.property" id="property_account_expense_categ_mother">-->
+<!--        <field name="name">CAE - property_account_expense_categ</field>-->
+<!--        <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>-->
+<!--        <field name="type">many2one</field>-->
+<!--        <field name="fields_id" ref="account.field_product_category_property_account_expense_categ"/>-->
+<!--        <field name="value" eval="'account.account,'+str(ref('a_expense'))"/>-->
+<!--        <field name="res_id" eval="'product.category,'+str(ref('product.product_category_all'))"/>-->
+<!--    </record>-->
+
+<!--    <record model="ir.property" id="property_account_income_categ_mother">-->
+<!--        <field name="name">CAE - property_account_income_categ</field>-->
+<!--        <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>-->
+<!--        <field name="type">many2one</field>-->
+<!--        <field name="fields_id" ref="account.field_product_category_property_account_income_categ"/>-->
+<!--        <field name="value" eval="'account.account,'+str(ref('a_sale'))"/>-->
+<!--        <field name="res_id" eval="'product.category,'+str(ref('product.product_category_all'))"/>-->
+<!--    </record>-->
+
+<!-- Duplicate Data for child company, because this module doesn't apply propagation via property creation but by write on categ-->
+
+<!--        <record model="ir.property" id="property_account_expense_category_child_1">-->
+<!--            <field name="name">CAE - property_account_expense_categ - Child 1</field>-->
+<!--            <field name="company_id" ref="base_fiscal_company.company_fiscal_child_1"/>-->
+<!--            <field name="fields_id" ref="account.field_product_category_property_account_expense_categ"/>-->
+<!--            <field name="value" eval="'account.account,'+str(ref('a_expense'))"/>-->
+<!--            <field name="res_id" eval="'product.category,'+str(ref('product.product_category_all'))"/>-->
+<!--        </record>-->
+
+<!--        <record model="ir.property" id="property_account_income_category_child_1">-->
+<!--            <field name="name">CAE - property_account_income_categ - Child 1</field>-->
+<!--            <field name="company_id" ref="base_fiscal_company.company_fiscal_child_1"/>-->
+<!--            <field name="type">many2one</field>-->
+<!--            <field name="fields_id" ref="account.field_product_category_property_account_income_categ"/>-->
+<!--            <field name="value" eval="'account.account,'+str(ref('a_sale'))"/>-->
+<!--            <field name="res_id" eval="'product.category,'+str(ref('product.product_category_all'))"/>-->
+<!--        </record>-->
+
+<!--        <record model="ir.property" id="property_account_expense_category_child_2">-->
+<!--            <field name="name">CAE - property_account_expense_categ - Child 2</field>-->
+<!--            <field name="company_id" ref="base_fiscal_company.company_fiscal_child_2"/>-->
+<!--            <field name="type">many2one</field>-->
+<!--            <field name="fields_id" ref="account.field_product_category_property_account_expense_categ"/>-->
+<!--            <field name="value" eval="'account.account,'+str(ref('a_expense'))"/>-->
+<!--            <field name="res_id" eval="'product.category,'+str(ref('product.product_category_all'))"/>-->
+<!--        </record>-->
+
+<!--        <record model="ir.property" id="property_account_income_category_child_2">-->
+<!--            <field name="name">CAE - property_account_income_categ - Child 2</field>-->
+<!--            <field name="company_id" ref="base_fiscal_company.company_fiscal_child_2"/>-->
+<!--            <field name="type">many2one</field>-->
+<!--            <field name="fields_id" ref="account.field_product_category_property_account_income_categ"/>-->
+<!--            <field name="value" eval="'account.account,'+str(ref('a_sale'))"/>-->
+<!--            <field name="res_id" eval="'product.category,'+str(ref('product.product_category_all'))"/>-->
+<!--        </record>-->
+
+</odoo>
