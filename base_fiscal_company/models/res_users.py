@@ -28,15 +28,14 @@ class ResUsers(models.Model):
     # Private function section
     @api.multi
     def _propagate_access_right(self):
-        return True
-#        """If a user has access to a fiscal_mother company, so he'll have
-#        access to all the child_company"""
-#        new_company_ids = []
-#        for user in self:
-#            for mother_company in user.company_ids.filtered(
-#                    lambda x: x.fiscal_type == 'fiscal_mother'):
-#                all_ids = mother_company.fiscal_child_ids.ids
-#                existing_ids = user.company_ids.ids
-#                new_company_ids += (list(set(all_ids) - set(existing_ids)))
-#            super(ResUsers, user).write({
-#                'company_ids': [(4, id) for id in list(set(new_company_ids))]})
+        """If a user has access to a fiscal_mother company, so he'll have
+        access to all the child_company"""
+        new_company_ids = []
+        for user in self:
+            for mother_company in user.company_ids.filtered(
+                    lambda x: x.fiscal_type == 'fiscal_mother'):
+                all_ids = mother_company.fiscal_child_ids.ids
+                existing_ids = user.company_ids.ids
+                new_company_ids += (list(set(all_ids) - set(existing_ids)))
+            super(ResUsers, user).write({
+                'company_ids': [(4, id) for id in list(set(new_company_ids))]})
