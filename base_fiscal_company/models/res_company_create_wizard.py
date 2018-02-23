@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 # Copyright (C) 2013-Today: GRAP (http://www.grap.coop)
 # @author: Julien WESTE
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
@@ -36,13 +36,8 @@ class ResCompanyCreateWizard(models.TransientModel):
     fiscal_code = fields.Char(
         string='Fiscal Code', required=True)
 
-    fiscal_company_id = fields.Many2one(
-        comodel_name='res.company', string='Fiscal Company',
-        domain="[('fiscal_type', '=', 'fiscal_mother')]")
-
     parent_company_id = fields.Many2one(
-        comodel_name='res.company', string='Parent Company',
-        domain="[('fiscal_type', '=', 'normal')]")
+        comodel_name='res.company', string='Parent Company')
 
     vat = fields.Char(string='Tax ID')
 
@@ -76,7 +71,8 @@ class ResCompanyCreateWizard(models.TransientModel):
 
     user_login = fields.Char(string='Login')
 
-    user_password = fields.Char(string='Password')
+    user_password = fields.Char(
+        string='Password', default=lambda s: s._default_user_password())
 
     # Technical hidden fields
     company_id = fields.Many2one(comodel_name='res.company')
@@ -86,8 +82,22 @@ class ResCompanyCreateWizard(models.TransientModel):
     # Default Section
     def _default_user_password(self):
         characters = string.ascii_letters + string.digits
-        return "".join(choice(characters) for x in range(8))
+        return "".join(choice(characters) for x in range(self._PASSWORD_SIZE))
 
+    # Onchange Section
+    @api.onchange('fiscal_type')
+    def onchange_fiscal_type(self):
+        domain = [('id', '=', False)]
+        if self.fiscal_type in ['normal', 'fiscal_mother']:
+            domain = [('fiscal_type', '=', 'normal')]
+        elif self.fiscal_type == 'fiscal_child':
+            domain = [('fiscal_type', '=', 'fiscal_mother')]
+            self.vat = False
+        else:
+            self.parent_company_id = False
+        return {'domain': {'parent_company_id': domain}}
+
+    # Button Section
     @api.multi
     def button_begin(self):
         self.ensure_one()
@@ -118,7 +128,7 @@ class ResCompanyCreateWizard(models.TransientModel):
             'target': 'new',
         }
 
-    # Overloadable Function
+    # Overloadable Prepare Function
     @api.multi
     def _prepare_company(self):
         self.ensure_one()
@@ -126,6 +136,7 @@ class ResCompanyCreateWizard(models.TransientModel):
             'name': self.company_name,
             'fiscal_code': self.fiscal_code,
             'fiscal_type': self.fiscal_type,
+            'parent_id': self.parent_company_id.id,
             'street': self.company_street,
             'street2': self.company_street2,
             'city': self.company_city,
@@ -138,11 +149,8 @@ class ResCompanyCreateWizard(models.TransientModel):
             'company_registry': self.company_registry,
         }
         if self.fiscal_type == 'fiscal_child':
-            vals['parent_id'] = self.fiscal_company_id.id
-            vals['fiscal_company_id'] = self.fiscal_company_id.id
-            vals['rml_header'] = self.fiscal_company_id.rml_header
-        else:
-            vals['parent_id'] = self.parent_company_id.id
+            vals['fiscal_company_id'] = self.parent_company_id.id
+            vals['rml_header'] = self.parent_company_id.rml_header
         return vals
 
     @api.multi

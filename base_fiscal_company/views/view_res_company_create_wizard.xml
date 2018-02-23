@@ -19,8 +19,7 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
                     <field name="company_name" attrs="{'readonly': [('state', '!=', 'init')]}"/>
                     <field name="fiscal_code" attrs="{'readonly': [('state', '!=', 'init')]}"/>
                     <field name="fiscal_type" attrs="{'readonly': [('state', '!=', 'init')]}"/>
-                    <field name="fiscal_company_id" attrs="{'readonly': ['|', ('state', '!=', 'init'), ('fiscal_type', '!=', 'fiscal_child')]}"/>
-                    <field name="parent_company_id" attrs="{'readonly': ['|', ('state', '!=', 'init'), ('fiscal_type', '=', 'fiscal_child')]}"/>
+                    <field name="parent_company_id" attrs="{'readonly': [('state', '!=', 'init')]}" options="{'no_create': True}"/>
                     <field name="company_id" invisible="1"/>
 
                 </group>
@@ -46,19 +45,21 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
                         </group>
 
                     </page>
-                    <page string="Administrative information">
+                    <page string="Administrative information" states="init">
                         <group>
-                            <field name="company_registry" attrs="{'readonly': ['|', ('state', '!=', 'init')]}"/>
-                            <field name="vat" attrs="{'readonly': ['|', ('state', '!=', 'init'), ('fiscal_type','=', ('fiscal_child'))]}"/>
+                            <field name="company_registry"/>
+                            <field name="vat" attrs="{'readonly': [('fiscal_type','=', ('fiscal_child'))]}"/>
 
                         </group>
                     </page>
                     <page string="User Information" states="init">
-                        <field name="create_user"/>
+                        <group>
+                            <field name="create_user"/>
+                        </group>
                         <group attrs="{'invisible': [('create_user', '=', False)]}">
-                            <field name="user_name" />
-                            <field name="user_login" />
-                            <field name="user_password" />
+                            <field name="user_name"/>
+                            <field name="user_login"/>
+                            <field name="user_password"/>
                         </group>
                     </page>
                 </notebook>
@@ -71,7 +72,7 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
                         <button name="button_finish" string="Finish" type="object" class="btn-primary"/>
                     </div>
                     <div states="done">
-                        <button special="cancel" string="Close" class="btn-default"/>
+                        <button special="cancel" string="Close" class="btn-primary"/>
                     </div>
                 </footer>
             </form>
