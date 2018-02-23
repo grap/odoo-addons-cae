@@ -1,51 +1,62 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2013-Today: GRAP (http://www.grap.coop)
-# @author:
-#    Julien WESTE
-#    Sylvain LE GAL (https://twitter.com/legalsylvain)
+# @author: Julien WESTE
+# @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import functools
 
 
-def replace_company_id_tuple(self, cr, uid, a):
-    if a[0] == 'company_id':
-        return ('company_id', a[1], self.pool.get("res.company").browse(
-            cr, uid, a[2]).fiscal_company.id)
+def replace_company_id_tuple(self, arg):
+    """
+    replace ('company_id', operator, company_arg) by
+        ('company_id', operator, company_arg.mapped('fiscal_company_id').ids
+    OR recursively call replace_company_id
+    """
+    if arg[0] == 'company_id':
+        operator = arg[1]
+        if operator != 'in':
+            new_company_id = self.env['res.company'].browse(
+                arg[2]).fiscal_company_id.id
+            return ('company_id', operator, new_company_id)
+        else:
+            new_company_ids = self.env['res.company'].browse(
+                arg[2]).mapped('fiscal_company_id').ids
+            return ('company_id', operator, new_company_ids)
     else:
         return tuple(
-            replace_company_id(self, cr, uid, a[x]) for x in range(0, len(a)))
+            replace_company_id(self, arg[x]) for x in range(0, len(arg)))
 
 
-def replace_company_id_dict(self, cr, uid, a):
+def replace_company_id_dict(self, a):
     if a.get('company_id', False):
         a['company_id'] = self.pool.get("res.company").browse(
-            cr, uid, a['company_id']).fiscal_company.id
+            a['company_id']).fiscal_company.id
     else:
         for key in a.keys():
-            a[key] = replace_company_id(self, cr, uid, a[key])
+            a[key] = replace_company_id(self, a[key])
 
 
-def replace_company_id_list(self, cr, uid, a):
+def replace_company_id_list(self, a):
     return list(
-        replace_company_id(self, cr, uid, a[x]) for x in range(0, len(a)))
+        replace_company_id(self, a[x]) for x in range(0, len(a)))
 
 
-def replace_company_id(self, cr, uid, a):
+def replace_company_id(self, a):
     if 'company_id' in str(a):
         if isinstance(a, tuple):
-            return replace_company_id_tuple(self, cr, uid, a)
+            return replace_company_id_tuple(self, a)
         elif isinstance(a, dict):
-            return replace_company_id_dict(self, cr, uid, a)
+            return replace_company_id_dict(self, a)
         elif isinstance(a, list):
-            return replace_company_id_list(self, cr, uid, a)
+            return replace_company_id_list(self, a)
         else:
             return a
     else:
         return a
 
 
-def switch_company(func):
+def switch_company_old_api(func):
     @functools.wraps(func)
     def wrapper(self, cr, uid, *args, **kwargs):
         rc_obj = self.pool.get("res.company")
@@ -70,6 +81,15 @@ def switch_company(func):
         response = func(self, cr, uid, *args2, **kwargs)
         return response
     return wrapper
+
+def switch_company(func):
+    @functools.wraps(func)
+    def wrapper(self, *args, **kwargs):
+        args2 = replace_company_id(self, args)
+        response = func(self, *args2, **kwargs)
+        return response
+    return wrapper
+
 
 
 def switch_company_period(func):

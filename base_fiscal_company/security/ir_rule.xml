@@ -24,4 +24,11 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
 <!--            ('company_id', '=', False)]</field>-->
 <!--    </record>-->
 
+    <record id="base.res_company_rule_employee" model="ir.rule">
+        <field name="domain_force">['|',
+            ('id','child_of', [user.company_id.id]),
+            ('id', '=', user.company_id.fiscal_company_id.id),
+        ]</field>
+    </record>
+
 </odoo>
