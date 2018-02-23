@@ -4,6 +4,7 @@
 # @author Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
 
 class TestBaseFiscalCompany(TransactionCase):
@@ -17,15 +18,13 @@ class TestBaseFiscalCompany(TransactionCase):
         self.user_obj = self.env['res.users']
         self.company_obj = self.env['res.company']
 
-        # Get ids from xml_ids
+        self.mother_company = self.env.ref(
+            'base_fiscal_company.company_fiscal_mother')
+        self.base_company = self.env.ref('base.main_company')
+
 #        self.accountant_user_id = self.imd_obj.get_object_reference(
 #            self.cr, self.uid,
 #            'base_fiscal_company', 'user_accountant')[1]
-        self.mother_company = self.env.ref(
-            'base_fiscal_company.company_fiscal_mother')
-#        self.base_company_id = self.imd_obj.get_object_reference(
-#            self.cr, self.uid,
-#            'base', 'main_company')[1]
 #        self.fix_mail_bug("DROP")
 
 
@@ -44,37 +43,29 @@ class TestBaseFiscalCompany(TransactionCase):
             "Affect a mother company to a new user must give access right"
             "to the childs companies")
 
-##    def test_02_res_users_propagate_access_right_write(self):
-##        """[Functional Test] Give access to a mother company must give acces
-##        to the child companies"""
-##        cr, uid = self.cr, self.uid
-##        ru_id = self.ru_obj.create(cr, uid, {
-##            'name': 'new_user',
-##            'login': 'new_user@odoo.com',
-##            'company_id': self.base_company_id,
-##            'company_ids': [(4, self.base_company_id)]})
-##        self.ru_obj.write(cr, uid, [ru_id], {
-##            'company_ids': [(4, self.mother_company_id)]})
-##        ru = self.ru_obj.browse(cr, uid, ru_id)
-##        rc = self.rc_obj.browse(cr, uid, self.mother_company_id)
-##        self.assertEqual(
-##            len(ru.company_ids), len(rc.fiscal_childs) + 1,
-##            "Give access to a mother company must give acces"
-##            "to the child companies")
+    def test_02_res_users_propagate_access_right_write(self):
+        """[Functional Test] Give access to a mother company must give acces
+        to the child companies"""
+        new_user = self.user_obj.create({
+            'name': 'new_user',
+            'login': 'new_user@odoo.com',
+            'company_id': self.base_company.id,
+            'company_ids': [(4, self.base_company.id)]})
+        new_user.write({'company_ids': [(4, self.mother_company.id)]})
+        self.assertEqual(
+            len(new_user.company_ids),
+            len(self.mother_company.fiscal_child_ids) + 1,
+            "Give access to a mother company must give access"
+            "to the child companies")
 
-##    def test_03_res_company_check_contraint_fail_01(self):
-##        """[Contraint Test] Must Fail. Try to create a company with
-##        'fiscal_type != 'child' and and a mother company."""
-##        cr, uid = self.cr, self.uid
-##        exception_raised = False
-##        try:
-##            self.rc_obj.create(cr, uid, {
-##                'name': 'new_company',
-##                'fiscal_type': 'normal',
-##                'fiscal_company': self.mother_company_id})
-##        except:
-##            exception_raised = True
-##        self.assertEqual(exception_raised, True, "Must raise an error.")
+    def test_03_res_company_check_contraint_fail_01(self):
+        """[Contraint Test] Try to create a company with
+        'fiscal_type != 'child' and and a mother company."""
+        with self.assertRaises(ValidationError):
+            self.company_obj.create({
+                'name': 'new_company',
+                'fiscal_type': 'normal',
+                'fiscal_company_id': self.mother_company.id})
 
 ##    def test_04_res_company_check_contraint_fail_02(self):
 ##        """[Contraint Test] Must Fail. Try to create a company with
