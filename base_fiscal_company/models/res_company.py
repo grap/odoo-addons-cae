@@ -55,7 +55,7 @@ class ResCompany(models.Model):
                         company.fiscal_company_id.fiscal_type !=
                         'fiscal_mother'):
                     raise exceptions.ValidationError(_(
-                        "You should selec in the field fiscal company, an"
+                        "You should select in the field fiscal company, a"
                         " Fiscal Mother company for a Fiscal Child Company."))
 
     # Overload Section
@@ -64,25 +64,24 @@ class ResCompany(models.Model):
         company = super(ResCompany, self).create(vals)
         if not vals.get('fiscal_company_id', False):
             company.fiscal_company_id = company.id
-        company._propagate_access_right()
+        if vals.get('fiscal_type', False) == 'fiscal_child':
+            company._propagate_access_right()
         return company
 
     @api.multi
     def write(self, vals):
         res = super(ResCompany, self).write(vals)
-        self._propagate_access_right()
+        if vals.get('fiscal_type', False) == 'fiscal_child':
+            self._propagate_access_right()
         return res
 
     # Private section
     @api.multi
     def _propagate_access_right(self):
-        return True
-#        """Give access to the given fiscal child companies to all the
-#        users that have access to the fiscal mother company"""
-#        args = [('id', 'in', self.ids), ('fiscal_type', '=', 'fiscal_child')]
-#        companies = self.search(args)
-#        for company in companies:
-#            user_ids = company.fiscal_company_id.user_ids.ids
-#            new_user_ids = list(set(user_ids) - set(company.user_ids))
-#            company.write({
-#                'user_ids': [(4, id) for id in list(set(new_user_ids))]})
+        """Give access to the given fiscal child companies to all the
+        users that have access to the fiscal mother company"""
+        for company in self:
+            user_ids = company.fiscal_company_id.user_ids.ids
+            new_user_ids = list(set(user_ids) - set(company.user_ids.ids))
+            company.write({
+                'user_ids': [(4, id) for id in list(set(new_user_ids))]})

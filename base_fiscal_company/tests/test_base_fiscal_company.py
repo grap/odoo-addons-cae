@@ -7,6 +7,7 @@
 from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
 
+
 class TestBaseFiscalCompany(TransactionCase):
     """Tests for 'Base Fiscal Company' Module"""
 
@@ -14,19 +15,20 @@ class TestBaseFiscalCompany(TransactionCase):
     def setUp(self):
         super(TestBaseFiscalCompany, self).setUp()
 
-        # Get Registries
         self.user_obj = self.env['res.users']
         self.company_obj = self.env['res.company']
-
         self.mother_company = self.env.ref(
             'base_fiscal_company.company_fiscal_mother')
         self.base_company = self.env.ref('base.main_company')
+        self.accountant_user = self.env.ref(
+            'base_fiscal_company.user_accountant')
 
-#        self.accountant_user_id = self.imd_obj.get_object_reference(
-#            self.cr, self.uid,
-#            'base_fiscal_company', 'user_accountant')[1]
-#        self.fix_mail_bug("DROP")
+        self._fix_mail_bug("DROP")
 
+    def tearDown(self):
+        self.cr.rollback()
+        self._fix_mail_bug("SET")
+        super(TestBaseFiscalCompany, self).tearDown()
 
     # Test Section
     def test_01_res_users_propagate_access_right_create(self):
@@ -67,90 +69,73 @@ class TestBaseFiscalCompany(TransactionCase):
                 'fiscal_type': 'normal',
                 'fiscal_company_id': self.mother_company.id})
 
-##    def test_04_res_company_check_contraint_fail_02(self):
-##        """[Contraint Test] Must Fail. Try to create a company with
-##        'fiscal_type != 'child' and and a mother company."""
-##        cr, uid = self.cr, self.uid
-##        exception_raised = False
-##        try:
-##            self.rc_obj.create(cr, uid, {
-##                'name': 'new_company',
-##                'fiscal_type': 'fiscal_mother',
-##                'fiscal_company': self.mother_company_id})
-##        except:
-##            exception_raised = True
-##        self.assertEqual(exception_raised, True, "Must raise an error.")
+    def test_04_res_company_check_contraint_fail_02(self):
+        """[Contraint Test] Try to create a company with
+        'fiscal_type != 'child' and and a mother company."""
+        with self.assertRaises(ValidationError):
+            self.company_obj.create({
+                'name': 'new_company_1',
+                'fiscal_type': 'fiscal_mother',
+                'fiscal_company_id': self.mother_company.id})
+        with self.assertRaises(ValidationError):
+            self.company_obj.create({
+                'name': 'new_company_2',
+                'fiscal_type': 'normal',
+                'fiscal_company_id': self.mother_company.id})
 
-##    def test_05_res_company_check_contraint_fail_03(self):
-##        """[Contraint Test] Must Fail. Try to create a company with
-##        'fiscal_type = 'child' without a mother company."""
-##        cr, uid = self.cr, self.uid
-##        exception_raised = False
-##        try:
-##            self.rc_obj.create(cr, uid, {
-##                'name': 'new_company',
-##                'fiscal_type': 'fiscal_child',
-##                'fiscal_company': None})
-##        except:
-##            exception_raised = True
-##        self.assertEqual(exception_raised, True, "Must raise an error.")
+    def test_05_res_company_check_contraint_fail_03(self):
+        """[Contraint Test] Try to create a company with
+        'fiscal_type = 'child' without a mother company."""
+        with self.assertRaises(ValidationError):
+            self.company_obj.create({
+                'name': 'new_company',
+                'fiscal_type': 'fiscal_child',
+                'fiscal_company_id': False})
 
-##    def test_06_res_company_create_child_propagate_success(self):
-##        """[Contraint Test] Create a child company and check propagation."""
-##        cr, uid = self.cr, self.uid
-##        rc_id = self.rc_obj.create(cr, uid, {
-##            'name': 'new_company',
-##            'fiscal_type': 'fiscal_child',
-##            'fiscal_company': self.mother_company_id})
-##        ru = self.ru_obj.browse(cr, uid, self.accountant_user_id)
-##        found = False
-##        for rc in ru.company_ids:
-##            if rc.id == rc_id:
-##                found = True
-##        self.assertEqual(
-##            found, True,
-##            "Existing user must have access to the new child company.")
+    def test_06_res_company_create_child_propagate_success(self):
+        """[Contraint Test] Create a child company and check propagation."""
+        new_company = self.company_obj.create({
+            'name': 'new_company',
+            'fiscal_type': 'fiscal_child',
+            'fiscal_company_id': self.mother_company.id})
+        new_access = self.accountant_user.company_ids.filtered(
+            lambda x: x.id == new_company.id).ids
+        self.assertEqual(
+            new_access, [new_company.id],
+            "Existing user must have access to the new child company.")
 
-##    def test_06_res_company_write_child_propagate_success(self):
-##        """[Contraint Test] Create and write a child company and check
-##         propagation."""
-##        cr, uid = self.cr, self.uid
-##        rc_id = self.rc_obj.create(cr, uid, {
-##            'name': 'new_company',
-##            'fiscal_type': 'normal'})
-##        self.rc_obj.write(cr, uid, [rc_id], {
-##            'fiscal_type': 'fiscal_child',
-##            'fiscal_company': self.mother_company_id})
-##        ru = self.ru_obj.browse(cr, uid, self.accountant_user_id)
-##        found = False
-##        for rc in ru.company_ids:
-##            if rc.id == rc_id:
-##                found = True
-##        self.assertEqual(
-##            found, True,
-##            "Existing user must have access to the new child company.")
+    def test_07_res_company_write_child_propagate_success(self):
+        """[Contraint Test] Create and write a child company and check
+         propagation."""
+        new_company = self.company_obj.create({
+            'name': 'new_company',
+            'fiscal_type': 'normal'})
+        new_company.write({
+            'fiscal_type': 'fiscal_child',
+            'fiscal_company_id': self.mother_company.id})
 
-#    # TODO: FIXME
-#    def fix_mail_bug(self, function):
-#        """ Tests are failing on a database with 'mail' module installed,
-#        Because the load of the registry in TransactionCase seems to be bad.
-#        To be sure, run "print self.registry('res.partner')._defaults and see
-#        that the mandatory field 'notify_email' doesn't appear.
-#        So this is a monkey patch that drop and add not null constraint
-#        to make that tests working."""
-#        self.cr.execute("""
-#            SELECT A.ATTNAME
-#                FROM PG_ATTRIBUTE A, PG_CLASS C
-#                WHERE A.ATTRELID = C.OID
-#                AND A.ATTNAME = 'notify_email'
-#                AND C.relname= 'res_partner';""")
-#        if self.cr.fetchone():
-#            self.cr.execute("""
-#                ALTER TABLE res_partner
-#                    ALTER COLUMN notify_email
-#                    %s NOT NULL;""" % (function))
+        new_access = self.accountant_user.company_ids.filtered(
+            lambda x: x.id == new_company.id).ids
+        self.assertEqual(
+            new_access, [new_company.id],
+            "Existing user must have access to the new child company.")
 
-#    def tearDown(self):
-#        self.cr.rollback()
-#        self.fix_mail_bug("SET")
-#        super(TestBaseFiscalCompany, self).tearDown()
+    # Private Section
+    def _fix_mail_bug(self, function):
+        """ Tests are failing on a database with 'mail' module installed,
+        Because the load of the registry in TransactionCase seems to be bad.
+        To be sure, run "print self.registry('res.partner')._defaults and see
+        that the mandatory field 'notify_email' doesn't appear.
+        So this is a monkey patch that drop and add not null constraint
+        to make that tests working."""
+        self.cr.execute("""
+            SELECT A.ATTNAME
+                FROM PG_ATTRIBUTE A, PG_CLASS C
+                WHERE A.ATTRELID = C.OID
+                AND A.ATTNAME = 'notify_email'
+                AND C.relname= 'res_partner';""")
+        if self.cr.fetchone():
+            self.cr.execute("""
+                ALTER TABLE res_partner
+                    ALTER COLUMN notify_email
+                    %s NOT NULL;""" % (function))
