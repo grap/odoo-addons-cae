@@ -84,6 +84,6 @@ Copyright, Author and Licence :
         'demo/account_journal.xml',
         'demo/ir_property.xml',
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': True,
 }
