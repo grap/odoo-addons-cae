@@ -14,8 +14,8 @@ class product_category(Model):
     _inherit = 'product.category'
 
     _PRODUCT_CATEGORY_FISCAL_PROPERTY_LIST = [
-        'property_account_income_categ',
-        'property_account_expense_categ',
+        'property_account_income_categ_id',
+        'property_account_expense_categ_id',
     ]
 
     # Custom Function

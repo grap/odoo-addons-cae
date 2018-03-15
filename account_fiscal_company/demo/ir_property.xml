@@ -8,52 +8,55 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
 <odoo>
 
     <!-- Receivable Properties-->
+    <!-- TODO Check if we manage the problem for partner, like for product.category -->
     <record id="property_account_receivable_CH1" model="ir.property">
         <field name="name">CAE - property_account_receivable CH1</field>
         <field name="company_id" ref="base_fiscal_company.company_fiscal_child_1"/>
         <field name="fields_id" ref="account.field_res_partner_property_account_receivable_id"/>
-        <field name="value" eval="'account.account,'+str(account_receivable)"/>
+        <field name="value" eval="'account.account,'+str(account_receivable_cae)"/>
     </record>
 
     <record id="property_account_receivable_CH2" model="ir.property">
         <field name="name">CAE - property_account_receivable CH2</field>
         <field name="company_id" ref="base_fiscal_company.company_fiscal_child_2"/>
         <field name="fields_id" ref="account.field_res_partner_property_account_receivable_id"/>
-        <field name="value" eval="'account.account,'+str(account_receivable)"/>
+        <field name="value" eval="'account.account,'+str(account_receivable_cae)"/>
     </record>
 
     <!-- Payable Properties-->
+    <!-- TODO Check if we manage the problem for partner, like for product.category -->
     <record id="property_account_payable_CH1" model="ir.property">
         <field name="name">CAE - property_account_payable CH1</field>
         <field name="company_id" ref="base_fiscal_company.company_fiscal_child_2"/>
         <field name="fields_id" ref="account.field_res_partner_property_account_payable_id"/>
-        <field name="value" eval="'account.account,'+str(account_payable)"/>
+        <field name="value" eval="'account.account,'+str(account_payable_cae)"/>
     </record>
 
     <record id="property_account_payable_CH2" model="ir.property">
         <field name="name">CAE - property_account_payable CH2</field>
         <field name="company_id" ref="base_fiscal_company.company_fiscal_child_2"/>
         <field name="fields_id" ref="account.field_res_partner_property_account_payable_id"/>
-        <field name="value" eval="'account.account,'+str(account_payable)"/>
+        <field name="value" eval="'account.account,'+str(account_payable_cae)"/>
     </record>
 
-<!--    <record model="ir.property" id="property_account_expense_categ_mother">-->
-<!--        <field name="name">CAE - property_account_expense_categ</field>-->
-<!--        <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>-->
-<!--        <field name="type">many2one</field>-->
-<!--        <field name="fields_id" ref="account.field_product_category_property_account_expense_categ"/>-->
-<!--        <field name="value" eval="'account.account,'+str(ref('a_expense'))"/>-->
-<!--        <field name="res_id" eval="'product.category,'+str(ref('product.product_category_all'))"/>-->
-<!--    </record>-->
+    <!-- Income and Expense Properties on product.category -->
+    <record model="ir.property" id="property_account_expense_categ_mother">
+        <field name="name">CAE - property_account_expense_categ</field>
+        <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+        <field name="type">many2one</field>
+        <field name="fields_id" ref="account.field_product_category_property_account_expense_categ_id"/>
+        <field name="value" eval="'account.account,'+str(ref('account_expense_cae'))"/>
+        <field name="res_id" eval="'product.category,'+str(ref('product.product_category_all'))"/>
+    </record>
 
-<!--    <record model="ir.property" id="property_account_income_categ_mother">-->
-<!--        <field name="name">CAE - property_account_income_categ</field>-->
-<!--        <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>-->
-<!--        <field name="type">many2one</field>-->
-<!--        <field name="fields_id" ref="account.field_product_category_property_account_income_categ"/>-->
-<!--        <field name="value" eval="'account.account,'+str(ref('a_sale'))"/>-->
-<!--        <field name="res_id" eval="'product.category,'+str(ref('product.product_category_all'))"/>-->
-<!--    </record>-->
+    <record model="ir.property" id="property_account_income_categ_mother">
+        <field name="name">CAE - property_account_income_categ</field>
+        <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+        <field name="type">many2one</field>
+        <field name="fields_id" ref="account.field_product_category_property_account_income_categ_id"/>
+        <field name="value" eval="'account.account,'+str(ref('account_income_cae'))"/>
+        <field name="res_id" eval="'product.category,'+str(ref('product.product_category_all'))"/>
+    </record>
 
 <!-- Duplicate Data for child company, because this module doesn't apply propagation via property creation but by write on categ-->
 

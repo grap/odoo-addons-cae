@@ -26,8 +26,6 @@
     ],
     'demo': [
         'demo/res_groups.xml',
-#        'demo/account_fiscalyear.xml',
-#        'demo/account_period.xml',
         'demo/account_account.xml',
         'demo/account_journal.xml',
         'demo/ir_property.xml',
