@@ -12,10 +12,15 @@ class ProductProduct(models.Model):
     _name = 'product.product'
     _inherit = ['product.product', 'fiscal.property.propagate.mixin']
 
-    @api.model
+    @api.multi
     def _fiscal_property_propagation_list(self):
+        self.ensure_one()
         res = super(ProductProduct, self)._fiscal_property_propagation_list()
-        return res + [
-            'property_account_expense',
-            'property_account_income',
-        ]
+        # Propagation only for object that belong to the fiscal_mother
+        # company
+        if self.company_id.fiscal_type == 'fiscal_mother':
+            res = res + [
+                'property_account_expense',
+                'property_account_income',
+            ]
+        return res

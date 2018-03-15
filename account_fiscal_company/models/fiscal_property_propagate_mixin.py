@@ -34,13 +34,19 @@ class FiscalPropertyPropagateMixin(models.AbstractModel):
     # Custom Function
     @api.multi
     def _propagate_fiscal_property_to_all_companies(self, vals, creation):
+
         field_obj = self.env['ir.model.fields']
         property_obj = self.env['ir.property']
         current_company = self.env.user.company_id
 
-        if current_company.fiscal_type in ('fiscal_child', 'fiscal_mother'):
+        if not current_company.fiscal_type in\
+                ('fiscal_child', 'fiscal_mother'):
+            return True
+
+
+        for obj in self:
             property_name_list = [
-                x for x in self._fiscal_property_propagation_list()
+                x for x in obj._fiscal_property_propagation_list()
                 if x in vals]
             for property_name in property_name_list:
                 property_value = vals[property_name]
@@ -58,23 +64,22 @@ class FiscalPropertyPropagateMixin(models.AbstractModel):
                     current_company.fiscal_company_id.fiscal_child_ids.ids
                 company_ids.remove(current_company.id)
 
-                for obj in self:
-                    # Delete all property
-                    domain = [
-                        ('res_id', '=', '%s,%s' % (self._name, obj.id)),
-                        ('fields_id', '=', field.id),
-                        ('company_id', 'in', company_ids)]
-                    properties = property_obj.search(domain)
-                    properties.unlink()
+                # Delete all property
+                domain = [
+                    ('res_id', '=', '%s,%s' % (self._name, obj.id)),
+                    ('fields_id', '=', field.id),
+                    ('company_id', 'in', company_ids)]
+                properties = property_obj.search(domain)
+                properties.unlink()
 
-                    # Create property for all fiscal childs
-                    if property_value:
-                        for company_id in company_ids:
-                            property_obj.create({
-                                'name': property_name,
-                                'res_id': '%s,%s' % (self._name, obj.id),
-                                'value': property_value,
-                                'fields_id': field.id,
-                                'type': field.ttype,
-                                'company_id': company_id,
-                            })
+                # Create property for all fiscal childs
+                if property_value:
+                    for company_id in company_ids:
+                        property_obj.create({
+                            'name': property_name,
+                            'res_id': '%s,%s' % (self._name, obj.id),
+                            'value': property_value,
+                            'fields_id': field.id,
+                            'type': field.ttype,
+                            'company_id': company_id,
+                        })

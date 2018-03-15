@@ -11,8 +11,9 @@ class ProductCategory(models.Model):
     _name = 'product.category'
     _inherit = ['product.category', 'fiscal.property.propagate.mixin']
 
-    @api.model
+    @api.multi
     def _fiscal_property_propagation_list(self):
+        self.ensure_one()
         res = super(ProductCategory, self)._fiscal_property_propagation_list()
         return res + [
             'property_account_income_categ_id',
