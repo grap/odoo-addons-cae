@@ -15,6 +15,7 @@ class TestAccountFiscalCompany(TransactionCase):
         self.company_obj = self.env['res.company']
         self.category_obj = self.env['product.category']
         self.template_obj = self.env['product.template']
+        self.product_obj = self.env['product.product']
 
         self.mother_company = self.env.ref(
             'base_fiscal_company.company_fiscal_mother')
@@ -26,6 +27,10 @@ class TestAccountFiscalCompany(TransactionCase):
             'product_fiscal_company.product_template_mother')
         self.product_template_child = self.env.ref(
             'product_fiscal_company.product_template_child')
+        self.product_product_mother = self.env.ref(
+            'product_fiscal_company.product_product_mother')
+        self.product_product_child = self.env.ref(
+            'product_fiscal_company.product_product_child')
         self.account_expense_cae = self.env.ref(
             'account_fiscal_company.account_expense_cae')
         self.account_income_cae = self.env.ref(
@@ -93,7 +98,6 @@ class TestAccountFiscalCompany(TransactionCase):
             "Change an income property for a category in a fiscal company"
             " must change the value for all the other fiscal company.")
 
-
     def test_03_template_mother_propagate_fiscal_property_to_all(self):
         """Change a template property of a fiscal company must change the value
         for all other companies if the template belong to the
@@ -107,19 +111,19 @@ class TestAccountFiscalCompany(TransactionCase):
             'property_account_income_id': self.account_income_cae.id,
         })
 
-        # Change current company and load product with the new context
+        # Change current company and load template with the new context
         self.env.user.company_id = self.child_company.id
-        product = self.template_obj.browse([self.product_template_mother.id])
+        template = self.template_obj.browse([self.product_template_mother.id])
 
         # Check if properties has been propagated to the other company
         self.assertEqual(
-            product.property_account_expense_id.id,
+            template.property_account_expense_id.id,
             self.account_expense_cae.id,
             "Change an expense property for a template in a mother company"
             " must change the value for all the other fiscal company.")
 
         self.assertEqual(
-            product.property_account_income_id.id,
+            template.property_account_income_id.id,
             self.account_income_cae.id,
             "Change an income property for a template in a mother company"
             " must change the value for all the other fiscal company.")
@@ -137,19 +141,79 @@ class TestAccountFiscalCompany(TransactionCase):
             'property_account_income_id': self.account_income_cae.id,
         })
 
-        # Change current company and load product with the new context
+        # Change current company and load template with the new context
         self.env.user.company_id = self.mother_company.id
-        product = self.template_obj.browse([self.product_template_child.id])
+        template = self.template_obj.browse([self.product_template_child.id])
 
-        # Check if properties has been propagated to the other company
+        # Check if properties has not been propagated to the other company
         self.assertNotEqual(
-            product.property_account_expense_id.id,
+            template.property_account_expense_id.id,
             self.account_expense_cae.id,
             "Change an expense property for a template in a child company"
             " must change the value for all the other fiscal company.")
 
         self.assertNotEqual(
-            product.property_account_income_id.id,
+            template.property_account_income_id.id,
             self.account_income_cae.id,
             "Change an income property for a template in a child company"
+            " must not change the value for all the other fiscal company.")
+
+    def test_05_product_mother_propagate_fiscal_property_to_all(self):
+        """Change a product property of a fiscal company must change the value
+        for all other companies if the product belong to the
+        fiscal mother company"""
+
+        # Change current company
+        self.env.user.company_id = self.mother_company.id
+
+        self.product_product_mother.write({
+            'property_account_expense_id': self.account_expense_cae.id,
+            'property_account_income_id': self.account_income_cae.id,
+        })
+
+        # Change current company and load product with the new context
+        self.env.user.company_id = self.child_company.id
+        product = self.product_obj.browse([self.product_product_mother.id])
+
+        # Check if properties has been propagated to the other company
+        self.assertEqual(
+            product.property_account_expense_id.id,
+            self.account_expense_cae.id,
+            "Change an expense property for a product in a mother company"
+            " must change the value for all the other fiscal company.")
+
+        self.assertEqual(
+            product.property_account_income_id.id,
+            self.account_income_cae.id,
+            "Change an income property for a product in a mother company"
+            " must change the value for all the other fiscal company.")
+
+    def test_06_product_child_propagate_fiscal_property_to_all(self):
+        """Change a product property of a fiscal company must not change the
+         value for all other companies if the product belong to a
+        fiscal child company"""
+
+        # Change current company
+        self.env.user.company_id = self.child_company.id
+
+        self.product_product_child.write({
+            'property_account_expense_id': self.account_expense_cae.id,
+            'property_account_income_id': self.account_income_cae.id,
+        })
+
+        # Change current company and load product with the new context
+        self.env.user.company_id = self.mother_company.id
+        product = self.product_obj.browse([self.product_product_child.id])
+
+        # Check if properties has not been propagated to the other company
+        self.assertNotEqual(
+            product.property_account_expense_id.id,
+            self.account_expense_cae.id,
+            "Change an expense property for a product in a child company"
+            " must change the value for all the other fiscal company.")
+
+        self.assertNotEqual(
+            product.property_account_income_id.id,
+            self.account_income_cae.id,
+            "Change an income property for a product in a child company"
             " must not change the value for all the other fiscal company.")
