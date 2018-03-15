@@ -34,7 +34,6 @@ class FiscalPropertyPropagateMixin(models.AbstractModel):
     # Custom Function
     @api.multi
     def _propagate_fiscal_property_to_all_companies(self, vals, creation):
-
         field_obj = self.env['ir.model.fields']
         property_obj = self.env['ir.property']
         current_company = self.env.user.company_id
@@ -42,7 +41,6 @@ class FiscalPropertyPropagateMixin(models.AbstractModel):
         if not current_company.fiscal_type in\
                 ('fiscal_child', 'fiscal_mother'):
             return True
-
 
         for obj in self:
             property_name_list = [
