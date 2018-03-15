@@ -7,18 +7,15 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 <odoo>
 
-<!--    <record id="view_product_pricelist_form" model="ir.ui.view">-->
-<!--        <field name="model">product.pricelist</field>-->
-<!--        <field name="inherit_id" ref="product.product_pricelist_view" />-->
-<!--        <field name="arch" type="xml">-->
-<!--            <xpath expr="//field[@name='version_id']/tree/field[@name='date_end']" position="after">-->
-<!--                <field name="company_id" groups="base.group_multi_company"/>-->
-<!--            </xpath>-->
-<!--            <xpath expr="//field[@name='version_id']/form/group/field[@name='date_end']" position="after">-->
-<!--                <field name="company_id" groups="base.group_multi_company"/>-->
-<!--            </xpath>-->
-<!--        </field>-->
-<!--    </record>-->
+    <record id="view_product_pricelist_form" model="ir.ui.view">
+        <field name="model">product.pricelist</field>
+        <field name="inherit_id" ref="product.product_pricelist_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='item_ids']/tree/field[@name='compute_price']" position="after">
+                <field name="company_id" groups="base.group_multi_company"/>
+            </xpath>
+        </field>
+    </record>
 
     <record id="view_product_pricelist_tree" model="ir.ui.view">
         <field name="model">product.pricelist</field>

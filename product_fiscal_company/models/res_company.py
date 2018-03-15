@@ -45,10 +45,10 @@ class ResCompany(models.Model):
         sequence_obj = self.env['ir.sequence']
         for company in self:
             if company.fiscal_code:
-                vals = company._prepare_default_code_sequence()
-                if not company_id.product_default_code_sequence_id:
+                vals = company._prepare_product_default_code_sequence()
+                if not company.product_default_code_sequence_id:
                     company.product_default_code_sequence_id =\
-                        sequence_obj.create(vals)
+                        sequence_obj.create(vals).id
                 else:
                     company.product_default_code_sequence_id.write({
                         'name': vals['name'],
@@ -56,11 +56,12 @@ class ResCompany(models.Model):
                     })
 
     @api.multi
-    def _prepare_product_default_code_sequence(vals):
+    def _prepare_product_default_code_sequence(self):
         self.ensure_one()
         return {
             'name': '%s - Default Code for Products' % (self.fiscal_code),
-            'fiscal_code': 'product_product.default_code',
+            'code': 'product_product.default_code',
+            'implementation': 'standard',
             'company_id': self.id,
             'prefix': '%s-' % (self.fiscal_code),
             'padding': 6,

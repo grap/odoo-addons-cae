@@ -11,17 +11,12 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_form_view" />
         <field name="arch" type="xml">
-            <field name="sale_ok" position="before">
-                <field name="administrative_ok"/>
-                <label for="administrative_ok"/>
-            </field>
+            <xpath expr="//field[@name='sale_ok']/.." position="before">
+                <field name="cae_administrative_ok"/>
+                <label for="cae_administrative_ok"/>
+            </xpath>
         </field>
     </record>
-
-<!--            <field name="type" position="after">-->
-<!--                <field name="company_id" groups="base.group_multi_company"/>-->
-<!--            </field>-->
-<!--        </field>-->
 
     <record id="view_product_template_tree" model="ir.ui.view">
         <field name="model">product.template</field>
