@@ -5,28 +5,16 @@ Copyright (C) 2013-Today: GRAP (http://www.grap.coop)
 @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
-<openerp><data>
+<odoo>
 
+    <!-- product.product -->
     <record id="product.product_comp_rule" model="ir.rule">
-        <field name="domain_force">['|','|', ('company_id','=',user.company_id.id), ('company_id','in',[c.id for c in user.company_id.fiscal_childs]), ('company_id', '=', user.company_id.fiscal_company.id)]</field>
+        <field name="domain_force">[
+            '|','|',
+            ('company_id', '=', user.company_id.id),
+            ('company_id', 'in', [c.id for c in user.company_id.fiscal_childs]),
+            ('company_id', '=', user.company_id.fiscal_company.id),
+        ]</field>
     </record>
 
-    <record id="product.product_pricelist_comp_rule" model="ir.rule">
-        <field name="domain_force">['|', ('company_id','=',user.company_id.id), ('company_id','=',False)]</field>
-    </record>
-
-    <record id="product.product_pricelist_version_comp_rule" model="ir.rule">
-        <field name="domain_force">['|', ('company_id','=',user.company_id.id), ('company_id','=',False)]</field>
-    </record>
-
-    <record id="product.product_pricelist_item_comp_rule" model="ir.rule">
-        <field name="domain_force">['|', ('company_id','=',user.company_id.id), ('company_id','=',False)]</field>
-    </record>
-
-    <record id="pricelist_partnerinfo_rule" model="ir.rule">
-        <field name="name">Multi company Rule - pricelist.partnerinfo</field>
-        <field name="model_id" ref="product.model_pricelist_partnerinfo"/>
-        <field name="domain_force">['|', ('company_id','=',user.company_id.id), ('company_id','=',False)]</field>
-    </record>
-
-</data></openerp>
+</odoo>

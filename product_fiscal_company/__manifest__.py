@@ -51,7 +51,7 @@ Copyright, Author and Licence
         'product',
     ],
     'data': [
-#        'security/ir_rule.xml',
+        'security/ir_rule.xml',
         'views/view_product_template.xml',
         'views/view_product_pricelist.xml',
         'views/view_product_pricelist_item.xml',
@@ -59,8 +59,6 @@ Copyright, Author and Licence
     'demo': [
         'demo/res_groups.xml',
         'demo/product_pricelist.xml',
-#        'demo/product_pricelist.yml',
-#        'demo/product_pricelist_version.yml',
         'demo/product_template.xml',
         'demo/product_product.xml',
         'demo/res_company.xml',
