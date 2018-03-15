@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2017-Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+
+<openerp><data>
+
+    <record id="sequence_type_product" model="ir.sequence.type">
+        <field name="name">Product Product - Default Code</field>
+        <field name="code">product_product.default_code</field>
+    </record>
+
+</data></openerp>

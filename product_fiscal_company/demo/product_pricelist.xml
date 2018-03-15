@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<openerp><data>
+
+    <record id="sale_product_pricelist_CH1" model="product.pricelist">
+        <field name="name">CH1 - Main Sale Pricelist</field>
+        <field name="type">sale</field>
+        <field name="company_id" ref="base_fiscal_company.company_fiscal_child_1"/>
+    </record>
+
+    <record id="sale_product_pricelist_version_CH1" model="product.pricelist.version">
+        <field name="name">CH1 - Main Sale Pricelist Version</field>
+        <field name="pricelist_id" ref="sale_product_pricelist_CH1" />
+        <field name="company_id" ref="base_fiscal_company.company_fiscal_child_1"/>
+    </record>
+
+    <record id="sale_product_pricelist_item_CH1" model="product.pricelist.item">
+        <field name="name">CH1 - Main Sale Pricelist Item</field>
+        <field name="price_version_id" ref="sale_product_pricelist_version_CH1" />
+        <field name="company_id" ref="base_fiscal_company.company_fiscal_child_1"/>
+        <field name="base" ref="product.list_price"/>
+    </record>
+
+</data></openerp>
