@@ -19,7 +19,4 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             },
               {'force_company': ref('base_fiscal_company.company_fiscal_mother')}"/>
 
-
 </odoo>
-
-

@@ -8,7 +8,6 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
 <odoo>
 
     <!-- Receivable Properties-->
-    <!-- TODO Check if we manage the problem for partner, like for product.category -->
     <record id="property_account_receivable_CH1" model="ir.property">
         <field name="name">CAE - property_account_receivable CH1</field>
         <field name="company_id" ref="base_fiscal_company.company_fiscal_child_1"/>
@@ -24,7 +23,6 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
     </record>
 
     <!-- Payable Properties-->
-    <!-- TODO Check if we manage the problem for partner, like for product.category -->
     <record id="property_account_payable_CH1" model="ir.property">
         <field name="name">CAE - property_account_payable CH1</field>
         <field name="company_id" ref="base_fiscal_company.company_fiscal_child_2"/>

@@ -26,6 +26,7 @@
         'views/view_res_company_create_wizard.xml',
     ],
     'demo': [
+        'demo/res_partner.xml',
         'demo/res_partner_company.xml',
         'demo/res_partner_users.xml',
     ],

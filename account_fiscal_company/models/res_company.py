@@ -10,7 +10,7 @@ class ResCompany(models.Model):
     _inherit = 'res.company'
 
     _PROPERTY_MODEL_LIST = [
-        'product.template', 'product.category']
+        'res.partner', 'product.template', 'product.category']
 
     @api.model
     def create(self, vals):
