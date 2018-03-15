@@ -10,11 +10,8 @@ This module extend Odoo functionnalities, regarding companies features to
 manage CAE (Coopearatives of Activities and Employment) that is a special
 status for french companies.
 
-Features :
-----------
-* Create a field res_company.fiscal_company:
-    * This field allow user to create account move in a company, but with
-      account of fiscal mother company;
+Features
+========
 
 * Account property propagation:
     * Following fields property are propagated in all the fiscal child company:
@@ -35,11 +32,6 @@ TODO:
     * Check if account_move_line code is usefull :possibility to
       reconcile entries between differents fiscal companies (?!?)
 
-
-Installation
-============
-
-Normal installation.
 
 Credits
 =======
