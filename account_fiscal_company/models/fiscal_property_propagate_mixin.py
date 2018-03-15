@@ -12,28 +12,40 @@ class FiscalPropertyPropagateMixin(models.AbstractModel):
     _name = 'fiscal.property.propagate.mixin'
 
     @api.model
+    def _fiscal_property_creation_list(self):
+        """Overload me to define property fields to create to a new
+        fiscal company
+        """
+        return []
+
+    @api.multi
     def _fiscal_property_propagation_list(self):
-        """Overload me to define property field to propagate to all
+        """Overload me to define property fields to propagate to all
         fiscal company.
         """
+        self.ensure_one()
         return []
 
     # Overload Section
     @api.model
     def create(self, vals):
         res = super(FiscalPropertyPropagateMixin, self).create(vals)
-        res._propagate_fiscal_property_to_all_companies(vals, True)
+        res._propagate_fiscal_property_to_all_companies(vals)
         return res
 
     @api.multi
     def write(self, vals):
         res = super(FiscalPropertyPropagateMixin, self).write(vals)
-        self._propagate_fiscal_property_to_all_companies(vals, False)
+        self._propagate_fiscal_property_to_all_companies(vals)
         return res
 
     # Custom Function
     @api.multi
-    def _propagate_fiscal_property_to_all_companies(self, vals, creation):
+    def _propagate_fiscal_property_to_all_companies(self, vals):
+        """
+        Propagate a property of objects of for all fiscal
+        childs of a mother company
+        """
         field_obj = self.env['ir.model.fields']
         property_obj = self.env['ir.property']
         current_company = self.env.user.company_id
@@ -50,11 +62,10 @@ class FiscalPropertyPropagateMixin(models.AbstractModel):
                 property_value = vals[property_name]
 
                 # Get fields information
-                domain = [
+                field = field_obj.search([
                     ('model', '=', self._name),
                     ('name', '=', property_name),
-                ]
-                field = field_obj.search(domain)[0]
+                ])[0]
 
                 # Get all companies and remove the current company which
                 # property has been just written

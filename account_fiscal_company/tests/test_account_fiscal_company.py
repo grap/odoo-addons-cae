@@ -21,6 +21,20 @@ class TestAccountFiscalCompany(TransactionCase):
             'base_fiscal_company.company_fiscal_mother')
         self.child_company = self.env.ref(
             'base_fiscal_company.company_fiscal_child_1')
+        self.account_expense_cae = self.env.ref(
+            'account_fiscal_company.account_expense_cae')
+        self.account_income_cae = self.env.ref(
+            'account_fiscal_company.account_income_cae')
+
+        # Object with demo accounting properties
+        self.product_category_all = self.env.ref(
+            'product.product_category_all')
+        self.product_template_mother_property = self.env.ref(
+            'account_fiscal_company.product_template_mother_property')
+        self.product_product_mother_property = self.env.ref(
+            'account_fiscal_company.product_product_mother_property')
+
+        # Object without demo accounting properties
         self.product_category_internal = self.env.ref(
             'product.product_category_2')
         self.product_template_mother = self.env.ref(
@@ -31,42 +45,66 @@ class TestAccountFiscalCompany(TransactionCase):
             'product_fiscal_company.product_product_mother')
         self.product_product_child = self.env.ref(
             'product_fiscal_company.product_product_child')
-        self.account_expense_cae = self.env.ref(
-            'account_fiscal_company.account_expense_cae')
-        self.account_income_cae = self.env.ref(
-            'account_fiscal_company.account_income_cae')
 
     # Test Section
-#    def test_01_account_property_propagation_new_company(self):
-#        """Create a new child company must propagate categories properties"""
+    def test_01_account_property_propagation_new_company(self):
+        """Create a new child company must propagate categories properties"""
 
-#        # Create a new Child company
-#        company = self.company_obj.create({
-#            'name': 'Your Test Child Company',
-#            'code': 'CTS',
-#            'fiscal_type': 'fiscal_child',
-#            'fiscal_company': self.mother_company.id,
-#            'parent_id': self.mother_company.id,
-#        })
+        # Create a new Child company
+        child_company = self.company_obj.create({
+            'name': 'Your Test Child Company',
+            'fiscal_type': 'fiscal_child',
+            'fiscal_company_id': self.mother_company.id,
+            'parent_id': self.mother_company.id,
+        })
 
-#        
-#        # Change current company and load category with the new context
-#        self.env.user.company_id = company.id
-#        category = self.category_obj.browse(
-#            [self.product_category_internal.id])
+        # Change current company and load objects with the new context
+        self.env.user.company_id = child_company.id
+        category = self.category_obj.browse(
+            [self.product_category_all.id])
+        product = self.product_obj.browse(
+            [self.product_product_mother_property.id])
+        template = self.template_obj.browse(
+            [self.product_template_mother_property.id])
 
-#        # Check if properties has been propagated to the new company
-#        self.assertEqual(
-#            category.property_account_expense_categ_id.id,
-#            self.account_expense_cae.id,
-#            "Create a new child company must set expense account property"
-#            " of the mother company to the new child company.")
+        # Check if category properties has been propagated to the new company
+        self.assertEqual(
+            category.property_account_expense_categ_id.id,
+            self.account_expense_cae.id,
+            "Create a new child company must set expense account property"
+            " of the mother company to the new child company for category.")
 
-#        self.assertEqual(
-#            category.property_account_income_categ_id.id,
-#            self.account_income_cae.id,
-#            "Create a new child company must set income account property"
-#            " of the mother company to the new child company.")
+        self.assertEqual(
+            category.property_account_income_categ_id.id,
+            self.account_income_cae.id,
+            "Create a new child company must set income account property"
+            " of the mother company to the new child company for category.")
+
+        # Check if product properties has been propagated to the new company
+        self.assertEqual(
+            product.property_account_expense_id.id,
+            self.account_expense_cae.id,
+            "Create a new child company must set expense account property"
+            " of the mother company to the new child company for product.")
+
+        self.assertEqual(
+            product.property_account_income_id.id,
+            self.account_income_cae.id,
+            "Create a new child company must set income account property"
+            " of the mother company to the new child company for product.")
+
+        # Check if template properties has been propagated to the new company
+        self.assertEqual(
+            template.property_account_expense_id.id,
+            self.account_expense_cae.id,
+            "Create a new child company must set expense account property"
+            " of the mother company to the new child company for template.")
+
+        self.assertEqual(
+            template.property_account_income_id.id,
+            self.account_income_cae.id,
+            "Create a new child company must set income account property"
+            " of the mother company to the new child company for template.")
 
     def test_02_category_propagate_fiscal_property_to_all(self):
         """Change a category property of a fiscal company must change the value

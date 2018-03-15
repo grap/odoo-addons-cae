@@ -29,6 +29,8 @@
         'demo/account_account.xml',
         'demo/account_journal.xml',
         'demo/product_category.xml',
+        'demo/product_product.xml',
+        'demo/product_template.xml',
 #        'demo/ir_property.xml',
     ],
     'installable': True,

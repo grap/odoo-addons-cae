@@ -12,6 +12,14 @@ class ProductTemplate(models.Model):
     _name = 'product.template'
     _inherit = ['product.template', 'fiscal.property.propagate.mixin']
 
+    @api.model
+    def _fiscal_property_creation_list(self):
+        res = super(ProductTemplate, self)._fiscal_property_creation_list()
+        return res + [
+            'property_account_expense_id',
+            'property_account_income_id',
+        ]
+
     @api.multi
     def _fiscal_property_propagation_list(self):
         self.ensure_one()
