@@ -18,6 +18,13 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="categ_id" ref="product.product_category_1"/>
     </record>
 
+    <record id="product_template_administrative" model="product.template">
+        <field name="name">CAE - Administrative Mother Product Template</field>
+        <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+        <field name="categ_id" ref="product.product_category_all"/>
+        <field name="cae_administrative_ok" eval="True"/>
+    </record>
+
 </odoo>
 
 

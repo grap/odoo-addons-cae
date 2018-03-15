@@ -3,9 +3,7 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, api
-
-_SUFFIX_LENGTH = 6
+from odoo import api, models
 
 
 class ProductProduct(models.Model):
@@ -23,5 +21,7 @@ class ProductProduct(models.Model):
     def _set_default_code(self):
         ir_sequence_obj = self.env['ir.sequence']
         for product in self:
-            product.default_code = ir_sequence_obj.get(
-                'product_product.default_code')
+            if product.company_id and\
+                    product.company_id.use_default_code_sequence:
+                product.default_code = ir_sequence_obj.get(
+                    'product_product.default_code')

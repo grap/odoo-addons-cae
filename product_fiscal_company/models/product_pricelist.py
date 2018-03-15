@@ -5,20 +5,21 @@
 
 from lxml import etree
 
-from openerp.osv.orm import Model
+from odoo import api, models
 
 
-class ProductPricelist(Model):
+class ProductPricelist(models.Model):
     _inherit = 'product.pricelist'
 
     # Overload Section
+    @api.model
     def fields_view_get(
-            self, cr, uid, view_id=None, view_type='form', context=None,
-            toolbar=False):
+            self, view_id=None, view_type='form', toolbar=False,
+            submenu=False):
         """Add a required modifiers on the field company_id"""
         res = super(ProductPricelist, self).fields_view_get(
-            cr, uid, view_id=view_id, view_type=view_type, context=context,
-            toolbar=toolbar)
+            view_id=view_id, view_type=view_type, toolbar=toolbar,
+            submenu=submenu)
         if view_type in ('form', 'tree')\
                 and 'company_id' in res['fields']:
             res['fields']['required'] = True
