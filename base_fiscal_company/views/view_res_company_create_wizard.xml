@@ -46,7 +46,7 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
 
                     </page>
                     <page string="Administrative information" states="init">
-                        <group>
+                        <group string="Basic Accounting Settings" name="group_basic_account">
                             <field name="company_registry"/>
                             <field name="vat" attrs="{'readonly': [('fiscal_type','=', ('fiscal_child'))]}"/>
 

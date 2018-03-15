@@ -10,7 +10,7 @@ This module extend Odoo functionnalities, regarding companies features to
 manage CAE (Coopearatives of Activities and Employment) that is a special
 status for french companies.
 
-(see above, links that describe what is CAE).
+(see above, links that describes what is CAE).
 
 Basically, in a CAE, there is a 'parent' company that hosts many 'child'
 companies. People in a child company should have access only to their activity.

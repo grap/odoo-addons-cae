@@ -175,6 +175,7 @@ class ResCompanyCreateWizard(models.TransientModel):
     @api.multi
     def _prepare_user_groups(self):
         """Overload this function. Should return a list of xml ids of groups"""
+        self.ensure_one()
         return []
 
     @api.multi
