@@ -7,11 +7,11 @@
 from openerp.tests.common import TransactionCase
 
 
-class TestAccountFiscalCompany(TransactionCase):
-    """Tests for Account Fiscal Company Module"""
+class TestPropagateProperties(TransactionCase):
+    """Tests for Account Fiscal Company Module (Propagate Properties)"""
 
     def setUp(self):
-        super(TestAccountFiscalCompany, self).setUp()
+        super(TestPropagateProperties, self).setUp()
         self.company_obj = self.env['res.company']
         self.partner_obj = self.env['res.partner']
         self.category_obj = self.env['product.category']
