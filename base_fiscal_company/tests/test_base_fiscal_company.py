@@ -21,7 +21,7 @@ class TestBaseFiscalCompany(TransactionCase):
         self.mother_company = self.env.ref(
             'base_fiscal_company.company_fiscal_mother')
         self.base_company = self.env.ref('base.main_company')
-        self.accountant_user = self.env.ref(
+        self.user_accountant = self.env.ref(
             'base_fiscal_company.user_accountant')
 
         self._fix_mail_bug("DROP")
@@ -99,7 +99,7 @@ class TestBaseFiscalCompany(TransactionCase):
             'name': 'new_company',
             'fiscal_type': 'fiscal_child',
             'fiscal_company_id': self.mother_company.id})
-        new_access = self.accountant_user.company_ids.filtered(
+        new_access = self.user_accountant.company_ids.filtered(
             lambda x: x.id == new_company.id).ids
         self.assertEqual(
             new_access, [new_company.id],
@@ -115,15 +115,17 @@ class TestBaseFiscalCompany(TransactionCase):
             'fiscal_type': 'fiscal_child',
             'fiscal_company_id': self.mother_company.id})
 
-        new_access = self.accountant_user.company_ids.filtered(
+        new_access = self.user_accountant.company_ids.filtered(
             lambda x: x.id == new_company.id).ids
         self.assertEqual(
             new_access, [new_company.id],
             "Existing user must have access to the new child company.")
 
     def test_08_wizard(self):
-        """[Contraint Test] Create a child company via the wizard"""
-        wizard = self.wizard_obj.create({
+        """[Contraint Test] Create a child company via the wizard,
+        with user accountant
+        """
+        wizard = self.wizard_obj.sudo(self.user_accountant).create({
             'company_name': 'Test Company Wizard',
             'fiscal_type': 'fiscal_child',
             'fiscal_code': 'WIZ',

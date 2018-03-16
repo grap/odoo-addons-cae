@@ -19,8 +19,11 @@ class TestProductFiscalCompany(TransactionCase):
 
     # Test Section
     def test_01_pricelist_creation(self):
-        """[Functional Test] creating a new company via wizard should create
-        a pricelist"""
+        """[Functional Test] creating a new company via wizard,
+        should create a pricelist"""
+        # Note we do not call with user_accountant, because
+        # there are no access right available for product.pricelist
+        # if third modules are not installed (like sales_team)
         wizard = self.wizard_obj.create({
             'company_name': 'Test Company Wizard',
             'fiscal_type': 'fiscal_child',

@@ -27,6 +27,7 @@
     ],
     'demo': [
         'demo/res_groups.xml',
+        'demo/res_company.xml',
         'demo/res_partner_company.xml',
         'demo/res_partner_users.xml',
         'demo/res_partner.xml',
