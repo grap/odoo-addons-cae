@@ -12,6 +12,7 @@ class ResCompanyCreateWizard(models.TransientModel):
 
     @api.multi
     def _begin(self):
+        print "product::_begin"
         self.ensure_one()
         res = super(ResCompanyCreateWizard, self)._begin()
         pricelist_obj = self.env['product.pricelist']
@@ -20,11 +21,12 @@ class ResCompanyCreateWizard(models.TransientModel):
         pricelists = pricelist_obj.search(
             [('name', '=', self.company_id.name)])
         if len(pricelists):
+            print "write on pricelist"
             pricelist = pricelists[0]
             pricelist.write(self._prepare_pricelist())
         else:
+            print "create pricelist"
             pricelist = pricelist_obj.create(self._prepare_pricelist())
-        return res
 
     @api.multi
     def _prepare_pricelist(self):

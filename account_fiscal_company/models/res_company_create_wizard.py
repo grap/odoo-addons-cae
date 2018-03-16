@@ -44,6 +44,8 @@ class ResCompanyCreateWizard(models.TransientModel):
         comodel_name='account.chart.template', string='Account Template',
         domain="[('visible', '=', True)]")
 
+    code_digits = fields.Integer(string='# of Digits')
+
     fiscalyear_last_day = fields.Integer(
         string='Fiscal Year Last Day', default=31)
 
@@ -51,31 +53,28 @@ class ResCompanyCreateWizard(models.TransientModel):
         string='Fiscal Year Last Month',  default=12,
         selection=_FISCALYEAR_LAST_MONTH_SELECTION)
 
-    sale_tax_template_id = fields.Many2one(
-        comodel_name='account.tax.template', string='Default sale tax',
-        domain="["
-        "('chart_template_id', '=', chart_template_id),"
-        "('parent_id','=',False),"
-        "('type_tax_use','in', ('sale', 'all'))]")
+    payable_account_template_id = fields.Many2one(
+        comodel_name='account.account.template',
+        string='Default Payable Account',
+        domain= lambda s: s._get_account_template_domain('payable'))
 
-    purchase_tax_template_id = fields.Many2one(
-        comodel_name='account.tax.template', string='Default purchase tax',
-        domain="["
-        "('chart_template_id', '=', chart_template_id),"
-        "('parent_id','=',False),"
-        "('type_tax_use','in', ('purchase', 'all'))]")
+    receivable_account_template_id = fields.Many2one(
+        comodel_name='account.account.template',
+        string='Default Receivable Account',
+        domain= lambda s: s._get_account_template_domain('receivable'))
+#        domain="["
+#        "('chart_template_id', '=', chart_template_id),"
+#        "('reconcile','=', True)]")
 
-#    'journal_ids': fields.function(
-#        _get_journal_ids, 'Journals', type='one2many',
-#        relation='account.journal'),
-#    'account_receivable_id': fields.many2one(
-#        'account.account', 'Account Receivable',
-#        domain="[('company_id', '=', fiscal_company),"
-#        "('type', '=', 'receivable')]"),
-#    'account_payable_id': fields.many2one(
-#        'account.account', 'Account Payable',
-#        domain="[('company_id', '=', fiscal_company),"
-#        "('type', '=', 'payable')]"),
+    @api.model
+    def _get_account_template_domain(self, type_name):
+        if type_name == 'current_assets':
+            type = self.env.ref('account.data_account_type_current_assets')
+        elif type_name == 'receivable':
+            type = self.env.ref('account.data_account_type_receivable')
+        elif type_name == 'payable':
+            type = self.env.ref('account.data_account_type_payable')
+        return [('user_type_id', '=', type.id)]
 
 #     transfer_account_id = fields.Many2one('account.account',
 #        domain=lambda self: [('reconcile', '=', True), ('user_type_id.id', '=', self.env.ref('account.data_account_type_current_assets').id), ('deprecated', '=', False)], string="Inter-Banks Transfer Account", help="Intermediary account used when moving money from a liquidity account to another")
@@ -108,7 +107,6 @@ class ResCompanyCreateWizard(models.TransientModel):
 
     @api.multi
     def _prepare_user_groups(self):
-        """Overload this function. Should return a list of xml ids of groups"""
         self.ensure_one()
         res = super(ResCompanyCreateWizard, self)._prepare_user_groups()
         res.append('account.group_account_user')
@@ -124,26 +122,28 @@ class ResCompanyCreateWizard(models.TransientModel):
 #        return res
 
     @api.multi
-    def begin(self):
+    def _prepare_chart_wizard(self):
+        self.ensure_one()
+        return {
+            'company_id': self.company_id.id,
+            'chart_template_id': self.chart_template_id.id,
+            'code_digits': self.code_digits,
+            'sale_tax_id': False,
+            'purchase_tax_id': False,
+        }
+
+    @api.multi
+    def _begin(self):
+        print "account::_begin"
         self.ensure_one()
         char_wizard_obj = self.env['wizard.multi.charts.accounts']
-        res = super(ResCompanyCreateWizard, self).begin()
+        res = super(ResCompanyCreateWizard, self)._begin()
 
-        # Install Chart of Accounts
         if self.fiscal_type != 'fiscal_child':
-#            
-            chart_wizard = chart_wizard_obj.create({
-                'company_id': self.company_id.id,
-                'chart_template_id': self.chart_template_id.id,
-                'code_digits': rccw.code_digits,
-                'sale_tax': rccw.sale_tax.id,
-                'sale_tax_rate': rccw.sale_tax_rate,
-                'purchase_tax': rccw.purchase_tax.id,
-                'purchase_tax_rate': rccw.purchase_tax_rate,
-                'complete_tax_set': rccw.chart_template_id.complete_tax_set,
-                'currency_id': rccw.company_id.currency_id.id,
-            }, context)
-            wmca_obj.execute(cr, uid, [wmca_id], context)
+            print "create chart"
+            # Install Chart of Accounts
+            chart_wizard = chart_wizard_obj.create(self._prepare_chart_wizard)
+            chart_wizard.execute()
 
 #            ip_payable_id = ip_obj.search(cr, uid, [
 #                ('name', '=', 'property_account_payable'),
@@ -254,6 +254,12 @@ class ResCompanyCreateWizard(models.TransientModel):
 #        return res
 
 #    # View Section
+    @api.onchange('chart_template_id')
+    def onchange_chart_template_id(self):
+        if self.chart_template_id:
+            self.code_digits = self.chart_template_id.code_digits
+
+
 #    def onchange_chart_template_id(
 #            self, cr, uid, ids, chart_template_id, context=None):
 #        tax_templ_obj = self.pool['account.tax.template']

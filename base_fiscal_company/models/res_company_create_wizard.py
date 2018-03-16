@@ -182,13 +182,16 @@ class ResCompanyCreateWizard(models.TransientModel):
 
     @api.multi
     def _begin(self):
+        print "base::_begin"
         self.ensure_one()
         company_obj = self.env['res.company']
         user_obj = self.env['res.users']
         model_data_obj = self.env['ir.model.data']
         # Create Company
+        print ">>>>>> create company"
         self.company_id = company_obj.create(self._prepare_company())
 
+        print ">>>>>> switch company"
         # Swith current user to the new company
         self.env.user.write({
             'company_id': self.company_id.id,
@@ -196,13 +199,16 @@ class ResCompanyCreateWizard(models.TransientModel):
         })
         # Clear cache, specially to reset obsoleted cached domain
         # ./odoo/tools/cache.py (_compute_domain)
+        print ">>>>>> clear domain"
         self.env.clear()
 
         # Manage Extra Data in associated partner
+        print ">>>>>> write on company's partner"
         self.company_id.partner_id.write(self._prepare_partner())
 
         # Create User if required
         if self.create_user:
+            print "create user"
             self.user_id = user_obj.create(self._prepare_user())
             for group in self._prepare_user_groups():
                 val = group.split('.')
