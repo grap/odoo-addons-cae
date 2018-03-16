@@ -7,11 +7,17 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 <openerp><data>
 
     <record id="product.group_sale_pricelist" model="res.groups">
-        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        <field name="users" eval="[
+            (4, ref('base.user_root')),
+            (4, ref('base_fiscal_company.user_accountant')),
+        ]"/>
     </record>
 
     <record id="product.group_pricelist_item" model="res.groups">
-        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        <field name="users" eval="[
+            (4, ref('base.user_root')),
+            (4, ref('base_fiscal_company.user_accountant')),
+        ]"/>
     </record>
 
 </data></openerp>

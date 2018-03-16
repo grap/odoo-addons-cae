@@ -8,6 +8,13 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
 
 <odoo>
 
+    <record id="account.group_account_invoice" model="res.groups">
+        <field name="users" eval="[
+            (4, ref('base_fiscal_company.user_worker')),
+        ]" />
+    </record>
+
+
     <record id="account.group_account_manager" model="res.groups">
         <field name="users" eval="[
             (4, ref('base.user_root')),

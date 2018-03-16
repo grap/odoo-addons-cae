@@ -16,13 +16,13 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
 <!--            <field name="name">res.partner company</field>-->
 <!--            <field name="model_id" ref="model_res_partner"/>-->
 
-<!--    <record id="base.res_partner_rule" model="ir.rule">-->
-<!--        <field name="domain_force">['|','|','|',-->
-<!--            ('company_id', '=', user.company_id.id),-->
-<!--            ('company_id', '=', user.company_id.fiscal_company_id.id),-->
-<!--            ('company_id', 'in', [c.id for c in user.company_id.fiscal_child_ids]),-->
-<!--            ('company_id', '=', False)]</field>-->
-<!--    </record>-->
+    <record id="base.res_partner_rule" model="ir.rule">
+        <field name="domain_force">['|','|','|',
+            ('company_id', '=', user.company_id.id),
+            ('company_id', '=', user.company_id.fiscal_company_id.id),
+            ('company_id', 'in', [c.id for c in user.company_id.fiscal_child_ids]),
+            ('company_id', '=', False)]</field>
+    </record>
 
     <record id="base.res_company_rule_employee" model="ir.rule">
         <field name="domain_force">['|',
