@@ -18,8 +18,10 @@
         'sale',
     ],
     'data': [
+        'views/view_sale_order.xml',
     ],
     'demo': [
+        'demo/product_product.xml',
     ],
     'installable': True,
     'auto_install': True,

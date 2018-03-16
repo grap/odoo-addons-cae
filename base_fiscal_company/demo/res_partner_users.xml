@@ -20,6 +20,8 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
     <record model="res.partner" id="partner_accountant">
         <field name="name">Accountant User</field>
         <field name="email">accountant@cae.coop</field>
+        <field name="customer" eval="False"/>
+        <field name="supplier" eval="False"/>
         <field name="company_id" eval="False"/>
     </record>
 
@@ -39,6 +41,8 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
     <record model="res.partner" id="partner_worker">
         <field name="name">Worker User</field>
         <field name="email">worker@cae.coop</field>
+        <field name="customer" eval="False"/>
+        <field name="supplier" eval="False"/>
         <field name="company_id" eval="False"/>
     </record>
 
@@ -46,9 +50,9 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
         <field name="partner_id" ref="partner_worker"/>
         <field name="login">worker</field>
         <field name="password">demo</field>
-        <field name="company_id" ref="company_fiscal_child_2"/>
+        <field name="company_id" ref="company_fiscal_child_1"/>
         <field name="company_ids" eval="[
-            (4, ref('company_fiscal_child_2')),
+            (4, ref('company_fiscal_child_1')),
         ]"/>
     </record>
 
