@@ -16,9 +16,9 @@
         'base',
     ],
     'data': [
+        'security/res_groups.xml',
         'security/ir_rule.xml',
         'security/ir.model.access.csv',
-        'security/res_groups.xml',
         'views/action.xml',
         'views/menu.xml',
         'views/view_res_users.xml',
