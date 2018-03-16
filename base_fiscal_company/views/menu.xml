@@ -6,13 +6,13 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 
-<openerp><data>
+<odoo>
 
     <menuitem id="menu_res_company_create_wizard"
         name="Create New Company"
         action="action_res_company_create_wizard"
-        groups="base.group_no_one"
+        groups="fiscal_company_manager"
         parent="base.menu_users"
         sequence="12"/>
 
-</data></openerp>
+</odoo>

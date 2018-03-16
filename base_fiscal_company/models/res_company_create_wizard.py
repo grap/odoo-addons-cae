@@ -158,6 +158,8 @@ class ResCompanyCreateWizard(models.TransientModel):
         self.ensure_one()
         return {
             'customer': False,
+            'supplier': False,
+            'active': False,
         }
 
     @api.multi
@@ -192,6 +194,9 @@ class ResCompanyCreateWizard(models.TransientModel):
             'company_id': self.company_id.id,
             'company_ids': [(4, self.company_id.id)],
         })
+        # Clear cache, specially to reset obsoleted cached domain
+        # ./odoo/tools/cache.py (_compute_domain)
+        self.env.clear()
 
         # Manage Extra Data in associated partner
         self.company_id.partner_id.write(self._prepare_partner())
