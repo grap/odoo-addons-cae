@@ -5,8 +5,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import models
-from openerp.addons.account_fiscal_company.decorator import \
-    switch_company
+from odoo.addons.account_fiscal_company.decorator import switch_company
 
 
 class AccountJournal(models.Model):
