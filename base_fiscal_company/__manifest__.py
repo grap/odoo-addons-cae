@@ -17,6 +17,7 @@
     ],
     'data': [
         'security/ir_rule.xml',
+        'security/ir.model.access.csv',
         'security/res_groups.xml',
         'views/action.xml',
         'views/menu.xml',

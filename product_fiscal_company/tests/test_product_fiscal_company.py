@@ -16,15 +16,14 @@ class TestProductFiscalCompany(TransactionCase):
         self.wizard_obj = self.env['res.company.create.wizard']
         self.mother_company = self.env.ref(
             'base_fiscal_company.company_fiscal_mother')
+        self.user_accountant = self.env.ref(
+            'base_fiscal_company.user_accountant')
 
     # Test Section
     def test_01_pricelist_creation(self):
         """[Functional Test] creating a new company via wizard,
-        should create a pricelist"""
-        # Note we do not call with user_accountant, because
-        # there are no access right available for product.pricelist
-        # if third modules are not installed (like sales_team)
-        wizard = self.wizard_obj.create({
+        with user accountant, should create (or update) a pricelist"""
+        wizard = self.wizard_obj.sudo(self.user_accountant).create({
             'company_name': 'Test Company Wizard',
             'fiscal_type': 'fiscal_child',
             'fiscal_code': 'WIZ',

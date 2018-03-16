@@ -51,6 +51,7 @@ Copyright, Author and Licence
         'product',
     ],
     'data': [
+        'security/ir.model.access.csv',
         'security/ir_rule.xml',
         'views/view_product_template.xml',
         'views/view_product_pricelist.xml',
