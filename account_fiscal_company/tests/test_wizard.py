@@ -1,19 +1,20 @@
 # coding: utf-8
-# Copyright (C) 2018 - Today: GRAP (http://www.grap.coop)
+# Copyright (C) 2013 - Today: GRAP (http://www.grap.coop)
+# @author Julien WESTE
 # @author Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo.tests.common import TransactionCase
+from openerp.tests.common import TransactionCase
 
 from odoo.addons.base_fiscal_company.fix_test import fix_required_field
 
 
-class TestProductFiscalCompany(TransactionCase):
-    """Tests for 'Product Fiscal Company' Module"""
+class TestWizard(TransactionCase):
+    """Tests for Account Fiscal Company Module (Wizard)"""
 
     # Overload Section
     def setUp(self):
-        super(TestProductFiscalCompany, self).setUp()
+        super(TestWizard, self).setUp()
         self.pricelist_obj = self.env['product.pricelist']
         self.wizard_obj = self.env['res.company.create.wizard']
         self.mother_company = self.env.ref(
@@ -25,12 +26,12 @@ class TestProductFiscalCompany(TransactionCase):
     def tearDown(self):
         self.cr.rollback()
         fix_required_field(self, 'SET')
-        super(TestProductFiscalCompany, self).tearDown()
+        super(TestWizard, self).tearDown()
 
     # Test Section
     def test_01_pricelist_creation(self):
-        """[Functional Test] creating a new company via wizard,
-        with user accountant, should create (or update) a pricelist"""
+        """[Functional Test] creating a new company via wizard
+        should work"""
         wizard = self.wizard_obj.sudo(self.user_accountant).create({
             'company_name': 'Test Company Wizard',
             'fiscal_type': 'fiscal_child',
@@ -38,11 +39,3 @@ class TestProductFiscalCompany(TransactionCase):
             'parent_company_id': self.mother_company.id,
         })
         wizard.button_begin()
-        wizard.button_finish()
-        pricelists = self.pricelist_obj.search([
-            ('company_id', '=', wizard.company_id.id),
-            ('name', '=', 'WIZ - Public Pricelist'),
-        ])
-        self.assertEqual(
-            len(pricelists), 1,
-            "Create a company by wizard should create a pricelist")

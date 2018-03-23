@@ -7,6 +7,7 @@
 from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
 
+from odoo.addons.base_fiscal_company.fix_test import fix_required_field
 
 class TestBaseFiscalCompany(TransactionCase):
     """Tests for 'Base Fiscal Company' Module"""
@@ -23,19 +24,20 @@ class TestBaseFiscalCompany(TransactionCase):
         self.base_company = self.env.ref('base.main_company')
         self.user_accountant = self.env.ref(
             'base_fiscal_company.user_accountant')
-
-        self._fix_mail_bug("DROP")
+        self.user_accountant.write({'company_id': self.mother_company.id})
+        self.env.clear()
+        fix_required_field(self, 'DROP')
 
     def tearDown(self):
         self.cr.rollback()
-        self._fix_mail_bug("SET")
+        fix_required_field(self, 'SET')
         super(TestBaseFiscalCompany, self).tearDown()
 
     # Test Section
     def test_01_res_users_propagate_access_right_create(self):
         """[Functional Test] A new user with access to mother company must
          have access to child companies"""
-        new_user = self.user_obj.create({
+        new_user = self.user_obj.sudo(user=self.user_accountant).create({
             'name': 'new_user',
             'login': 'new_user@odoo.com',
             'company_id': self.mother_company.id,
@@ -65,7 +67,7 @@ class TestBaseFiscalCompany(TransactionCase):
         """[Contraint Test] Try to create a company with
         'fiscal_type != 'child' and and a mother company."""
         with self.assertRaises(ValidationError):
-            self.company_obj.create({
+            self.company_obj.sudo(user=self.user_accountant).create({
                 'name': 'new_company',
                 'fiscal_type': 'normal',
                 'fiscal_company_id': self.mother_company.id})
@@ -74,12 +76,12 @@ class TestBaseFiscalCompany(TransactionCase):
         """[Contraint Test] Try to create a company with
         'fiscal_type != 'child' and and a mother company."""
         with self.assertRaises(ValidationError):
-            self.company_obj.create({
+            self.company_obj.sudo(user=self.user_accountant).create({
                 'name': 'new_company_1',
                 'fiscal_type': 'fiscal_mother',
                 'fiscal_company_id': self.mother_company.id})
         with self.assertRaises(ValidationError):
-            self.company_obj.create({
+            self.company_obj.sudo(user=self.user_accountant).create({
                 'name': 'new_company_2',
                 'fiscal_type': 'normal',
                 'fiscal_company_id': self.mother_company.id})
@@ -88,14 +90,14 @@ class TestBaseFiscalCompany(TransactionCase):
         """[Contraint Test] Try to create a company with
         'fiscal_type = 'child' without a mother company."""
         with self.assertRaises(ValidationError):
-            self.company_obj.create({
+            self.company_obj.sudo(user=self.user_accountant).create({
                 'name': 'new_company',
                 'fiscal_type': 'fiscal_child',
                 'fiscal_company_id': False})
 
     def test_06_res_company_create_child_propagate_success(self):
         """[Contraint Test] Create a child company and check propagation."""
-        new_company = self.company_obj.create({
+        new_company = self.company_obj.sudo(user=self.user_accountant).create({
             'name': 'new_company',
             'fiscal_type': 'fiscal_child',
             'fiscal_company_id': self.mother_company.id})
@@ -108,10 +110,10 @@ class TestBaseFiscalCompany(TransactionCase):
     def test_07_res_company_write_child_propagate_success(self):
         """[Contraint Test] Create and write a child company and check
          propagation."""
-        new_company = self.company_obj.create({
+        new_company = self.company_obj.sudo(user=self.user_accountant).create({
             'name': 'new_company',
             'fiscal_type': 'normal'})
-        new_company.write({
+        new_company.sudo(user=self.user_accountant).write({
             'fiscal_type': 'fiscal_child',
             'fiscal_company_id': self.mother_company.id})
 
@@ -156,24 +158,3 @@ class TestBaseFiscalCompany(TransactionCase):
         self.assertEqual(
             len(users), 1,
             "The user creation via the wizard failed.")
-
-        # Check if the user is well created
-    # Private Section
-    def _fix_mail_bug(self, function):
-        """ Tests are failing on a database with 'mail' module installed,
-        Because the load of the registry in TransactionCase seems to be bad.
-        To be sure, run "print self.registry('res.partner')._defaults and see
-        that the mandatory field 'notify_email' doesn't appear.
-        So this is a monkey patch that drop and add not null constraint
-        to make that tests working."""
-        self.cr.execute("""
-            SELECT A.ATTNAME
-                FROM PG_ATTRIBUTE A, PG_CLASS C
-                WHERE A.ATTRELID = C.OID
-                AND A.ATTNAME = 'notify_email'
-                AND C.relname= 'res_partner';""")
-        if self.cr.fetchone():
-            self.cr.execute("""
-                ALTER TABLE res_partner
-                    ALTER COLUMN notify_email
-                    %s NOT NULL;""" % (function))

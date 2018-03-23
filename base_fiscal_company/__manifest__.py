@@ -13,6 +13,7 @@
     'website': 'http://www.grap.coop',
     'license': 'AGPL-3',
     'depends': [
+        'account',
         'base',
     ],
     'data': [

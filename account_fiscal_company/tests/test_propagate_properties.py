@@ -6,6 +6,8 @@
 
 from openerp.tests.common import TransactionCase
 
+from odoo.addons.base_fiscal_company.fix_test import fix_required_field
+
 
 class TestPropagateProperties(TransactionCase):
     """Tests for Account Fiscal Company Module (Propagate Properties)"""
@@ -56,6 +58,12 @@ class TestPropagateProperties(TransactionCase):
             'product_fiscal_company.product_product_mother')
         self.product_product_child = self.env.ref(
             'product_fiscal_company.product_product_child')
+        fix_required_field(self, 'DROP')
+
+    def tearDown(self):
+        self.cr.rollback()
+        fix_required_field(self, 'SET')
+        super(TestPropagateProperties, self).tearDown()
 
     # Test Section
     def test_01_account_property_propagation_new_company(self):
