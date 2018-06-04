@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<!--
+Copyright (C) 2013-Today GRAP (http://www.grap.coop)
+@author Julien Weste
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+
+<odoo>
+
+    <!-- account.move -->
+    <record id="account.account_move_comp_rule" model="ir.rule">
+        <field name="domain_force">['|','|',
+            ('company_id','=',user.company_id.id),
+            ('company_id','in',[c.id for c in user.company_id.fiscal_child_ids]),
+            ('company_id','=',False),
+        ]</field>
+    </record>
+
+    <!-- account.move.line -->
+    <record id="account.account_move_line_comp_rule" model="ir.rule">
+        <field name="domain_force">['|','|',
+            ('company_id','=',user.company_id.id),
+            ('company_id','in',[c.id for c in user.company_id.fiscal_child_ids]),
+            ('company_id','=',False),
+        ]</field>
+    </record>
+
+    <!-- account.account -->
+    <record id="account.account_comp_rule" model="ir.rule">
+        <field name="domain_force">['|',
+            ('company_id','=',user.company_id.fiscal_company_id.id),
+            ('company_id','=',False),
+        ]</field>
+    </record>
+
+    <!-- account.tax -->
+    <record id="account.tax_comp_rule" model="ir.rule">
+        <field name="domain_force">['|',
+            ('company_id','=',user.company_id.fiscal_company_id.id),
+            ('company_id','=',False),
+        ]</field>
+    </record>
+
+    <!-- account.journal -->
+    <record id="account.journal_comp_rule" model="ir.rule">
+        <field name="domain_force">['|','|','|',
+            ('company_id','=',user.company_id.id),
+            ('company_id','=',user.company_id.fiscal_company_id.id),
+            ('company_id','in',[c.id for c in user.company_id.fiscal_child_ids]),
+            ('company_id','=',False),
+        ]</field>
+    </record>
+
+    <!-- account.fiscal.position -->
+    <record id="account.account_fiscal_position_comp_rule" model="ir.rule">
+        <field name="domain_force">['|','|',
+            ('company_id','=',user.company_id.id),
+            ('company_id','=',user.company_id.fiscal_company_id.id),
+            ('company_id','=',False),
+        ]</field>
+    </record>
+
+</odoo>
