@@ -134,13 +134,11 @@ class ResCompanyCreateWizard(models.TransientModel):
 
     @api.multi
     def _begin(self):
-        print "account::_begin"
         self.ensure_one()
         char_wizard_obj = self.env['wizard.multi.charts.accounts']
         res = super(ResCompanyCreateWizard, self)._begin()
 
         if self.fiscal_type != 'fiscal_child':
-            print "create chart"
             # Install Chart of Accounts
             chart_wizard = chart_wizard_obj.create(self._prepare_chart_wizard)
             chart_wizard.execute()

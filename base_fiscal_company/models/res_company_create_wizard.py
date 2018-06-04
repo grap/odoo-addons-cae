@@ -187,7 +187,7 @@ class ResCompanyCreateWizard(models.TransientModel):
         user_obj = self.env['res.users']
         model_data_obj = self.env['ir.model.data']
         # Create Company
-        self.company_id = company_obj.create(self._prepare_company())
+        self.company_id = company_obj.sudo().create(self._prepare_company())
 
         # Swith current user to the new company
         self.env.user.write({
