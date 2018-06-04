@@ -8,8 +8,6 @@
     'version': '10.0.1.0.0',
     'category': 'CAE',
     'summary': 'Glue Module between CAE and Sales Team modules',
-    'description': """
-    """,
     'author': 'GRAP',
     'website': 'http://www.grap.coop',
     'license': 'AGPL-3',
