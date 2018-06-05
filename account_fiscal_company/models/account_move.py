@@ -9,4 +9,4 @@ from odoo import fields, models
 class AccountMove(models.Model):
     _inherit = 'account.move'
 
-    company_id = fields.Many2one(required=True)
+    company_id = fields.Many2one(related=False)
