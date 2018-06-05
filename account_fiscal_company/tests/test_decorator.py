@@ -14,9 +14,45 @@ class TestDecorator(TransactionCase):
 
     def setUp(self):
         super(TestDecorator, self).setUp()
+        self.account_obj = self.env['account.account']
+        self.journal_obj = self.env['account.journal']
+        self.user_accountant = self.env.ref(
+            'base_fiscal_company.user_accountant')
+        self.child_company = self.env.ref(
+            'base_fiscal_company.company_fiscal_child_1')
+        self.mother_company = self.env.ref(
+            'base_fiscal_company.company_fiscal_mother')
         fix_required_field(self, 'DROP')
 
     def tearDown(self):
         self.cr.rollback()
         fix_required_field(self, 'SET')
         super(TestDecorator, self).tearDown()
+
+    # Test Section
+    def test_01_decorator_account_account(self):
+        """Searching an account in a child company should return
+        accounts of the mother company
+        """ 
+        self.user_accountant.company_id = self.child_company.id
+        res = self.account_obj.sudo(self.user_accountant).search(
+            [('company_id', '=', self.mother_company.id)])
+        self.assertNotEqual(
+            len(res), 0,
+            "Searching accounts in a fiscal child company should return"
+            " accounts of the mother company")
+
+    # Test Section
+    def test_02_decorator_account_journal(self):
+        """Searching a journal in a child company should return
+        journals of the mother company
+        """ 
+        self.user_accountant.company_id = self.child_company.id
+        res = self.journal_obj.sudo(self.user_accountant).search(
+            [('company_id', '=', self.mother_company.id)])
+        self.assertNotEqual(
+            len(res), 0,
+            "Searching accounts in a fiscal child company should return"
+            " accounts of the mother company")
+
+
