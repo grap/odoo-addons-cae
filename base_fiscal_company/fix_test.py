@@ -12,6 +12,7 @@ _FIELD_LIST = [
     ('res_partner', 'purchase_warn'),
 ]
 
+
 def fix_required_field(env, function):
     """ Tests are failing on a database with some modules installed like 'mail'
     because the load of the registry in TransactionCase seems to be bad.

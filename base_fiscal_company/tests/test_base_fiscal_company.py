@@ -9,6 +9,7 @@ from odoo.tests.common import TransactionCase
 
 from odoo.addons.base_fiscal_company.fix_test import fix_required_field
 
+
 class TestBaseFiscalCompany(TransactionCase):
     """Tests for 'Base Fiscal Company' Module"""
 

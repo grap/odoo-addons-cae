@@ -32,8 +32,7 @@ class TestDecorator(TransactionCase):
     # Test Section
     def test_01_decorator_account_account(self):
         """Searching an account in a child company should return
-        accounts of the mother company
-        """ 
+        accounts of the mother company"""
         self.user_accountant.company_id = self.child_company.id
         res = self.account_obj.sudo(self.user_accountant).search(
             [('company_id', '=', self.mother_company.id)])
@@ -45,8 +44,7 @@ class TestDecorator(TransactionCase):
     # Test Section
     def test_02_decorator_account_journal(self):
         """Searching a journal in a child company should return
-        journals of the mother company
-        """ 
+        journals of the mother company"""
         self.user_accountant.company_id = self.child_company.id
         res = self.journal_obj.sudo(self.user_accountant).search(
             [('company_id', '=', self.mother_company.id)])
@@ -54,5 +52,3 @@ class TestDecorator(TransactionCase):
             len(res), 0,
             "Searching accounts in a fiscal child company should return"
             " accounts of the mother company")
-
-

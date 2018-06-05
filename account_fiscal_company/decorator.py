@@ -69,17 +69,3 @@ def switch_company(func):
         response = func(self, *args2, **kwargs)
         return response
     return wrapper
-
-
-# def add_user_company(func):
-#    @functools.wraps(func)
-#    def wrapper(self, cr, uid, *args, **kwargs):
-#        context = kwargs.get('context', {})
-#        c = context.copy()
-#        if not context.get('company_id', False):
-#            c['company_id'] = self.pool.get('res.users').browse(
-#                cr, uid, uid, context=context).company_id.id
-#        kwargs['context'] = c
-#        response = func(self, cr, uid, *args, **kwargs)
-#        return response
-#    return wrapper

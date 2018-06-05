@@ -13,7 +13,7 @@ class ResCompanyCreateWizard(models.TransientModel):
     @api.multi
     def _begin(self):
         self.ensure_one()
-        res = super(ResCompanyCreateWizard, self)._begin()
+        super(ResCompanyCreateWizard, self)._begin()
         pricelist_obj = self.env['product.pricelist']
 
         # update just created pricelist, if exist or create one

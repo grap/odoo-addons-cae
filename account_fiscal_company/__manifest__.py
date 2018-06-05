@@ -18,10 +18,10 @@
     ],
     'data': [
         'security/ir_rule.xml',
-#        'security/ir.model.access.csv',
-#        'view/account_view.xml',
-#        'view/account_invoice_view.xml',
-#        'view/view.xml',
+        #        'security/ir.model.access.csv',
+        #        'view/account_view.xml',
+        #        'view/account_invoice_view.xml',
+        #        'view/view.xml',
         'views/view_account_payment.xml',
         'views/view_res_company_create_wizard.xml'
     ],

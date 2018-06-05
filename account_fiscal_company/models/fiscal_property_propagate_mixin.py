@@ -50,7 +50,7 @@ class FiscalPropertyPropagateMixin(models.AbstractModel):
         property_obj = self.env['ir.property']
         current_company = self.env.user.company_id
 
-        if not current_company.fiscal_type in\
+        if current_company.fiscal_type not in\
                 ('fiscal_child', 'fiscal_mother'):
             return True
 

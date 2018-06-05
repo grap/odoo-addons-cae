@@ -3,7 +3,7 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, fields, models
+from odoo import api, models
 
 
 class ResCompany(models.Model):
@@ -50,6 +50,6 @@ class ResCompany(models.Model):
                     ])
                     # Duplicate properties for the new fiscal childc company
                     for existing_property in existing_properties:
-                        new_property = existing_property.copy(default={
+                        existing_property.copy(default={
                             'company_id': company.id,
                         })
