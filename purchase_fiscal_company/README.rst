@@ -12,6 +12,14 @@ status for french companies.
 
 This module is a glue module for the Odoo Purchase module.
 
+Note
+----
+
+Work in Progress module. Current incompatibility with the stock module to
+solve. (wizard / create new company / error when creating the warehouse
+then the location.)
+
+
 Features
 --------
 
