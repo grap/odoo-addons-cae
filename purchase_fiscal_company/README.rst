@@ -2,21 +2,20 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-==========================
-Manage CAE for Sale Module
-==========================
+==============================
+Manage CAE for Purchase Module
+==============================
 
 This module extend Odoo functionnalities, regarding companies features to
 manage CAE (Coopearatives of Activities and Employment) that is a special
 status for french companies.
 
-This module is a glue module for the Odoo Sale module.
+This module is a glue module for the Odoo Purchase module.
 
 Features
 --------
 
-* It adds company fields on various views.
-* Add constrain on ```sale.order``` model that prevent to create a sale
+* Add constrain on ```purchase.order``` model that prevent to create a purchase
   order on a fiscal mother company.
 
 Credits
@@ -25,5 +24,4 @@ Credits
 Contributors
 ------------
 
-* Julien WESTE
 * Sylvain LE GAL <https://twitter.com/legalsylvain>
