@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2018-Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="crm_lead_multicompany_rule" model="ir.rule">
+        <field name="name" >CRM Lead - Multi Company</field>
+        <field model="ir.model" name="model_id" search="[('model', '=', u'crm.lead')]"/>
+        <field name="domain_force">['|','|',
+            ('company_id','=',user.company_id.id),
+            ('company_id','in',[c.id for c in user.company_id.fiscal_child_ids]),
+            ('company_id','=',False),
+        ]</field>
+    </record>
+
+    <record id="crm_stage_multicompany_rule" model="ir.rule">
+        <field name="name" >CRM Stage - Multi Company</field>
+        <field model="ir.model" name="model_id" search="[('model', '=', u'crm.stage')]"/>
+        <field name="domain_force">['|','|',
+            ('company_id','=',user.company_id.id),
+            ('company_id','in',[c.id for c in user.company_id.fiscal_child_ids]),
+            ('company_id','=',False),
+        ]</field>
+    </record>
+
+    <record id="crm_lead_tag_multicompany_rule" model="ir.rule">
+        <field name="name" >CRM Lead Tag - Multi Company</field>
+        <field model="ir.model" name="model_id" search="[('model', '=', u'crm.lead.tag')]"/>
+        <field name="domain_force">['|','|',
+            ('company_id','=',user.company_id.id),
+            ('company_id','in',[c.id for c in user.company_id.fiscal_child_ids]),
+            ('company_id','=',False),
+        ]</field>
+    </record>
+
+    <record id="crm_lost_reason_multicompany_rule" model="ir.rule">
+        <field name="name" >CRM Lost Reason - Multi Company</field>
+        <field model="ir.model" name="model_id" search="[('model', '=', u'crm.lost.reason')]"/>
+        <field name="domain_force">['|','|',
+            ('company_id','=',user.company_id.id),
+            ('company_id','in',[c.id for c in user.company_id.fiscal_child_ids]),
+            ('company_id','=',False),
+        ]</field>
+    </record>
+
+    <record id="crm_activity_multicompany_rule" model="ir.rule">
+        <field name="name" >CRM Activity - Multi Company</field>
+        <field model="ir.model" name="model_id" search="[('model', '=', u'crm.activity')]"/>
+        <field name="domain_force">['|','|',
+            ('company_id','=',user.company_id.id),
+            ('company_id','in',[c.id for c in user.company_id.fiscal_child_ids]),
+            ('company_id','=',False),
+        ]</field>
+    </record>
+
+
+</odoo>
