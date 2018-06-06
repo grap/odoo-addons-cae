@@ -8,6 +8,7 @@ from odoo import fields, models
 
 
 class AccountMoveLine(models.Model):
-    _inherit = 'account.move.line'
+    _name = 'account.move.line'
+    _inherit = ['account.move.line', 'fiscal.mother.check.mixin']
 
     company_id = fields.Many2one(related='move_id.company_id')

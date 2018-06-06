@@ -7,7 +7,8 @@ from odoo import fields, models
 
 
 class AccountPayment(models.Model):
-    _inherit = 'account.payment'
+    _name = 'account.payment'
+    _inherit = ['account.payment', 'fiscal.mother.check.mixin']
 
     company_id = fields.Many2one(
         related=False,
