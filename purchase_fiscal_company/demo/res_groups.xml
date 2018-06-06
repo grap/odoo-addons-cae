@@ -6,7 +6,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <openerp><data>
 
-    <record id="sales_team.group_sale_manager" model="res.groups">
+    <record id="purchase.group_purchase_manager" model="res.groups">
         <field name="users" eval="[
             (4, ref('user_worker')),
             (4, ref('user_accountant')),

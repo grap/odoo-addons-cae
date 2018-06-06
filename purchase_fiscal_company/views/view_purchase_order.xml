@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (C) 2016-Today: GRAP (http://www.grap.coop)
+Copyright (C) 2018-Today: GRAP (http://www.grap.coop)
 @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
 
-    <record id="view_crm_team_search" model="ir.ui.view">
-        <field name="model">crm.team</field>
-        <field name="inherit_id" ref="sales_team.crm_team_salesteams_search"/>
+    <record id="view_purchase_order_search" model="ir.ui.view">
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
         <field name="arch" type="xml">
-            <field name="name" position="after">
+            <field name="partner_id" position="after">
                 <field name="company_id" groups="base.group_multi_company"/>
             </field>
-            <field name="name" position="after">
+            <field name="partner_id" position="after">
                 <filter name="company_id" string="Company" context="{'group_by':'company_id'}" groups="base.group_multi_company"/>
             </field>
         </field>
     </record>
 
-    <record id="view_crm_team_tree" model="ir.ui.view">
-        <field name="model">crm.team</field>
-        <field name="inherit_id" ref="sales_team.crm_team_view_tree"/>
+    <record id="view_purchase_order_tree" model="ir.ui.view">
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
         <field name="arch" type="xml">
-            <field name="user_id" position="after">
+            <field name="invoice_status" position="after">
                 <field name="company_id" groups="base.group_multi_company" />
             </field>
         </field>

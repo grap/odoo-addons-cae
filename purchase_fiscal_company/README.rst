@@ -15,6 +15,8 @@ This module is a glue module for the Odoo Purchase module.
 Features
 --------
 
+* It adds company fields on various views.
+
 * Add constrain on ```purchase.order``` model that prevent to create a purchase
   order on a fiscal mother company.
 

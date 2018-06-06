@@ -16,6 +16,7 @@ Features
 --------
 
 * It adds company fields on various views.
+
 * Add constrain on ```sale.order``` model that prevent to create a sale
   order on a fiscal mother company.
 
