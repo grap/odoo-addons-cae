@@ -15,7 +15,10 @@ This module is a glue module for the Odoo CRM module.
 Features
 --------
 
-It adds company fields on various views.
+* Adds ```company_id``` fields on the following models ```crm.activity```
+  ```crm.lead.tag```, ```crm.lost.reason```, ```crm.stage```.
+
+* Adds company fields on various views.
 
 Credits
 =======
