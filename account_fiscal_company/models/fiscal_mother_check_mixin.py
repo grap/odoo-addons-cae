@@ -9,6 +9,11 @@ from openerp.exceptions import Warning as UserError
 
 
 class FiscalMotherCheckMixin(models.AbstractModel):
+    """ This abstract block the possibility for a model to have
+    items linked to a fiscal mother company.
+    Note that you can only inherit from this abstract, if the current model
+    has ```company_id``` and ```name``` fields defined.
+    """
     _name = 'fiscal.mother.check.mixin'
 
     @api.constrains('company_id')
@@ -16,5 +21,5 @@ class FiscalMotherCheckMixin(models.AbstractModel):
         for item in self:
             if item.company_id.fiscal_type == 'fiscal_mother':
                 raise UserError(_(
-                    "FROMaGE !"
-                    "You can't affect this item to a fiscal mother company."))
+                    "You can't affect the item %s (model '%s') to a fiscal"
+                    " mother company.") % (item.name, self._name))
