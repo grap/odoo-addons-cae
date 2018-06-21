@@ -19,6 +19,8 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
                     <field name="fiscalyear_last_month" attrs="{'required': [('fiscal_type', '!=', 'fiscal_child')]}"/>
                     <field name="payable_account_template_id" attrs="{'required': [('fiscal_type', '!=', 'fiscal_child')]}"/>
                     <field name="receivable_account_template_id" attrs="{'required': [('fiscal_type', '!=', 'fiscal_child')]}"/>
+                    <field name="transfer_account_id" attrs="{'required': [('fiscal_type', '!=', 'fiscal_child')]}"/>
+                    <field name="currency_id" attrs="{'required': [('fiscal_type', '!=', 'fiscal_child')]}"/>
                 </group>
             </xpath>
         </field>

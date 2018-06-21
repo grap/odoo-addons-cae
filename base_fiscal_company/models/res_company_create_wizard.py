@@ -185,7 +185,6 @@ class ResCompanyCreateWizard(models.TransientModel):
         self.ensure_one()
         company_obj = self.env['res.company']
         user_obj = self.env['res.users']
-        model_data_obj = self.env['ir.model.data']
         # Create Company
         self.company_id = company_obj.sudo().create(self._prepare_company())
 
@@ -205,9 +204,7 @@ class ResCompanyCreateWizard(models.TransientModel):
         if self.create_user:
             self.user_id = user_obj.create(self._prepare_user())
             for group in self._prepare_user_groups():
-                val = group.split('.')
-                group = model_data_obj.get_object_reference(val[0], val[1])
-                group.write({
+                self.env.ref(group).write({
                     'users': [(4, self.user_id.id)],
                 })
 
