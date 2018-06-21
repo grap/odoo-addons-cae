@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2018 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <!--
+    Hide Configuration for non Expert Accounting User
+    -->
+    <record id="account.menu_finance_configuration" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [ref('account.group_account_manager')])]"/>
+    </record>
+
+</odoo>
