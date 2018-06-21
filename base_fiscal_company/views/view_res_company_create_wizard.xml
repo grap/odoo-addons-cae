@@ -59,9 +59,10 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
                             <field name="create_user"/>
                         </group>
                         <group attrs="{'invisible': [('create_user', '=', False)]}">
-                            <field name="user_name"/>
+                            <field name="user_name" attrs="{'required': [('create_user', '=', True)]}"/>
+                            <field name="user_email" attrs="{'required': [('create_user', '=', True)]}"/>
                             <field name="user_login"/>
-                            <field name="user_password"/>
+                            <field name="user_password" attrs="{'required': [('create_user', '=', True)]}"/>
                         </group>
                     </page>
                 </notebook>

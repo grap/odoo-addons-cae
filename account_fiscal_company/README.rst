@@ -29,13 +29,11 @@ Features
         * delete some properties created by default, and give the possiblity to
           create the good ones: property_receivable, property_payable;
 
-TODO:
------
-    * Update the description of this module;
-    * Check the ir.model.access model
-    * Check if account_move_line code is usefull :possibility to
-      reconcile entries between differents fiscal companies (?!?)
+Know issues / Roadmap
+=====================
 
+* the odoo accounting dashboard is disabled, because all the data are bad
+  computed. (by SQL request), so security access is not possible.
 
 Credits
 =======

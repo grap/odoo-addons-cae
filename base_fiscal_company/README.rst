@@ -42,24 +42,21 @@ Users Feature
 * If a user has access rights to a 'fiscal_mother' so he has access
   rights to all 'fiscal_child' companies;
 
+Groups Feature
+--------------
+
+* this module add a new group 'Disabled Features for Fiscal Company'
+  that should be affected to all the features bad designed by odoo,
+  specially when odoo introduced views based on datas computed on SQL hard
+  coded requests that can not work with the Odoo CAE design.
+  See 'account_fiscal_company' module for exemples.
+
 More information about CAE [FR]
 -------------------------------
 
 * https://fr.wikipedia.org/wiki/Coopérative_d'activités_et_d'emploi
 * http://www.cooperer.coop/
 * http://www.copea.fr/
-
-
-Limits / Roadmaps / TODO
-------------------------
-
-* Created partner from users / companies, must be disabled by default.
-  (maybe create a new module for that feature)
-
-Installation
-============
-
-Normal installation.
 
 Credits
 =======

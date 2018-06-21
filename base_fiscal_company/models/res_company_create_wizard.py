@@ -69,7 +69,10 @@ class ResCompanyCreateWizard(models.TransientModel):
 
     user_name = fields.Char(string='Name')
 
-    user_login = fields.Char(string='Login')
+    user_login = fields.Char(
+        string='Login', help="Let empty to use the email as login")
+
+    user_email = fields.Char(string='Email')
 
     user_password = fields.Char(
         string='Password', default=lambda s: s._default_user_password())
@@ -168,7 +171,8 @@ class ResCompanyCreateWizard(models.TransientModel):
         return {
             'customer': False,
             'name': self.user_name,
-            'login': self.user_login,
+            'login': self.user_login or self.user_email,
+            'email': self.user_email,
             'new_password': self.user_password,
             'company_id': self.company_id.id,
             'company_ids': [(4, self.company_id.id)],
