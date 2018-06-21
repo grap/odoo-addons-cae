@@ -1,35 +1,30 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- 
-Copyright (C) 2013-Today: GRAP (http://www.grap.coop)
-@author:
-    * Julien WESTE
-    * Sylvain LE GAL (https://twitter.com/legalsylvain)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
- -->
-<openerp>
-    <data>
-        <record id="view_account_move_form_account" model="ir.ui.view">
-            <field name="model">account.move</field>
-            <field name="inherit_id" ref="account.view_move_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//page[@string='Journal Items']/field[@name='line_id']/tree[@string='Journal Items']/field[@name='account_id']" position="attributes">
-                    <attribute name="domain">[('journal_id','=',parent.journal_id)]</attribute> 
-                </xpath>
-            </field>
-        </record>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2018 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
 
-        <record id="view_move_form_inherit" model="ir.ui.view">
-            <field name="model">account.move</field>
-            <field name="inherit_id" ref="account.view_move_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//page[@string='Information']/group/group[@string='Amount']/field[@name='account_id']" position="attributes">
-                    <attribute name="domain">[('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation')]</attribute> 
-                </xpath>
-                <xpath expr="//tree[@string='Journal Items']/field[@name='account_id']" position="attributes">
-                    <attribute name="domain">[('journal_id','=',parent.journal_id)]</attribute> 
-                </xpath>
+    <record id="view_account_move_search" model="ir.ui.view">
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_move_filter" />
+        <field name="arch" type="xml">
+            <field name="date" position="after">
+                <field name="company_id" groups="base.group_multi_company"/>
+                <filter name="company_id" string="Company" context="{'group_by':'company_id'}" groups="base.group_multi_company"/>
             </field>
-        </record>
+        </field>
+    </record>
 
-    </data>
-</openerp>
+    <record id="view_account_move_tree" model="ir.ui.view">
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_tree" />
+        <field name="arch" type="xml">
+            <field name="currency_id" position="after">
+                <field name="company_id" groups="base.group_multi_company" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
