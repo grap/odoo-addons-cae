@@ -39,7 +39,7 @@ class ProductTemplate(models.Model):
     @api.model
     def _check_administrative_access(self):
         if not self.env.user.has_group(
-                'base_fiscal_company.fiscal_company_manager'):
+                'fiscal_company_base.fiscal_company_manager'):
             raise exceptions.ValidationError(_(
                 "You have no right to create or update an"
                 " administrative product"))

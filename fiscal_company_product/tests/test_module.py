@@ -5,21 +5,21 @@
 
 from odoo.tests.common import TransactionCase
 
-from odoo.addons.base_fiscal_company.fix_test import fix_required_field
+from odoo.addons.fiscal_company_base.fix_test import fix_required_field
 
 
-class TestProductFiscalCompany(TransactionCase):
+class TestModule(TransactionCase):
     """Tests for 'Product Fiscal Company' Module"""
 
     # Overload Section
     def setUp(self):
-        super(TestProductFiscalCompany, self).setUp()
+        super(TestModule, self).setUp()
         self.pricelist_obj = self.env['product.pricelist']
         self.wizard_obj = self.env['res.company.create.wizard']
         self.mother_company = self.env.ref(
-            'base_fiscal_company.company_fiscal_mother')
+            'fiscal_company_base.company_fiscal_mother')
         self.user_accountant = self.env.ref(
-            'base_fiscal_company.user_accountant')
+            'fiscal_company_base.user_accountant')
         fix_required_field(self, 'DROP')
 
     def tearDown(self):
