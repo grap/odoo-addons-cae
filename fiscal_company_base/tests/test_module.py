@@ -10,12 +10,12 @@ from odoo.tests.common import TransactionCase
 from ..fix_test import fix_required_field
 
 
-class TestBaseFiscalCompany(TransactionCase):
+class TestModule(TransactionCase):
     """Tests for 'Base Fiscal Company' Module"""
 
     # Overload Section
     def setUp(self):
-        super(TestBaseFiscalCompany, self).setUp()
+        super(TestModule, self).setUp()
 
         self.user_obj = self.env['res.users']
         self.company_obj = self.env['res.company']

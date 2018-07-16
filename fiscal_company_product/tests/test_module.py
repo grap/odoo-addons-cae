@@ -8,12 +8,12 @@ from odoo.tests.common import TransactionCase
 from odoo.addons.fiscal_company_base.fix_test import fix_required_field
 
 
-class TestProductFiscalCompany(TransactionCase):
+class TestModule(TransactionCase):
     """Tests for 'Product Fiscal Company' Module"""
 
     # Overload Section
     def setUp(self):
-        super(TestProductFiscalCompany, self).setUp()
+        super(TestModule, self).setUp()
         self.pricelist_obj = self.env['product.pricelist']
         self.wizard_obj = self.env['res.company.create.wizard']
         self.mother_company = self.env.ref(
