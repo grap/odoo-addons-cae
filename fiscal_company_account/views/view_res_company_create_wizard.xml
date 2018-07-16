@@ -9,7 +9,7 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
 
     <record id="view_res_company_create_wizard_form" model="ir.ui.view">
         <field name="model">res.company.create.wizard</field>
-        <field name="inherit_id" ref="base_fiscal_company.view_res_company_create_wizard_form"/>
+        <field name="inherit_id" ref="fiscal_company_base.view_res_company_create_wizard_form"/>
         <field name="arch" type="xml">
             <xpath expr="//group[@name='group_basic_account']" position="after">
                 <group string="Complete Accounting Settings" name="group_complete_account" attrs="{'invisible': [('fiscal_type', 'not in', ['normal', 'fiscal_mother'])]}" col="4">

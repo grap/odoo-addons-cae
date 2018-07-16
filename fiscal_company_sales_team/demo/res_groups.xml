@@ -8,8 +8,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <record id="sales_team.group_sale_manager" model="res.groups">
         <field name="users" eval="[
-            (4, ref('base_fiscal_company.user_worker')),
-            (4, ref('base_fiscal_company.user_accountant')),
+            (4, ref('fiscal_company_base.user_worker')),
+            (4, ref('fiscal_company_base.user_accountant')),
         ]"/>
     </record>
 

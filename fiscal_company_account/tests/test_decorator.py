@@ -6,7 +6,7 @@
 
 from openerp.tests.common import TransactionCase
 
-from odoo.addons.base_fiscal_company.fix_test import fix_required_field
+from odoo.addons.fiscal_company_base.fix_test import fix_required_field
 
 
 class TestDecorator(TransactionCase):
@@ -17,11 +17,11 @@ class TestDecorator(TransactionCase):
         self.account_obj = self.env['account.account']
         self.journal_obj = self.env['account.journal']
         self.user_accountant = self.env.ref(
-            'base_fiscal_company.user_accountant')
+            'fiscal_company_base.user_accountant')
         self.child_company = self.env.ref(
-            'base_fiscal_company.company_fiscal_child_1')
+            'fiscal_company_base.company_fiscal_child_1')
         self.mother_company = self.env.ref(
-            'base_fiscal_company.company_fiscal_mother')
+            'fiscal_company_base.company_fiscal_mother')
         fix_required_field(self, 'DROP')
 
     def tearDown(self):

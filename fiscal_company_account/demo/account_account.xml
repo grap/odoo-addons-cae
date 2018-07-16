@@ -8,7 +8,7 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
 <odoo>
 
     <record model="account.account" id="account_payable_cae">
-        <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
         <field name="code">401_CAE</field>
         <field name="name">CAE - Payable - (test) </field>
         <field name="user_type_id" ref="account.data_account_type_payable"/>
@@ -16,7 +16,7 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
     </record>
 
     <record model="account.account" id="account_receivable_cae">
-        <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
         <field name="code">411_CAE</field>
         <field name="name">CAE - Receivable - (test) </field>
         <field name="user_type_id" ref="account.data_account_type_receivable"/>
@@ -24,7 +24,7 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
     </record>
 
     <record model="account.account" id="account_custom_payable_cae">
-        <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
         <field name="code">401_CAE_CUS</field>
         <field name="name">CAE - Custom Payable - (test) </field>
         <field name="user_type_id" ref="account.data_account_type_payable"/>
@@ -32,7 +32,7 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
     </record>
 
     <record model="account.account" id="account_custom_receivable_cae">
-        <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
         <field name="code">411_CAE_CUS</field>
         <field name="name">CAE - Custom Receivable - (test) </field>
         <field name="user_type_id" ref="account.data_account_type_receivable"/>
@@ -41,14 +41,14 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
 
     <!-- Bank and Cash Part -->
     <record model="account.account" id="account_bank_cae">
-        <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
         <field name="code">CAE_512</field>
         <field name="name">CAE - Bank - (test)</field>
         <field name="user_type_id" ref="account.data_account_type_liquidity"/>
     </record>
 
     <record model="account.account" id="account_cash_cae">
-        <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
         <field name="code">CAE_581</field>
         <field name="name">CAE - Cash - (test)</field>
         <field name="user_type_id" ref="account.data_account_type_liquidity"/>
@@ -56,7 +56,7 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
 
     <!-- Expense Part-->
     <record model="account.account" id="account_expense_cae">
-        <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
         <field name="code">CAE_601</field>
         <field name="name">CAE - Expenses - (test)</field>
         <field name="user_type_id" ref="account.data_account_type_expenses"/>
@@ -64,7 +64,7 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
 
     <!-- Income Part-->
     <record model="account.account" id="account_income_cae">
-        <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
         <field name="code">CAE_702</field>
         <field name="name">CAE - Product Sales - (test)</field>
         <field name="user_type_id" ref="account.data_account_type_revenue"/>

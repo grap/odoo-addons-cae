@@ -9,8 +9,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <function model="res.company" name="_create_product_default_code_sequence" eval="[[
         ref('base.main_company'),
-        ref('base_fiscal_company.company_fiscal_child_1'), 
-        ref('base_fiscal_company.company_fiscal_child_2'),
-        ref('base_fiscal_company.company_fiscal_mother')]]"/>
+        ref('fiscal_company_base.company_fiscal_child_1'), 
+        ref('fiscal_company_base.company_fiscal_child_2'),
+        ref('fiscal_company_base.company_fiscal_mother')]]"/>
 
 </odoo>

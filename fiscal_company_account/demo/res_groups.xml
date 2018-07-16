@@ -10,7 +10,7 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
 
     <record id="account.group_account_invoice" model="res.groups">
         <field name="users" eval="[
-            (4, ref('base_fiscal_company.user_worker')),
+            (4, ref('fiscal_company_base.user_worker')),
         ]" />
     </record>
 
@@ -18,7 +18,7 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
     <record id="account.group_account_manager" model="res.groups">
         <field name="users" eval="[
             (4, ref('base.user_root')),
-            (4, ref('base_fiscal_company.user_accountant')),
+            (4, ref('fiscal_company_base.user_accountant')),
         ]" />
     </record>
 

@@ -8,7 +8,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <record id="product_template_mother_property" model="product.template">
         <field name="name">CAE - Mother Product Template With Property</field>
-        <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
         <field name="categ_id" ref="product.product_category_1"/>
     </record>
 
@@ -17,6 +17,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             'property_account_income_id': ref('account_income_cae'),
             'property_account_expense_id': ref('account_expense_cae'),
             },
-              {'force_company': ref('base_fiscal_company.company_fiscal_mother')}"/>
+              {'force_company': ref('fiscal_company_base.company_fiscal_mother')}"/>
 
 </odoo>

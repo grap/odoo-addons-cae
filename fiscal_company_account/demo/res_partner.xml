@@ -8,7 +8,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <record id="partner_mother_property" model="res.partner">
         <field name="name">CAE - Mother Partner With Property</field>
-        <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
         <field name="customer" eval="True"/>
         <field name="supplier" eval="True"/>
     </record>
@@ -19,6 +19,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             'property_account_receivable_id': ref('account_custom_receivable_cae'),
 
             },
-              {'force_company': ref('base_fiscal_company.company_fiscal_mother')}"/>
+              {'force_company': ref('fiscal_company_base.company_fiscal_mother')}"/>
 
 </odoo>

@@ -6,7 +6,7 @@
 
 from openerp.tests.common import TransactionCase
 
-from odoo.addons.base_fiscal_company.fix_test import fix_required_field
+from odoo.addons.fiscal_company_base.fix_test import fix_required_field
 
 
 class TestPropagateProperties(TransactionCase):
@@ -21,9 +21,9 @@ class TestPropagateProperties(TransactionCase):
         self.product_obj = self.env['product.product']
 
         self.mother_company = self.env.ref(
-            'base_fiscal_company.company_fiscal_mother')
+            'fiscal_company_base.company_fiscal_mother')
         self.child_company = self.env.ref(
-            'base_fiscal_company.company_fiscal_child_1')
+            'fiscal_company_base.company_fiscal_child_1')
         self.account_expense_cae = self.env.ref(
             'account_fiscal_company.account_expense_cae')
         self.account_income_cae = self.env.ref(
