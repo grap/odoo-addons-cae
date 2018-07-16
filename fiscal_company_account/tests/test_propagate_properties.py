@@ -25,27 +25,27 @@ class TestPropagateProperties(TransactionCase):
         self.child_company = self.env.ref(
             'fiscal_company_base.company_fiscal_child_1')
         self.account_expense_cae = self.env.ref(
-            'account_fiscal_company.account_expense_cae')
+            'fiscal_company_account.account_expense_cae')
         self.account_income_cae = self.env.ref(
-            'account_fiscal_company.account_income_cae')
+            'fiscal_company_account.account_income_cae')
         self.account_payable_cae = self.env.ref(
-            'account_fiscal_company.account_payable_cae')
+            'fiscal_company_account.account_payable_cae')
         self.account_receivable_cae = self.env.ref(
-            'account_fiscal_company.account_receivable_cae')
+            'fiscal_company_account.account_receivable_cae')
         self.account_custom_payable_cae = self.env.ref(
-            'account_fiscal_company.account_custom_payable_cae')
+            'fiscal_company_account.account_custom_payable_cae')
         self.account_custom_receivable_cae = self.env.ref(
-            'account_fiscal_company.account_custom_receivable_cae')
+            'fiscal_company_account.account_custom_receivable_cae')
 
         # Object with demo accounting properties
         self.product_category_all = self.env.ref(
             'product.product_category_all')
         self.product_template_mother_property = self.env.ref(
-            'account_fiscal_company.product_template_mother_property')
+            'fiscal_company_account.product_template_mother_property')
         self.product_product_mother_property = self.env.ref(
-            'account_fiscal_company.product_product_mother_property')
+            'fiscal_company_account.product_product_mother_property')
         self.partner_mother_property = self.env.ref(
-            'account_fiscal_company.partner_mother_property')
+            'fiscal_company_account.partner_mother_property')
 
         # Object without demo accounting properties
         self.product_category_internal = self.env.ref(

@@ -13,7 +13,7 @@
     'license': 'AGPL-3',
     'depends': [
         'fiscal_company_base',
-        'account_fiscal_company',
+        'fiscal_company_account',
         'purchase',
     ],
     'data': [
