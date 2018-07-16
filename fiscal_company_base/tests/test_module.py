@@ -144,8 +144,8 @@ class TestModule(TransactionCase):
         companies = self.company_obj.search([
             ('name', '=', 'Test Company Wizard'),
             ('fiscal_type', '=', 'fiscal_child'),
-            ('parent_id', '=', self.mother_company.id)
-            ])
+            ('parent_id', '=', self.mother_company.id),
+        ])
         self.assertEqual(
             len(companies), 1,
             "The company creation via the wizard failed.")
@@ -155,7 +155,7 @@ class TestModule(TransactionCase):
             ('name', '=', 'Test User Wizard'),
             ('login', '=', 'test_user_wizard@odoo.com'),
             ('company_id', '=', companies[0].id),
-            ])
+        ])
         self.assertEqual(
             len(users), 1,
             "The user creation via the wizard failed.")
