@@ -51,13 +51,13 @@ class TestPropagateProperties(TransactionCase):
         self.product_category_internal = self.env.ref(
             'product.product_category_2')
         self.product_template_mother = self.env.ref(
-            'product_fiscal_company.product_template_mother')
+            'fiscal_company_product.product_template_mother')
         self.product_template_child = self.env.ref(
-            'product_fiscal_company.product_template_child')
+            'fiscal_company_product.product_template_child')
         self.product_product_mother = self.env.ref(
-            'product_fiscal_company.product_product_mother')
+            'fiscal_company_product.product_product_mother')
         self.product_product_child = self.env.ref(
-            'product_fiscal_company.product_product_child')
+            'fiscal_company_product.product_product_child')
         fix_required_field(self, 'DROP')
 
     def tearDown(self):
