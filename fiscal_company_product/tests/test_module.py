@@ -25,7 +25,7 @@ class TestModule(TransactionCase):
     def tearDown(self):
         self.cr.rollback()
         fix_required_field(self, 'SET')
-        super(TestProductFiscalCompany, self).tearDown()
+        super(TestModule, self).tearDown()
 
     # Test Section
     def test_01_pricelist_creation(self):
