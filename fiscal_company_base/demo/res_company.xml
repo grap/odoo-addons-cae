@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2018-Today GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+
+<odoo>
+
+    <!--
+    Note, we set the main company as a french company to avoid the
+    installation of l10n_generic_coa if account is installad.
+    see addons/account/__init__.py
+    -->
+    <record id="base.main_company" model="res.company">
+        <field name="country_id" ref="base.fr"/>
+    </record>
+
+</odoo>

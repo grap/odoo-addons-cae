@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2015-Today GRAP (http://www.grap.coop)
+@author: Julien WESTE
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+
+<odoo>
+
+    <record id="view_res_company_create_wizard_form" model="ir.ui.view">
+        <field name="model">res.company.create.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <group string="General Information" col="4">
+                    <field name="company_name" attrs="{'readonly': [('state', '!=', 'init')]}"/>
+                    <field name="fiscal_code" attrs="{'readonly': [('state', '!=', 'init')]}"/>
+                    <field name="fiscal_type" attrs="{'readonly': [('state', '!=', 'init')]}"/>
+                    <field name="parent_company_id"
+                        attrs="{'readonly': [('state', '!=', 'init')], 'required': [('fiscal_type', '=', 'fiscal_child')]}" 
+                        options="{'no_create': True}"/>
+                    <field name="company_id" invisible="1"/>
+
+                </group>
+                <notebook>
+                    <page string="Company Contact" states="init">
+                        <group col="4">
+                            <group colspan="2">
+                            <label for="street" string="Address"/>
+                            <div class="o_address_format">
+                                <field name="company_street" placeholder="Street..." class="o_address_street"/>
+                                <field name="company_street2" placeholder="Street 2..." class="o_address_street"/>
+                                <field name="company_city" placeholder="City" class="o_address_city"/>
+                                <field name="company_state_id" class="o_address_state" placeholder="State"/>
+                                <field name="company_zip" placeholder="ZIP" class="o_address_zip"/>
+                                <field name="company_country_id" placeholder="Country" class="o_address_country"/>
+                            </div>
+                            </group>
+                            <group colspan="2">
+                            <field name="company_website" widget="url"/>
+                            <field name="company_phone"/>
+                            <field name="company_email"/>
+                            </group>
+                        </group>
+
+                    </page>
+                    <page string="Administrative information" states="init">
+                        <group string="Basic Accounting Settings" name="group_basic_account">
+                            <field name="company_registry"/>
+                            <field name="vat" attrs="{'readonly': [('fiscal_type','=', ('fiscal_child'))]}"/>
+
+                        </group>
+                    </page>
+                    <page string="User Information" states="init">
+                        <group>
+                            <field name="create_user"/>
+                        </group>
+                        <group attrs="{'invisible': [('create_user', '=', False)]}">
+                            <field name="user_name" attrs="{'required': [('create_user', '=', True)]}"/>
+                            <field name="user_email" attrs="{'required': [('create_user', '=', True)]}"/>
+                            <field name="user_login"/>
+                            <field name="user_password" attrs="{'required': [('create_user', '=', True)]}"/>
+                        </group>
+                    </page>
+                </notebook>
+                <footer>
+                    <div states="init">
+                        <button name="button_begin" string="Begin" type="object" class="btn-primary"/>
+                        <button special="cancel" string="Cancel" class="btn-default"/>
+                    </div>
+                    <div states="pending">
+                        <button name="button_finish" string="Finish" type="object" class="btn-primary"/>
+                    </div>
+                    <div states="done">
+                        <button special="cancel" string="Close" class="btn-primary"/>
+                    </div>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

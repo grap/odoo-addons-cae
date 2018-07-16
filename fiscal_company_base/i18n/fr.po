@@ -1,0 +1,216 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* base_fiscal_company
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-01-15 23:09+0000\n"
+"PO-Revision-Date: 2015-01-15 23:09+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: base_fiscal_company
+#: view:res.company.create.wizard:0
+msgid "Accounting"
+msgstr "Comptabilité"
+
+#. module: base_fiscal_company
+#: model:res.groups,name:base_fiscal_company.res_group_administrative_manager
+msgid "Administrative Manager of CIS"
+msgstr "Gestionnaire de Coopérative de Filière Intégrée"
+
+#. module: base_fiscal_company
+#: selection:res.company.create.wizard,type:0
+msgid "Associated Company"
+msgstr "Société associée"
+
+#. module: base_fiscal_company
+#: view:res.company.create.wizard:0
+msgid "Begin"
+msgstr "Commencer"
+
+#. module: base_fiscal_company
+#: view:res.company.create.wizard:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: base_fiscal_company
+#: view:res.company.create.wizard:0
+msgid "Close"
+msgstr "Fermer"
+
+#. module: base_fiscal_company
+#: field:res.company,code:0
+#: field:res.company.create.wizard,code:0
+msgid "Code"
+msgstr "Code"
+
+#. module: base_fiscal_company
+#: code:_description:0
+#: model:ir.model,name:base_fiscal_company.model_res_company
+#, python-format
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: base_fiscal_company
+#: field:res.company.create.wizard,company_id:0
+msgid "Company"
+msgstr "Société"
+
+#. module: base_fiscal_company
+#: model:ir.actions.act_window,name:base_fiscal_company.action_res_company_create_wizard
+#: model:ir.ui.menu,name:base_fiscal_company.menu_res_company_create_wizard
+msgid "Create New Company"
+msgstr "Créer une nouvelle Société"
+
+#. module: base_fiscal_company
+#: view:res.company.create.wizard:0
+msgid "Create a New Company"
+msgstr "Créer une nouvelle société"
+
+#. module: base_fiscal_company
+#: constraint:res.company.create.wizard:0
+msgid "Error on Mother Company: Please select a normal Parent Company if the company is 'associated' and and a Fiscal Mother Company, if the company is 'integrated'"
+msgstr "Erreur sur la société Mère : Merci de sélectionner une société parente normale, si la société est 'associée' et une société Fiscale Mère, si la société est 'intégrée'"
+
+#. module: base_fiscal_company
+#: view:res.company.create.wizard:0
+msgid "Finish"
+msgstr "Terminer"
+
+#. module: base_fiscal_company
+#: selection:res.company,fiscal_type:0
+msgid "Fiscal Child Company"
+msgstr "Société Fiscale Fille"
+
+#. module: base_fiscal_company
+#: selection:res.company,fiscal_type:0
+msgid "Fiscal Mother Company"
+msgstr "Société Fiscale Mère"
+
+#. module: base_fiscal_company
+#: field:res.company,fiscal_type:0
+msgid "Fiscal Type"
+msgstr "Type Fiscale"
+
+#. module: base_fiscal_company
+#: view:res.company:0
+msgid "Fiscal information"
+msgstr "Information Fiscale"
+
+#. module: base_fiscal_company
+#: view:res.company.create.wizard:0
+msgid "General Information"
+msgstr "Information générale"
+
+#. module: base_fiscal_company
+#: selection:res.company.create.wizard,type:0
+msgid "Integrated Company"
+msgstr "Société Intégrée"
+
+#. module: base_fiscal_company
+#: field:res.company.create.wizard,mother_company:0
+msgid "Mother Company"
+msgstr "Société Mère"
+
+#. module: base_fiscal_company
+#: field:res.company.create.wizard,name:0
+msgid "Name"
+msgstr "Nom"
+
+#. module: base_fiscal_company
+#: selection:res.company,fiscal_type:0
+msgid "Normal"
+msgstr "Normal"
+
+#. module: base_fiscal_company
+#: view:res.company.create.wizard:0
+#: field:res.company.create.wizard,password:0
+msgid "Password"
+msgstr "Mot de passe"
+
+#. module: base_fiscal_company
+#: constraint:res.company:0
+msgid "Please select a Fiscal Mother Company for a Fiscal Child Company"
+msgstr "Veuillez selectionner une société fiscale mère pour la société fiscale fille courante."
+
+#. module: base_fiscal_company
+#: field:res.company.create.wizard,state:0
+msgid "Status"
+msgstr "Etat"
+
+#. module: base_fiscal_company
+#: field:res.company.create.wizard,vat:0
+msgid "Tax ID"
+msgstr "Numéro de TVA"
+
+#. module: base_fiscal_company
+#: help:res.company,code:0
+msgid "This field is used as a prefix to generate automatic and unique reference for items (product, ...).\n"
+"Warning, changing this value will change the reference of all items of this company."
+msgstr "Ce champ est utilisé comme préfixe pour générer des codes uniques et automatiques pour différents objets (produits, etc...).\n" "Attention, changer cette valeur changera la référence tous les items de cette société."
+
+#. module: base_fiscal_company
+#: help:res.company.create.wizard,code:0
+msgid "This field is used as a prefix to generate automatic and unique reference for items (product, ...).Warning, changing this value will change the reference of all items of this company."
+msgstr "Ce champ est utilisé comme préfixe pour générer des codes uniques et automatiques pour différents objets (produits, etc...) Attention, changer cette valeur changera la référence tous les items de cette société."
+
+#. module: base_fiscal_company
+#: field:res.company.create.wizard,type:0
+msgid "Type"
+msgstr "Type"
+
+#. module: base_fiscal_company
+#: view:res.company.create.wizard:0
+msgid "User Information"
+msgstr "User Information"
+
+#. module: base_fiscal_company
+#: code:_description:0
+#, python-format
+msgid "Users"
+msgstr "Utilisateurs"
+
+#. module: base_fiscal_company
+#: constraint:res.company:0
+msgid "You can't select an other company for a Non Fiscal Child Company"
+msgstr "Vous ne pouvez pas sélectionner une autre société pour une société fille non fiscale"
+
+#. module: base_fiscal_company
+#: selection:res.company.create.wizard,state:0
+msgid "done"
+msgstr "fait"
+
+#. module: base_fiscal_company
+#: selection:res.company.create.wizard,state:0
+msgid "init"
+msgstr "début"
+
+#. module: base_fiscal_company
+#: view:res.company.create.wizard:0
+msgid "or"
+msgstr "ou"
+
+#. module: base_fiscal_company
+#: selection:res.company.create.wizard,state:0
+msgid "pending"
+msgstr "en cours"
+
+#. module: base_fiscal_company
+#: code:_description:0
+#: model:ir.model,name:base_fiscal_company.model_res_company_create_wizard
+#, python-format
+msgid "res.company.create.wizard"
+msgstr "res.company.create.wizard"
+
+#. module: base_fiscal_company
+#: model:ir.model,name:base_fiscal_company.model_res_users
+msgid "res.users"
+msgstr "res.users"
+
