@@ -32,7 +32,7 @@ class TestModule(TransactionCase):
     def tearDown(self):
         self.cr.rollback()
         fix_required_field(self, 'SET')
-        super(TestBaseFiscalCompany, self).tearDown()
+        super(TestModule, self).tearDown()
 
     # Test Section
     def test_01_res_users_propagate_access_right_create(self):
