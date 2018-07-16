@@ -12,8 +12,8 @@
     'website': 'http://www.grap.coop',
     'license': 'AGPL-3',
     'depends': [
-        'base_fiscal_company',
-        'account_fiscal_company',
+        'fiscal_company_base',
+        'fiscal_company_account',
         'sale',
     ],
     'data': [
