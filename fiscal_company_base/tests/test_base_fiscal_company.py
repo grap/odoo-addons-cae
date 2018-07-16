@@ -21,10 +21,10 @@ class TestBaseFiscalCompany(TransactionCase):
         self.company_obj = self.env['res.company']
         self.wizard_obj = self.env['res.company.create.wizard']
         self.mother_company = self.env.ref(
-            'base_fiscal_company.company_fiscal_mother')
+            'fiscal_company_base.company_fiscal_mother')
         self.base_company = self.env.ref('base.main_company')
         self.user_accountant = self.env.ref(
-            'base_fiscal_company.user_accountant')
+            'fiscal_company_base.user_accountant')
         self.user_accountant.write({'company_id': self.mother_company.id})
         self.env.clear()
         fix_required_field(self, 'DROP')
