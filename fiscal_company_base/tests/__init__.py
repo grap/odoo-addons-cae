@@ -1,2 +1,2 @@
 # coding: utf-8
-from . import test_base_fiscal_company
+from . import test_module
