@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2016-Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="view_sale_order_search" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">
+                <field name="company_id" groups="base.group_multi_company"/>
+            </field>
+            <filter name="customer" position="after">
+                <filter name="company_id" string="Company" context="{'group_by':'company_id'}" groups="base.group_multi_company"/>
+            </filter>
+        </field>
+    </record>
+
+    <record id="view_sale_order_tree" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="company_id" groups="base.group_multi_company" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_sale_order_tree_quotation" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="company_id" groups="base.group_multi_company" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
