@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/odoo-cae/odoo-addons-cae.svg?branch=10.0)](https://travis-ci.org/odoo-cae/odoo-addons-cae)
+[![codecov](https://codecov.io/gh/odoo-cae/odoo-addons-cae/branch/10.0/graph/badge.svg)](https://codecov.io/gh/odoo-cae/odoo-addons-cae)
 [![Coverage Status](https://coveralls.io/repos/odoo-cae/odoo-addons-cae/badge.png?branch=10.0)](https://coveralls.io/r/odoo-cae/odoo-addons-cae?branch=10.0)
 [![Code Climate](https://codeclimate.com/github/odoo-cae/odoo-addons-cae/badges/gpa.svg)](https://codeclimate.com/github/odoo-cae/odoo-addons-cae)
 
