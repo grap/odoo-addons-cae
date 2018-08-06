@@ -2,3 +2,5 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 ,,,,,,,
 access_pricelist_manager,pricelist CAE manager,product.model_product_pricelist,fiscal_company_base.fiscal_company_manager,1,1,1,1
 access_pricelist_item_manager,pricelist Item CAE manager,product.model_product_pricelist_item,fiscal_company_base.fiscal_company_manager,1,1,1,1
+access_product_product_maganer,access_product_product_maganer,product.model_product_product,fiscal_company_product.product_creation,1,1,1,1
+access_product_template_maganer,access_product_template_maganer,product.model_product_template,fiscal_company_product.product_creation,1,1,1,1

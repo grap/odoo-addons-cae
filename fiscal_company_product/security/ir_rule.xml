@@ -13,11 +13,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="name">product.template CAE company</field>
         <field name="model_id" ref="product.model_product_template"/>
         <field name="domain_force">[
-            '|', '|', '|',
-            ('company_id', '=', user.company_id.id),
-            ('company_id', '=', user.company_id.fiscal_company_id.id),
-            ('company_id', 'in', [c.id for c in user.company_id.fiscal_child_ids]),
+            '|', '|',
             ('company_id', '=', False),
+            ('company_id', 'child_of', [user.company_id.id]),
+            ('company_id', '=', user.company_id.fiscal_company_id.id),
         ]</field>
     </record>
 

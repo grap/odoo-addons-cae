@@ -18,14 +18,4 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         </field>
     </record>
 
-    <record id="view_product_template_tree" model="ir.ui.view">
-        <field name="model">product.template</field>
-        <field name="inherit_id" ref="product.product_template_tree_view" />
-        <field name="arch" type="xml">
-            <field name="uom_id" position="after">
-                <field name="company_id"/>
-            </field>
-        </field>
-    </record>
-
 </data></openerp>
