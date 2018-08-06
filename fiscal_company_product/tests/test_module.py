@@ -4,45 +4,45 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo.tests.common import TransactionCase
-
-from odoo.addons.fiscal_company_base.fix_test import fix_required_field
+from odoo.exceptions import ValidationError
 
 
 class TestModule(TransactionCase):
-    """Tests for 'Product Fiscal Company' Module"""
+    """Tests for 'CAE - Product' Module"""
 
     # Overload Section
     def setUp(self):
         super(TestModule, self).setUp()
-        self.pricelist_obj = self.env['product.pricelist']
-        self.wizard_obj = self.env['res.company.create.wizard']
-        self.mother_company = self.env.ref(
-            'fiscal_company_base.company_fiscal_mother')
+        self.product_obj = self.env['product.product']
         self.user_accountant = self.env.ref(
             'fiscal_company_base.user_accountant')
-        fix_required_field(self, 'DROP')
-
-    def tearDown(self):
-        self.cr.rollback()
-        fix_required_field(self, 'SET')
-        super(TestModule, self).tearDown()
+        self.user_worker = self.env.ref('fiscal_company_base.user_worker')
+        self.child_company = self.env.ref(
+            'fiscal_company_base.company_fiscal_child_1')
+        self.product_categ = self.env.ref('product.product_category_1')
+        self.employee_group = self.env.ref('base.group_user')
 
     # Test Section
-    def test_01_pricelist_creation(self):
-        """[Functional Test] creating a new company via wizard,
-        with user accountant, should create (or update) a pricelist"""
-        wizard = self.wizard_obj.sudo(self.user_accountant).create({
-            'company_name': 'Test Company Wizard',
-            'fiscal_type': 'fiscal_child',
-            'fiscal_code': 'WIZ',
-            'parent_company_id': self.mother_company.id,
-        })
-        wizard.button_begin()
-        wizard.button_finish()
-        pricelists = self.pricelist_obj.search([
-            ('company_id', '=', wizard.company_id.id),
-            ('name', '=', 'WIZ - Public Pricelist'),
-        ])
-        self.assertEqual(
-            len(pricelists), 1,
-            "Create a company by wizard should create a pricelist")
+    def test_01_administrative_product_creation(self):
+        """[Functional Test] Test constraint again Administrative product"""
+
+        # Try to create an administrative product with user that is
+        # CAE manager, should success
+        self._create_administrative_product(self.user_accountant)
+
+        # Try to create an administrative product with user that is not
+        # CAE manager, should fail
+        with self.assertRaises(ValidationError):
+            self._create_administrative_product(self.user_worker)
+
+    def _create_administrative_product(self, user):
+        product_vals = {
+            'name': 'Product Test',
+            'company_id': self.child_company.id,
+            'categ_id': self.product_categ.id,
+            'cae_administrative_ok': True,
+        }
+        user.company_id = self.child_company.id
+        self.product_obj.sudo(user).with_context(
+            mail_create_nosubscribe=True,
+            mail_create_nolog=True).create(product_vals)

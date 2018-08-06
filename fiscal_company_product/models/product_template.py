@@ -3,7 +3,8 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, exceptions, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class ProductTemplate(models.Model):
@@ -40,6 +41,6 @@ class ProductTemplate(models.Model):
     def _check_administrative_access(self):
         if not self.env.user.has_group(
                 'fiscal_company_base.fiscal_company_manager'):
-            raise exceptions.ValidationError(_(
+            raise ValidationError(_(
                 "You have no right to create or update an"
                 " administrative product"))
