@@ -25,7 +25,7 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
     <!-- Payable Properties-->
     <record id="property_account_payable_CH1" model="ir.property">
         <field name="name">CAE - property_account_payable CH1</field>
-        <field name="company_id" ref="fiscal_company_base.company_fiscal_child_2"/>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_child_1"/>
         <field name="fields_id" ref="account.field_res_partner_property_account_payable_id"/>
         <field name="value" eval="'account.account,'+str(account_payable_cae)"/>
     </record>
