@@ -21,7 +21,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     </record>
 
     <function model="res.partner" name="write"
-        eval="[ref('partner_mother_property'), [ref('partner_fiscal_child_1_property')], {
+        eval="[ref('partner_mother_property'), ref('partner_fiscal_child_1_property')], {
             'property_account_payable_id': ref('account_custom_payable_cae'),
             'property_account_receivable_id': ref('account_custom_receivable_cae'),
             },
