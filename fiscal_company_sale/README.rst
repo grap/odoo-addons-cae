@@ -15,9 +15,7 @@ This module is a glue module for the Odoo Sale module.
 Features
 --------
 
-* It adds company fields on various views.
-
-* Add constrain on ```sale.order``` model that prevent to create a sale
+* Add constrain on ``sale.order`` model that prevent to create a sale
   order on a fiscal mother company.
 
 Credits
