@@ -10,24 +10,24 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
 
     <!-- res.company -->
     <!-- recreate a new rule, because base.res_partner_rule is noupdatable -->
-    <record id="res_partner_rule" model="ir.rule">
-        <field name="name">res.partner CAE company</field>
-        <field name="model_id" ref="base.model_res_partner"/>
-        <field name="domain_force">[
-            '|', '|', '|',
-            ('company_id', '=', user.company_id.id),
-            ('company_id', '=', user.company_id.fiscal_company_id.id),
-            ('company_id', 'in', [c.id for c in user.company_id.fiscal_child_ids]),
-            ('company_id', '=', False),
-        ]</field>
-    </record>
+<!--    <record id="res_partner_rule" model="ir.rule">-->
+<!--        <field name="name">res.partner CAE company</field>-->
+<!--        <field name="model_id" ref="base.model_res_partner"/>-->
+<!--        <field name="domain_force">[-->
+<!--            '|', '|', '|',-->
+<!--            ('company_id', '=', user.company_id.id),-->
+<!--            ('company_id', '=', user.company_id.fiscal_company_id.id),-->
+<!--            ('company_id', 'in', [c.id for c in user.company_id.fiscal_child_ids]),-->
+<!--            ('company_id', '=', False),-->
+<!--        ]</field>-->
+<!--    </record>-->
 
     <!-- model: res.company -->
-    <record id="base.res_company_rule_employee" model="ir.rule">
-        <field name="domain_force">['|',
-            ('id','child_of', [user.company_id.id]),
-            ('id', '=', user.company_id.fiscal_company_id.id),
-        ]</field>
-    </record>
+<!--    <record id="base.res_company_rule_employee" model="ir.rule">-->
+<!--        <field name="domain_force">['|',-->
+<!--            ('id','child_of', [user.company_id.id]),-->
+<!--            ('id', '=', user.company_id.fiscal_company_id.id),-->
+<!--        ]</field>-->
+<!--    </record>-->
 
 </odoo>

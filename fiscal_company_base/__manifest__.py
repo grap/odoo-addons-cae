@@ -20,12 +20,7 @@
         'security/res_groups.xml',
         'security/ir_rule.xml',
         'security/ir.model.access.csv',
-        'views/action.xml',
-        'views/menu.xml',
-        'views/view_res_users.xml',
-        'views/view_res_partner.xml',
         'views/view_res_company.xml',
-        'views/view_res_company_create_wizard.xml',
     ],
     'demo': [
         'demo/res_company.xml',

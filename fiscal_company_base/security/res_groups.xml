@@ -13,7 +13,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     </record>
 
     <record id="fiscal_company_disabled_feature" model="res.groups">
-        <field name="name">Disabled Features for Fiscal Company</field>
+        <field name="name">Disabled Features</field>
         <field name="category_id" ref="module_category_fiscal_company" />
     </record>
 

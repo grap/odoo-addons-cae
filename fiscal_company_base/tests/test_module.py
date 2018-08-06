@@ -19,7 +19,6 @@ class TestModule(TransactionCase):
 
         self.user_obj = self.env['res.users']
         self.company_obj = self.env['res.company']
-        self.wizard_obj = self.env['res.company.create.wizard']
         self.mother_company = self.env.ref(
             'fiscal_company_base.company_fiscal_mother')
         self.base_company = self.env.ref('base.main_company')
@@ -123,39 +122,3 @@ class TestModule(TransactionCase):
         self.assertEqual(
             new_access, [new_company.id],
             "Existing user must have access to the new child company.")
-
-    def test_08_wizard(self):
-        """[Contraint Test] Create a child company via the wizard,
-        with user accountant
-        """
-        wizard = self.wizard_obj.sudo(self.user_accountant).create({
-            'company_name': 'Test Company Wizard',
-            'fiscal_type': 'fiscal_child',
-            'fiscal_code': 'WIZ',
-            'parent_company_id': self.mother_company.id,
-            'create_user': True,
-            'user_name': 'Test User Wizard',
-            'user_login': 'test_user_wizard@odoo.com',
-        })
-        wizard.button_begin()
-        wizard.button_finish()
-
-        # Check if the company is well created
-        companies = self.company_obj.search([
-            ('name', '=', 'Test Company Wizard'),
-            ('fiscal_type', '=', 'fiscal_child'),
-            ('parent_id', '=', self.mother_company.id),
-        ])
-        self.assertEqual(
-            len(companies), 1,
-            "The company creation via the wizard failed.")
-
-        # Check if the user is well created
-        users = self.user_obj.search([
-            ('name', '=', 'Test User Wizard'),
-            ('login', '=', 'test_user_wizard@odoo.com'),
-            ('company_id', '=', companies[0].id),
-        ])
-        self.assertEqual(
-            len(users), 1,
-            "The user creation via the wizard failed.")
