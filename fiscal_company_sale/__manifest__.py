@@ -4,24 +4,20 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': 'CAE - Sale Fiscal Company',
+    'name': 'CAE - Sale',
     'version': '10.0.1.0.0',
     'category': 'CAE',
-    'summary': 'Glue Module between CAE and Sale module',
+    'summary': 'Glue Module between CAE and Sale modules',
     'author': 'GRAP',
     'website': 'http://www.grap.coop',
     'license': 'AGPL-3',
     'depends': [
         'fiscal_company_base',
-        'fiscal_company_account',
         'sale',
-    ],
-    'data': [
-        'views/view_sale_order.xml',
     ],
     'demo': [
         'demo/product_product.xml',
     ],
-    'installable': False,
-    'auto_install': False,
+    'installable': True,
+    'auto_install': True,
 }
