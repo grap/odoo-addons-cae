@@ -4,7 +4,7 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import models
+from odoo import api, models
 from ..decorator import switch_company
 
 
@@ -16,3 +16,11 @@ class AccountTax(models.Model):
             self, args, offset=0, limit=None, order=None, count=False):
         return super(AccountTax, self).search(
             args, offset=offset, limit=limit, order=order, count=count)
+
+    @api.multi
+    def filtered(self, func):
+        if callable(func) and func.__code__.co_names == ('company_id',):
+            company = self.env.user.company_id.fiscal_company_id
+            return super(AccountTax, self).filtered(
+                lambda x: x.company_id == company)
+        return super(AccountTax, self).filtered(func)
