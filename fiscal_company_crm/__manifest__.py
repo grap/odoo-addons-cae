@@ -23,6 +23,6 @@
         'views/view_crm_lost_reason.xml',
         'views/view_crm_stage.xml',
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': True,
 }

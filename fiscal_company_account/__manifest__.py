@@ -37,6 +37,6 @@
         'demo/res_partner.xml',
         'demo/ir_property.xml',
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': True,
 }

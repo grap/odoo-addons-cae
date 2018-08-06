@@ -29,12 +29,6 @@ Companies feature
     * `fiscal_mother`: CAE company, that can host many child companies
     * `fiscal_child`: child company, hosted by the CAE
 
-* Add a new field on company `fiscal_code` that is required for fiscal
-  child companies, and that is used to identify simply a company.
-
-Add a wizard to create more easily child companies.
-
-.. image:: /base_fiscal_company/static/description/company_wizard.png
 
 Users Feature
 -------------
@@ -66,3 +60,10 @@ Contributors
 
 * Julien WESTE
 * Sylvain LE GAL <https://twitter.com/legalsylvain>
+
+Funders
+-------
+
+The development of this module has been financially supported by:
+
+* GRAP, Groupement Régional Alimentaire de Proximité (<http://www.grap.coop>)

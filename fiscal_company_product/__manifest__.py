@@ -29,6 +29,6 @@
         'demo/product_product.xml',
         'demo/res_company.xml',
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': True,
 }
