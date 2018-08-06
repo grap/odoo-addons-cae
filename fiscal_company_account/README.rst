@@ -13,21 +13,14 @@ status for french companies.
 Features
 ========
 
-* Add constrains on ```account.bank.statement```, ```account.invoice```
-  ```account.move```, ```account.move.line```, ```account.payment``` models
+* Add constrains on ``account.bank.statement``, ``account.invoice``
+  ``account.move``, ``account.move.line``, ``account.payment`` models
   that prevent to create such items on a fiscal mother company.
 
 * Account property propagation:
     * Following fields property are propagated in all the fiscal child company:
         * product_category / property_account_income_categ;
         * product_category / property_account_expense_categ;
-
-* Update the wizard of company creation:
-    * for associated company:
-        * Possibility to set the VAT number of the company;
-        * possiblity to select a chart account;
-        * delete some properties created by default, and give the possiblity to
-          create the good ones: property_receivable, property_payable;
 
 Know issues / Roadmap
 =====================
@@ -43,3 +36,10 @@ Contributors
 
 * Julien WESTE
 * Sylvain LE GAL <https://twitter.com/legalsylvain>
+
+Funders
+-------
+
+The development of this module has been financially supported by:
+
+* GRAP, Groupement Régional Alimentaire de Proximité (<http://www.grap.coop>)

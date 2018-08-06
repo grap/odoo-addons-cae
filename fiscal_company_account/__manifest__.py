@@ -25,7 +25,6 @@
         'views/view_account_move.xml',
         'views/view_account_move_line.xml',
         'views/view_account_payment.xml',
-        'views/view_res_company_create_wizard.xml'
     ],
     'demo': [
         'demo/res_groups.xml',
@@ -37,6 +36,6 @@
         'demo/res_partner.xml',
         'demo/ir_property.xml',
     ],
-    'installable': False,
+    'installable': True,
     'auto_install': True,
 }
