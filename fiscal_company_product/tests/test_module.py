@@ -20,7 +20,6 @@ class TestModule(TransactionCase):
         self.child_company = self.env.ref(
             'fiscal_company_base.company_fiscal_child_1')
         self.product_categ = self.env.ref('product.product_category_1')
-        self.employee_group = self.env.ref('base.group_user')
 
     # Test Section
     def test_01_administrative_product_creation(self):
