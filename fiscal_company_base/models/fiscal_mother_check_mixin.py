@@ -5,7 +5,7 @@
 
 
 from odoo import _, api, models
-from openerp.exceptions import Warning as UserError
+from odoo.exceptions import ValidationError
 
 
 class FiscalMotherCheckMixin(models.AbstractModel):
@@ -20,6 +20,6 @@ class FiscalMotherCheckMixin(models.AbstractModel):
     def _check_fiscal_mother_company_id(self):
         for item in self:
             if item.company_id.fiscal_type == 'fiscal_mother':
-                raise UserError(_(
+                raise ValidationError(_(
                     "You can't affect the item %s (model '%s') to a fiscal"
                     " mother company.") % (item.name, self._name))
