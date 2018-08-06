@@ -29,7 +29,7 @@ class ResCompany(models.Model):
         comodel_name='res.company', inverse_name='fiscal_company_id',
         string='Fiscal Childs', readonly=True)
 
-    fiscal_code = fields.Char(string='Fiscal Code')
+#    fiscal_code = fields.Char(string='Fiscal Code')
 
     # Constrains Section
     @api.constrains('fiscal_child_ids', 'fiscal_type')
