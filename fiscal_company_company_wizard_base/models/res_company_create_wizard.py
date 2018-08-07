@@ -4,7 +4,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 from odoo.addons.fiscal_company_base.models.res_company import\
     _RES_COMPANY_FISCAL_TYPE
@@ -15,7 +16,17 @@ class ResCompanyCreateWizard(models.TransientModel):
 
     fiscal_type = fields.Selection(
         selection=_RES_COMPANY_FISCAL_TYPE, string='Fiscal Type',
-        required=True)
+        required=True, default='normal')
+
+    @api.constrains('fiscal_type', 'parent_company_id')
+    def _check_fiscal_type_parent_company(self):
+        res = self.filtered(
+            lambda x:
+            x.fiscal_type == 'fiscal_child' and not x.parent_company_id)
+        if res:
+            raise ValidationError(_(
+                "you have to set a parent company if you create a new fiscal"
+                " child company"))
 
     # Onchange Section
     @api.onchange('fiscal_type')
