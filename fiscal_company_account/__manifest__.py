@@ -19,12 +19,7 @@
     'data': [
         'security/ir_rule.xml',
         'views/menu.xml',
-        'views/view_account_account.xml',
-        'views/view_account_invoice.xml',
         'views/view_account_journal.xml',
-        'views/view_account_move.xml',
-        'views/view_account_move_line.xml',
-        'views/view_account_payment.xml',
     ],
     'demo': [
         'demo/res_groups.xml',
