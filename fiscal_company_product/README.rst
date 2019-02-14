@@ -40,6 +40,10 @@ Contributors
 * Julien WESTE
 * Sylvain LE GAL <https://twitter.com/legalsylvain>
 
+* Porting to odoo V10 has been funded by :
+ * BABEL.COOP, leverage cooperation through the digital age (<http://babel.coop>)
+
+
 Funders
 -------
 
