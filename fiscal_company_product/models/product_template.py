@@ -20,20 +20,20 @@ class ProductTemplate(models.Model):
     def create(self, vals):
         if vals.get('cae_administrative_ok', False):
             self._check_administrative_access()
-        return super(ProductTemplate, self).create(vals)
+        return super().create(vals)
 
     @api.multi
     def write(self, vals):
         if vals.get('cae_administrative_ok', False) or\
                 any(self.mapped('cae_administrative_ok')):
             self._check_administrative_access()
-        return super(ProductTemplate, self).write(vals)
+        return super().write(vals)
 
     @api.multi
     def unlink(self):
         if any(self.mapped('cae_administrative_ok')):
             self._check_administrative_access()
-        return super(ProductTemplate, self).unlink()
+        return super().unlink()
 
     # Custom Section
     @api.model

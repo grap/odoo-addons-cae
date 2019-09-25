@@ -12,7 +12,7 @@ class TestPropagateProperties(TransactionCase):
     """Tests for Account Fiscal Company Module (Propagate Properties)"""
 
     def setUp(self):
-        super(TestPropagateProperties, self).setUp()
+        super().setUp()
         self.company_obj = self.env['res.company']
         self.partner_obj = self.env['res.partner']
         self.category_obj = self.env['product.category']
@@ -62,7 +62,7 @@ class TestPropagateProperties(TransactionCase):
     def tearDown(self):
         self.cr.rollback()
         fix_required_field(self, 'SET')
-        super(TestPropagateProperties, self).tearDown()
+        super().tearDown()
 
     # Test Section
     def test_01_account_property_propagation_new_company(self):

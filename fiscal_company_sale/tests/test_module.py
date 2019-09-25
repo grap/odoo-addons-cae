@@ -11,7 +11,7 @@ class TestModule(TransactionCase):
 
     # Overload Section
     def setUp(self):
-        super(TestModule, self).setUp()
+        super().setUp()
         self.order_obj = self.env['sale.order']
         self.partner_obj = self.env['res.partner']
         self.user_worker = self.env.ref('fiscal_company_base.user_worker')

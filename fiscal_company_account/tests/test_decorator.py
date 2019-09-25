@@ -12,7 +12,7 @@ class TestDecorator(TransactionCase):
     """Tests for Account Fiscal Company Module (Decorator)"""
 
     def setUp(self):
-        super(TestDecorator, self).setUp()
+        super().setUp()
         self.account_obj = self.env['account.account']
         self.journal_obj = self.env['account.journal']
         self.user_accountant = self.env.ref(
@@ -26,7 +26,7 @@ class TestDecorator(TransactionCase):
     def tearDown(self):
         self.cr.rollback()
         fix_required_field(self, 'SET')
-        super(TestDecorator, self).tearDown()
+        super().tearDown()
 
     # Test Section
     def test_01_decorator_account_account(self):

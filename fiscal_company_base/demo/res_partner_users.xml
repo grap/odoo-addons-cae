@@ -23,7 +23,7 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
         <field name="customer" eval="False"/>
         <field name="supplier" eval="False"/>
         <field name="company_id" eval="False"/>
-        <field name="active" eval="False"/>
+        <field name="active" eval="True"/>
     </record>
 
     <record model="res.users" id="user_accountant">
@@ -45,7 +45,7 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
         <field name="customer" eval="False"/>
         <field name="supplier" eval="False"/>
         <field name="company_id" eval="False"/>
-        <field name="active" eval="False"/>
+        <field name="active" eval="True"/>
     </record>
 
     <record model="res.users" id="user_worker">

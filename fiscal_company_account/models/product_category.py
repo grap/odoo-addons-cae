@@ -17,11 +17,11 @@ class ProductCategory(models.Model):
 
     @api.model
     def _fiscal_property_creation_list(self):
-        res = super(ProductCategory, self)._fiscal_property_creation_list()
+        res = super()._fiscal_property_creation_list()
         return res + self._FISCAL_PROPERTY_LIST
 
     @api.multi
     def _fiscal_property_propagation_list(self):
         self.ensure_one()
-        res = super(ProductCategory, self)._fiscal_property_propagation_list()
+        res = super()._fiscal_property_propagation_list()
         return res + self._FISCAL_PROPERTY_LIST

@@ -45,7 +45,7 @@ class ResCompanyCreateWizard(models.TransientModel):
     @api.multi
     def _prepare_company(self):
         self.ensure_one()
-        vals = super(ResCompanyCreateWizard, self)._prepare_company()
+        vals = super()._prepare_company()
         vals.update({
             'fiscal_type': self.fiscal_type,
         })

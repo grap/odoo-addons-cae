@@ -12,5 +12,5 @@ class AccountJournal(models.Model):
 
     @switch_company
     def search(self, args, offset=0, limit=0, order=None, count=False):
-        return super(AccountJournal, self).search(
+        return super().search(
             args, offset=offset, limit=limit, order=order, count=count)

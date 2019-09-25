@@ -28,13 +28,13 @@ class FiscalPropertyPropagateMixin(models.AbstractModel):
     # Overload Section
     @api.model
     def create(self, vals):
-        res = super(FiscalPropertyPropagateMixin, self).create(vals)
+        res = super().create(vals)
         res._propagate_fiscal_property_to_all_companies(vals)
         return res
 
     @api.multi
     def write(self, vals):
-        res = super(FiscalPropertyPropagateMixin, self).write(vals)
+        res = super().write(vals)
         self._propagate_fiscal_property_to_all_companies(vals)
         return res
 

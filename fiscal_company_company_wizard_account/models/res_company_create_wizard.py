@@ -12,7 +12,7 @@ class ResCompanyCreateWizard(models.TransientModel):
     # Onchange Section
     @api.onchange('fiscal_type')
     def onchange_fiscal_type(self):
-        res = super(ResCompanyCreateWizard, self).onchange_fiscal_type()
+        res = super().onchange_fiscal_type()
         if self.fiscal_type == 'fiscal_child':
             self.chart_template_id = False
         return res
