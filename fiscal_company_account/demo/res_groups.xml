@@ -22,4 +22,11 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
         ]" />
     </record>
 
+    <record id="account.group_account_user" model="res.groups">
+        <field name="users" eval="[
+            (4, ref('base.user_admin')),
+            (4, ref('fiscal_company_base.user_accountant')),
+        ]" />
+    </record>
+
 </odoo>

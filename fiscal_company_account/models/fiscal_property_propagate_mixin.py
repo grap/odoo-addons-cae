@@ -9,6 +9,7 @@ from odoo import api, models
 
 class FiscalPropertyPropagateMixin(models.AbstractModel):
     _name = 'fiscal.property.propagate.mixin'
+    _description = "Fiscal Property Propagation Features Mixin"
 
     @api.model
     def _fiscal_property_creation_list(self):
@@ -47,10 +48,15 @@ class FiscalPropertyPropagateMixin(models.AbstractModel):
         """
         field_obj = self.env['ir.model.fields']
         property_obj = self.env['ir.property']
-        current_company = self.env.user.company_id
+        company_id = self.env.context.get('force_company', False)
+        if company_id:
+            current_company = self.env['res.company'].browse(company_id)
+        else:
+            current_company = self.env.user.company_id
 
         if current_company.fiscal_type not in\
                 ('fiscal_child', 'fiscal_mother'):
+            print("EXITING")
             return True
 
         for obj in self:
