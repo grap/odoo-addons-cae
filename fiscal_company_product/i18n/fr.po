@@ -1,13 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* fiscal_company_product
+#   * fiscal_company_product
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-06 13:39+0000\n"
-"PO-Revision-Date: 2018-08-06 13:39+0000\n"
+"POT-Creation-Date: 2019-09-26 14:34+0000\n"
+"PO-Revision-Date: 2019-09-26 14:34+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,16 +16,53 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: fiscal_company_product
-#: model:ir.model.fields,help:fiscal_company_product.field_product_product_cae_administrative_ok
-#: model:ir.model.fields,help:fiscal_company_product.field_product_template_cae_administrative_ok
-msgid "If checked, this product will be readonly for users and updatable only by specific group"
-msgstr "Si la case est cochée, le produit sera en lecture seule pour les utilisateurs, et modifiable seulement par un groupe spécifique d'utilisateur"
+#: model:product.template,name:fiscal_company_product.product_template_administrative
+msgid "CAE - Administrative Mother Product Template"
+msgstr "CAE - Produit administratif de la société mère"
 
 #. module: fiscal_company_product
-#: model:ir.model.fields,field_description:fiscal_company_product.field_product_product_cae_administrative_ok
-#: model:ir.model.fields,field_description:fiscal_company_product.field_product_template_cae_administrative_ok
+#: model:product.template,name:fiscal_company_product.product_template_child
+msgid "CH1 - Child 1 Product Template"
+msgstr "CAE - Article de la société CH1"
+
+#. module: fiscal_company_product
+#: model:product.product,name:fiscal_company_product.product_product_child
+#: model:product.template,name:fiscal_company_product.product_product_child_product_template
+msgid "CH1 - Child 1 Product Variant"
+msgstr "CH1 - Variante d'article de la société CH1"
+
+#. module: fiscal_company_product
+#: model:product.template,name:fiscal_company_product.product_template_mother
+msgid "CAE - Mother Product Template"
+msgstr "CAE - Article de la société mère"
+
+#. module: fiscal_company_product
+#: model:product.product,name:fiscal_company_product.product_product_mother
+#: model:product.template,name:fiscal_company_product.product_product_mother_product_template
+msgid "CAE - Mother Product Variant"
+msgstr "CAE - Variante d'article de la société mère"
+
+#. module: fiscal_company_product
+#: model:product.pricelist,name:fiscal_company_product.sale_product_pricelist_CH1
+msgid "CH1 - Main Sale Pricelist"
+msgstr "CH1 - Liste de prix par défaut"
+
+#. module: fiscal_company_product
+#: model:product.pricelist,name:fiscal_company_product.sale_product_pricelist_CH2
+msgid "CH2 - Main Sale Pricelist"
+msgstr "CH2 - Liste de prix par défaut"
+
+#. module: fiscal_company_product
+#: model:ir.model.fields,help:fiscal_company_product.field_product_product__cae_administrative_ok
+#: model:ir.model.fields,help:fiscal_company_product.field_product_template__cae_administrative_ok
+msgid "If checked, this product will be readonly for users and updatable only by specific group"
+msgstr "Si cette case est cochée, cet article sera en lecture seul pour les utilisateurs, et modifiable seulement par les membres d'un groupe spécifique"
+
+#. module: fiscal_company_product
+#: model:ir.model.fields,field_description:fiscal_company_product.field_product_product__cae_administrative_ok
+#: model:ir.model.fields,field_description:fiscal_company_product.field_product_template__cae_administrative_ok
 msgid "Is CAE Administrative"
-msgstr "Administratif CAE"
+msgstr "Est administratif"
 
 #. module: fiscal_company_product
 #: model:res.groups,name:fiscal_company_product.product_creation
@@ -38,8 +75,30 @@ msgid "Product Template"
 msgstr "Modèle d'article"
 
 #. module: fiscal_company_product
-#: code:addons/fiscal_company_product/models/product_template.py:44
+#: model:product.product,uom_name:fiscal_company_product.product_product_child
+#: model:product.product,uom_name:fiscal_company_product.product_product_mother
+#: model:product.template,uom_name:fiscal_company_product.product_product_child_product_template
+#: model:product.template,uom_name:fiscal_company_product.product_product_mother_product_template
+#: model:product.template,uom_name:fiscal_company_product.product_template_administrative
+#: model:product.template,uom_name:fiscal_company_product.product_template_child
+#: model:product.template,uom_name:fiscal_company_product.product_template_mother
+msgid "Unit(s)"
+msgstr "Unité(s)"
+
+#. module: fiscal_company_product
+#: code:addons/fiscal_company_product/models/product_template.py:43
 #, python-format
 msgid "You have no right to create or update an administrative product"
 msgstr "Nous n'avez pas le droit de créer ou de modifier un produit de type Administratif CAE"
+
+#. module: fiscal_company_product
+#: model:product.product,weight_uom_name:fiscal_company_product.product_product_child
+#: model:product.product,weight_uom_name:fiscal_company_product.product_product_mother
+#: model:product.template,weight_uom_name:fiscal_company_product.product_product_child_product_template
+#: model:product.template,weight_uom_name:fiscal_company_product.product_product_mother_product_template
+#: model:product.template,weight_uom_name:fiscal_company_product.product_template_administrative
+#: model:product.template,weight_uom_name:fiscal_company_product.product_template_child
+#: model:product.template,weight_uom_name:fiscal_company_product.product_template_mother
+msgid "kg"
+msgstr "kg"
 
