@@ -1,4 +1,3 @@
-# coding: utf-8
 # Copyright (C) 2013-Today: GRAP (http://www.grap.coop)
 # @author: Julien WESTE
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
@@ -32,6 +31,6 @@
         'demo/res_partner.xml',
         'demo/ir_property.xml',
     ],
-    'installable': False,
+    'installable': True,
     'auto_install': True,
 }
