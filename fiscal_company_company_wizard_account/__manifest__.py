@@ -15,6 +15,6 @@
         'fiscal_company_account',
         'company_wizard_account',
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': True,
 }

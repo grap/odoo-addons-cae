@@ -18,6 +18,6 @@
     'data': [
         'views/view_res_company_create_wizard.xml',
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': True,
 }
