@@ -1,4 +1,3 @@
-# coding: utf-8
 # Copyright (C) 2013-Today: GRAP (http://www.grap.coop)
 # @author: Julien WESTE
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
@@ -28,8 +27,6 @@ class ResCompany(models.Model):
     fiscal_child_ids = fields.One2many(
         comodel_name='res.company', inverse_name='fiscal_company_id',
         string='Fiscal Childs', readonly=True)
-
-#    fiscal_code = fields.Char(string='Fiscal Code')
 
     # Constrains Section
     @api.constrains('fiscal_child_ids', 'fiscal_type')
@@ -61,7 +58,7 @@ class ResCompany(models.Model):
     # Overload Section
     @api.model
     def create(self, vals):
-        company = super(ResCompany, self).create(vals)
+        company = super().create(vals)
         if not vals.get('fiscal_company_id', False):
             company.fiscal_company_id = company.id
         if vals.get('fiscal_type', False) == 'fiscal_child':
@@ -70,7 +67,7 @@ class ResCompany(models.Model):
 
     @api.multi
     def write(self, vals):
-        res = super(ResCompany, self).write(vals)
+        res = super().write(vals)
         if vals.get('fiscal_type', False) == 'fiscal_child':
             self._propagate_access_right()
         return res

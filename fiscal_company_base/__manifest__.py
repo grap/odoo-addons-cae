@@ -1,4 +1,3 @@
-# coding: utf-8
 # Copyright (C) 2013-Today: GRAP (http://www.grap.coop)
 # @author: Julien WESTE
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
@@ -6,7 +5,7 @@
 
 {
     'name': 'CAE - Base',
-    'version': '10.0.1.0.0',
+    'version': '12.0.1.0.0',
     'category': 'CAE',
     'summary': 'Manage Cooperatives of Activities and Employment',
     'author': 'GRAP',
@@ -29,5 +28,5 @@
         'demo/res_partner.xml',
         'demo/res_groups.xml',
     ],
-    'installable': False,
+    'installable': True,
 }

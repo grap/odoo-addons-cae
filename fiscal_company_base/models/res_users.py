@@ -1,4 +1,3 @@
-# coding: utf-8
 # Copyright (C) 2013-Today: GRAP (http://www.grap.coop)
 # @author: Julien WESTE
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
@@ -13,14 +12,14 @@ class ResUsers(models.Model):
     # Overload Section
     @api.model
     def create(self, vals):
-        user = super(ResUsers, self).create(vals)
+        user = super().create(vals)
         if vals.get('company_ids', False):
             user._propagate_access_right()
         return user
 
     @api.multi
     def write(self, vals):
-        res = super(ResUsers, self).write(vals)
+        res = super().write(vals)
         if vals.get('company_ids', False):
             self._propagate_access_right()
         return res
