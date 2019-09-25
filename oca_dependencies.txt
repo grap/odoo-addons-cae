@@ -1,1 +1,1 @@
-odoo-addons-company-wizard        https://github.com/odoo-cae/odoo-addons-company-wizard.git            10.0
+odoo-addons-company-wizard        https://github.com/odoo-cae/odoo-addons-company-wizard.git            12.0
