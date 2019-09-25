@@ -13,7 +13,9 @@ class FiscalMotherCheckMixin(models.AbstractModel):
     Note that you can only inherit from this abstract, if the current model
     has ```company_id``` and ```name``` fields defined.
     """
+
     _name = 'fiscal.mother.check.mixin'
+    _description = "Fiscal Mother Features Mixin"
 
     @api.constrains('company_id')
     def _check_fiscal_mother_company_id(self):
