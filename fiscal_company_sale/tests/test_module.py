@@ -1,4 +1,3 @@
-# coding: utf-8
 # Copyright (C) 2018 - Today: GRAP (http://www.grap.coop)
 # @author Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
@@ -12,9 +11,9 @@ class TestModule(TransactionCase):
 
     # Overload Section
     def setUp(self):
-        super(TestModule, self).setUp()
-        self.order_obj = self.env['sale.order']
-        self.partner_obj = self.env['res.partner']
+        super().setUp()
+        self.SaleOrder = self.env['sale.order']
+        self.ResPartner = self.env['res.partner']
         self.user_worker = self.env.ref('fiscal_company_base.user_worker')
         self.child_company = self.env.ref(
             'fiscal_company_base.company_fiscal_child_1')
@@ -33,7 +32,7 @@ class TestModule(TransactionCase):
             self._create_sale_order(self.mother_company)
 
     def _create_sale_order(self, company):
-        partner = self.partner_obj.create({
+        partner = self.ResPartner.create({
             'name': 'Test partner',
             'company_id': company.id,
         })
@@ -44,4 +43,4 @@ class TestModule(TransactionCase):
         }
 
         self.user_worker.company_id = company.id
-        self.order_obj.sudo(self.user_worker).create(order_vals)
+        self.SaleOrder.sudo(self.user_worker).create(order_vals)
