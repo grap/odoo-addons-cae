@@ -25,3 +25,8 @@ class ResCompanyCreateWizard(models.TransientModel):
                 raise UserError(_(
                     "You can not select a Chart of Account for a Fiscal Child"
                     " Company"))
+            elif wizard.fiscal_type == 'fiscal_mother'\
+                    and not wizard.chart_template_id:
+                raise UserError(_(
+                    "You have to select a Chart of Account for a Fiscal Mother"
+                    " Company"))
