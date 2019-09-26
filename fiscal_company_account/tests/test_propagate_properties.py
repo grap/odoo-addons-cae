@@ -13,11 +13,11 @@ class TestPropagateProperties(TransactionCase):
 
     def setUp(self):
         super().setUp()
-        self.company_obj = self.env['res.company']
-        self.partner_obj = self.env['res.partner']
-        self.category_obj = self.env['product.category']
-        self.template_obj = self.env['product.template']
-        self.product_obj = self.env['product.product']
+        self.ResCompany = self.env['res.company']
+        self.ResPartner = self.env['res.partner']
+        self.ProductCategory = self.env['product.category']
+        self.ProductTemplate = self.env['product.template']
+        self.ProductProduct = self.env['product.product']
 
         self.mother_company = self.env.ref(
             'fiscal_company_base.company_fiscal_mother')
@@ -71,7 +71,7 @@ class TestPropagateProperties(TransactionCase):
         """Create a new child company must propagate categories properties"""
 
         # Create a new Child company
-        child_company = self.company_obj.create({
+        child_company = self.ResCompany.create({
             'name': 'Your Test Child Company',
             'fiscal_type': 'fiscal_child',
             'fiscal_company_id': self.mother_company.id,
@@ -82,7 +82,7 @@ class TestPropagateProperties(TransactionCase):
         self.env.user.company_id = child_company.id
 
         # Check if category properties has been propagated for the new company
-        category = self.category_obj.browse(
+        category = self.ProductCategory.browse(
             [self.product_category_all.id])
         self.assertEqual(
             category.property_account_expense_categ_id.id,
@@ -97,7 +97,7 @@ class TestPropagateProperties(TransactionCase):
             " of the mother company to the new child company for category.")
 
         # Check if product properties has been propagated for the new company
-        product = self.product_obj.browse(
+        product = self.ProductProduct.browse(
             [self.product_product_mother_property.id])
         self.assertEqual(
             product.property_account_expense_id.id,
@@ -112,7 +112,7 @@ class TestPropagateProperties(TransactionCase):
             " of the mother company to the new child company for product.")
 
         # Check if template properties has been propagated for the new company
-        template = self.template_obj.browse(
+        template = self.ProductTemplate.browse(
             [self.product_template_mother_property.id])
         self.assertEqual(
             template.property_account_expense_id.id,
@@ -128,7 +128,7 @@ class TestPropagateProperties(TransactionCase):
 
         # Check if custom partner properties has been propagated for the new
         # company
-        partner = self.partner_obj.browse(
+        partner = self.ResPartner.browse(
             [self.partner_mother_property.id])
         self.assertEqual(
             partner.property_account_payable_id.id,
@@ -158,7 +158,7 @@ class TestPropagateProperties(TransactionCase):
 
         # Change current company and load category with the new context
         self.env.user.company_id = self.child_company.id
-        category = self.category_obj.browse(
+        category = self.ProductCategory.browse(
             [self.product_category_internal.id])
 
         # Check if properties has been propagated to the other company
@@ -227,7 +227,8 @@ class TestPropagateProperties(TransactionCase):
 
         # Change current company and load template with the new context
         self.env.user.company_id = self.mother_company.id
-        template = self.template_obj.browse([self.product_template_child.id])
+        template = self.ProductTemplate.browse(
+            [self.product_template_child.id])
 
         # Check if properties has not been propagated to the other company
         self.assertNotEqual(
@@ -297,7 +298,7 @@ class TestPropagateProperties(TransactionCase):
 
         # Change current company and load product with the new context
         self.env.user.company_id = self.mother_company.id
-        product = self.product_obj.browse([self.product_product_child.id])
+        product = self.ProductProduct.browse([self.product_product_child.id])
 
         # Check if properties has not been propagated to the other company
         self.assertNotEqual(
