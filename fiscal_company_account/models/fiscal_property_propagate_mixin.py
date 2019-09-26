@@ -56,7 +56,6 @@ class FiscalPropertyPropagateMixin(models.AbstractModel):
 
         if current_company.fiscal_type not in\
                 ('fiscal_child', 'fiscal_mother'):
-            print("EXITING")
             return True
 
         for obj in self:
