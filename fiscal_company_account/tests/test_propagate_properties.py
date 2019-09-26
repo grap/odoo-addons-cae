@@ -5,7 +5,7 @@
 
 from odoo.tests.common import TransactionCase
 
-from odoo.addons.fiscal_company_base.fix_test import fix_required_field
+# from odoo.addons.fiscal_company_base.fix_test import fix_required_field
 
 
 class TestPropagateProperties(TransactionCase):
