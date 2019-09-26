@@ -1,13 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* fiscal_company_base
+#   * fiscal_company_base
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-06 13:35+0000\n"
-"PO-Revision-Date: 2018-08-06 13:35+0000\n"
+"POT-Creation-Date: 2019-09-26 14:31+0000\n"
+"PO-Revision-Date: 2019-09-26 14:31+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -26,12 +26,26 @@ msgid "Cooperatives of Activities and Employment"
 msgstr "Coopératives d'Activités et d'Emplois"
 
 #. module: fiscal_company_base
+#: model:res.company,overdue_msg:fiscal_company_base.company_fiscal_child_1
+#: model:res.company,overdue_msg:fiscal_company_base.company_fiscal_child_2
+#: model:res.company,overdue_msg:fiscal_company_base.company_fiscal_mother
+msgid "Dear Sir/Madam,\n"
+"\n"
+"Our records indicate that some payments on your account are still due. Please find details below.\n"
+"If the amount has already been paid, please disregard this notice. Otherwise, please forward us the total amount stated below.\n"
+"If you have any queries regarding your account, Please contact us.\n"
+"\n"
+"Thank you in advance for your cooperation.\n"
+"Best Regards,"
+msgstr ""
+
+#. module: fiscal_company_base
 #: model:res.groups,name:fiscal_company_base.fiscal_company_disabled_feature
 msgid "Disabled Features"
 msgstr "Fonctionnalités désactivées"
 
 #. module: fiscal_company_base
-#: model:ir.model.fields,field_description:fiscal_company_base.field_fiscal_mother_check_mixin_display_name
+#: model:ir.model.fields,field_description:fiscal_company_base.field_fiscal_mother_check_mixin__display_name
 msgid "Display Name"
 msgstr "Nom affiché"
 
@@ -41,12 +55,12 @@ msgid "Fiscal Child Company"
 msgstr "Société fiscale fille"
 
 #. module: fiscal_company_base
-#: model:ir.model.fields,field_description:fiscal_company_base.field_res_company_fiscal_child_ids
+#: model:ir.model.fields,field_description:fiscal_company_base.field_res_company__fiscal_child_ids
 msgid "Fiscal Childs"
-msgstr "Sociétés fiscales filles"
+msgstr "Filles fiscales"
 
 #. module: fiscal_company_base
-#: model:ir.model.fields,field_description:fiscal_company_base.field_res_company_fiscal_company_id
+#: model:ir.model.fields,field_description:fiscal_company_base.field_res_company__fiscal_company_id
 msgid "Fiscal Company"
 msgstr "Société fiscale"
 
@@ -61,24 +75,29 @@ msgid "Fiscal Mother Company"
 msgstr "Société CAE"
 
 #. module: fiscal_company_base
-#: model:ir.ui.view,arch_db:fiscal_company_base.view_res_company_form
+#: model:ir.model,name:fiscal_company_base.model_fiscal_mother_check_mixin
+msgid "Fiscal Mother Features Mixin"
+msgstr "Mixin de fonctionnalité de société fiscale"
+
+#. module: fiscal_company_base
+#: model_terms:ir.ui.view,arch_db:fiscal_company_base.view_res_company_form
 msgid "Fiscal Settings"
-msgstr "Paramétrage fiscale"
+msgstr "Paramétrages fiscaux"
 
 #. module: fiscal_company_base
-#: model:ir.model.fields,field_description:fiscal_company_base.field_res_company_fiscal_type
+#: model:ir.model.fields,field_description:fiscal_company_base.field_res_company__fiscal_type
 msgid "Fiscal Type"
-msgstr "Type Fiscale"
+msgstr "Type fiscal"
 
 #. module: fiscal_company_base
-#: model:ir.model.fields,field_description:fiscal_company_base.field_fiscal_mother_check_mixin_id
+#: model:ir.model.fields,field_description:fiscal_company_base.field_fiscal_mother_check_mixin__id
 msgid "ID"
 msgstr "ID"
 
 #. module: fiscal_company_base
-#: model:ir.model.fields,field_description:fiscal_company_base.field_fiscal_mother_check_mixin___last_update
+#: model:ir.model.fields,field_description:fiscal_company_base.field_fiscal_mother_check_mixin____last_update
 msgid "Last Modified on"
-msgstr "Dernière Modification le"
+msgstr "Dernière modification le"
 
 #. module: fiscal_company_base
 #: selection:res.company,fiscal_type:0
@@ -86,7 +105,7 @@ msgid "Normal"
 msgstr "Normal"
 
 #. module: fiscal_company_base
-#: code:addons/fiscal_company_base/models/res_company.py:40
+#: code:addons/fiscal_company_base/models/res_company.py:37
 #, python-format
 msgid "Only Fiscal Mother company can have fiscal child companies."
 msgstr "Seulement les sociétés de type CAE peuvent avoir des sociétés fiscales filles."
@@ -97,25 +116,20 @@ msgid "Users"
 msgstr "Utilisateurs"
 
 #. module: fiscal_company_base
-#: code:addons/fiscal_company_base/models/fiscal_mother_check_mixin.py:23
+#: code:addons/fiscal_company_base/models/fiscal_mother_check_mixin.py:24
 #, python-format
 msgid "You can't affect the item %s (model '%s') to a fiscal mother company."
 msgstr "Vous ne pouvez pas affecter cet élément %s (modèle '%s') a une société de type CAE."
 
 #. module: fiscal_company_base
-#: code:addons/fiscal_company_base/models/res_company.py:51
+#: code:addons/fiscal_company_base/models/res_company.py:48
 #, python-format
 msgid "You can't select in the field fiscal company, an other company for a Non Fiscal Child Company."
 msgstr "Vous ne pouvez pas sélectionner dans le champs société fiscale, une autre société, pour une société fiscale fille."
 
 #. module: fiscal_company_base
-#: code:addons/fiscal_company_base/models/res_company.py:57
+#: code:addons/fiscal_company_base/models/res_company.py:54
 #, python-format
 msgid "You should select in the field fiscal company, a Fiscal Mother company for a Fiscal Child Company."
 msgstr "Vous devez sélectionner dans le champs société fiscale, une société de type CAE."
-
-#. module: fiscal_company_base
-#: model:ir.model,name:fiscal_company_base.model_fiscal_mother_check_mixin
-msgid "fiscal.mother.check.mixin"
-msgstr "fiscal.mother.check.mixin"
 

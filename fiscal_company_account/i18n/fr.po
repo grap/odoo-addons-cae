@@ -1,13 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* fiscal_company_account
+#   * fiscal_company_account
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-06 13:41+0000\n"
-"PO-Revision-Date: 2018-08-06 13:41+0000\n"
+"POT-Creation-Date: 2019-09-26 14:29+0000\n"
+"PO-Revision-Date: 2019-09-26 14:29+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,14 +21,20 @@ msgid "Account"
 msgstr "Compte"
 
 #. module: fiscal_company_account
-#: model:ir.model,name:fiscal_company_account.model_account_move
-msgid "Account Entry"
-msgstr "Écriture comptable"
-
-#. module: fiscal_company_account
 #: model:ir.model,name:fiscal_company_account.model_account_bank_statement
 msgid "Bank Statement"
 msgstr "Relevé bancaire"
+
+#. module: fiscal_company_account
+#: model:product.template,name:fiscal_company_account.product_template_mother_property
+msgid "CAE - Mother Product Template With Property"
+msgstr "CAE - Article de la société mère avec propriété"
+
+#. module: fiscal_company_account
+#: model:product.product,name:fiscal_company_account.product_product_mother_property
+#: model:product.template,name:fiscal_company_account.product_product_mother_property_product_template
+msgid "CAE - Mother Product Variant With Property"
+msgstr "CAE - Variante d'article de la société mère avec propriété"
 
 #. module: fiscal_company_account
 #: model:ir.model,name:fiscal_company_account.model_res_company
@@ -36,21 +42,30 @@ msgid "Companies"
 msgstr "Sociétés"
 
 #. module: fiscal_company_account
-#: model:ir.ui.view,arch_db:fiscal_company_account.view_account_account_search
-#: model:ir.ui.view,arch_db:fiscal_company_account.view_account_invoice_search
-#: model:ir.ui.view,arch_db:fiscal_company_account.view_account_journal_search
-#: model:ir.ui.view,arch_db:fiscal_company_account.view_account_move_line_search
-#: model:ir.ui.view,arch_db:fiscal_company_account.view_account_move_search
+#: model:ir.model.fields,field_description:fiscal_company_account.field_account_bank_statement__company_id
+#: model:ir.model.fields,field_description:fiscal_company_account.field_account_move__company_id
+#: model:ir.model.fields,field_description:fiscal_company_account.field_account_move_line__company_id
+#: model:ir.model.fields,field_description:fiscal_company_account.field_account_payment__company_id
 msgid "Company"
 msgstr "Société"
 
 #. module: fiscal_company_account
-#: model:ir.model.fields,field_description:fiscal_company_account.field_fiscal_property_propagate_mixin_display_name
+#: model:ir.model,name:fiscal_company_account.model_res_partner
+msgid "Contact"
+msgstr "Contact"
+
+#. module: fiscal_company_account
+#: model:ir.model.fields,field_description:fiscal_company_account.field_fiscal_property_propagate_mixin__display_name
 msgid "Display Name"
 msgstr "Nom affiché"
 
 #. module: fiscal_company_account
-#: model:ir.model.fields,field_description:fiscal_company_account.field_fiscal_property_propagate_mixin_id
+#: model:ir.model,name:fiscal_company_account.model_fiscal_property_propagate_mixin
+msgid "Fiscal Property Propagation Features Mixin"
+msgstr "Mixin de propagation des propriétés ficales"
+
+#. module: fiscal_company_account
+#: model:ir.model.fields,field_description:fiscal_company_account.field_fiscal_property_propagate_mixin__id
 msgid "ID"
 msgstr "ID"
 
@@ -65,19 +80,19 @@ msgid "Journal"
 msgstr "Journal"
 
 #. module: fiscal_company_account
+#: model:ir.model,name:fiscal_company_account.model_account_move
+msgid "Journal Entries"
+msgstr "Pièces comptables"
+
+#. module: fiscal_company_account
 #: model:ir.model,name:fiscal_company_account.model_account_move_line
 msgid "Journal Item"
 msgstr "Écriture comptable"
 
 #. module: fiscal_company_account
-#: model:ir.model.fields,field_description:fiscal_company_account.field_fiscal_property_propagate_mixin___last_update
+#: model:ir.model.fields,field_description:fiscal_company_account.field_fiscal_property_propagate_mixin____last_update
 msgid "Last Modified on"
-msgstr "Dernière Modification le"
-
-#. module: fiscal_company_account
-#: model:ir.model,name:fiscal_company_account.model_res_partner
-msgid "Partner"
-msgstr "Partenaire"
+msgstr "Dernière modification le"
 
 #. module: fiscal_company_account
 #: model:ir.model,name:fiscal_company_account.model_account_payment
@@ -100,7 +115,16 @@ msgid "Tax"
 msgstr "Taxe"
 
 #. module: fiscal_company_account
-#: model:ir.model,name:fiscal_company_account.model_fiscal_property_propagate_mixin
-msgid "fiscal.property.propagate.mixin"
-msgstr "fiscal.property.propagate.mixin"
+#: model:product.product,uom_name:fiscal_company_account.product_product_mother_property
+#: model:product.template,uom_name:fiscal_company_account.product_product_mother_property_product_template
+#: model:product.template,uom_name:fiscal_company_account.product_template_mother_property
+msgid "Unit(s)"
+msgstr "Unité(s)"
+
+#. module: fiscal_company_account
+#: model:product.product,weight_uom_name:fiscal_company_account.product_product_mother_property
+#: model:product.template,weight_uom_name:fiscal_company_account.product_product_mother_property_product_template
+#: model:product.template,weight_uom_name:fiscal_company_account.product_template_mother_property
+msgid "kg"
+msgstr "kg"
 

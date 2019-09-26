@@ -13,7 +13,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     </record>
 
     <record id="product_product_child" model="product.product">
-        <field name="name">CAE - Child 1 Product Variant</field>
+        <field name="name">CH1 - Child 1 Product Variant</field>
         <field name="company_id" ref="fiscal_company_base.company_fiscal_child_1"/>
         <field name="categ_id" ref="product.product_category_1"/>
     </record>
