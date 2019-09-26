@@ -8,13 +8,13 @@ import functools
 
 # Private Function Section
 def _get_fiscal_mother_company(self, operator, company_id):
-    company_obj = self.env['res.company']
+    ResCompany = self.env['res.company']
     if operator != 'in':
-        new_company_id = company_obj.browse(
+        new_company_id = ResCompany.browse(
             company_id).fiscal_company_id.id
         return new_company_id
     else:
-        new_company_ids = company_obj.browse(
+        new_company_ids = ResCompany.browse(
             company_id).mapped('fiscal_company_id').ids
         return new_company_ids
 

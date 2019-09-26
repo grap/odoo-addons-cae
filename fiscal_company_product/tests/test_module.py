@@ -12,7 +12,7 @@ class TestModule(TransactionCase):
     # Overload Section
     def setUp(self):
         super().setUp()
-        self.product_obj = self.env['product.product']
+        self.ProductProduct = self.env['product.product']
         self.user_accountant = self.env.ref(
             'fiscal_company_base.user_accountant')
         self.user_worker = self.env.ref('fiscal_company_base.user_worker')
@@ -41,6 +41,6 @@ class TestModule(TransactionCase):
             'cae_administrative_ok': True,
         }
         user.company_id = self.child_company.id
-        self.product_obj.sudo(user).with_context(
+        self.ProductProduct.sudo(user).with_context(
             mail_create_nosubscribe=True,
             mail_create_nolog=True).create(product_vals)

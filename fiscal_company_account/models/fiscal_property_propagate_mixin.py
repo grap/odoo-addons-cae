@@ -46,8 +46,8 @@ class FiscalPropertyPropagateMixin(models.AbstractModel):
         Propagate a property of objects of for all fiscal
         childs of a mother company
         """
-        field_obj = self.env['ir.model.fields']
-        property_obj = self.env['ir.property']
+        IrModelFields = self.env['ir.model.fields']
+        IrProperty = self.env['ir.property']
         company_id = self.env.context.get('force_company', False)
         if company_id:
             current_company = self.env['res.company'].browse(company_id)
@@ -66,7 +66,7 @@ class FiscalPropertyPropagateMixin(models.AbstractModel):
                 property_value = vals[property_name]
 
                 # Get fields information
-                field = field_obj.search([
+                field = IrModelFields.search([
                     ('model', '=', self._name),
                     ('name', '=', property_name),
                 ])[0]
@@ -82,13 +82,13 @@ class FiscalPropertyPropagateMixin(models.AbstractModel):
                     ('res_id', '=', '%s,%s' % (self._name, obj.id)),
                     ('fields_id', '=', field.id),
                     ('company_id', 'in', company_ids)]
-                properties = property_obj.search(domain)
+                properties = IrProperty.search(domain)
                 properties.unlink()
 
                 # Create property for all fiscal childs
                 if property_value:
                     for company_id in company_ids:
-                        property_obj.create({
+                        IrProperty.create({
                             'name': property_name,
                             'res_id': '%s,%s' % (self._name, obj.id),
                             'value': property_value,
