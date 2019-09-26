@@ -21,7 +21,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     </record>
 
 
-    <record id="fiscal_company_product.product_creation" model="res.groups">
+    <record id="product_creation" model="res.groups">
         <field name="users" eval="[
             (4, ref('fiscal_company_base.user_worker')),
             (4, ref('fiscal_company_base.user_accountant')),
