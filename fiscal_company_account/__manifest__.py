@@ -5,9 +5,9 @@
 
 {
     'name': 'CAE - Account',
-    'version': '10.0.1.0.0',
+    'version': '12.0.1.0.0',
     'category': 'CAE',
-    'summary': 'Manage Cooperatives of Activities and Employment - Account',
+    'summary': 'Glue Module between CAE and Account modules',
     'author': 'GRAP',
     'website': 'http://www.grap.coop',
     'license': 'AGPL-3',
