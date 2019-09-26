@@ -16,8 +16,8 @@ class TestModule(TransactionCase):
     def setUp(self):
         super().setUp()
 
-        self.user_obj = self.env['res.users']
-        self.company_obj = self.env['res.company']
+        self.ResUsers = self.env['res.users']
+        self.ResCompany = self.env['res.company']
         self.mother_company = self.env.ref(
             'fiscal_company_base.company_fiscal_mother')
         self.base_company = self.env.ref('base.main_company')
@@ -27,16 +27,16 @@ class TestModule(TransactionCase):
         self.env.clear()
         fix_required_field(self, 'DROP')
 
-    def tearDown(self):
-        self.cr.rollback()
-        fix_required_field(self, 'SET')
-        super().tearDown()
+    # def tearDown(self):
+    #     self.cr.rollback()
+    #     fix_required_field(self, 'SET')
+    #     super().tearDown()
 
     # Test Section
     def test_01_res_users_propagate_access_right_create(self):
         """[Functional Test] A new user with access to mother company must
          have access to child companies"""
-        new_user = self.user_obj.sudo(user=self.user_accountant).create({
+        new_user = self.ResUsers.sudo(user=self.user_accountant).create({
             'name': 'new_user',
             'login': 'new_user@odoo.com',
             'company_id': self.mother_company.id,
@@ -50,7 +50,7 @@ class TestModule(TransactionCase):
     def test_02_res_users_propagate_access_right_write(self):
         """[Functional Test] Give access to a mother company must give acces
         to the child companies"""
-        new_user = self.user_obj.create({
+        new_user = self.ResUsers.create({
             'name': 'new_user',
             'login': 'new_user@odoo.com',
             'company_id': self.base_company.id,
@@ -66,7 +66,7 @@ class TestModule(TransactionCase):
         """[Contraint Test] Try to create a company with
         'fiscal_type != 'child' and and a mother company."""
         with self.assertRaises(ValidationError):
-            self.company_obj.sudo(user=self.user_accountant).create({
+            self.ResCompany.sudo(user=self.user_accountant).create({
                 'name': 'new_company',
                 'fiscal_type': 'normal',
                 'fiscal_company_id': self.mother_company.id})
@@ -75,12 +75,12 @@ class TestModule(TransactionCase):
         """[Contraint Test] Try to create a company with
         'fiscal_type != 'child' and and a mother company."""
         with self.assertRaises(ValidationError):
-            self.company_obj.sudo(user=self.user_accountant).create({
+            self.ResCompany.sudo(user=self.user_accountant).create({
                 'name': 'new_company_1',
                 'fiscal_type': 'fiscal_mother',
                 'fiscal_company_id': self.mother_company.id})
         with self.assertRaises(ValidationError):
-            self.company_obj.sudo(user=self.user_accountant).create({
+            self.ResCompany.sudo(user=self.user_accountant).create({
                 'name': 'new_company_2',
                 'fiscal_type': 'normal',
                 'fiscal_company_id': self.mother_company.id})
@@ -89,14 +89,14 @@ class TestModule(TransactionCase):
         """[Contraint Test] Try to create a company with
         'fiscal_type = 'child' without a mother company."""
         with self.assertRaises(ValidationError):
-            self.company_obj.sudo(user=self.user_accountant).create({
+            self.ResCompany.sudo(user=self.user_accountant).create({
                 'name': 'new_company',
                 'fiscal_type': 'fiscal_child',
                 'fiscal_company_id': False})
 
     def test_06_res_company_create_child_propagate_success(self):
         """[Contraint Test] Create a child company and check propagation."""
-        new_company = self.company_obj.sudo(user=self.user_accountant).create({
+        new_company = self.ResCompany.sudo(user=self.user_accountant).create({
             'name': 'new_company',
             'fiscal_type': 'fiscal_child',
             'fiscal_company_id': self.mother_company.id})
@@ -109,7 +109,7 @@ class TestModule(TransactionCase):
     def test_07_res_company_write_child_propagate_success(self):
         """[Contraint Test] Create and write a child company and check
          propagation."""
-        new_company = self.company_obj.sudo(user=self.user_accountant).create({
+        new_company = self.ResCompany.sudo(user=self.user_accountant).create({
             'name': 'new_company',
             'fiscal_type': 'normal'})
         new_company.sudo(user=self.user_accountant).write({
