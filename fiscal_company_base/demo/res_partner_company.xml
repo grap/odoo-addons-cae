@@ -5,8 +5,6 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 
-<!-- pylint: disable=W7902 -->
-
 <odoo>
 
 <!-- Updating base.main_company-->
