@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 # Copyright (C) 2018 - Today: GRAP (http://www.grap.coop)
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import _, api, models
-from openerp.exceptions import Warning as UserError
+from odoo.exceptions import Warning as UserError
 
 
 class ResCompanyCreateWizard(models.TransientModel):
@@ -13,7 +12,7 @@ class ResCompanyCreateWizard(models.TransientModel):
     # Onchange Section
     @api.onchange('fiscal_type')
     def onchange_fiscal_type(self):
-        res = super(ResCompanyCreateWizard, self).onchange_fiscal_type()
+        res = super().onchange_fiscal_type()
         if self.fiscal_type == 'fiscal_child':
             self.chart_template_id = False
         return res
@@ -25,4 +24,9 @@ class ResCompanyCreateWizard(models.TransientModel):
                     and wizard.chart_template_id:
                 raise UserError(_(
                     "You can not select a Chart of Account for a Fiscal Child"
+                    " Company"))
+            elif wizard.fiscal_type == 'fiscal_mother'\
+                    and not wizard.chart_template_id:
+                raise UserError(_(
+                    "You have to select a Chart of Account for a Fiscal Mother"
                     " Company"))

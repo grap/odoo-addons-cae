@@ -1,4 +1,3 @@
-# coding: utf-8
 
 # Accounting Part
 from . import account_account

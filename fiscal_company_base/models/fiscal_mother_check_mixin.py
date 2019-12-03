@@ -1,4 +1,3 @@
-# coding: utf-8
 # Copyright (C) 2018 - Today: GRAP (http://www.grap.coop)
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
@@ -14,7 +13,9 @@ class FiscalMotherCheckMixin(models.AbstractModel):
     Note that you can only inherit from this abstract, if the current model
     has ```company_id``` and ```name``` fields defined.
     """
+
     _name = 'fiscal.mother.check.mixin'
+    _description = "Fiscal Mother Features Mixin"
 
     @api.constrains('company_id')
     def _check_fiscal_mother_company_id(self):

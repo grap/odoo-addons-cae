@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright (C) 2018 - Today: GRAP (http://www.grap.coop)
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
@@ -46,7 +45,7 @@ class ResCompanyCreateWizard(models.TransientModel):
     @api.multi
     def _prepare_company(self):
         self.ensure_one()
-        vals = super(ResCompanyCreateWizard, self)._prepare_company()
+        vals = super()._prepare_company()
         vals.update({
             'fiscal_type': self.fiscal_type,
         })

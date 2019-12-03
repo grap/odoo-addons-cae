@@ -1,4 +1,3 @@
-# coding: utf-8
 # Copyright (C) 2013-Today: GRAP (http://www.grap.coop)
 # @author: Julien WESTE
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
@@ -6,9 +5,9 @@
 
 {
     'name': 'CAE - Account',
-    'version': '10.0.1.0.0',
+    'version': '12.0.1.0.0',
     'category': 'CAE',
-    'summary': 'Manage Cooperatives of Activities and Employment - Account',
+    'summary': 'Glue Module between CAE and Account modules',
     'author': 'GRAP',
     'website': 'http://www.grap.coop',
     'license': 'AGPL-3',
@@ -32,6 +31,6 @@
         'demo/res_partner.xml',
         'demo/ir_property.xml',
     ],
-    'installable': False,
+    'installable': True,
     'auto_install': True,
 }

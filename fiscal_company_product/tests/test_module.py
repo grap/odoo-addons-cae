@@ -1,4 +1,3 @@
-# coding: utf-8
 # Copyright (C) 2018 - Today: GRAP (http://www.grap.coop)
 # @author Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
@@ -12,8 +11,8 @@ class TestModule(TransactionCase):
 
     # Overload Section
     def setUp(self):
-        super(TestModule, self).setUp()
-        self.product_obj = self.env['product.product']
+        super().setUp()
+        self.ProductProduct = self.env['product.product']
         self.user_accountant = self.env.ref(
             'fiscal_company_base.user_accountant')
         self.user_worker = self.env.ref('fiscal_company_base.user_worker')
@@ -42,6 +41,6 @@ class TestModule(TransactionCase):
             'cae_administrative_ok': True,
         }
         user.company_id = self.child_company.id
-        self.product_obj.sudo(user).with_context(
+        self.ProductProduct.sudo(user).with_context(
             mail_create_nosubscribe=True,
             mail_create_nolog=True).create(product_vals)

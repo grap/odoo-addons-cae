@@ -1,4 +1,3 @@
-# coding: utf-8
 # Copyright (C) 2013 - Today: GRAP (http://www.grap.coop)
 # @author: Julien WESTE
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
@@ -19,13 +18,13 @@ class ProductTemplate(models.Model):
 
     @api.model
     def _fiscal_property_creation_list(self):
-        res = super(ProductTemplate, self)._fiscal_property_creation_list()
+        res = super()._fiscal_property_creation_list()
         return res + self._FISCAL_PROPERTY_LIST
 
     @api.multi
     def _fiscal_property_propagation_list(self):
         self.ensure_one()
-        res = super(ProductTemplate, self)._fiscal_property_propagation_list()
+        res = super()._fiscal_property_propagation_list()
         # Propagation only for object that belong to the fiscal_mother
         # company
         if self.company_id.fiscal_type == 'fiscal_mother':

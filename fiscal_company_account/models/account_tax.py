@@ -1,4 +1,3 @@
-# coding: utf-8
 # Copyright (C) 2013-Today: GRAP (http://www.grap.coop)
 # @author: Julien WESTE
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
@@ -14,13 +13,13 @@ class AccountTax(models.Model):
     @switch_company
     def search(
             self, args, offset=0, limit=None, order=None, count=False):
-        return super(AccountTax, self).search(
+        return super().search(
             args, offset=offset, limit=limit, order=order, count=count)
 
     @api.multi
     def filtered(self, func):
         if callable(func) and func.__code__.co_names == ('company_id',):
             company = self.env.user.company_id.fiscal_company_id
-            return super(AccountTax, self).filtered(
+            return super().filtered(
                 lambda x: x.company_id == company)
-        return super(AccountTax, self).filtered(func)
+        return super().filtered(func)

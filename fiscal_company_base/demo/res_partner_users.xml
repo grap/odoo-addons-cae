@@ -7,7 +7,7 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
 
 <odoo>
 
-    <record model="res.users" id="base.user_root">
+    <record model="res.users" id="base.user_admin">
         <field name="company_ids" eval="[
             (4, ref('base.main_company')),
             (4, ref('company_fiscal_mother')),
@@ -23,7 +23,7 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
         <field name="customer" eval="False"/>
         <field name="supplier" eval="False"/>
         <field name="company_id" eval="False"/>
-        <field name="active" eval="False"/>
+        <field name="active" eval="True"/>
     </record>
 
     <record model="res.users" id="user_accountant">
@@ -45,7 +45,7 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
         <field name="customer" eval="False"/>
         <field name="supplier" eval="False"/>
         <field name="company_id" eval="False"/>
-        <field name="active" eval="False"/>
+        <field name="active" eval="True"/>
     </record>
 
     <record model="res.users" id="user_worker">

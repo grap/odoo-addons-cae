@@ -1,4 +1,3 @@
-# coding: utf-8
 # Copyright (C) 2013-Today: GRAP (http://www.grap.coop)
 # @author: Julien WESTE
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
@@ -14,5 +13,5 @@ class AccountAccount(models.Model):
     @switch_company
     def search(
             self, args, offset=0, limit=None, order=None, count=False):
-        return super(AccountAccount, self).search(
+        return super().search(
             args, offset=offset, limit=limit, order=order, count=count)
