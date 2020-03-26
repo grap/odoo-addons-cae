@@ -30,3 +30,22 @@ addon | version | summary
 * https://fr.wikipedia.org/wiki/Coopérative_d'activités_et_d'emploi
 * http://www.cooperer.coop/
 * http://www.copea.fr/
+
+
+# Funders
+
+The development of the modules has been financially supported by:
+
+<p align="center">
+   <img src="http://www.grap.coop/wp-content/uploads/2016/11/GRAP.png" width="200"/>
+</p>
+
+GRAP, [Groupement Régional Alimentaire de Proximité](http://www.grap.coop) is a
+french company which brings together activities that sale food products in the
+region Rhône Alpes. We promote organic and local food, social and solidarity
+economy and cooperation.
+
+The GRAP IT Team promote Free Software and developp all the Odoo modules under
+AGPL-3 Licence. You can get find all this modules here :
+* on the [OCA Apps Store](https://odoo-community.org/shop?&search=GRAP)
+* on the [Odoo Apps Store](https://www.odoo.com/apps/modules/browse?author=GRAP).
