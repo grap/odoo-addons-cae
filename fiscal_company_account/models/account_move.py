@@ -10,4 +10,8 @@ class AccountMove(models.Model):
     _name = 'account.move'
     _inherit = ['account.move', 'fiscal.mother.check.mixin']
 
-    company_id = fields.Many2one(related=False)
+    company_id = fields.Many2one(
+        related=False, default=lambda x: x._default_company_id())
+
+    def _default_company_id(self):
+        return self.env.user.company_id.id
