@@ -51,5 +51,4 @@ class ResCompanyCreateWizard(models.TransientModel):
         })
         if self.fiscal_type == 'fiscal_child':
             vals['fiscal_company_id'] = self.parent_company_id.id
-            vals['rml_header'] = self.parent_company_id.rml_header
         return vals
