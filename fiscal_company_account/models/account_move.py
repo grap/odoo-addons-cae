@@ -14,4 +14,8 @@ class AccountMove(models.Model):
         related=False, default=lambda x: x._default_company_id())
 
     def _default_company_id(self):
+        if self.env.context.get("force_company", False):
+            return self.env.context["force_company"]
+        if self.env.context.get("company_id", False):
+            return self.env.context["company_id"]
         return self.env.user.company_id.id
