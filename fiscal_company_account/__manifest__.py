@@ -19,6 +19,7 @@
         'security/ir_rule.xml',
         'views/menu.xml',
         'views/view_account_move.xml',
+        'views/view_res_partner.xml',
     ],
     'demo': [
         'demo/res_groups.xml',
