@@ -4,7 +4,7 @@
 
 {
     'name': 'CAE - Point Of Sale',
-    'version': '12.0.1.1.0',
+    'version': '12.0.1.1.1',
     'category': 'CAE',
     'summary': 'Glue Module between CAE and Point of Sale modules',
     'author': 'GRAP',
