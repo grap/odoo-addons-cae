@@ -13,3 +13,21 @@ class PosOrder(models.Model):
         return super(PosOrder, self.with_context(
             overload_force_company=company_id)
         )._prepare_bank_statement_line_payment_values(data)
+
+    # The call of this function is made with a force company that
+    # point on the sale journal company, that is wrong in CAE
+    # where there is a single shared journal for many companies
+    # we so reforce the value force_company with the correct
+    # company_id for the two following function
+
+    def _create_account_move(self, dt, ref, journal_id, company_id):
+        company_id = self.config_id.company_id.id
+        return super(
+            PosOrder, self.with_context(force_company=company_id)
+        )._create_account_move(dt, ref, journal_id, company_id)
+
+    def _create_account_move_line(self, session=None, move=None):
+        company_id = self.config_id.company_id.id
+        return super(
+            PosOrder, self.with_context(force_company=company_id)
+        )._create_account_move_line(session=session, move=move)
