@@ -18,7 +18,7 @@
     'data': [
         'security/ir_rule.xml',
         'views/menu.xml',
-        'views/view_account_journal.xml',
+        'views/view_account_move.xml',
     ],
     'demo': [
         'demo/res_groups.xml',
