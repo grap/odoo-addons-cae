@@ -5,7 +5,7 @@
 
 {
     'name': 'CAE - Account',
-    'version': '12.0.1.0.2',
+    'version': '12.0.1.0.3',
     'category': 'CAE',
     'summary': 'Glue Module between CAE and Account modules',
     'author': 'GRAP',
