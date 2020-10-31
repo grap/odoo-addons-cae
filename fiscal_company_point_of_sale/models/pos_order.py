@@ -2,7 +2,7 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import models
+from odoo import api, models
 
 
 class PosOrder(models.Model):
@@ -19,15 +19,17 @@ class PosOrder(models.Model):
     # where there is a single shared journal for many companies
     # we so reforce the value force_company with the correct
     # company_id for the two following function
-
     def _create_account_move(self, dt, ref, journal_id, company_id):
-        company_id = self.config_id.company_id.id
+        if not len(self):
+            return super()._create_account_move(dt, ref, journal_id, company_id)
+        company_id = self[0].config_id.company_id.id
         return super(
             PosOrder, self.with_context(force_company=company_id)
         )._create_account_move(dt, ref, journal_id, company_id)
 
+    @api.multi
     def _create_account_move_line(self, session=None, move=None):
-        company_id = self.config_id.company_id.id
+        company_id = self[0].config_id.company_id.id
         return super(
             PosOrder, self.with_context(force_company=company_id)
         )._create_account_move_line(session=session, move=move)
