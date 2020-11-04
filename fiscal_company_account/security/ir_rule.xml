@@ -61,4 +61,14 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
         ]</field>
     </record>
 
+    <record id="account_fiscal_year_cae_rule" model="ir.rule">
+        <field name="name" >Account Fiscal Year - CAE Rule</field>
+        <field model="ir.model" name="model_id" search="[('model', '=', u'account.fiscal.year')]"/>
+        <field name="domain_force">['|','|',
+            ('company_id','=',user.company_id.id),
+            ('company_id','=',user.company_id.fiscal_company_id.id),
+            ('company_id','=',False),
+        ]</field>
+    </record>
+
 </odoo>
