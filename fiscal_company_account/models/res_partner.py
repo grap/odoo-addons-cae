@@ -73,9 +73,6 @@ class ResPartner(models.Model):
                 partner.property_account_position_id
 
     def _inverse_no_property_account_position_id(self):
-        print("_inverse_no_property_account_position_id")
-        print(self.env.context)
-        print(self.env.user)
         for partner in self:
             partner.property_account_position_id =\
                 partner.no_property_account_position_id
