@@ -13,6 +13,7 @@
     'license': 'AGPL-3',
     'depends': [
         'base',
+        'technical_partner_access',
     ],
     'data': [
         'security/ir_module_category.xml',
