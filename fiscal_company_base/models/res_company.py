@@ -6,9 +6,10 @@
 from odoo import _, api, exceptions, fields, models
 
 _RES_COMPANY_FISCAL_TYPE = [
+    ('group', 'Group'),
     ('normal', 'Normal'),
-    ('fiscal_mother', 'Fiscal Mother Company'),
-    ('fiscal_child', 'Fiscal Child Company'),
+    ('fiscal_mother', 'CAE'),
+    ('fiscal_child', 'Integrated Company'),
 ]
 
 
@@ -26,17 +27,29 @@ class ResCompany(models.Model):
 
     fiscal_child_ids = fields.One2many(
         comodel_name='res.company', inverse_name='fiscal_company_id',
-        string='Fiscal Childs', readonly=True)
+        string='Technical Integrated Companies', readonly=True)
+
+    other_fiscal_child_ids = fields.One2many(
+        comodel_name='res.company', compute='_compute_other_fiscal_child_ids',
+        string='Integrated Companies')
+
+    @api.multi
+    def _compute_other_fiscal_child_ids(self):
+        for company in self:
+            companies = self.search([
+                ('id', 'in', company.fiscal_child_ids.ids),
+                ('id', '!=', company.id),
+            ])
+            company.other_fiscal_child_ids = companies.ids
 
     # Constrains Section
     @api.constrains('fiscal_child_ids', 'fiscal_type')
     def _check_non_fiscal_childs(self):
         for company in self:
             if (company.fiscal_type != 'fiscal_mother' and
-                    len(company.fiscal_child_ids)):
+                    len(company.other_fiscal_child_ids)):
                 raise exceptions.ValidationError(_(
-                    "Only Fiscal Mother company can have fiscal child"
-                    " companies."))
+                    "Only CAE company can have Integrated Companies"))
 
     @api.constrains('fiscal_company_id', 'fiscal_type')
     def _check_non_fiscal_child_company(self):
@@ -47,13 +60,13 @@ class ResCompany(models.Model):
                         company.id != company.fiscal_company_id.id):
                     raise exceptions.ValidationError(_(
                         "You can't select in the field fiscal company, an"
-                        " other company for a Non Fiscal Child Company."))
+                        " other company for a non integrated company."))
                 elif (company.fiscal_type == 'fiscal_child' and
                         company.fiscal_company_id.fiscal_type !=
                         'fiscal_mother'):
                     raise exceptions.ValidationError(_(
                         "You should select in the field fiscal company, a"
-                        " Fiscal Mother company for a Fiscal Child Company."))
+                        " CAE company for a Integrated Company."))
 
     # Overload Section
     @api.model
