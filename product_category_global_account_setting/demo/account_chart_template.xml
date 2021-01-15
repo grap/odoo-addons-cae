@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2020-Today GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record model="account.chart.template" id="chart_template">
+        <field name="name">Test</field>
+        <field name="bank_account_code_prefix">P1</field>
+        <field name="cash_account_code_prefix">P2</field>
+        <field name="transfer_account_code_prefix">P3</field>
+        <field name="currency_id" ref="base.EUR"/>
+    </record>
+
+</odoo>
