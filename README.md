@@ -23,6 +23,7 @@ addon | version | summary
 [fiscal_company_product](fiscal_company_product/) | 12.0.1.0.0 | Glue Module between CAE and Product modules
 [fiscal_company_sale](fiscal_company_sale/) | 12.0.1.0.0 | Glue Module between CAE and Sale modules
 [fiscal_company_sales_team](fiscal_company_sales_team/) | 12.0.1.0.1 | Glue Module between CAE and Sales Team modules
+[product_category_global_account_setting](product_category_global_account_setting/) | 12.0.1.0.1 | Propagate Accouting settings of product categories for all the companies
 
 [//]: # (end addons)
 
