@@ -14,6 +14,7 @@
     'post_init_hook': 'post_install_set_fiscal_company',
     'depends': [
         'base',
+        'technical_partner_access',
     ],
     'data': [
         'security/ir_module_category.xml',

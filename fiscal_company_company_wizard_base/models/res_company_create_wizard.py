@@ -32,7 +32,7 @@ class ResCompanyCreateWizard(models.TransientModel):
     def onchange_fiscal_type(self):
         domain_type_list = []
         if self.fiscal_type in ['normal', 'fiscal_mother']:
-            domain_type_list = ['normal']
+            domain_type_list = ['group']
         elif self.fiscal_type == 'fiscal_child':
             domain_type_list = ['fiscal_mother']
             self.vat = False
@@ -46,9 +46,26 @@ class ResCompanyCreateWizard(models.TransientModel):
     def _prepare_company(self):
         self.ensure_one()
         vals = super()._prepare_company()
-        vals.update({
-            'fiscal_type': self.fiscal_type,
-        })
         if self.fiscal_type == 'fiscal_child':
-            vals['fiscal_company_id'] = self.parent_company_id.id
+            # Poor hack, to avoid error when creating directly fiscal child
+            # company.
+            # In V12, if we try to create a new GRAP child company
+            # the system will try to recompute the value of the field
+            # account.voucher company_id. (related field) for a bad reason.
+            # TODO: VX: check if it is still mandatory.
+            vals.update({})
+        else:
+            vals.update({
+                'fiscal_type': self.fiscal_type,
+            })
         return vals
+
+    @api.multi
+    def _post_create_company(self):
+        self.ensure_one()
+        super()._post_create_company()
+        if self.fiscal_type == 'fiscal_child':
+            self.company_id.write({
+                "fiscal_type": self.fiscal_type,
+                "fiscal_company_id": self.parent_company_id.id,
+                })

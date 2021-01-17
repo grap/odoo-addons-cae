@@ -24,7 +24,9 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
         <field name="inherit_id" ref="base.view_company_tree"/>
         <field name="arch" type="xml">
             <xpath expr="//tree" position="attributes">
-                <attribute name="colors">brown: fiscal_type=='fiscal_mother'; blue: fiscal_type=='fiscal_child'; black: fiscal_type=='normal'</attribute>
+                <attribute name="decoration-info">fiscal_type=='fiscal_child'</attribute>
+                <attribute name="decoration-warning">fiscal_type=='fiscal_mother'</attribute>
+                <attribute name="decoration-it">fiscal_type=='group'</attribute>
             </xpath>
             <field name="sequence" position="attributes">
                 <attribute name="invisible">1</attribute>
@@ -43,9 +45,11 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
                 <page string="Fiscal Settings">
                     <group>
                         <field name="fiscal_type"/>
-                        <field name="fiscal_company_id"/>
+                        <field name="fiscal_company_id"
+                            attrs="{'invisible': [('fiscal_type', '!=', 'fiscal_child')]}"/>
                     </group>
-                    <field name="fiscal_child_ids" nolabel="1" />
+                    <field name="other_fiscal_child_ids" nolabel="1"
+                        attrs="{'invisible': [('other_fiscal_child_ids', '!=', False)]}"/>
                 </page>
             </notebook>
         </field>
