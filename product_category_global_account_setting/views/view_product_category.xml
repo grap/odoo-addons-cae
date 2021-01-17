@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2020-Today GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+
+<odoo>
+
+    <record id="view_product_category_tree" model="ir.ui.view">
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_list_view"/>
+        <field name="arch" type="xml">
+                <field name="display_name" position="after">
+                    <field name="global_property_account_expense_categ"/>
+                    <field name="global_property_account_income_categ"/>
+                </field>
+        </field>
+    </record>
+
+    <record id="view_product_category_form" model="ir.ui.view">
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="account.view_category_property_form"/>
+        <field name="arch" type="xml">
+            <group name="account_property" position="inside">
+
+                <group name="global_account_property" string="Global Account Properties" groups="account.group_account_manager" col="3">
+                    <field name="global_property_account_income_categ"/>
+                    <button name="propagate_global_account_properties_recursive_income" string="Apply recursively" type="object"/>
+
+                    <field name="global_property_account_expense_categ"/>
+                    <button name="propagate_global_account_properties_recursive_expense" string="Apply recursively" type="object"/>
+
+                </group>
+            </group>
+        </field>
+    </record>
+
+</odoo>
