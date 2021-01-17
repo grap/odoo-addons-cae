@@ -5,7 +5,7 @@
 
 {
     'name': 'CAE - Base',
-    'version': '12.0.1.1.0',
+    'version': '12.0.1.1.1',
     'category': 'CAE',
     'summary': 'Manage Cooperatives of Activities and Employment',
     'author': 'GRAP',
