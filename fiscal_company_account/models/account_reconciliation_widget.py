@@ -24,7 +24,6 @@ class AccountReconciliationWidget(models.AbstractModel):
     def _domain_move_lines_for_reconciliation(
             self, st_line, aml_accounts, partner_id, excluded_ids=None,
             search_str=False):
-        print("_domain_move_lines_for_reconciliation")
         domain = super()._domain_move_lines_for_reconciliation(
             st_line, aml_accounts, partner_id, excluded_ids=excluded_ids,
             search_str=search_str)
@@ -34,12 +33,7 @@ class AccountReconciliationWidget(models.AbstractModel):
     def _domain_move_lines_for_manual_reconciliation(
             self, account_id, partner_id=False, excluded_ids=None,
             search_str=False):
-        print("_domain_move_lines_for_manual_reconciliation::OVERLOADED")
         domain = super()._domain_move_lines_for_manual_reconciliation(
             account_id, partner_id=False, excluded_ids=None,
             search_str=search_str)
-        print("before %s" % domain)
-        res = self._set_domain_to_current_company(domain)
-        print("after %s" % res)
-
-        return res
+        return self._set_domain_to_current_company(domain)
