@@ -4,13 +4,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import models
-from ..decorator import switch_company
 
 
 class AccountJournal(models.Model):
-    _inherit = 'account.journal'
-
-    @switch_company
-    def search(self, args, offset=0, limit=0, order=None, count=False):
-        return super().search(
-            args, offset=offset, limit=limit, order=order, count=count)
+    _name = 'account.journal'
+    _inherit = ['account.journal', 'include.fiscal.company.search.mixin']

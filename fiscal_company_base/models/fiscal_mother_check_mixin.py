@@ -15,7 +15,7 @@ class FiscalMotherCheckMixin(models.AbstractModel):
     """
 
     _name = 'fiscal.mother.check.mixin'
-    _description = "Fiscal Mother Features Mixin"
+    _description = "Fiscal Mother Check Mixin"
 
     @api.constrains('company_id')
     def _check_fiscal_mother_company_id(self):
