@@ -22,9 +22,10 @@ class IncludeFiscalCompanySearchMixin(models.AbstractModel):
         ResCompany = self.env['res.company']
 
         for item in domain:
-            if isinstance(item, list)\
-                    or isinstance(item, tuple)\
-                    and item[0] == 'company_id':
+            if (
+                    isinstance(item, list)
+                    or isinstance(item, tuple)
+                    ) and item[0] == 'company_id':
                 if isinstance(item[2], list):
                     old_company_ids = [item[2]]
                 else:
@@ -51,7 +52,6 @@ class IncludeFiscalCompanySearchMixin(models.AbstractModel):
             self, args, offset=0, limit=None, order=None, count=False,
             access_rights_uid=None):
         new_args = self._include_fiscal_company_domain(args)
-        print(new_args)
         return super()._search(
             new_args, offset=offset, limit=limit, order=order, count=count,
             access_rights_uid=access_rights_uid)
