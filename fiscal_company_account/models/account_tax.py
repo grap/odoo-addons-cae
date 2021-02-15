@@ -4,18 +4,13 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, models
-from ..decorator import switch_company
 
 
 class AccountTax(models.Model):
-    _inherit = 'account.tax'
+    _name = 'account.tax'
+    _inherit = ['account.tax', 'include.fiscal.company.search.mixin']
 
-    @switch_company
-    def search(
-            self, args, offset=0, limit=None, order=None, count=False):
-        return super().search(
-            args, offset=offset, limit=limit, order=order, count=count)
-
+    # TODO, document this function
     @api.multi
     def filtered(self, func):
         if callable(func) and func.__code__.co_names == ('company_id',):
