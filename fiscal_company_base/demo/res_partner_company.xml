@@ -28,7 +28,7 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
     <record model="res.partner" id="partner_fiscal_mother">
         <field name="company_id" ref="company_fiscal_mother"/>
     </record>
-    
+
 <!-- Create fiscal child company 1 and partner associated -->
     <record model="res.partner" id="partner_fiscal_child_1">
         <field name="name">Your Child Company 1 (Service)</field>

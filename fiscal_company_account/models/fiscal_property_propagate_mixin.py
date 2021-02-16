@@ -79,7 +79,7 @@ class FiscalPropertyPropagateMixin(models.AbstractModel):
 
                 # Delete all property
                 domain = [
-                    ('res_id', '=', '%s,%s' % (self._name, obj.id)),
+                    ('res_id', '=', '{},{}'.format(self._name, obj.id)),
                     ('fields_id', '=', field.id),
                     ('company_id', 'in', company_ids)]
                 properties = IrProperty.search(domain)
@@ -90,7 +90,7 @@ class FiscalPropertyPropagateMixin(models.AbstractModel):
                     for company_id in company_ids:
                         IrProperty.create({
                             'name': property_name,
-                            'res_id': '%s,%s' % (self._name, obj.id),
+                            'res_id': '{},{}'.format(self._name, obj.id),
                             'value': property_value,
                             'fields_id': field.id,
                             'type': field.ttype,

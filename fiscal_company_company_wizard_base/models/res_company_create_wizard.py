@@ -6,8 +6,7 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
-from odoo.addons.fiscal_company_base.models.res_company import\
-    _RES_COMPANY_FISCAL_TYPE
+from odoo.addons.fiscal_company_base.models.res_company import _RES_COMPANY_FISCAL_TYPE
 
 
 class ResCompanyCreateWizard(models.TransientModel):
