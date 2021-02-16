@@ -10,11 +10,10 @@ _logger = logging.getLogger(__name__)
 
 
 class AccountChartTemplate(models.Model):
-    _inherit = 'account.chart.template'
+    _inherit = "account.chart.template"
 
     def load_for_current_company(self, sale_tax_rate, purchase_tax_rate):
-        res = super().load_for_current_company(
-            sale_tax_rate, purchase_tax_rate)
+        res = super().load_for_current_company(sale_tax_rate, purchase_tax_rate)
 
         # Create properties for all the categories
         # for all the new created accounts
@@ -26,5 +25,6 @@ class AccountChartTemplate(models.Model):
                 "global_property_account_income_categ",
             ]:
                 category._apply_global_account_property(
-                    self.env.user.company_id, field_name)
+                    self.env.user.company_id, field_name
+                )
         return res

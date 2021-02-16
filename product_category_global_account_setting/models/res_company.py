@@ -10,7 +10,7 @@ _logger = logging.getLogger(__name__)
 
 
 class ResCompany(models.Model):
-    _inherit = 'res.company'
+    _inherit = "res.company"
 
     @api.model
     def create(self, vals):
@@ -34,6 +34,8 @@ class ResCompany(models.Model):
         categories = ProductCategory.with_context(active_test=False).search([])
         for category in categories:
             category._apply_global_account_property(
-                self, "global_property_account_expense_categ")
+                self, "global_property_account_expense_categ"
+            )
             category._apply_global_account_property(
-                self, "global_property_account_income_categ")
+                self, "global_property_account_income_categ"
+            )
