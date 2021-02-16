@@ -25,7 +25,7 @@ class IncludeFiscalCompanySearchMixin(models.AbstractModel):
             if (
                     isinstance(item, list)
                     or isinstance(item, tuple)
-                    ) and item[0] == 'company_id':
+            ) and item[0] == 'company_id':
                 if isinstance(item[2], list):
                     old_company_ids = item[2]
                 else:

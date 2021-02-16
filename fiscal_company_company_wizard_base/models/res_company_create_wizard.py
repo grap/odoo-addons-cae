@@ -67,4 +67,4 @@ class ResCompanyCreateWizard(models.TransientModel):
             self.company_id.write({
                 "fiscal_type": self.fiscal_type,
                 "fiscal_company_id": self.parent_company_id.id,
-                })
+            })

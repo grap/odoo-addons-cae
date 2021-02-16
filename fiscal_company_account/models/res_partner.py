@@ -65,7 +65,7 @@ class ResPartner(models.Model):
         return [("company_id", "in", [
             self.env.user.company_id.id,
             self.env.user.company_id.fiscal_company_id.id,
-            ])]
+        ])]
 
     def _compute_no_property_account_position_id(self):
         for partner in self:
