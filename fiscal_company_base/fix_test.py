@@ -13,7 +13,7 @@ _FIELD_LIST = [
 
 
 def fix_required_field(env, function):
-    """ Tests are failing on a database with some modules installed like 'mail'
+    """Tests are failing on a database with some modules installed like 'mail'
     because the load of the registry in TransactionCase seems to be bad.
     To be sure, run "print self.registry('res.partner')._defaults and see
     that the mandatory field 'notify_email' doesn't appear.
