@@ -7,7 +7,7 @@ from odoo import api, models
 
 
 class IncludeFiscalCompanySearchMixin(models.AbstractModel):
-    """ This abstract change the _search features for models.
+    """This abstract change the _search features for models.
 
     if a domain contain a ('company_id', '=', company_id)
     it will be replace by ('company_id', 'in', [company_id, fiscal_company_id])

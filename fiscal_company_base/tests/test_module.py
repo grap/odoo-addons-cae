@@ -33,7 +33,7 @@ class TestModule(TransactionCase):
     # Test Section
     def test_01_res_users_propagate_access_right_create(self):
         """[Functional Test] A new user with access to mother company must
-         have access to child companies"""
+        have access to child companies"""
         new_user = self.ResUsers.sudo(user=self.user_accountant).create(
             {
                 "name": "new_user",
@@ -131,7 +131,7 @@ class TestModule(TransactionCase):
 
     def test_07_res_company_write_child_propagate_success(self):
         """[Contraint Test] Create and write a child company and check
-         propagation."""
+        propagation."""
         new_company = self.ResCompany.sudo(user=self.user_accountant).create(
             {"name": "new_company", "fiscal_type": "normal"}
         )

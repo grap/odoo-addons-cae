@@ -8,7 +8,7 @@ from odoo.exceptions import ValidationError
 
 
 class FiscalMotherCheckMixin(models.AbstractModel):
-    """ This abstract block the possibility for a model to have
+    """This abstract block the possibility for a model to have
     items linked to a fiscal mother company.
     Note that you can only inherit from this abstract, if the current model
     has ```company_id``` and ```name``` fields defined.
