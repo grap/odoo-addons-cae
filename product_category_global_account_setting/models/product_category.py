@@ -109,7 +109,7 @@ class ProductCategory(models.Model):
                 _logger.debug(
                     "{} - Account {} : Property updated.".format(
                         base_message, account_code)
-                    )
+                )
             else:
                 # Create a new property
                 IrProperty.create({
@@ -125,11 +125,11 @@ class ProductCategory(models.Model):
                 _logger.debug(
                     "{} - Account {} : Property created.".format(
                         base_message, account_code)
-                    )
+                )
 
         elif current_property:
             # Delete obsolete property
             current_property.unlink()
             _logger.debug(
                 "%s : Property deleted." % (base_message)
-                )
+            )

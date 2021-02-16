@@ -40,7 +40,7 @@ class TestModule(TransactionCase):
                 "name": name,
                 "user_type_id": user_type_id,
                 "company_id": company.id,
-                })
+            })
 
     def test_01_propagate_recursively(self):
         # Try to affect properties should fail

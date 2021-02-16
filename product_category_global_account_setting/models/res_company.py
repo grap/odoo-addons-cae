@@ -24,7 +24,7 @@ class ResCompany(models.Model):
         res = super().write(vals)
         if vals.get("fiscal_type") == "fiscal_child":
             for company in self:
-                self._apply_global_account_settings()
+                company._apply_global_account_settings()
         return res
 
     @api.multi
