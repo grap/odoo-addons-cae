@@ -12,13 +12,11 @@ class TestModule(TransactionCase):
     # Overload Section
     def setUp(self):
         super().setUp()
-        self.ProductProduct = self.env['product.product']
-        self.user_accountant = self.env.ref(
-            'fiscal_company_base.user_accountant')
-        self.user_worker = self.env.ref('fiscal_company_base.user_worker')
-        self.child_company = self.env.ref(
-            'fiscal_company_base.company_fiscal_child_1')
-        self.product_categ = self.env.ref('product.product_category_1')
+        self.ProductProduct = self.env["product.product"]
+        self.user_accountant = self.env.ref("fiscal_company_base.user_accountant")
+        self.user_worker = self.env.ref("fiscal_company_base.user_worker")
+        self.child_company = self.env.ref("fiscal_company_base.company_fiscal_child_1")
+        self.product_categ = self.env.ref("product.product_category_1")
 
     # Test Section
     def test_01_administrative_product_creation(self):
@@ -35,12 +33,12 @@ class TestModule(TransactionCase):
 
     def _create_administrative_product(self, user):
         product_vals = {
-            'name': 'Product Test',
-            'company_id': self.child_company.id,
-            'categ_id': self.product_categ.id,
-            'cae_administrative_ok': True,
+            "name": "Product Test",
+            "company_id": self.child_company.id,
+            "categ_id": self.product_categ.id,
+            "cae_administrative_ok": True,
         }
         user.company_id = self.child_company.id
         self.ProductProduct.sudo(user).with_context(
-            mail_create_nosubscribe=True,
-            mail_create_nolog=True).create(product_vals)
+            mail_create_nosubscribe=True, mail_create_nolog=True
+        ).create(product_vals)
