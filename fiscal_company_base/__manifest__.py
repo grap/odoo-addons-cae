@@ -21,11 +21,9 @@
         'security/res_groups.xml',
         'security/ir_rule.xml',
         'security/ir.model.access.csv',
-        'data/res_groups.xml',
         'views/view_res_company.xml',
     ],
     'demo': [
-        'demo/res_company.xml',
         'demo/res_partner_company.xml',
         'demo/res_partner_users.xml',
         'demo/res_partner.xml',

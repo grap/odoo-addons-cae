@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- pylint:disable=duplicate-xml-record-id -->
 <!--
 Copyright (C) 2015-Today GRAP (http://www.grap.coop)
 @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
@@ -8,8 +9,14 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
 <odoo>
 
 <!-- Updating base.main_company-->
+    <!--
+    Note, we set the main company as a french company to avoid the
+    installation of l10n_generic_coa if account is installad.
+    see addons/account/__init__.py
+    -->
     <record model="res.company" id="base.main_company">
         <field name="fiscal_company_id" ref="base.main_company" />
+        <field name="country_id" ref="base.fr"/>
     </record>
 
 <!-- Create fiscal mother company and partner associated -->

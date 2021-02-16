@@ -46,8 +46,8 @@ class ResCompany(models.Model):
     @api.constrains('fiscal_child_ids', 'fiscal_type')
     def _check_non_fiscal_childs(self):
         for company in self:
-            if (company.fiscal_type != 'fiscal_mother' and
-                    len(company.other_fiscal_child_ids)):
+            if (company.fiscal_type != 'fiscal_mother'
+                    and len(company.other_fiscal_child_ids)):
                 raise exceptions.ValidationError(_(
                     "Only CAE company can have Integrated Companies"))
 
@@ -56,14 +56,13 @@ class ResCompany(models.Model):
         for company in self:
             # skip special case of creation
             if company.fiscal_company_id:
-                if (company.fiscal_type in ('normal', 'fiscal_mother') and
-                        company.id != company.fiscal_company_id.id):
+                if (company.fiscal_type in ('normal', 'fiscal_mother')
+                        and company.id != company.fiscal_company_id.id):
                     raise exceptions.ValidationError(_(
                         "You can't select in the field fiscal company, an"
                         " other company for a non integrated company."))
-                elif (company.fiscal_type == 'fiscal_child' and
-                        company.fiscal_company_id.fiscal_type !=
-                        'fiscal_mother'):
+                elif (company.fiscal_type == 'fiscal_child'
+                        and company.fiscal_company_id.fiscal_type != 'fiscal_mother'):
                     raise exceptions.ValidationError(_(
                         "You should select in the field fiscal company, a"
                         " CAE company for a Integrated Company."))
