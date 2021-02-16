@@ -4,11 +4,11 @@
 
 
 _FIELD_LIST = [
-    ('res_partner', 'notify_email'),
-    ('res_partner', 'invoice_warn'),
-    ('res_partner', 'sale_warn'),
-    ('res_partner', 'picking_warn'),
-    ('res_partner', 'purchase_warn'),
+    ("res_partner", "notify_email"),
+    ("res_partner", "invoice_warn"),
+    ("res_partner", "sale_warn"),
+    ("res_partner", "picking_warn"),
+    ("res_partner", "purchase_warn"),
 ]
 
 
@@ -24,14 +24,20 @@ def fix_required_field(env, function):
         'SET' at the end of the test tearDown(self)
     """
     for table_name, field_name in _FIELD_LIST:
-        env.cr.execute("""
+        env.cr.execute(
+            """
             SELECT A.ATTNAME
                 FROM PG_ATTRIBUTE A, PG_CLASS C
                 WHERE A.ATTRELID = C.OID
                 AND A.ATTNAME = '%s'
-                AND C.relname= '%s';""" % (field_name, table_name))
+                AND C.relname= '%s';"""
+            % (field_name, table_name)
+        )
         if env.cr.fetchone():
-            env.cr.execute("""
+            env.cr.execute(
+                """
                 ALTER TABLE %s
                     ALTER COLUMN %s
-                    %s NOT NULL;""" % (table_name, field_name, function))
+                    %s NOT NULL;"""
+                % (table_name, field_name, function)
+            )

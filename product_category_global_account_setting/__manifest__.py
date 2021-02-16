@@ -11,16 +11,8 @@
     "author": "GRAP",
     "website": "http://www.grap.coop",
     "license": "AGPL-3",
-    "depends": [
-        "stock_account",
-        "fiscal_company_account",
-    ],
-    "data": [
-        "views/view_product_category.xml",
-    ],
-    "demo": [
-        "demo/account_chart_template.xml",
-        "demo/account_account_template.xml",
-    ],
+    "depends": ["stock_account", "fiscal_company_account"],
+    "data": ["views/view_product_category.xml"],
+    "demo": ["demo/account_chart_template.xml", "demo/account_account_template.xml"],
     "installable": True,
 }

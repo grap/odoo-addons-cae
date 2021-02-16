@@ -13,47 +13,58 @@ class TestPropagateProperties(TransactionCase):
 
     def setUp(self):
         super().setUp()
-        self.ResCompany = self.env['res.company']
-        self.ResPartner = self.env['res.partner']
-        self.ProductTemplate = self.env['product.template']
-        self.ProductProduct = self.env['product.product']
+        self.ResCompany = self.env["res.company"]
+        self.ResPartner = self.env["res.partner"]
+        self.ProductTemplate = self.env["product.template"]
+        self.ProductProduct = self.env["product.product"]
 
-        self.mother_company = self.env.ref(
-            'fiscal_company_base.company_fiscal_mother')
-        self.child_company = self.env.ref(
-            'fiscal_company_base.company_fiscal_child_1')
+        self.mother_company = self.env.ref("fiscal_company_base.company_fiscal_mother")
+        self.child_company = self.env.ref("fiscal_company_base.company_fiscal_child_1")
         self.account_expense_cae = self.env.ref(
-            'fiscal_company_account.account_expense_cae')
+            "fiscal_company_account.account_expense_cae"
+        )
         self.account_income_cae = self.env.ref(
-            'fiscal_company_account.account_income_cae')
+            "fiscal_company_account.account_income_cae"
+        )
         self.account_payable_cae = self.env.ref(
-            'fiscal_company_account.account_payable_cae')
+            "fiscal_company_account.account_payable_cae"
+        )
         self.account_receivable_cae = self.env.ref(
-            'fiscal_company_account.account_receivable_cae')
+            "fiscal_company_account.account_receivable_cae"
+        )
         self.account_custom_payable_cae = self.env.ref(
-            'fiscal_company_account.account_custom_payable_cae')
+            "fiscal_company_account.account_custom_payable_cae"
+        )
         self.account_custom_receivable_cae = self.env.ref(
-            'fiscal_company_account.account_custom_receivable_cae')
+            "fiscal_company_account.account_custom_receivable_cae"
+        )
 
-        self.accountant = self.env.ref('fiscal_company_base.user_accountant')
+        self.accountant = self.env.ref("fiscal_company_base.user_accountant")
 
         # Object with demo accounting properties
         self.product_template_mother_property = self.env.ref(
-            'fiscal_company_account.product_template_mother_property')
+            "fiscal_company_account.product_template_mother_property"
+        )
         self.product_product_mother_property = self.env.ref(
-            'fiscal_company_account.product_product_mother_property')
+            "fiscal_company_account.product_product_mother_property"
+        )
         self.partner_mother_property = self.env.ref(
-            'fiscal_company_account.partner_mother_property')
+            "fiscal_company_account.partner_mother_property"
+        )
 
         # Object without demo accounting properties
         self.product_template_mother = self.env.ref(
-            'fiscal_company_product.product_template_mother')
+            "fiscal_company_product.product_template_mother"
+        )
         self.product_template_child = self.env.ref(
-            'fiscal_company_product.product_template_child')
+            "fiscal_company_product.product_template_child"
+        )
         self.product_product_mother = self.env.ref(
-            'fiscal_company_product.product_product_mother')
+            "fiscal_company_product.product_product_mother"
+        )
         self.product_product_child = self.env.ref(
-            'fiscal_company_product.product_product_child')
+            "fiscal_company_product.product_product_child"
+        )
         # fix_required_field(self, 'DROP')
 
     # def tearDown(self):
@@ -66,82 +77,89 @@ class TestPropagateProperties(TransactionCase):
         """Create a new child company must propagate properties"""
 
         # Create a new Child company
-        child_company = self.ResCompany.create({
-            'name': 'Your Test Child Company',
-            'fiscal_type': 'fiscal_child',
-            'fiscal_company_id': self.mother_company.id,
-            'parent_id': self.mother_company.id,
-        })
+        child_company = self.ResCompany.create(
+            {
+                "name": "Your Test Child Company",
+                "fiscal_type": "fiscal_child",
+                "fiscal_company_id": self.mother_company.id,
+                "parent_id": self.mother_company.id,
+            }
+        )
 
         # Change current company and load objects with the new context
         self.env.user.company_id = child_company.id
 
         # Check if product properties has been propagated for the new company
-        product = self.ProductProduct.browse(
-            [self.product_product_mother_property.id])
+        product = self.ProductProduct.browse([self.product_product_mother_property.id])
         self.assertEqual(
             product.property_account_expense_id.id,
             self.account_expense_cae.id,
             "Create a new child company must set expense account property"
-            " of the mother company to the new child company for product.")
+            " of the mother company to the new child company for product.",
+        )
 
         self.assertEqual(
             product.property_account_income_id.id,
             self.account_income_cae.id,
             "Create a new child company must set income account property"
-            " of the mother company to the new child company for product.")
+            " of the mother company to the new child company for product.",
+        )
 
         # Check if template properties has been propagated for the new company
         template = self.ProductTemplate.browse(
-            [self.product_template_mother_property.id])
+            [self.product_template_mother_property.id]
+        )
         self.assertEqual(
             template.property_account_expense_id.id,
             self.account_expense_cae.id,
             "Create a new child company must set expense account property"
-            " of the mother company to the new child company for template.")
+            " of the mother company to the new child company for template.",
+        )
 
         self.assertEqual(
             template.property_account_income_id.id,
             self.account_income_cae.id,
             "Create a new child company must set income account property"
-            " of the mother company to the new child company for template.")
+            " of the mother company to the new child company for template.",
+        )
 
         # Check if custom partner properties has been propagated for the new
         # company
-        partner = self.ResPartner.browse(
-            [self.partner_mother_property.id])
+        partner = self.ResPartner.browse([self.partner_mother_property.id])
         self.assertEqual(
             partner.property_account_payable_id.id,
             self.account_custom_payable_cae.id,
             "Create a new child company must set custom payable account"
             " property of the mother company to the new child company for"
-            " partner.")
+            " partner.",
+        )
 
         self.assertEqual(
             partner.property_account_receivable_id.id,
             self.account_custom_receivable_cae.id,
             "Create a new child company must set custom receivable account"
             " property of the mother company to the new child company for"
-            " partner.")
+            " partner.",
+        )
 
     def test_03_template_mother_propagate_fiscal_property_to_all(self):
         """Change a template property of a fiscal company must change the value
         for all other companies if the template belong to the
         fiscal mother company"""
 
-        template_id = self.env.ref(
-            'fiscal_company_product.product_template_mother').id
+        template_id = self.env.ref("fiscal_company_product.product_template_mother").id
 
-        ProductTemplateAccountant = self.env['product.template'].sudo(
-            self.accountant)
+        ProductTemplateAccountant = self.env["product.template"].sudo(self.accountant)
         self.accountant.company_id = self.mother_company.id
 
         templateInMotherCompany = ProductTemplateAccountant.browse(template_id)
 
-        templateInMotherCompany.write({
-            'property_account_expense_id': self.account_expense_cae.id,
-            'property_account_income_id': self.account_income_cae.id,
-        })
+        templateInMotherCompany.write(
+            {
+                "property_account_expense_id": self.account_expense_cae.id,
+                "property_account_income_id": self.account_income_cae.id,
+            }
+        )
 
         # Change current company and load template with the new context
         self.accountant.company_id = self.child_company.id
@@ -154,13 +172,15 @@ class TestPropagateProperties(TransactionCase):
             templateInChildCompany.property_account_expense_id.id,
             self.account_expense_cae.id,
             "Change an expense property for a template in a mother company"
-            " must change the value for all the other fiscal company.")
+            " must change the value for all the other fiscal company.",
+        )
 
         self.assertEqual(
             templateInChildCompany.property_account_income_id.id,
             self.account_income_cae.id,
             "Change an income property for a template in a mother company"
-            " must change the value for all the other fiscal company.")
+            " must change the value for all the other fiscal company.",
+        )
 
     def test_04_template_child_propagate_fiscal_property_to_all(self):
         """Change a template property of a fiscal company must not change the
@@ -170,28 +190,31 @@ class TestPropagateProperties(TransactionCase):
         # Change current company
         self.env.user.company_id = self.child_company.id
 
-        self.product_template_child.write({
-            'property_account_expense_id': self.account_expense_cae.id,
-            'property_account_income_id': self.account_income_cae.id,
-        })
+        self.product_template_child.write(
+            {
+                "property_account_expense_id": self.account_expense_cae.id,
+                "property_account_income_id": self.account_income_cae.id,
+            }
+        )
 
         # Change current company and load template with the new context
         self.env.user.company_id = self.mother_company.id
-        template = self.ProductTemplate.browse(
-            [self.product_template_child.id])
+        template = self.ProductTemplate.browse([self.product_template_child.id])
 
         # Check if properties has not been propagated to the other company
         self.assertNotEqual(
             template.property_account_expense_id.id,
             self.account_expense_cae.id,
             "Change an expense property for a template in a child company"
-            " must change the value for all the other fiscal company.")
+            " must change the value for all the other fiscal company.",
+        )
 
         self.assertNotEqual(
             template.property_account_income_id.id,
             self.account_income_cae.id,
             "Change an income property for a template in a child company"
-            " must not change the value for all the other fiscal company.")
+            " must not change the value for all the other fiscal company.",
+        )
 
     def test_05_product_mother_propagate_fiscal_property_to_all(self):
         """Change a product property of a fiscal company must change the value
@@ -199,20 +222,22 @@ class TestPropagateProperties(TransactionCase):
         fiscal mother company"""
 
         product_id = self.env.ref(
-            'fiscal_company_account.product_product_mother_property').id
+            "fiscal_company_account.product_product_mother_property"
+        ).id
 
-        ProductProductAccountant = self.env['product.product'].sudo(
-            self.accountant)
+        ProductProductAccountant = self.env["product.product"].sudo(self.accountant)
 
         # Change current company
         self.accountant.company_id = self.mother_company.id
 
         productInMotherCompany = ProductProductAccountant.browse(product_id)
 
-        productInMotherCompany.write({
-            'property_account_expense_id': self.account_expense_cae.id,
-            'property_account_income_id': self.account_income_cae.id,
-        })
+        productInMotherCompany.write(
+            {
+                "property_account_expense_id": self.account_expense_cae.id,
+                "property_account_income_id": self.account_income_cae.id,
+            }
+        )
 
         # Change current company and load template with the new context
         self.accountant.company_id = self.child_company.id
@@ -225,13 +250,15 @@ class TestPropagateProperties(TransactionCase):
             productInChildCompany.property_account_expense_id.id,
             self.account_expense_cae.id,
             "Change an expense property for a product in a mother company"
-            " must change the value for all the other fiscal company.")
+            " must change the value for all the other fiscal company.",
+        )
 
         self.assertEqual(
             productInChildCompany.property_account_income_id.id,
             self.account_income_cae.id,
             "Change an income property for a product in a mother company"
-            " must change the value for all the other fiscal company.")
+            " must change the value for all the other fiscal company.",
+        )
 
     def test_06_product_child_propagate_fiscal_property_to_all(self):
         """Change a product property of a fiscal company must not change the
@@ -241,10 +268,12 @@ class TestPropagateProperties(TransactionCase):
         # Change current company
         self.env.user.company_id = self.child_company.id
 
-        self.product_product_child.write({
-            'property_account_expense_id': self.account_expense_cae.id,
-            'property_account_income_id': self.account_income_cae.id,
-        })
+        self.product_product_child.write(
+            {
+                "property_account_expense_id": self.account_expense_cae.id,
+                "property_account_income_id": self.account_income_cae.id,
+            }
+        )
 
         # Change current company and load product with the new context
         self.env.user.company_id = self.mother_company.id
@@ -255,10 +284,12 @@ class TestPropagateProperties(TransactionCase):
             product.property_account_expense_id.id,
             self.account_expense_cae.id,
             "Change an expense property for a product in a child company"
-            " must change the value for all the other fiscal company.")
+            " must change the value for all the other fiscal company.",
+        )
 
         self.assertNotEqual(
             product.property_account_income_id.id,
             self.account_income_cae.id,
             "Change an income property for a product in a child company"
-            " must not change the value for all the other fiscal company.")
+            " must not change the value for all the other fiscal company.",
+        )

@@ -6,9 +6,9 @@ from odoo import fields, models
 
 
 class AccountPayment(models.Model):
-    _name = 'account.payment'
-    _inherit = ['account.payment', 'fiscal.mother.check.mixin']
+    _name = "account.payment"
+    _inherit = ["account.payment", "fiscal.mother.check.mixin"]
 
     company_id = fields.Many2one(
-        related=False,
-        default=lambda self: self.env.user.company_id)
+        related=False, default=lambda self: self.env.user.company_id
+    )

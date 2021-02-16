@@ -6,7 +6,7 @@ from odoo import fields, models
 
 
 class AccountBankStatement(models.Model):
-    _name = 'account.bank.statement'
-    _inherit = ['account.bank.statement', 'fiscal.mother.check.mixin']
+    _name = "account.bank.statement"
+    _inherit = ["account.bank.statement", "fiscal.mother.check.mixin"]
 
     company_id = fields.Many2one(related=False)

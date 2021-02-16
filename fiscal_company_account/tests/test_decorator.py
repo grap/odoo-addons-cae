@@ -13,14 +13,11 @@ class TestDecorator(TransactionCase):
 
     def setUp(self):
         super().setUp()
-        self.AccountAccount = self.env['account.account']
-        self.AccountJournal = self.env['account.journal']
-        self.user_accountant = self.env.ref(
-            'fiscal_company_base.user_accountant')
-        self.child_company = self.env.ref(
-            'fiscal_company_base.company_fiscal_child_1')
-        self.mother_company = self.env.ref(
-            'fiscal_company_base.company_fiscal_mother')
+        self.AccountAccount = self.env["account.account"]
+        self.AccountJournal = self.env["account.journal"]
+        self.user_accountant = self.env.ref("fiscal_company_base.user_accountant")
+        self.child_company = self.env.ref("fiscal_company_base.company_fiscal_child_1")
+        self.mother_company = self.env.ref("fiscal_company_base.company_fiscal_mother")
         # fix_required_field(self, 'DROP')
 
     # def tearDown(self):
@@ -34,11 +31,14 @@ class TestDecorator(TransactionCase):
         accounts of the mother company"""
         self.user_accountant.company_id = self.child_company.id
         res = self.AccountAccount.sudo(self.user_accountant).search(
-            [('company_id', '=', self.mother_company.id)])
+            [("company_id", "=", self.mother_company.id)]
+        )
         self.assertNotEqual(
-            len(res), 0,
+            len(res),
+            0,
             "Searching accounts in a fiscal child company should return"
-            " accounts of the mother company")
+            " accounts of the mother company",
+        )
 
     # Test Section
     def test_02_decorator_account_journal(self):
@@ -46,8 +46,11 @@ class TestDecorator(TransactionCase):
         journals of the mother company"""
         self.user_accountant.company_id = self.child_company.id
         res = self.AccountJournal.sudo(self.user_accountant).search(
-            [('company_id', '=', self.mother_company.id)])
+            [("company_id", "=", self.mother_company.id)]
+        )
         self.assertNotEqual(
-            len(res), 0,
+            len(res),
+            0,
             "Searching accounts in a fiscal child company should return"
-            " accounts of the mother company")
+            " accounts of the mother company",
+        )

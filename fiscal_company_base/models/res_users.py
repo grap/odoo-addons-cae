@@ -7,20 +7,20 @@ from odoo import api, models
 
 
 class ResUsers(models.Model):
-    _inherit = 'res.users'
+    _inherit = "res.users"
 
     # Overload Section
     @api.model
     def create(self, vals):
         user = super().create(vals)
-        if vals.get('company_ids', False):
+        if vals.get("company_ids", False):
             user._propagate_access_right()
         return user
 
     @api.multi
     def write(self, vals):
         res = super().write(vals)
-        if vals.get('company_ids', False):
+        if vals.get("company_ids", False):
             self._propagate_access_right()
         return res
 
@@ -32,9 +32,11 @@ class ResUsers(models.Model):
         new_company_ids = []
         for user in self:
             for mother_company in user.company_ids.filtered(
-                    lambda x: x.fiscal_type == 'fiscal_mother'):
+                lambda x: x.fiscal_type == "fiscal_mother"
+            ):
                 all_ids = mother_company.fiscal_child_ids.ids
                 existing_ids = user.company_ids.ids
-                new_company_ids += (list(set(all_ids) - set(existing_ids)))
-            super(ResUsers, user).write({
-                'company_ids': [(4, id) for id in list(set(new_company_ids))]})
+                new_company_ids += list(set(all_ids) - set(existing_ids))
+            super(ResUsers, user).write(
+                {"company_ids": [(4, id) for id in list(set(new_company_ids))]}
+            )

@@ -7,7 +7,10 @@ def post_install_set_fiscal_company(cr, registry):
     """
     with api.Environment.manage():
         env = api.Environment(cr, SUPERUSER_ID, {})
-        companies = env["res.company"].with_context(
-            active_test=False).search([("fiscal_type", "!=", "fiscal_child")])
+        companies = (
+            env["res.company"]
+            .with_context(active_test=False)
+            .search([("fiscal_type", "!=", "fiscal_child")])
+        )
         for company in companies:
             company.fiscal_company_id = company.id

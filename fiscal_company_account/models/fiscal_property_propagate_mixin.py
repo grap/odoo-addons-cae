@@ -8,7 +8,7 @@ from odoo import api, models
 
 
 class FiscalPropertyPropagateMixin(models.AbstractModel):
-    _name = 'fiscal.property.propagate.mixin'
+    _name = "fiscal.property.propagate.mixin"
     _description = "Fiscal Property Propagation Features Mixin"
 
     @api.model
@@ -46,53 +46,53 @@ class FiscalPropertyPropagateMixin(models.AbstractModel):
         Propagate a property of objects of for all fiscal
         childs of a mother company
         """
-        IrModelFields = self.env['ir.model.fields']
-        IrProperty = self.env['ir.property']
-        company_id = self.env.context.get('force_company', False)
+        IrModelFields = self.env["ir.model.fields"]
+        IrProperty = self.env["ir.property"]
+        company_id = self.env.context.get("force_company", False)
         if company_id:
-            current_company = self.env['res.company'].browse(company_id)
+            current_company = self.env["res.company"].browse(company_id)
         else:
             current_company = self.env.user.company_id
 
-        if current_company.fiscal_type not in\
-                ('fiscal_child', 'fiscal_mother'):
+        if current_company.fiscal_type not in ("fiscal_child", "fiscal_mother"):
             return True
 
         for obj in self:
             property_name_list = [
-                x for x in obj._fiscal_property_propagation_list()
-                if x in vals]
+                x for x in obj._fiscal_property_propagation_list() if x in vals
+            ]
             for property_name in property_name_list:
                 property_value = vals[property_name]
 
                 # Get fields information
-                field = IrModelFields.search([
-                    ('model', '=', self._name),
-                    ('name', '=', property_name),
-                ])[0]
+                field = IrModelFields.search(
+                    [("model", "=", self._name), ("name", "=", property_name)]
+                )[0]
 
                 # Get all companies and remove the current company which
                 # property has been just written
-                company_ids =\
-                    current_company.fiscal_company_id.fiscal_child_ids.ids
+                company_ids = current_company.fiscal_company_id.fiscal_child_ids.ids
                 company_ids.remove(current_company.id)
 
                 # Delete all property
                 domain = [
-                    ('res_id', '=', '{},{}'.format(self._name, obj.id)),
-                    ('fields_id', '=', field.id),
-                    ('company_id', 'in', company_ids)]
+                    ("res_id", "=", "{},{}".format(self._name, obj.id)),
+                    ("fields_id", "=", field.id),
+                    ("company_id", "in", company_ids),
+                ]
                 properties = IrProperty.search(domain)
                 properties.unlink()
 
                 # Create property for all fiscal childs
                 if property_value:
                     for company_id in company_ids:
-                        IrProperty.create({
-                            'name': property_name,
-                            'res_id': '{},{}'.format(self._name, obj.id),
-                            'value': property_value,
-                            'fields_id': field.id,
-                            'type': field.ttype,
-                            'company_id': company_id,
-                        })
+                        IrProperty.create(
+                            {
+                                "name": property_name,
+                                "res_id": "{},{}".format(self._name, obj.id),
+                                "value": property_value,
+                                "fields_id": field.id,
+                                "type": field.ttype,
+                                "company_id": company_id,
+                            }
+                        )

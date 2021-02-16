@@ -7,15 +7,15 @@ from odoo import api, fields, models
 
 
 class ResPartner(models.Model):
-    _name = 'res.partner'
-    _inherit = ['res.partner', 'fiscal.property.propagate.mixin']
+    _name = "res.partner"
+    _inherit = ["res.partner", "fiscal.property.propagate.mixin"]
 
     _FISCAL_PROPERTY_LIST = [
-        'property_account_position_id',
-        'property_account_payable_id',
-        'property_account_receivable_id',
-        'property_payment_term_id',
-        'property_supplier_payment_term_id',
+        "property_account_position_id",
+        "property_account_payable_id",
+        "property_account_receivable_id",
+        "property_payment_term_id",
+        "property_supplier_payment_term_id",
     ]
 
     @api.model
@@ -29,7 +29,7 @@ class ResPartner(models.Model):
         res = super()._fiscal_property_propagation_list()
         # Propagation only for object that belong to the fiscal_mother
         # company
-        if self.company_id.fiscal_type == 'fiscal_mother':
+        if self.company_id.fiscal_type == "fiscal_mother":
             res = res + self._FISCAL_PROPERTY_LIST
         return res
 
@@ -48,10 +48,13 @@ class ResPartner(models.Model):
     def create(self, vals):
         res = super().create(vals)
         if "no_property_account_position_id" in vals.keys():
-            res.write({
-                "property_account_position_id":
-                vals["no_property_account_position_id"],
-            })
+            res.write(
+                {
+                    "property_account_position_id": vals[
+                        "no_property_account_position_id"
+                    ]
+                }
+            )
         return res
 
     no_property_account_position_id = fields.Many2one(
@@ -59,21 +62,31 @@ class ResPartner(models.Model):
         comodel_name="account.fiscal.position",
         domain=lambda x: x._domain_no_property_account_position_id(),
         compute="_compute_no_property_account_position_id",
-        inverse="_inverse_no_property_account_position_id")
+        inverse="_inverse_no_property_account_position_id",
+    )
 
     def _domain_no_property_account_position_id(self):
-        return [("company_id", "in", [
-            self.env.user.company_id.id,
-            self.env.user.company_id.fiscal_company_id.id,
-        ])]
+        return [
+            (
+                "company_id",
+                "in",
+                [
+                    self.env.user.company_id.id,
+                    self.env.user.company_id.fiscal_company_id.id,
+                ],
+            )
+        ]
 
     def _compute_no_property_account_position_id(self):
         for partner in self:
-            partner.no_property_account_position_id =\
+            partner.no_property_account_position_id = (
                 partner.property_account_position_id
+            )
 
     def _inverse_no_property_account_position_id(self):
         for partner in self:
-            partner.property_account_position_id =\
+            partner.property_account_position_id = (
                 partner.no_property_account_position_id
+            )
+
     # </dirty Hack>
