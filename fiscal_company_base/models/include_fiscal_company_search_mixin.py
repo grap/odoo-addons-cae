@@ -27,9 +27,9 @@ class IncludeFiscalCompanySearchMixin(models.AbstractModel):
                     or isinstance(item, tuple)
                     ) and item[0] == 'company_id':
                 if isinstance(item[2], list):
-                    old_company_ids = [item[2]]
-                else:
                     old_company_ids = item[2]
+                else:
+                    old_company_ids = [item[2]]
 
                 new_company_ids = ResCompany.browse(
                     old_company_ids).mapped('fiscal_company_id').ids
