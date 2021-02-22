@@ -7,5 +7,5 @@ from odoo import models
 
 
 class AccountJournal(models.Model):
-    _name = 'account.journal'
-    _inherit = ['account.journal', 'include.fiscal.company.search.mixin']
+    _name = "account.journal"
+    _inherit = ["account.journal", "include.fiscal.company.search.mixin"]

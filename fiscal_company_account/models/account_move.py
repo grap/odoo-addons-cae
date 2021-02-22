@@ -7,11 +7,12 @@ from odoo import fields, models
 
 
 class AccountMove(models.Model):
-    _name = 'account.move'
-    _inherit = ['account.move', 'fiscal.mother.check.mixin']
+    _name = "account.move"
+    _inherit = ["account.move", "fiscal.mother.check.mixin"]
 
     company_id = fields.Many2one(
-        related=False, default=lambda x: x._default_company_id())
+        related=False, default=lambda x: x._default_company_id()
+    )
 
     def _default_company_id(self):
         if self.env.context.get("force_company", False):

@@ -6,12 +6,12 @@ from odoo import api, models
 
 
 class PosConfig(models.Model):
-    _inherit = 'pos.config'
+    _inherit = "pos.config"
 
-    @api.constrains('company_id', 'invoice_journal_id')
+    @api.constrains("company_id", "invoice_journal_id")
     def _check_company_invoice_journal(self):
         return True
 
-    @api.constrains('company_id', 'journal_id')
+    @api.constrains("company_id", "journal_id")
     def _check_company_journal(self):
         return True
