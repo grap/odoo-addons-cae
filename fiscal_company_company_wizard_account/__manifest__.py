@@ -4,7 +4,7 @@
 
 {
     "name": "CAE - Company Wizard - Account",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.1.0",
     "category": "CAE",
     "summary": "Glue Module between CAE and Company Wizard - Account modules",
     "author": "GRAP",
