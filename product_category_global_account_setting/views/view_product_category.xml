@@ -26,11 +26,7 @@ Copyright (C) 2020-Today GRAP (http://www.grap.coop)
 
                 <group name="global_account_property" string="Global Account Properties" groups="account.group_account_manager" col="3">
                     <field name="global_property_account_income_categ"/>
-                    <button name="propagate_global_account_properties_recursive_income" string="Apply recursively" type="object"/>
-
                     <field name="global_property_account_expense_categ"/>
-                    <button name="propagate_global_account_properties_recursive_expense" string="Apply recursively" type="object"/>
-
                 </group>
             </group>
         </field>
