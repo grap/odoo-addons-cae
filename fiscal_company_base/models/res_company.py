@@ -15,7 +15,6 @@ _RES_COMPANY_FISCAL_TYPE = [
 
 class ResCompany(models.Model):
     _inherit = "res.company"
-    _order = "fiscal_company_id, fiscal_type desc, name"
 
     # Columns Section
     fiscal_type = fields.Selection(
