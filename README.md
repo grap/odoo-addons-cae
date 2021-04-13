@@ -16,7 +16,7 @@ Available addons
 addon | version | summary
 --- | --- | ---
 [fiscal_company_account](fiscal_company_account/) | 12.0.1.1.0 | Glue Module between CAE and Account modules
-[fiscal_company_base](fiscal_company_base/) | 12.0.1.2.0 | Manage Cooperatives of Activities and Employment
+[fiscal_company_base](fiscal_company_base/) | 12.0.1.2.1 | Manage Cooperatives of Activities and Employment
 [fiscal_company_company_wizard_account](fiscal_company_company_wizard_account/) | 12.0.1.1.0 | Glue Module between CAE and Company Wizard - Account modules
 [fiscal_company_company_wizard_base](fiscal_company_company_wizard_base/) | 12.0.1.1.0 | Glue Module between CAE and Company Wizard - Base modules
 [fiscal_company_point_of_sale](fiscal_company_point_of_sale/) | 12.0.1.2.0 | Glue Module between CAE and Point of Sale modules
