@@ -8,11 +8,19 @@ from odoo import api, models
 
 class AccountTax(models.Model):
     _name = "account.tax"
-    _inherit = ["account.tax", "include.fiscal.company.search.mixin"]
+    _inherit = [
+        "account.tax",
+        "include.fiscal.company.search.mixin",
+        "fiscal.child.check.mixin",
+    ]
 
-    # TODO, document this function
     @api.multi
     def filtered(self, func):
+        # a lot of function in Odoo are filtering taxes by the current company
+        # for exemple in 'addons/account/models/account_invoice.py#L1809'
+        # In our CAE case, we replace the current company by the fiscal one.
+
+        # TODO, improve that ugly code.
         if callable(func) and func.__code__.co_names == ("company_id",):
             company = self.env.user.company_id.fiscal_company_id
             return super().filtered(lambda x: x.company_id == company)
