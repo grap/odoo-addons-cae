@@ -21,7 +21,7 @@ class AccountTax(models.Model):
         # In our CAE case, we replace the current company by the fiscal one.
 
         # TODO, improve that ugly code.
-        if callable(func) and func.__code__.co_names == ("company_id",):
+        if callable(func) and "company_id" in func.__code__.co_names:
             company = self.env.user.company_id.fiscal_company_id
             return super().filtered(lambda x: x.company_id == company)
         return super().filtered(func)
