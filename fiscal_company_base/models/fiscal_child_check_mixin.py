@@ -19,7 +19,9 @@ class FiscalChildCheckMixin(models.AbstractModel):
 
     @api.constrains("company_id")
     def _check_fiscal_child_company_id(self):
-        bad_items = self.filtered(lambda x: x.company_id.fiscal_type == "fiscal_child")
+        bad_items = self.with_context(dont_change_filter=True).filtered(
+            lambda x: x.company_id.fiscal_type == "fiscal_child"
+        )
         if bad_items:
             raise ValidationError(
                 _(
