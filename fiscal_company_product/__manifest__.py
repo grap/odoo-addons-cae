@@ -8,7 +8,7 @@
     "category": "CAE",
     "summary": "Glue Module between CAE and Product modules",
     "author": "GRAP",
-    "website": "http://www.grap.coop",
+    "website": "https://github.com/grap/odoo-addons-cae",
     "license": "AGPL-3",
     "depends": ["fiscal_company_base", "product"],
     "data": [
