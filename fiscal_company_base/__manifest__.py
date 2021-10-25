@@ -9,7 +9,7 @@
     "category": "CAE",
     "summary": "Manage Cooperatives of Activities and Employment",
     "author": "GRAP",
-    "website": "http://www.grap.coop",
+    "website": "https://github.com/grap/odoo-addons-cae",
     "license": "AGPL-3",
     "post_init_hook": "post_install_set_fiscal_company",
     "depends": ["base", "technical_partner_access"],

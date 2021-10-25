@@ -8,7 +8,7 @@
     "category": "CAE",
     "summary": "Glue Module between CAE and Company Wizard - Account modules",
     "author": "GRAP",
-    "website": "http://www.grap.coop",
+    "website": "https://github.com/grap/odoo-addons-cae",
     "license": "AGPL-3",
     "depends": ["fiscal_company_account", "company_wizard_account"],
     "installable": True,
