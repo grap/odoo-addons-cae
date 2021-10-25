@@ -9,7 +9,7 @@
     " for all the companies",
     "category": "Accounting",
     "author": "GRAP",
-    "website": "http://www.grap.coop",
+    "website": "https://github.com/grap/odoo-addons-cae",
     "license": "AGPL-3",
     "depends": ["stock_account", "fiscal_company_account"],
     "data": ["views/view_product_category.xml"],
