@@ -8,7 +8,7 @@
     "category": "CAE",
     "summary": "Glue Module between CAE and Point of Sale modules",
     "author": "GRAP",
-    "website": "http://www.grap.coop",
+    "website": "https://github.com/grap/odoo-addons-cae",
     "license": "AGPL-3",
     "depends": ["fiscal_company_base", "point_of_sale"],
     "installable": True,
