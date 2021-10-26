@@ -7,7 +7,7 @@
     "name": "CAE - Base",
     "version": "12.0.1.2.1",
     "category": "CAE",
-    "summary": "Manage Cooperatives of Activities and Employment",
+    "summary": "Manage CAE (Cooperatives of Activities and Employment)",
     "author": "GRAP",
     "website": "https://github.com/grap/odoo-addons-cae",
     "license": "AGPL-3",
