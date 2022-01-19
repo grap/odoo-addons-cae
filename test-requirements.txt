@@ -1,0 +1,1 @@
+odoo12-addon-technical_partner_access @ git+https://github.com/grap/grap-odoo-business#subdirectory=setup/technical_partner_access
