@@ -1,1 +1,3 @@
+odoo12-addon-name_search_reset_res_partner @ git+https://github.com/grap/grap-odoo-incubator#subdirectory=setup/name_search_reset_res_partner
+
 odoo12-addon-technical_partner_access @ git+https://github.com/grap/grap-odoo-business#subdirectory=setup/technical_partner_access
