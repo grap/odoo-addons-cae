@@ -4,4 +4,4 @@ odoo12-addon-technical_partner_access @ git+https://github.com/grap/grap-odoo-bu
 
 odoo12-addon-company_wizard_account @ git+https://github.com/grap/odoo-addons-company-wizard#subdirectory=setup/company_wizard_account
 # (dependency of company_wizard_account)
-# odoo12-addon-company_wizard_base @ git+https://github.com/grap/odoo-addons-company-wizard#subdirectory=setup/company_wizard_base
+odoo12-addon-company_wizard_base @ git+https://github.com/grap/odoo-addons-company-wizard#subdirectory=setup/company_wizard_base
