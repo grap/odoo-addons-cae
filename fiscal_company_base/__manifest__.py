@@ -12,7 +12,11 @@
     "website": "https://github.com/grap/odoo-addons-cae",
     "license": "AGPL-3",
     "post_init_hook": "post_install_set_fiscal_company",
-    "depends": ["base", "technical_partner_access"],
+    "depends": [
+        "base",
+        # GRAP
+        "technical_partner_access",
+    ],
     "data": [
         "security/ir_module_category.xml",
         "security/res_groups.xml",
