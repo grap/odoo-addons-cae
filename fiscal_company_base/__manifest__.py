@@ -15,7 +15,7 @@
     "depends": [
         "base",
         # GRAP
-        "technical_partner_access",
+        # "technical_partner_access",
     ],
     "data": [
         "security/ir_module_category.xml",
