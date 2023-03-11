@@ -1,5 +1,5 @@
 # Do NOT update manually; changes here will be overwritten by Copier
-_commit: 7de0cb5
+_commit: 5a39237
 _src_path: https://github.com/grap/oca-addons-repo-template-new.git
 ci: GitHub
 dependency_installation_mode: PIP
@@ -16,12 +16,17 @@ odoo_version: 16.0
 org_name: GRAP
 org_slug: grap
 rebel_module_groups: []
-repo_description: This project aim to deal with modules related to manage CAE in Odoo.
+repo_description: ' This project aim to deal with modules related to manage CAE in
+    Odoo.
+
     More information about CAE [FR]
-        * https://fr.wikipedia.org/wiki/Coopérative_d'activités_et_d'emploi
-        * http://www.cooperer.coop/
-        * http://www.copea.fr/
-repo_name: Odoo Modules for CAE (Cooperative d'Activité et d'Emploi) 
+
+    - https://fr.wikipedia.org/wiki/Coopérative_d''activités_et_d''emploi
+
+    - http://www.cooperer.coop/
+
+    - http://www.copea.fr/'
+repo_name: Odoo Modules for CAE (Cooperative d'Activité et d'Emploi)
 repo_slug: odoo-addons-cae
 repo_website: https://github.com/grap/odoo-addons-cae
 travis_apt_packages: []
