@@ -25,8 +25,14 @@ class ProductTemplate(models.Model):
 
     @api.multi
     def write(self, vals):
-        if vals.get("cae_administrative_ok", False) or any(
-            self.mapped("cae_administrative_ok")
+        forbidden_fields = [
+            key
+            for key in vals.keys()
+            if key not in self._allowed_fields_cae_administrative()
+        ]
+        if forbidden_fields and (
+            vals.get("cae_administrative_ok", False)
+            or any(self.mapped("cae_administrative_ok"))
         ):
             self._check_administrative_access()
         return super().write(vals)
@@ -44,3 +50,12 @@ class ProductTemplate(models.Model):
             raise ValidationError(
                 _("You have no right to create or update an" " administrative product")
             )
+
+    def _allowed_fields_cae_administrative(self):
+        return [
+            "seller_ids",
+            "print_category_id",
+            "lst_price",
+            "to_print",
+            "standard_price",
+        ]
