@@ -30,7 +30,7 @@ addon | version | maintainers | summary
 [fiscal_company_company_wizard_account](fiscal_company_company_wizard_account/) | 12.0.1.1.0 |  | Glue Module between CAE and Company Wizard - Account modules
 [fiscal_company_company_wizard_base](fiscal_company_company_wizard_base/) | 12.0.1.1.0 |  | Glue Module between CAE and Company Wizard - Base modules
 [fiscal_company_point_of_sale](fiscal_company_point_of_sale/) | 12.0.1.2.0 |  | Glue Module between CAE and Point of Sale modules
-[fiscal_company_product](fiscal_company_product/) | 12.0.1.1.0 |  | Glue Module between CAE and Product modules
+[fiscal_company_product](fiscal_company_product/) | 12.0.1.1.1 |  | Glue Module between CAE and Product modules
 [fiscal_company_sale](fiscal_company_sale/) | 12.0.1.1.0 |  | Glue Module between CAE and Sale modules
 [fiscal_company_sales_team](fiscal_company_sales_team/) | 12.0.1.1.0 |  | Glue Module between CAE and Sales Team modules
 [product_category_global_account_setting](product_category_global_account_setting/) | 12.0.1.1.1 |  | Propagate Accouting settings of product categories for all the companies
