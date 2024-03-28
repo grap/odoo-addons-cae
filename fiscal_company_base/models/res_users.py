@@ -17,7 +17,6 @@ class ResUsers(models.Model):
             user._propagate_access_right()
         return user
 
-    @api.multi
     def write(self, vals):
         res = super().write(vals)
         if vals.get("company_ids", False):
@@ -25,7 +24,6 @@ class ResUsers(models.Model):
         return res
 
     # Private function section
-    @api.multi
     def _propagate_access_right(self):
         """If a user has access to a fiscal_mother company, so he'll have
         access to all the child_company"""

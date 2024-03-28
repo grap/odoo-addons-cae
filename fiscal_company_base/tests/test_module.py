@@ -34,7 +34,7 @@ class TestModule(TransactionCase):
     def test_01_res_users_propagate_access_right_create(self):
         """[Functional Test] A new user with access to mother company must
         have access to child companies"""
-        new_user = self.ResUsers.sudo(user=self.user_accountant).create(
+        new_user = self.ResUsers.with_user(user=self.user_accountant).create(
             {
                 "name": "new_user",
                 "login": "new_user@odoo.com",
@@ -71,7 +71,7 @@ class TestModule(TransactionCase):
         """[Contraint Test] Try to create a company with
         'fiscal_type != 'child' and and a mother company."""
         with self.assertRaises(ValidationError):
-            self.ResCompany.sudo(user=self.user_accountant).create(
+            self.ResCompany.with_user(user=self.user_accountant).create(
                 {
                     "name": "new_company",
                     "fiscal_type": "normal",
@@ -83,7 +83,7 @@ class TestModule(TransactionCase):
         """[Contraint Test] Try to create a company with
         'fiscal_type != 'child' and and a mother company."""
         with self.assertRaises(ValidationError):
-            self.ResCompany.sudo(user=self.user_accountant).create(
+            self.ResCompany.with_user(user=self.user_accountant).create(
                 {
                     "name": "new_company_1",
                     "fiscal_type": "fiscal_mother",
@@ -91,7 +91,7 @@ class TestModule(TransactionCase):
                 }
             )
         with self.assertRaises(ValidationError):
-            self.ResCompany.sudo(user=self.user_accountant).create(
+            self.ResCompany.with_user(user=self.user_accountant).create(
                 {
                     "name": "new_company_2",
                     "fiscal_type": "normal",
@@ -103,7 +103,7 @@ class TestModule(TransactionCase):
         """[Contraint Test] Try to create a company with
         'fiscal_type = 'child' without a mother company."""
         with self.assertRaises(ValidationError):
-            self.ResCompany.sudo(user=self.user_accountant).create(
+            self.ResCompany.with_user(user=self.user_accountant).create(
                 {
                     "name": "new_company",
                     "fiscal_type": "fiscal_child",
@@ -113,7 +113,7 @@ class TestModule(TransactionCase):
 
     def test_06_res_company_create_child_propagate_success(self):
         """[Contraint Test] Create a child company and check propagation."""
-        new_company = self.ResCompany.sudo(user=self.user_accountant).create(
+        new_company = self.ResCompany.with_user(user=self.user_accountant).create(
             {
                 "name": "new_company",
                 "fiscal_type": "fiscal_child",
@@ -132,10 +132,10 @@ class TestModule(TransactionCase):
     def test_07_res_company_write_child_propagate_success(self):
         """[Contraint Test] Create and write a child company and check
         propagation."""
-        new_company = self.ResCompany.sudo(user=self.user_accountant).create(
+        new_company = self.ResCompany.with_user(user=self.user_accountant).create(
             {"name": "new_company", "fiscal_type": "normal"}
         )
-        new_company.sudo(user=self.user_accountant).write(
+        new_company.with_user(user=self.user_accountant).write(
             {"fiscal_type": "fiscal_child", "fiscal_company_id": self.mother_company.id}
         )
 
