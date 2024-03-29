@@ -41,7 +41,6 @@ class ResCompany(models.Model):
         string="Integrated Companies",
     )
 
-    @api.multi
     def _compute_other_fiscal_child_ids(self):
         for company in self:
             companies = self.search(
@@ -96,7 +95,6 @@ class ResCompany(models.Model):
             company._propagate_access_right()
         return company
 
-    @api.multi
     def write(self, vals):
         res = super().write(vals)
         if vals.get("fiscal_type", False) == "fiscal_child":
@@ -104,7 +102,6 @@ class ResCompany(models.Model):
         return res
 
     # Private section
-    @api.multi
     def _propagate_access_right(self):
         """Give access to the given fiscal child companies to all the
         users that have access to the fiscal mother company"""
