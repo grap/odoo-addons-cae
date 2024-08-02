@@ -10,8 +10,6 @@ Copyright (C) 2018-Today GRAP (http://www.grap.coop)
     <record id="partner_mother" model="res.partner">
         <field name="name">CAE - Mother Partner</field>
         <field name="company_id" ref="company_fiscal_mother"/>
-        <field name="customer" eval="True"/>
-        <field name="supplier" eval="True"/>
     </record>
 
 </odoo>

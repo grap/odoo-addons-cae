@@ -6,18 +6,18 @@
 from odoo import api, models
 
 
-class IncludeFiscalCompanySearchMixin(models.AbstractModel):
+class FiscalCompanyChangeSearchDomainMixin(models.AbstractModel):
     """This abstract change the _search features for models.
 
     if a domain contain a ('company_id', '=', company_id)
     it will be replace by ('company_id', 'in', [company_id, fiscal_company_id])
     """
 
-    _name = "include.fiscal.company.search.mixin"
-    _description = "Include Fiscal Company Search Mixin"
+    _name = "fiscal.company.change.search.domain.mixin"
+    _description = "Fiscal Company : Change Search Domain Mixin"
 
     @api.model
-    def _include_fiscal_company_domain(self, domain):
+    def _fiscal_company_change_domain(self, domain):
         new_domain = []
         ResCompany = self.env["res.company"]
 
@@ -30,9 +30,20 @@ class IncludeFiscalCompanySearchMixin(models.AbstractModel):
                 else:
                     old_company_ids = [item[2]]
 
+                has_false = False in old_company_ids
+                if has_false:
+                    if len(old_company_ids) == 1:
+                        # if the domain is ('company_id', 'OP', False)
+                        # We have nothing to change
+                        new_domain.append(item)
+                        continue
+                    else:
+                        old_company_ids.pop(False)
+
+                old_companies = ResCompany.browse(old_company_ids)
                 new_company_ids = (
-                    ResCompany.browse(old_company_ids).mapped("fiscal_company_id").ids
-                )
+                    old_companies | old_companies.mapped("fiscal_company_id")
+                ).ids
 
                 if item[1] in ["=", "in"]:
                     new_operator = "in"
@@ -41,8 +52,10 @@ class IncludeFiscalCompanySearchMixin(models.AbstractModel):
                 else:
                     raise NotImplementedError("Not implemented operator")
 
-                new_item = ("company_id", new_operator, new_company_ids)
-                new_domain.append(new_item)
+                if has_false:
+                    new_company_ids.append(False)
+
+                new_domain.append(("company_id", new_operator, new_company_ids))
             else:
                 new_domain.append(item)
         return new_domain
@@ -57,7 +70,7 @@ class IncludeFiscalCompanySearchMixin(models.AbstractModel):
         count=False,
         access_rights_uid=None,
     ):
-        new_args = self._include_fiscal_company_domain(args)
+        new_args = self._fiscal_company_change_domain(args)
         return super()._search(
             new_args,
             offset=offset,

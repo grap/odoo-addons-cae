@@ -3,7 +3,8 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, exceptions, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 _RES_COMPANY_FISCAL_TYPE = [
     ("group", "Group"),
@@ -16,16 +17,17 @@ _RES_COMPANY_FISCAL_TYPE = [
 class ResCompany(models.Model):
     _inherit = "res.company"
 
-    # Columns Section
     fiscal_type = fields.Selection(
         selection=_RES_COMPANY_FISCAL_TYPE,
-        string="Fiscal Type",
         required=True,
         default="normal",
     )
 
     fiscal_company_id = fields.Many2one(
-        comodel_name="res.company", string="Fiscal Company"
+        comodel_name="res.company",
+        string="Fiscal Company",
+        compute="_compute_fiscal_company_id",
+        store=True,
     )
 
     fiscal_child_ids = fields.One2many(
@@ -35,80 +37,82 @@ class ResCompany(models.Model):
         readonly=True,
     )
 
-    other_fiscal_child_ids = fields.One2many(
-        comodel_name="res.company",
-        compute="_compute_other_fiscal_child_ids",
-        string="Integrated Companies",
-    )
-
-    @api.multi
-    def _compute_other_fiscal_child_ids(self):
+    @api.depends("fiscal_type", "parent_id")
+    def _compute_fiscal_company_id(self):
         for company in self:
-            companies = self.search(
-                [("id", "in", company.fiscal_child_ids.ids), ("id", "!=", company.id)]
-            )
-            company.other_fiscal_child_ids = companies.ids
+            if company.fiscal_type in ["normal", "fiscal_mother"]:
+                company.fiscal_company_id = company
+            elif company.fiscal_type == "fiscal_child":
+                company.fiscal_company_id = company.parent_id
+            elif company.fiscal_type == "group":
+                company.fiscal_company_id = False
 
     # Constrains Section
-    @api.constrains("fiscal_child_ids", "fiscal_type")
-    def _check_non_fiscal_childs(self):
-        for company in self:
-            if company.fiscal_type != "fiscal_mother" and len(
-                company.other_fiscal_child_ids
-            ):
-                raise exceptions.ValidationError(
-                    _("Only CAE company can have Integrated Companies")
+    @api.constrains("parent_id", "fiscal_type")
+    def _check_fiscal_type_with_parent_type(self):
+        for company in self.filtered(
+            lambda x: x.fiscal_type in ["group", "normal", "fiscal_mother"]
+        ):
+            if company.parent_id.fiscal_type not in ["group", False]:
+                raise ValidationError(
+                    _(
+                        "The company '%(company_name)s' (type %(fiscal_type_name)s)"
+                        " can only have a parent company with a type 'Group'.",
+                        company_name=company.name,
+                        fiscal_type_name=company.fiscal_type,
+                    )
+                )
+        for company in self.filtered(lambda x: x.fiscal_type in ["fiscal_child"]):
+            if company.parent_id.fiscal_type != "fiscal_mother":
+                raise ValidationError(
+                    _(
+                        "The company '%(company_name)s' (type 'Fiscal Child')"
+                        " can only have a parent company with a type 'Fiscal Mother'.",
+                        company_name=company.name,
+                    )
                 )
 
-    @api.constrains("fiscal_company_id", "fiscal_type")
-    def _check_non_fiscal_child_company(self):
-        for company in self:
-            # skip special case of creation
-            if company.fiscal_company_id:
-                if (
-                    company.fiscal_type in ("normal", "fiscal_mother")
-                    and company.id != company.fiscal_company_id.id
-                ):
-                    raise exceptions.ValidationError(
-                        _(
-                            "You can't select in the field fiscal company, an"
-                            " other company for a non integrated company."
-                        )
+    @api.constrains("child_ids", "fiscal_type")
+    def _check_fiscal_type_with_child_type(self):
+        for company in self.filtered(
+            lambda x: x.fiscal_type in ["normal", "fiscal_child"]
+        ):
+            if company.child_ids:
+                raise ValidationError(
+                    _(
+                        "The company '%(company_name)s' can not be '%(fiscal_type)s'"
+                        " because it contains companies.",
+                        company_name=company.name,
+                        fiscal_type=company.fiscal_type,
                     )
-                elif (
-                    company.fiscal_type == "fiscal_child"
-                    and company.fiscal_company_id.fiscal_type != "fiscal_mother"
-                ):
-                    raise exceptions.ValidationError(
-                        _(
-                            "You should select in the field fiscal company, a"
-                            " CAE company for a Integrated Company."
-                        )
+                )
+
+        for company in self.filtered(lambda x: x.fiscal_type in ["fiscal_mother"]):
+            error_types = set(company.mapped("child_ids.fiscal_type")) - set(
+                {"fiscal_child"}
+            )
+
+            if error_types:
+                raise ValidationError(
+                    _(
+                        "The company '%(company_name)s' can not be 'Fiscal Mother'"
+                        " because it contains companies type of '%(error_types)s'",
+                        company_name=company.name,
+                        error_types=error_types,
                     )
+                )
 
-    # Overload Section
-    @api.model
-    def create(self, vals):
-        company = super().create(vals)
-        if not vals.get("fiscal_company_id", False):
-            company.fiscal_company_id = company.id
-        if vals.get("fiscal_type", False) == "fiscal_child":
-            company._propagate_access_right()
-        return company
+        for company in self.filtered(lambda x: x.fiscal_type in ["group"]):
+            error_types = set(company.mapped("child_ids.fiscal_type")) - set(
+                {"normal", "group", "fiscal_mother"}
+            )
 
-    @api.multi
-    def write(self, vals):
-        res = super().write(vals)
-        if vals.get("fiscal_type", False) == "fiscal_child":
-            self._propagate_access_right()
-        return res
-
-    # Private section
-    @api.multi
-    def _propagate_access_right(self):
-        """Give access to the given fiscal child companies to all the
-        users that have access to the fiscal mother company"""
-        for company in self:
-            user_ids = company.fiscal_company_id.user_ids.ids
-            new_user_ids = list(set(user_ids) - set(company.user_ids.ids))
-            company.write({"user_ids": [(4, id) for id in list(set(new_user_ids))]})
+            if error_types:
+                raise ValidationError(
+                    _(
+                        "The company '%(company_name)s' can not be 'Group'"
+                        " because it contains companies type of '%(error_types)s'",
+                        company_name=company.name,
+                        error_types=error_types,
+                    )
+                )

@@ -41,20 +41,10 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
         <field name="model">res.company</field>
         <field name="inherit_id" ref="base.view_company_form"/>
         <field name="arch" type="xml">
-            <notebook position="inside">
-                <page string="Fiscal Settings">
-                    <group>
-                        <field name="fiscal_type"/>
-                        <field name="fiscal_company_id"
-                            attrs="{'invisible': [('fiscal_type', '!=', 'fiscal_child')]}"/>
-                    </group>
-                    <field name="other_fiscal_child_ids" nolabel="1"
-                        attrs="{'invisible': [('other_fiscal_child_ids', '!=', False)]}"/>
-                </page>
-            </notebook>
+            <field name="parent_id" position="before">
+                <field name="fiscal_type"/>
+            </field>
         </field>
     </record>
-
-
 
 </odoo>

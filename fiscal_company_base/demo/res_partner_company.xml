@@ -8,70 +8,64 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
 
 <odoo>
 
-<!-- Updating base.main_company-->
-    <!--
-    Note, we set the main company as a french company to avoid the
-    installation of l10n_generic_coa if account is installad.
-    see addons/account/__init__.py
-    -->
+<!-- Create Main Group company and partner associated -->
+    <record model="res.partner" id="partner_group">
+        <field name="name">Group Company</field>
+        <field name="company_id" eval="False"/>
+        <field name="is_company" eval="True"/>
+    </record>
+
+    <record model="res.company" id="company_group">
+        <field name="name">Group Company</field>
+        <field name="partner_id" ref="partner_group"/>
+        <field name="fiscal_type">group</field>
+    </record>
+
+<!-- Set Group as the parent of the default demo company -->
     <record model="res.company" id="base.main_company">
-        <field name="fiscal_company_id" ref="base.main_company" />
-        <field name="country_id" ref="base.fr"/>
+        <field name="parent_id" ref="company_group" />
     </record>
 
 <!-- Create fiscal mother company and partner associated -->
     <record model="res.partner" id="partner_fiscal_mother">
-        <field name="name">Your Mother Company</field>
-        <field name="company_id" eval="None"/>
+        <field name="name">CAE Company</field>
+        <field name="company_id" eval="False"/>
         <field name="is_company" eval="True"/>
     </record>
 
     <record model="res.company" id="company_fiscal_mother">
-        <field name="name">Your Mother Company</field>
+        <field name="name">CAE Company</field>
         <field name="partner_id" ref="partner_fiscal_mother"/>
         <field name="fiscal_type">fiscal_mother</field>
-    </record>
-
-    <record model="res.partner" id="partner_fiscal_mother">
-        <field name="company_id" ref="company_fiscal_mother"/>
+        <field name="parent_id" ref="company_group" />
     </record>
 
 <!-- Create fiscal child company 1 and partner associated -->
     <record model="res.partner" id="partner_fiscal_child_1">
-        <field name="name">Your Child Company 1 (Service)</field>
-        <field name="company_id" eval="None"/>
+        <field name="name">Integrated Company 1 (Service)</field>
+        <field name="company_id" eval="False"/>
         <field name="is_company" eval="True"/>
     </record>
 
     <record model="res.company" id="company_fiscal_child_1">
-        <field name="name">Your Child Company 1 (Service)</field>
+        <field name="name">Integrated Company 1 (Service)</field>
         <field name="partner_id" ref="partner_fiscal_child_1"/>
         <field name="parent_id" ref="company_fiscal_mother" />
-        <field name="fiscal_company_id" ref="company_fiscal_mother"/>
         <field name="fiscal_type">fiscal_child</field>
-    </record>
-
-    <record model="res.partner" id="partner_fiscal_child_1">
-        <field name="company_id" ref="company_fiscal_child_1"/>
     </record>
 
 <!-- Create fiscal child company 2 and partner associated -->
     <record model="res.partner" id="partner_fiscal_child_2">
-        <field name="name">Your Child Company 2 (Production)</field>
-        <field name="company_id" eval="None"/>
+        <field name="name">Integrated Company 2 (Production)</field>
+        <field name="company_id" eval="False"/>
         <field name="is_company" eval="True"/>
     </record>
 
     <record model="res.company" id="company_fiscal_child_2">
-        <field name="name">Your Child Company 2 (Production)</field>
+        <field name="name">Integrated Company 2 (Production)</field>
         <field name="partner_id" ref="partner_fiscal_child_2"/>
         <field name="parent_id" ref="company_fiscal_mother" />
-        <field name="fiscal_company_id" ref="company_fiscal_mother"/>
         <field name="fiscal_type">fiscal_child</field>
-    </record>
-
-    <record model="res.partner" id="partner_fiscal_child_2">
-        <field name="company_id" ref="company_fiscal_child_2"/>
     </record>
 
 </odoo>

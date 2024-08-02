@@ -5,23 +5,20 @@
 
 {
     "name": "CAE - Base",
-    "version": "12.0.1.2.3",
+    "version": "16.0.1.0.0",
     "category": "CAE",
     "summary": "Manage CAE (Cooperatives of Activities and Employment)",
     "author": "GRAP",
     "website": "https://github.com/grap/odoo-addons-cae",
     "license": "AGPL-3",
-    "post_init_hook": "post_install_set_fiscal_company",
     "depends": [
         "base",
-        # GRAP
-        "technical_partner_access",
+        # Dependency added to have the possibility to create demo user,
+        # without "notification_type" error
+        "mail",
     ],
     "data": [
-        "security/ir_module_category.xml",
-        "security/res_groups.xml",
-        "security/ir_rule.xml",
-        "security/ir.model.access.csv",
+        # "security/ir_rule.xml",
         "views/view_res_company.xml",
     ],
     "demo": [

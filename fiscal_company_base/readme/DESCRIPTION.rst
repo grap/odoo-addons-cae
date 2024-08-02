@@ -16,23 +16,13 @@ the parent company.
 **Companies feature**
 
 * Add a new field on company `fiscal_type`:
-    * `normal` : classical company
+    * `group` : Container company: can only contains 'Normal'
+      or 'CAE' Companies.
+    * `normal` : Classical company, (by default)
     * `fiscal_mother`: CAE company, that can host many child companies
     * `fiscal_child`: child company, hosted by the CAE
 
-
-**Users Feature**
-
-* If a user has access rights to a 'fiscal_mother' so he has access
-  rights to all 'fiscal_child' companies;
-
-**Groups Feature**
-
-* this module add a new group 'Disabled Features for Fiscal Company'
-  that should be affected to all the features bad designed by odoo,
-  specially when odoo introduced views based on datas computed on SQL hard
-  coded requests that can not work with the Odoo CAE design.
-  See 'account_fiscal_company' module for exemples.
+.. figure:: ../static/description/res_company_form.png
 
 **More information about CAE [FR]**
 
