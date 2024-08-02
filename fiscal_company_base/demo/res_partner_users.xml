@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2015-Today GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+
+<odoo>
+
+    <record model="res.users" id="base.user_admin">
+        <field name="company_ids" eval="[
+            (4, ref('base.main_company')),
+            (4, ref('company_fiscal_mother')),
+            (4, ref('company_fiscal_child_1')),
+            (4, ref('company_fiscal_child_2')),
+        ]"/>
+    </record>
+
+<!-- Create user associated to all companies and partner associated -->
+    <record model="res.partner" id="partner_accountant">
+        <field name="name">Accountant User</field>
+        <field name="email">accountant@cae.coop</field>
+        <field name="customer" eval="False"/>
+        <field name="supplier" eval="False"/>
+        <field name="company_id" eval="False"/>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record model="res.users" id="user_accountant">
+        <field name="partner_id" ref="partner_accountant"/>
+        <field name="login">accountant</field>
+        <field name="password">demo</field>
+        <field name="company_id" ref="company_fiscal_mother"/>
+        <field name="company_ids" eval="[
+            (4, ref('company_fiscal_mother')),
+            (4, ref('company_fiscal_child_1')),
+            (4, ref('company_fiscal_child_2')),
+        ]"/>
+    </record>
+
+<!-- Create user associated to company 2 and partner associated -->
+    <record model="res.partner" id="partner_worker">
+        <field name="name">Worker User</field>
+        <field name="email">worker@cae.coop</field>
+        <field name="customer" eval="False"/>
+        <field name="supplier" eval="False"/>
+        <field name="company_id" eval="False"/>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record model="res.users" id="user_worker">
+        <field name="partner_id" ref="partner_worker"/>
+        <field name="login">worker</field>
+        <field name="password">demo</field>
+        <field name="company_id" ref="company_fiscal_child_1"/>
+        <field name="company_ids" eval="[
+            (4, ref('company_fiscal_child_1')),
+        ]"/>
+    </record>
+
+
+</odoo>

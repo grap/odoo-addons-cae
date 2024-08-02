@@ -1,0 +1,181 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#   * fiscal_company_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-05-28 13:47+0000\n"
+"PO-Revision-Date: 2021-05-28 13:47+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: fiscal_company_base
+#: selection:res.company,fiscal_type:0
+msgid "CAE"
+msgstr ""
+
+#. module: fiscal_company_base
+#: model:ir.model.fields,field_description:fiscal_company_base.field_res_company_code
+msgid "Code"
+msgstr ""
+
+#. module: fiscal_company_base
+#: model:ir.model,name:fiscal_company_base.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: fiscal_company_base
+#: model:ir.model.fields,field_description:fiscal_company_base.field_res_company_create_wizard_company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: fiscal_company_base
+#: model:ir.model,name:fiscal_company_base.model_res_company_create_wizard
+msgid "Company Creation Wizard"
+msgstr "Assistant de création de société"
+
+#. module: fiscal_company_base
+#: model:ir.model,name:fiscal_company_base.model_ir_property
+msgid "Company Property"
+msgstr "Propriété de la société"
+
+#. module: fiscal_company_base
+#: model:ir.module.category,name:fiscal_company_base.module_category_fiscal_company
+msgid "Cooperatives of Activities and Employment"
+msgstr "Coopératives d'Activités et d'Emplois"
+
+#. module: fiscal_company_base
+#: model:ir.model.fields,field_description:fiscal_company_base.field_res_company_create_wizard_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: fiscal_company_base
+#: model:ir.model.fields,field_description:fiscal_company_base.field_res_company_create_wizard_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: fiscal_company_base
+#: model:res.groups,name:fiscal_company_base.fiscal_company_disabled_feature
+msgid "Disabled Features"
+msgstr "Fonctionnalités désactivées"
+
+#. module: fiscal_company_base
+#: model:ir.model.fields,field_description:fiscal_company_base.field_fiscal_mother_check_mixin__display_name
+#: model:ir.model.fields,field_description:fiscal_company_base.field_include_fiscal_company_search_mixin__display_name
+#: model:ir.model.fields,field_description:fiscal_company_base.field_res_company_create_wizard_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: fiscal_company_base
+#: model:ir.model.fields,field_description:fiscal_company_base.field_res_company__fiscal_company_id
+msgid "Fiscal Company"
+msgstr ""
+
+#. module: fiscal_company_base
+#: model:res.groups,name:fiscal_company_base.fiscal_company_manager
+msgid "Fiscal Company Manager"
+msgstr "Responsable CAE"
+
+#. module: fiscal_company_base
+#: model:ir.model,name:fiscal_company_base.model_fiscal_mother_check_mixin
+msgid "Fiscal Mother Check Mixin"
+msgstr ""
+
+#. module: fiscal_company_base
+#: model_terms:ir.ui.view,arch_db:fiscal_company_base.view_res_company_form
+msgid "Fiscal Settings"
+msgstr "Paramétrages fiscaux"
+
+#. module: fiscal_company_base
+#: model:ir.model.fields,field_description:fiscal_company_base.field_res_company__fiscal_type
+msgid "Fiscal Type"
+msgstr "Type fiscal"
+
+#. module: fiscal_company_base
+#: selection:res.company,fiscal_type:0
+msgid "Group"
+msgstr ""
+
+#. module: fiscal_company_base
+#: model:ir.model.fields,field_description:fiscal_company_base.field_fiscal_mother_check_mixin__id
+#: model:ir.model.fields,field_description:fiscal_company_base.field_include_fiscal_company_search_mixin__id
+#: model:ir.model.fields,field_description:fiscal_company_base.field_res_company_create_wizard_id
+msgid "ID"
+msgstr ""
+
+#. module: fiscal_company_base
+#: model:ir.model,name:fiscal_company_base.model_include_fiscal_company_search_mixin
+msgid "Include Fiscal Company Search Mixin"
+msgstr ""
+
+#. module: fiscal_company_base
+#: model:ir.model.fields,field_description:fiscal_company_base.field_res_company__other_fiscal_child_ids
+msgid "Integrated Companies"
+msgstr "Activités integrées"
+
+#. module: fiscal_company_base
+#: selection:res.company,fiscal_type:0
+msgid "Integrated Company"
+msgstr "Activité integrée"
+
+#. module: fiscal_company_base
+#: model:ir.model.fields,field_description:fiscal_company_base.field_fiscal_mother_check_mixin____last_update
+#: model:ir.model.fields,field_description:fiscal_company_base.field_include_fiscal_company_search_mixin____last_update
+#: model:ir.model.fields,field_description:fiscal_company_base.field_res_company_create_wizard___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: fiscal_company_base
+#: model:ir.model.fields,field_description:fiscal_company_base.field_res_company_create_wizard_write_uid
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: fiscal_company_base
+#: model:ir.model.fields,field_description:fiscal_company_base.field_res_company_create_wizard_write_date
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: fiscal_company_base
+#: selection:res.company,fiscal_type:0
+msgid "Normal"
+msgstr "Activité associée"
+
+#. module: fiscal_company_base
+#: code:addons/fiscal_company_base/models/res_company.py:60
+#, python-format
+msgid "Only CAE company can have Integrated Companies"
+msgstr "Seul les CAE peuvent avoir des activités integrées"
+
+#. module: fiscal_company_base
+#: model:ir.model.fields,field_description:fiscal_company_base.field_res_company__fiscal_child_ids
+msgid "Technical Integrated Companies"
+msgstr ""
+
+#. module: fiscal_company_base
+#: model:ir.model,name:fiscal_company_base.model_res_users
+msgid "Users"
+msgstr "Utilisateurs"
+
+#. module: fiscal_company_base
+#: code:addons/fiscal_company_base/models/fiscal_mother_check_mixin.py:25
+#, python-format
+msgid "You can't affect the item %s (model '%s') to a fiscal mother company."
+msgstr "Vous ne pouvez pas affecter cet élément %s (modèle '%s') a une société de type CAE."
+
+#. module: fiscal_company_base
+#: code:addons/fiscal_company_base/models/res_company.py:73
+#, python-format
+msgid "You can't select in the field fiscal company, an other company for a non integrated company."
+msgstr "Sur le champ `société fiscale` Vous ne pouvez pas sélectionner une société fiscale différente pour une activite intégrée"
+
+#. module: fiscal_company_base
+#: code:addons/fiscal_company_base/models/res_company.py:83
+#, python-format
+msgid "You should select in the field fiscal company, a CAE company for a Integrated Company."
+msgstr ""

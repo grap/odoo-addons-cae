@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- oca-hooks:disable=xml-duplicate-record-id -->
+<!--
+Copyright (C) 2015-Today GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+
+<odoo>
+
+<!-- Updating base.main_company-->
+    <!--
+    Note, we set the main company as a french company to avoid the
+    installation of l10n_generic_coa if account is installad.
+    see addons/account/__init__.py
+    -->
+    <record model="res.company" id="base.main_company">
+        <field name="fiscal_company_id" ref="base.main_company" />
+        <field name="country_id" ref="base.fr"/>
+    </record>
+
+<!-- Create fiscal mother company and partner associated -->
+    <record model="res.partner" id="partner_fiscal_mother">
+        <field name="name">Your Mother Company</field>
+        <field name="company_id" eval="None"/>
+        <field name="is_company" eval="True"/>
+    </record>
+
+    <record model="res.company" id="company_fiscal_mother">
+        <field name="name">Your Mother Company</field>
+        <field name="partner_id" ref="partner_fiscal_mother"/>
+        <field name="fiscal_type">fiscal_mother</field>
+    </record>
+
+    <record model="res.partner" id="partner_fiscal_mother">
+        <field name="company_id" ref="company_fiscal_mother"/>
+    </record>
+
+<!-- Create fiscal child company 1 and partner associated -->
+    <record model="res.partner" id="partner_fiscal_child_1">
+        <field name="name">Your Child Company 1 (Service)</field>
+        <field name="company_id" eval="None"/>
+        <field name="is_company" eval="True"/>
+    </record>
+
+    <record model="res.company" id="company_fiscal_child_1">
+        <field name="name">Your Child Company 1 (Service)</field>
+        <field name="partner_id" ref="partner_fiscal_child_1"/>
+        <field name="parent_id" ref="company_fiscal_mother" />
+        <field name="fiscal_company_id" ref="company_fiscal_mother"/>
+        <field name="fiscal_type">fiscal_child</field>
+    </record>
+
+    <record model="res.partner" id="partner_fiscal_child_1">
+        <field name="company_id" ref="company_fiscal_child_1"/>
+    </record>
+
+<!-- Create fiscal child company 2 and partner associated -->
+    <record model="res.partner" id="partner_fiscal_child_2">
+        <field name="name">Your Child Company 2 (Production)</field>
+        <field name="company_id" eval="None"/>
+        <field name="is_company" eval="True"/>
+    </record>
+
+    <record model="res.company" id="company_fiscal_child_2">
+        <field name="name">Your Child Company 2 (Production)</field>
+        <field name="partner_id" ref="partner_fiscal_child_2"/>
+        <field name="parent_id" ref="company_fiscal_mother" />
+        <field name="fiscal_company_id" ref="company_fiscal_mother"/>
+        <field name="fiscal_type">fiscal_child</field>
+    </record>
+
+    <record model="res.partner" id="partner_fiscal_child_2">
+        <field name="company_id" ref="company_fiscal_child_2"/>
+    </record>
+
+</odoo>

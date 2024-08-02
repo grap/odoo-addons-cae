@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+,,,,,,,
+access_sequence_manager,Sequence CAE manager,base.model_ir_sequence,fiscal_company_base.fiscal_company_manager,1,1,1,1
+access_ui_view_manager,View CAE manager,base.model_ir_ui_view,fiscal_company_base.fiscal_company_manager,1,1,1,1
+access_property_manager,Property CAE manager,base.model_ir_property,fiscal_company_base.fiscal_company_manager,1,1,1,1

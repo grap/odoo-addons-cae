@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2015-Today GRAP (http://www.grap.coop)
+@author: Julien WESTE
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+
+<odoo>
+
+    <record id="view_res_company_search" model="ir.ui.view">
+        <field name="model">res.company</field>
+        <field name="arch" type="xml">
+            <search>
+               <field name="name" filter_domain="['|', ('name','ilike',self), ('code','=',self)]"/>
+                <field name="fiscal_type"/>
+                <field name="fiscal_company_id"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_res_company_tree" model="ir.ui.view">
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-info">fiscal_type=='fiscal_child'</attribute>
+                <attribute name="decoration-warning">fiscal_type=='fiscal_mother'</attribute>
+                <attribute name="decoration-it">fiscal_type=='group'</attribute>
+            </xpath>
+            <field name="sequence" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="name" position="after">
+                <field name="fiscal_type" invisible="1"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_res_company_form" model="ir.ui.view">
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="Fiscal Settings">
+                    <group>
+                        <field name="fiscal_type"/>
+                        <field name="fiscal_company_id"
+                            attrs="{'invisible': [('fiscal_type', '!=', 'fiscal_child')]}"/>
+                    </group>
+                    <field name="other_fiscal_child_ids" nolabel="1"
+                        attrs="{'invisible': [('other_fiscal_child_ids', '!=', False)]}"/>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+
+
+</odoo>
