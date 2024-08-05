@@ -1,0 +1,133 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#   * fiscal_company_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-05 10:52+0000\n"
+"PO-Revision-Date: 2024-08-05 10:52+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: fiscal_company_base
+#: model:ir.model.fields.selection,name:fiscal_company_base.selection__res_company__fiscal_type__fiscal_mother
+msgid "CAE"
+msgstr ""
+
+#. module: fiscal_company_base
+#: model:ir.model,name:fiscal_company_base.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: fiscal_company_base
+#: model:ir.model.fields,field_description:fiscal_company_base.field_res_company__fiscal_company_id
+msgid "Fiscal Company"
+msgstr "Société Fiscale"
+
+#. module: fiscal_company_base
+#: model:ir.model,name:fiscal_company_base.model_fiscal_company_change_search_domain_mixin
+msgid "Fiscal Company : Change Search Domain Mixin"
+msgstr "Société Fiscale: Mixin changement de domaine de recherche"
+
+#. module: fiscal_company_base
+#: model:ir.model,name:fiscal_company_base.model_fiscal_company_check_company_mixin
+msgid "Fiscal Company : Check Company Mixin"
+msgstr "Société Fiscale: Mixin de vérification de société"
+
+#. module: fiscal_company_base
+#: model:ir.model.fields,field_description:fiscal_company_base.field_res_company__fiscal_type
+msgid "Fiscal Type"
+msgstr "Type fiscal"
+
+#. module: fiscal_company_base
+#: model:ir.model.fields.selection,name:fiscal_company_base.selection__res_company__fiscal_type__group
+msgid "Group"
+msgstr "Groupe"
+
+#. module: fiscal_company_base
+#: model:ir.model.fields.selection,name:fiscal_company_base.selection__res_company__fiscal_type__fiscal_child
+msgid "Integrated Company"
+msgstr "Activité intégrée"
+
+#. module: fiscal_company_base
+#: model:ir.model.fields.selection,name:fiscal_company_base.selection__res_company__fiscal_type__normal
+msgid "Normal"
+msgstr ""
+
+#. module: fiscal_company_base
+#: model:ir.model.fields,field_description:fiscal_company_base.field_res_company__fiscal_child_ids
+msgid "Technical Integrated Companies"
+msgstr "Sociétés fiscales filles (champ techniques)"
+
+#. module: fiscal_company_base
+#. odoo-python
+#: code:addons/fiscal_company_base/models/res_company.py:0
+#, python-format
+msgid ""
+"The company '%(company_name)s' (type %(fiscal_type_name)s) can only have a "
+"parent company with a type 'Group'."
+msgstr ""
+"La société '%(company_name)s' (type %(fiscal_type_name)s) peut seulement "
+"avoir une société parent de type 'Groupe'."
+
+#. module: fiscal_company_base
+#. odoo-python
+#: code:addons/fiscal_company_base/models/res_company.py:0
+#, python-format
+msgid ""
+"The company '%(company_name)s' (type 'Fiscal Child') can only have a parent "
+"company with a type 'Fiscal Mother'."
+msgstr ""
+"La société '%(company_name)s' (type 'Activité Intégrée') peut seulement "
+"avoir une société parent de type 'CAE'."
+
+#. module: fiscal_company_base
+#. odoo-python
+#: code:addons/fiscal_company_base/models/res_company.py:0
+#, python-format
+msgid ""
+"The company '%(company_name)s' can not be '%(fiscal_type)s' because it "
+"contains companies."
+msgstr ""
+"La société '%(company_name)s' ne peut pas être de type '%(fiscal_type)s' car"
+" elle contient des sociétés filles."
+
+#. module: fiscal_company_base
+#. odoo-python
+#: code:addons/fiscal_company_base/models/res_company.py:0
+#, python-format
+msgid ""
+"The company '%(company_name)s' can not be 'Fiscal Mother' because it "
+"contains companies type of '%(error_types)s'"
+msgstr ""
+"La société '%(company_name)s' ne peut pas être de type 'CAE' car elle "
+"contient des sociétés de type '%(error_types)s'"
+
+#. module: fiscal_company_base
+#. odoo-python
+#: code:addons/fiscal_company_base/models/res_company.py:0
+#, python-format
+msgid ""
+"The company '%(company_name)s' can not be 'Group' because it contains "
+"companies type of '%(error_types)s'"
+msgstr ""
+"La société '%(company_name)s' ne peut pas être de type 'Groupe' car elle "
+"contient des sociétés de type '%(error_types)s'"
+
+#. module: fiscal_company_base
+#. odoo-python
+#: code:addons/fiscal_company_base/models/fiscal_company_check_company_mixin.py:0
+#, python-format
+msgid ""
+"You can't affect the %(items_qty)s item(s) to company with such fiscal type.\n"
+"\n"
+" (model '%(model_name)s')"
+msgstr "Vous ne pouvez pas affecter le(s) %(items_qty)s élément(s) à cette société avec ce type de société fiscale.\n"
+"\n"
+" (Modèle '%(model_name)s')"
