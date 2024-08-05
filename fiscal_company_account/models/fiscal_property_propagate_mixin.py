@@ -76,7 +76,7 @@ class FiscalPropertyPropagateMixin(models.AbstractModel):
 
                 # Delete all property
                 domain = [
-                    ("res_id", "=", "{},{}".format(self._name, obj.id)),
+                    ("res_id", "=", f"{self._name},{obj.id}"),
                     ("fields_id", "=", field.id),
                     ("company_id", "in", company_ids),
                 ]
@@ -89,7 +89,7 @@ class FiscalPropertyPropagateMixin(models.AbstractModel):
                         IrProperty.create(
                             {
                                 "name": property_name,
-                                "res_id": "{},{}".format(self._name, obj.id),
+                                "res_id": f"{self._name},{obj.id}",
                                 "value": property_value,
                                 "fields_id": field.id,
                                 "type": field.ttype,
