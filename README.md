@@ -21,7 +21,11 @@ More information about CAE [FR]
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[fiscal_company_base](fiscal_company_base/) | 16.0.1.0.0 |  | Manage CAE (Cooperatives of Activities and Employment)
 
 [//]: # (end addons)
 
