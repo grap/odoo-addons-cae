@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2013-Today GRAP (http://www.grap.coop)
+@author Julien Weste
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="property_account_receivable_CH1" model="ir.property">
+        <field name="name">CAE - property_account_receivable CH1</field>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_child_1"/>
+        <field name="fields_id" ref="account.field_res_partner__property_account_receivable_id"/>
+        <field name="value" eval="'account.account,'+str(account_receivable_cae)"/>
+    </record>
+
+    <record id="property_account_receivable_CH2" model="ir.property">
+        <field name="name">CAE - property_account_receivable CH2</field>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_child_2"/>
+        <field name="fields_id" ref="account.field_res_partner__property_account_receivable_id"/>
+        <field name="value" eval="'account.account,'+str(account_receivable_cae)"/>
+    </record>
+
+    <record id="property_account_payable_CH1" model="ir.property">
+        <field name="name">CAE - property_account_payable CH1</field>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_child_1"/>
+        <field name="fields_id" ref="account.field_res_partner__property_account_payable_id"/>
+        <field name="value" eval="'account.account,'+str(account_payable_cae)"/>
+    </record>
+
+    <record id="property_account_payable_CH2" model="ir.property">
+        <field name="name">CAE - property_account_payable CH2</field>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_child_2"/>
+        <field name="fields_id" ref="account.field_res_partner__property_account_payable_id"/>
+        <field name="value" eval="'account.account,'+str(account_payable_cae)"/>
+    </record>
+
+</odoo>

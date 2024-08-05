@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2013-Today GRAP (http://www.grap.coop)
+@author Julien Weste
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record model="account.account" id="account_payable_cae">
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
+        <field name="code">401_CAE</field>
+        <field name="name">CAE - Payable - (test) </field>
+        <field name="user_type_id" ref="account.data_account_type_payable"/>
+        <field name="reconcile" eval="True" />
+    </record>
+
+    <record model="account.account" id="account_receivable_cae">
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
+        <field name="code">411_CAE</field>
+        <field name="name">CAE - Receivable - (test) </field>
+        <field name="user_type_id" ref="account.data_account_type_receivable"/>
+        <field name="reconcile" eval="True" />
+    </record>
+
+    <record model="account.account" id="account_custom_payable_cae">
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
+        <field name="code">401_CAE_CUS</field>
+        <field name="name">CAE - Custom Payable - (test) </field>
+        <field name="user_type_id" ref="account.data_account_type_payable"/>
+        <field name="reconcile" eval="True" />
+    </record>
+
+    <record model="account.account" id="account_custom_receivable_cae">
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
+        <field name="code">411_CAE_CUS</field>
+        <field name="name">CAE - Custom Receivable - (test) </field>
+        <field name="user_type_id" ref="account.data_account_type_receivable"/>
+        <field name="reconcile" eval="True" />
+    </record>
+
+    <!-- Bank and Cash Part -->
+    <record model="account.account" id="account_bank_cae">
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
+        <field name="code">CAE_512</field>
+        <field name="name">CAE - Bank - (test)</field>
+        <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+    </record>
+
+    <record model="account.account" id="account_cash_cae">
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
+        <field name="code">CAE_581</field>
+        <field name="name">CAE - Cash - (test)</field>
+        <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+    </record>
+
+    <!-- Expense Part-->
+    <record model="account.account" id="account_expense_cae">
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
+        <field name="code">CAE_601</field>
+        <field name="name">CAE - Expenses - (test)</field>
+        <field name="user_type_id" ref="account.data_account_type_expenses"/>
+    </record>
+
+    <!-- Income Part-->
+    <record model="account.account" id="account_income_cae">
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
+        <field name="code">CAE_702</field>
+        <field name="name">CAE - Product Sales - (test)</field>
+        <field name="user_type_id" ref="account.data_account_type_revenue"/>
+    </record>
+
+</odoo>

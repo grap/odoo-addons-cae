@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2018 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="product_template_mother_property" model="product.template">
+        <field name="name">CAE - Mother Product Template With Property</field>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
+        <field name="categ_id" ref="product.product_category_1"/>
+    </record>
+
+    <function model="product.template" name="write"
+        eval="[ref('product_template_mother_property')], {
+            'property_account_income_id': ref('account_income_cae'),
+            'property_account_expense_id': ref('account_expense_cae'),
+            },
+              {'force_company': ref('fiscal_company_base.company_fiscal_mother')}"/>
+
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2018 - Today:  GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <function model="product.category" name="write"
+        eval="[ref('product.product_category_all')], {
+            'property_account_income_categ_id': ref('account_income_cae'),
+            'property_account_expense_categ_id': ref('account_expense_cae'),
+            },
+              {'force_company': ref('fiscal_company_base.company_fiscal_mother')}"/>
+
+</odoo>

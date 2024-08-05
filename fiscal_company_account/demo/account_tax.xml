@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2013-Today GRAP (http://www.grap.coop)
+@author Julien Weste
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record model="account.tax" id="sale_tax_20">
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
+        <field name="name">Sale Tax (20% Excluded)</field>
+        <field name="type_tax_use">sale</field>
+        <field name="amount">20</field>
+    </record>
+
+    <record model="account.tax" id="purchase_tax_20">
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
+        <field name="name">Purchase Tax (20% Excluded)</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="amount">20</field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2018 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="partner_mother_property" model="res.partner">
+        <field name="name">CAE - Mother Partner With Property</field>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
+        <field name="customer" eval="True"/>
+        <field name="supplier" eval="True"/>
+    </record>
+
+    <record id="partner_fiscal_child_1_property" model="res.partner">
+        <field name="name">CAE - Fiscal 1 Partner With Property</field>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_child_1"/>
+        <field name="customer" eval="True"/>
+        <field name="supplier" eval="True"/>
+    </record>
+
+    <function model="res.partner" name="write"
+        eval="[ref('partner_mother_property'), ref('partner_fiscal_child_1_property')], {
+            'property_account_payable_id': ref('account_custom_payable_cae'),
+            'property_account_receivable_id': ref('account_custom_receivable_cae'),
+            },
+              {'force_company': ref('fiscal_company_base.company_fiscal_mother')}"/>
+
+</odoo>

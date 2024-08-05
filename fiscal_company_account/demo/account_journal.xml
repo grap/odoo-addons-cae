@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2013-Today GRAP (http://www.grap.coop)
+@author Julien Weste
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record model="account.journal" id="journal_purchase">
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
+        <field name="code">CAE_PURCHASE</field>
+        <field name="name">CAE - Purchase Journal - (test)</field>
+        <field name="type">purchase</field>
+    </record>
+
+    <record model="account.journal" id="journal_sale">
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
+        <field name="code">CAE_SALE</field>
+        <field name="name">CAE - Sale Journal - (test)</field>
+        <field name="type">sale</field>
+    </record>
+
+    <record model="account.journal" id="journal_bank">
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
+        <field name="code">CAE_BANK</field>
+        <field name="name">CAE - Bank Journal - (test)</field>
+        <field name="type">bank</field>
+    </record>
+
+</odoo>
