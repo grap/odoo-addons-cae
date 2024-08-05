@@ -9,9 +9,10 @@ class TestAbstract(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-
         cls.ResCompany = cls.env["res.company"]
+        cls.ResPartner = cls.env["res.partner"]
         cls.group_company = cls.env.ref("fiscal_company_base.company_group")
         cls.mother_company = cls.env.ref("fiscal_company_base.company_fiscal_mother")
         cls.child_company = cls.env.ref("fiscal_company_base.company_fiscal_child_1")
         cls.normal_company = cls.env.ref("base.main_company")
+        cls.user_accountant = cls.env.ref("fiscal_company_base.user_accountant")

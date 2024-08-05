@@ -1,4 +1,5 @@
-# Copyright (C) 2018-Today: GRAP (http://www.grap.coop)
+# Copyright (C) 2013-Today: GRAP (http://www.grap.coop)
+# @author: Julien WESTE
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -6,9 +7,8 @@ from odoo import fields, models
 
 
 class AccountPayment(models.Model):
-    _name = "account.payment"
-    _inherit = ["account.payment", "fiscal.mother.check.mixin"]
+    _inherit = "account.payment"
 
-    company_id = fields.Many2one(
-        related=False, default=lambda self: self.env.user.company_id
-    )
+    destination_account_id = fields.Many2one(check_company=False)
+
+    outstanding_account_id = fields.Many2one(check_company=False)

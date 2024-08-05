@@ -15,9 +15,9 @@ class TestFiscalCompanyCheckCompanyMixin(TestAbstract):
         # Load a test model using odoo_test_helper
         cls.loader = FakeModelLoader(cls.env, cls.__module__)
         cls.loader.backup_registry()
-        from .models import FiscalCompanyCheckCompanyMixinFiscalMother
+        from .models import ModelFiscalCompanyCheckCompanyMixinFiscalMother
 
-        cls.loader.update_registry((FiscalCompanyCheckCompanyMixinFiscalMother,))
+        cls.loader.update_registry((ModelFiscalCompanyCheckCompanyMixinFiscalMother,))
 
         cls.model_fiscal_mother = cls.env[
             "model.fiscal.company.check.company.mixin.fiscal.mother"

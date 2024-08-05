@@ -2,19 +2,16 @@
 # @author Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo.tests.common import TransactionCase
+from .test_abstract import TestAbstract
 
 
-class TestTaxFiltered(TransactionCase):
-    """Tests for Account Fiscal Company Module (Tax filter)"""
-
-    def setUp(self):
-        super().setUp()
-        self.taxes = self.env.ref("fiscal_company_account.sale_tax_20") | self.env.ref(
+class TestMixinChangeFiltered(TestAbstract):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.taxes = cls.env.ref("fiscal_company_account.sale_tax_20") | cls.env.ref(
             "fiscal_company_account.purchase_tax_20"
         )
-        self.child_company = self.env.ref("fiscal_company_base.company_fiscal_child_1")
-        self.mother_company = self.env.ref("fiscal_company_base.company_fiscal_mother")
 
     # Test Section
     def test_01_filter_company(self):
@@ -71,7 +68,7 @@ class TestTaxFiltered(TransactionCase):
                 len(filtered_taxes), 0, "Filtering taxes by name should worker (3/3"
             )
 
-    def test_that_should_fail(self):
+    def test_02_filter_company_that_should_fail(self):
         # we test multiple filter in the same time.
         # The non company condition will not be applyed (and should be).
         # It is a limitation of the current implementation.

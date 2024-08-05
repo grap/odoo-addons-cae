@@ -26,6 +26,18 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
         <field name="code">CAE_BANK</field>
         <field name="name">CAE - Bank Journal - (test)</field>
         <field name="type">bank</field>
+        <field name="default_account_id" ref="account_bank_default_cae"/>
+        <field name="suspense_account_id" ref="account_bank_suspense_cae"/>
     </record>
+
+    <function model="account.payment.method.line" name="write">
+        <value model="account.payment.method.line" eval="obj().env.ref('fiscal_company_account.journal_bank').inbound_payment_method_line_ids.id"/>
+        <value eval="{'payment_account_id': ref('fiscal_company_account.account_bank_payment_cae')}"/>
+    </function>
+
+    <function model="account.payment.method.line" name="write">
+        <value model="account.payment.method.line" eval="obj().env.ref('fiscal_company_account.journal_bank').outbound_payment_method_line_ids.id"/>
+        <value eval="{'payment_account_id': ref('fiscal_company_account.account_bank_payment_cae')}"/>
+    </function>
 
 </odoo>

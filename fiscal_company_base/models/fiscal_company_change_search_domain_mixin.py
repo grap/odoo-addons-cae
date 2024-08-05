@@ -49,8 +49,15 @@ class FiscalCompanyChangeSearchDomainMixin(models.AbstractModel):
                     new_operator = "in"
                 elif item[1] in ["!=", "not in"]:
                     new_operator = "not in"
+                elif item[1] in ["child_of"]:
+                    new_operator = "child_of"
                 else:
-                    raise NotImplementedError("Not implemented operator")
+                    raise NotImplementedError(
+                        "fiscal.company.change.search.domain.mixin:"
+                        f" Not implemented operator {item[1]}"
+                        f" ({self._name}).\n"
+                        f" Full Domain: {domain}"
+                    )
 
                 if has_false:
                     new_company_ids.append(False)

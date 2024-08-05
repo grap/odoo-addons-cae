@@ -1,3 +1,3 @@
-from . import test_tax_filtered
-from . import test_decorator
-from . import test_propagate_properties
+from . import test_account_journal_dashboard
+from . import test_mixin_change_filtered
+from . import test_mixin_change_search_domain

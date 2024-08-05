@@ -7,32 +7,76 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
 -->
 <odoo>
 
+    <!-- Partner Properties -->
     <record id="property_account_receivable_CH1" model="ir.property">
-        <field name="name">CAE - property_account_receivable CH1</field>
+        <field name="name">property_account_receivable_id</field>
         <field name="company_id" ref="fiscal_company_base.company_fiscal_child_1"/>
         <field name="fields_id" ref="account.field_res_partner__property_account_receivable_id"/>
         <field name="value" eval="'account.account,'+str(account_receivable_cae)"/>
     </record>
 
     <record id="property_account_receivable_CH2" model="ir.property">
-        <field name="name">CAE - property_account_receivable CH2</field>
+        <field name="name">property_account_receivable_id</field>
         <field name="company_id" ref="fiscal_company_base.company_fiscal_child_2"/>
         <field name="fields_id" ref="account.field_res_partner__property_account_receivable_id"/>
         <field name="value" eval="'account.account,'+str(account_receivable_cae)"/>
     </record>
 
     <record id="property_account_payable_CH1" model="ir.property">
-        <field name="name">CAE - property_account_payable CH1</field>
+        <field name="name">property_account_payable_id</field>
         <field name="company_id" ref="fiscal_company_base.company_fiscal_child_1"/>
         <field name="fields_id" ref="account.field_res_partner__property_account_payable_id"/>
         <field name="value" eval="'account.account,'+str(account_payable_cae)"/>
     </record>
 
     <record id="property_account_payable_CH2" model="ir.property">
-        <field name="name">CAE - property_account_payable CH2</field>
+        <field name="name">property_account_payable_id</field>
         <field name="company_id" ref="fiscal_company_base.company_fiscal_child_2"/>
         <field name="fields_id" ref="account.field_res_partner__property_account_payable_id"/>
         <field name="value" eval="'account.account,'+str(account_payable_cae)"/>
+    </record>
+
+    <!-- Product Category Properties -->
+    <record id="property_account_income_categ_id_CAE" model="ir.property">
+        <field name="name">property_account_income_categ_id</field>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
+        <field name="fields_id" ref="account.field_product_category__property_account_income_categ_id"/>
+        <field name="value" eval="'account.account,'+str(account_income_cae)"/>
+    </record>
+
+    <record id="property_account_income_categ_id_CH1" model="ir.property">
+        <field name="name">property_account_income_categ_id</field>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_child_1"/>
+        <field name="fields_id" ref="account.field_product_category__property_account_income_categ_id"/>
+        <field name="value" eval="'account.account,'+str(account_income_cae)"/>
+    </record>
+
+    <record id="property_account_income_categ_id_CH2" model="ir.property">
+        <field name="name">property_account_income_categ_id</field>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_child_2"/>
+        <field name="fields_id" ref="account.field_product_category__property_account_income_categ_id"/>
+        <field name="value" eval="'account.account,'+str(account_income_cae)"/>
+    </record>
+
+    <record id="property_account_expense_categ_id_CAE" model="ir.property">
+        <field name="name">property_account_expense_categ_id</field>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
+        <field name="fields_id" ref="account.field_product_category__property_account_expense_categ_id"/>
+        <field name="value" eval="'account.account,'+str(account_expense_cae)"/>
+    </record>
+
+    <record id="property_account_expense_categ_id_CH1" model="ir.property">
+        <field name="name">CAE - property_account_expense_categ_id CH1</field>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_child_1"/>
+        <field name="fields_id" ref="account.field_product_category__property_account_expense_categ_id"/>
+        <field name="value" eval="'account.account,'+str(account_expense_cae)"/>
+    </record>
+
+    <record id="property_account_expense_categ_id_CH2" model="ir.property">
+        <field name="name">property_account_expense_categ_id</field>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_child_2"/>
+        <field name="fields_id" ref="account.field_product_category__property_account_expense_categ_id"/>
+        <field name="value" eval="'account.account,'+str(account_expense_cae)"/>
     </record>
 
 </odoo>
