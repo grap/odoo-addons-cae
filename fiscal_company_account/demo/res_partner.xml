@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2018 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="partner_mother_property" model="res.partner">
+        <field name="name">CAE - Mother Partner</field>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
+    </record>
+
+    <record id="partner_fiscal_child_1" model="res.partner">
+        <field name="name">CAE - Fiscal 1 Partner</field>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_child_1"/>
+    </record>
+
+    <record id="partner_fiscal_child_2" model="res.partner">
+        <field name="name">CAE - Fiscal 2 Partner</field>
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_child_1"/>
+    </record>
+
+</odoo>

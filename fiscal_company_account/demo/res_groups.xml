@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2013-Today GRAP (http://www.grap.coop)
+@author Julien Weste
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+
+<odoo>
+
+    <record id="account.group_account_invoice" model="res.groups">
+        <field name="users" eval="[
+            (4, ref('fiscal_company_base.user_worker')),
+        ]" />
+    </record>
+
+
+    <record id="account.group_account_manager" model="res.groups">
+        <field name="users" eval="[
+            (4, ref('base.user_admin')),
+            (4, ref('fiscal_company_base.user_accountant')),
+        ]" />
+    </record>
+
+    <record id="account.group_account_user" model="res.groups">
+        <field name="users" eval="[
+            (4, ref('base.user_admin')),
+            (4, ref('fiscal_company_base.user_accountant')),
+        ]" />
+    </record>
+
+</odoo>

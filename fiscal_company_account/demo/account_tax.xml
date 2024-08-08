@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- oca-hooks:disable=xml-duplicate-record-id -->
+<!--
+Copyright (C) 2013-Today GRAP (http://www.grap.coop)
+@author Julien Weste
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <!-- Sale Tax 20% -->
+    <record model="account.tax.repartition.line" id="sale_tax_20_repartition_invoice_base" >
+        <field name="factor_percent">100</field>
+        <field name="repartition_type">base</field>
+    </record>
+
+    <record model="account.tax.repartition.line" id="sale_tax_20_repartition_invoice_tax">
+        <field name="factor_percent">100</field>
+        <field name="repartition_type">tax</field>
+    </record>
+
+    <record model="account.tax.repartition.line" id="sale_tax_20_repartition_refund_base" >
+        <field name="factor_percent">100</field>
+        <field name="repartition_type">base</field>
+    </record>
+
+    <record model="account.tax.repartition.line" id="sale_tax_20_repartition_refund_tax" >
+        <field name="factor_percent">100</field>
+        <field name="repartition_type">tax</field>
+    </record>
+
+    <record model="account.tax" id="sale_tax_20" >
+        <field name="name">Sale Tax 20% (Price Excl.)</field>
+        <field name="type_tax_use">sale</field>
+        <field name="amount_type">percent</field>
+        <field name="amount">20.0</field>
+        <field name="price_include" eval="False" />
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
+        <field name="country_id" ref="base.fr"/>
+        <field name="invoice_repartition_line_ids" eval="[
+            Command.link(ref('fiscal_company_account.sale_tax_20_repartition_invoice_base')),
+            Command.link(ref('fiscal_company_account.sale_tax_20_repartition_invoice_tax')),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[
+            Command.link(ref('fiscal_company_account.sale_tax_20_repartition_refund_base')),
+            Command.link(ref('fiscal_company_account.sale_tax_20_repartition_refund_tax')),
+        ]"/>
+    </record>
+
+
+    <record model="account.tax.repartition.line"  id="sale_tax_20_repartition_invoice_tax" >
+        <field name="account_id" ref="account_vat_received_cae"/>
+    </record>
+
+    <record model="account.tax.repartition.line" id="sale_tax_20_repartition_refund_tax" >
+        <field name="account_id" ref="account_vat_received_cae"/>
+    </record>
+
+<!--
+
+    <record model="account.tax" id="sale_tax_20">
+        <field name="name">Sale Tax (20% Excluded)</field>
+        <field name="amount">20</field>
+    </record>
+
+    <record model="account.tax" id="purchase_tax_20">
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
+        <field name="name">Purchase Tax (20% Excluded)</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="amount">20</field>
+    </record>
+
+ -->
+
+    <!-- Purchase Tax 20% -->
+    <record model="account.tax.repartition.line" id="purchase_tax_20_repartition_invoice_base" >
+        <field name="factor_percent">100</field>
+        <field name="repartition_type">base</field>
+    </record>
+
+    <record model="account.tax.repartition.line" id="purchase_tax_20_repartition_invoice_tax">
+        <field name="factor_percent">100</field>
+        <field name="repartition_type">tax</field>
+    </record>
+
+    <record model="account.tax.repartition.line" id="purchase_tax_20_repartition_refund_base" >
+        <field name="factor_percent">100</field>
+        <field name="repartition_type">base</field>
+    </record>
+
+    <record model="account.tax.repartition.line" id="purchase_tax_20_repartition_refund_tax" >
+        <field name="factor_percent">100</field>
+        <field name="repartition_type">tax</field>
+    </record>
+
+    <record model="account.tax" id="purchase_tax_20" >
+        <field name="name">Purchase Tax 20% (Price Excl.)</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="amount_type">percent</field>
+        <field name="amount">20.0</field>
+        <field name="price_include" eval="False" />
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_mother"/>
+        <field name="country_id" ref="base.fr"/>
+        <field name="invoice_repartition_line_ids" eval="[
+            Command.link(ref('fiscal_company_account.purchase_tax_20_repartition_invoice_base')),
+            Command.link(ref('fiscal_company_account.purchase_tax_20_repartition_invoice_tax')),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[
+            Command.link(ref('fiscal_company_account.purchase_tax_20_repartition_refund_base')),
+            Command.link(ref('fiscal_company_account.purchase_tax_20_repartition_refund_tax')),
+        ]"/>
+    </record>
+
+
+    <record model="account.tax.repartition.line"  id="purchase_tax_20_repartition_invoice_tax" >
+        <field name="account_id" ref="account_vat_deductible_cae"/>
+    </record>
+
+    <record model="account.tax.repartition.line" id="purchase_tax_20_repartition_refund_tax" >
+        <field name="account_id" ref="account_vat_deductible_cae"/>
+    </record>
+
+</odoo>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2020 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="view_account_move_form" model="ir.ui.view">
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <!-- remove hardcoded domain, that is wrong in our case, and duplicated with
+            python domain -->
+            <xpath expr="//field[@name='line_ids']/tree//field[@name='account_id']" position="attributes">
+                <attribute name="domain">[]</attribute>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/form//field[@name='account_id']" position="attributes">
+                <attribute name="domain">[]</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

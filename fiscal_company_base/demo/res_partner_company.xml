@@ -29,6 +29,7 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
 <!-- Create fiscal mother company and partner associated -->
     <record model="res.partner" id="partner_fiscal_mother">
         <field name="name">CAE Company</field>
+        <field name="country_id" ref="base.fr"/>
         <field name="company_id" eval="False"/>
         <field name="is_company" eval="True"/>
     </record>
@@ -43,6 +44,7 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
 <!-- Create fiscal child company 1 and partner associated -->
     <record model="res.partner" id="partner_fiscal_child_1">
         <field name="name">Integrated Company 1 (Service)</field>
+        <field name="country_id" ref="base.fr"/>
         <field name="company_id" eval="False"/>
         <field name="is_company" eval="True"/>
     </record>
@@ -56,6 +58,7 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
 
 <!-- Create fiscal child company 2 and partner associated -->
     <record model="res.partner" id="partner_fiscal_child_2">
+        <field name="country_id" ref="base.fr"/>
         <field name="name">Integrated Company 2 (Production)</field>
         <field name="company_id" eval="False"/>
         <field name="is_company" eval="True"/>
