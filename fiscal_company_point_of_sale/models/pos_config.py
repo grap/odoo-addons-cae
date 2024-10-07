@@ -40,9 +40,9 @@ class PosConfig(models.Model):
 
     @api.constrains("company_id", "journal_ids")
     def _check_company_payment(self):
-        if self.mapped("journal_ids.company_id.fiscal_company_id.id") != [
-            self.company_id.fiscal_company_id.id
-        ]:
+        if self.mapped("journal_ids") and self.mapped(
+            "journal_ids.company_id.fiscal_company_id.id"
+        ) != [self.company_id.fiscal_company_id.id]:
             raise ValidationError(
                 _(
                     "The companies of the method payments and the company of the point of sale"
