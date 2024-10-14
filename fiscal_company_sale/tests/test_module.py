@@ -40,4 +40,4 @@ class TestModule(TransactionCase):
         }
 
         self.user_worker.company_id = company.id
-        self.SaleOrder.sudo(self.user_worker).create(order_vals)
+        self.SaleOrder.with_user(self.user_worker).create(order_vals)
