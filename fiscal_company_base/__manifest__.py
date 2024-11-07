@@ -5,7 +5,7 @@
 
 {
     "name": "CAE - Base",
-    "version": "16.0.1.1.1",
+    "version": "16.0.2.0.0",
     "category": "CAE",
     "summary": "Manage CAE (Cooperatives of Activities and Employment)",
     "author": "GRAP",
@@ -18,7 +18,7 @@
         "mail",
     ],
     "data": [
-        # "security/ir_rule.xml",
+        "security/ir_rule.xml",
         "views/view_res_company.xml",
     ],
     "demo": [
