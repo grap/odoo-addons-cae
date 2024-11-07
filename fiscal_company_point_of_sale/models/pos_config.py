@@ -19,7 +19,8 @@ class PosConfig(models.Model):
         ):
             raise ValidationError(
                 _(
-                    "The company of the invoice journal and the company of the point of sale"
+                    "The company of the invoice journal and"
+                    " the company of the point of sale"
                     " must have the same fiscal company."
                 )
             )
@@ -33,19 +34,21 @@ class PosConfig(models.Model):
         ):
             raise ValidationError(
                 _(
-                    "The company of the sales journal and the company of the point of sale"
+                    "The company of the sales journal and"
+                    " the company of the point of sale"
                     " must have the same fiscal company."
                 )
             )
 
-    @api.constrains("company_id", "journal_ids")
-    def _check_company_payment(self):
-        if self.mapped("journal_ids") and self.mapped(
-            "journal_ids.company_id.fiscal_company_id.id"
-        ) != [self.company_id.fiscal_company_id.id]:
-            raise ValidationError(
-                _(
-                    "The companies of the method payments and the company of the point of sale"
-                    " must have the same fiscal company."
-                )
-            )
+    # @api.constrains("company_id", "journal_ids")
+    # def _check_company_payment(self):
+    #     if self.mapped("journal_ids") and self.mapped(
+    #         "journal_ids.company_id.fiscal_company_id.id"
+    #     ) != [self.company_id.fiscal_company_id.id]:
+    #         raise ValidationError(
+    #             _(
+    #                 "The companies of the method payments and"
+    #                 " the company of the point of sale"
+    #                 " must have the same fiscal company."
+    #             )
+    #         )

@@ -6,4 +6,4 @@ This module is a glue module for the Odoo Point of Sale module.
 
 **Features**
 
-Remove bad checks regarding company journals of ``pos.config`` models.
+- Remove bad checks regarding company journals of ``pos.config`` models.

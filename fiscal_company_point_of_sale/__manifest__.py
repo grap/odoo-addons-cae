@@ -4,13 +4,18 @@
 
 {
     "name": "CAE - Point Of Sale",
-    "version": "12.0.1.2.2",
+    "version": "16.0.1.0.0",
     "category": "CAE",
     "summary": "Glue Module between CAE and Point of Sale modules",
     "author": "GRAP",
     "website": "https://github.com/grap/odoo-addons-cae",
     "license": "AGPL-3",
-    "depends": ["fiscal_company_base", "point_of_sale"],
+    "depends": [
+        # Odoo
+        "point_of_sale",
+        # GRAP
+        "fiscal_company_base",
+    ],
     "installable": True,
     "auto_install": True,
 }
