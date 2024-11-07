@@ -5,13 +5,18 @@
 
 {
     "name": "CAE - Account",
-    "version": "16.0.1.1.0",
+    "version": "16.0.2.0.0",
     "category": "CAE",
     "summary": "Glue Module between CAE and Account modules",
     "author": "GRAP",
     "website": "https://github.com/grap/odoo-addons-cae",
     "license": "AGPL-3",
-    "depends": ["fiscal_company_base", "account"],
+    "depends": [
+        # Odoo
+        "account",
+        # GRAP
+        "fiscal_company_base",
+    ],
     "data": [
         "security/ir_rule.xml",
         # "views/menu.xml",
@@ -26,6 +31,8 @@
         "demo/res_partner.xml",
         "demo/ir_property.xml",
     ],
+    "post_init_hook": "post_init_hook",
+    "uninstall_hook": "uninstall_hook",
     "installable": True,
     "auto_install": True,
 }
