@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2024-Today GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+
+<odoo>
+
+    <!-- account.fiscal.year -->
+    <!-- See the fiscal years of the fiscal mother company -->
+    <!-- OCA DEFAULT: ['|', ('company_id', '=', False), ('company_id', 'in', company_ids)] -->
+    <record id="rule_account_fiscal_year" model="ir.rule">
+        <field name="name">account.fiscal_year (fiscal_company_account_fiscal_year)</field>
+        <field name="model_id" ref="account_fiscal_year.model_account_fiscal_year"/>
+        <field name="domain_force">
+            [('company_id', 'in', user._include_fiscal_company_ids(company_ids))]
+        </field>
+    </record>
+
+</odoo>
