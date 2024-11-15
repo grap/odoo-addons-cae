@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 Copyright (C) 2013-Today GRAP (http://www.grap.coop)
 @author Julien Weste
@@ -11,7 +11,20 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
     <!-- account.account -->
     <!-- See the accounts of the fiscal mother company -->
     <!-- Odoo DEFAULT: [('company_id', 'in', company_ids)] -->
-    <record id="account.account_comp_rule" model="ir.rule">
+    <record id="rule_account_account" model="ir.rule">
+        <field name="name">account.account (fiscal_company_account)</field>
+        <field name="model_id" ref="account.model_account_account"/>
+        <field name="domain_force">
+            [('company_id', 'in', user._include_fiscal_company_ids(company_ids))]
+        </field>
+    </record>
+
+    <!-- account.root -->
+    <!-- See the account roots of the fiscal mother company -->
+    <!-- Odoo DEFAULT: [('company_id', 'in', company_ids + [False])] -->
+    <record id="rule_account_root" model="ir.rule">
+        <field name="name">account.root (fiscal_company_account)</field>
+        <field name="model_id" ref="account.model_account_root"/>
         <field name="domain_force">
             [('company_id', 'in', user._include_fiscal_company_ids(company_ids))]
         </field>
@@ -20,7 +33,9 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
     <!-- account.tax -->
     <!-- See the taxes of the fiscal mother company -->
     <!-- Odoo DEFAULT: [('company_id', 'in', company_ids)] -->
-    <record id="account.tax_comp_rule" model="ir.rule">
+    <record id="rule_account_tax" model="ir.rule">
+        <field name="name">account.tax (fiscal_company_account)</field>
+        <field name="model_id" ref="account.model_account_tax"/>
         <field name="domain_force">
             [('company_id', 'in', user._include_fiscal_company_ids(company_ids))]
         </field>
@@ -29,7 +44,9 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
     <!-- account.journal -->
     <!-- See the journals of the fiscal mother company -->
     <!-- Odoo DEFAULT: [('company_id', 'in', company_ids)] -->
-    <record id="account.journal_comp_rule" model="ir.rule">
+    <record id="rule_account_journal" model="ir.rule">
+        <field name="name">account.journal (fiscal_company_account)</field>
+        <field name="model_id" ref="account.model_account_journal"/>
         <field name="domain_force">
             [('company_id', 'in', user._include_fiscal_company_ids(company_ids))]
         </field>
@@ -38,7 +55,9 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
     <!-- account.fiscal.position -->
     <!-- See the fiscal positions of the fiscal mother company -->
     <!-- Odoo DEFAULT: [('company_id', 'in', company_ids)] -->
-    <record id="account.account_fiscal_position_comp_rule" model="ir.rule">
+    <record id="rule_account_fiscal_position" model="ir.rule">
+        <field name="name">account.fiscal.position (fiscal_company_account)</field>
+        <field name="model_id" ref="account.model_account_fiscal_position"/>
         <field name="domain_force">
             [('company_id', 'in', user._include_fiscal_company_ids(company_ids))]
         </field>
