@@ -7,7 +7,13 @@ from odoo import fields, models
 
 
 class AccountPayment(models.Model):
-    _inherit = "account.payment"
+    _name = "account.payment"
+    _inherit = [
+        "account.payment",
+        "fiscal.company.check.company.mixin",
+    ]
+
+    _fiscal_company_forbid_fiscal_type = ["group"]
 
     destination_account_id = fields.Many2one(check_company=False)
 

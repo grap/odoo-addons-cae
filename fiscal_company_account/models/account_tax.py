@@ -15,4 +15,4 @@ class AccountTax(models.Model):
         "fiscal.company.check.company.mixin",
     ]
 
-    _fiscal_company_forbid_fiscal_type = ["fiscal_child"]
+    _fiscal_company_forbid_fiscal_type = ["group", "fiscal_child"]

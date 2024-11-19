@@ -13,7 +13,7 @@ class AccountMoveLine(models.Model):
         "fiscal.company.check.company.mixin",
     ]
 
-    _fiscal_company_forbid_fiscal_type = ["fiscal_mother"]
+    _fiscal_company_forbid_fiscal_type = ["group", "fiscal_mother"]
 
     account_id = fields.Many2one(check_company=False)
 
