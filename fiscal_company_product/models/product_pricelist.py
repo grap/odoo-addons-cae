@@ -5,8 +5,8 @@
 from odoo import models
 
 
-class ProductTemplate(models.Model):
-    _name = "product.template"
-    _inherit = ["product.template", "fiscal.company.check.company.mixin"]
+class ProductPricelist(models.Model):
+    _name = "product.pricelist"
+    _inherit = ["product.pricelist", "fiscal.company.check.company.mixin"]
 
     _fiscal_company_forbid_fiscal_type = ["group", "fiscal_mother"]

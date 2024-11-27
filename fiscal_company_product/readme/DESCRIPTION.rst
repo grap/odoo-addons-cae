@@ -6,8 +6,5 @@ This module is a glue module for the Odoo Product module.
 
 **Features**
 
-* User in mother company can see product of all child company
-* User in fiscal company can see but not update / delete product
-  of mother company
-* Add a field ```cae_administrative_ok``` on ```product.product```. if checked
-  the product will not be updatable by non 'CAE Manager' users
+* Add constrains on ``product.product``, ``product.pricelist``
+  to create such items on a fiscal mother company or a group.
