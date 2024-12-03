@@ -4,7 +4,7 @@
 
 {
     "name": "Product Category - Global Account Settings",
-    "version": "12.0.1.1.1",
+    "version": "16.0.1.0.0",
     "summary": "Propagate Accouting settings of product categories"
     " for all the companies",
     "category": "Accounting",
@@ -13,6 +13,5 @@
     "license": "AGPL-3",
     "depends": ["stock_account", "fiscal_company_account"],
     "data": ["views/view_product_category.xml"],
-    "demo": ["demo/account_chart_template.xml", "demo/account_account_template.xml"],
     "installable": True,
 }

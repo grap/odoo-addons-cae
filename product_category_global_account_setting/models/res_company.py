@@ -12,14 +12,14 @@ _logger = logging.getLogger(__name__)
 class ResCompany(models.Model):
     _inherit = "res.company"
 
-    @api.model
-    def create(self, vals):
-        company = super().create(vals)
-        if vals.get("fiscal_type") == "fiscal_child":
-            company._apply_global_account_settings()
-        return company
+    @api.model_create_multi
+    def create(self, vals_list):
+        companies = super().create(vals_list)
+        for company, vals in zip(companies, vals_list, strict=True):
+            if vals.get("fiscal_type") == "fiscal_child":
+                company._apply_global_account_settings()
+        return companies
 
-    @api.multi
     def write(self, vals):
         res = super().write(vals)
         if vals.get("fiscal_type") == "fiscal_child":
@@ -27,7 +27,6 @@ class ResCompany(models.Model):
                 company._apply_global_account_settings()
         return res
 
-    @api.multi
     def _apply_global_account_settings(self):
         self.ensure_one()
         ProductCategory = self.env["product.category"]

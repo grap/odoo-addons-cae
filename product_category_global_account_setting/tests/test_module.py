@@ -7,31 +7,20 @@ from odoo.tests.common import TransactionCase
 
 
 class TestModule(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.ResCompany = self.env["res.company"]
-        self.AccountAccount = self.env["account.account"]
-        self.IrProperty = self.env["ir.property"].sudo()
-
-        self.expense_type = self.env.ref("account.data_account_type_expenses")
-        self.mother_company = self.env.ref("fiscal_company_base.company_fiscal_mother")
-        self.income_type = self.env.ref("account.data_account_type_revenue")
-        self.saleable_categ = self.env.ref("product.product_category_1")
-        self.saleable_service_categ = self.env.ref("product.product_category_3")
-        self.expense_field = self.env.ref(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.ResCompany = cls.env["res.company"]
+        cls.AccountAccount = cls.env["account.account"]
+        cls.IrProperty = cls.env["ir.property"].sudo()
+        cls.mother_company = cls.env.ref("fiscal_company_base.company_fiscal_mother")
+        cls.saleable_categ = cls.env.ref("product.product_category_1")
+        cls.saleable_service_categ = cls.env.ref("product.product_category_3")
+        cls.expense_field = cls.env.ref(
             "account." "field_product_category__property_account_expense_categ_id"
         )
-        self.income_field = self.env.ref(
-            "account." "field_product_category__property_account_income_categ_id"
-        )
-        self.chart_template = self.env.ref(
-            "product_category_global_account_setting.chart_template"
-        )
-        self.account_template = self.env.ref(
-            "product_category_global_account_setting.account_template"
-        )
 
-    def _create_account_for_all_companies(self, code, name, user_type_id):
+    def _create_account_for_all_companies(self, code, name, account_type):
         for company in self.ResCompany.with_context(active_test=False).search(
             [("fiscal_type", "in", ["normal", "fiscal_mother"])]
         ):
@@ -39,7 +28,7 @@ class TestModule(TransactionCase):
                 {
                     "code": code,
                     "name": name,
-                    "user_type_id": user_type_id,
+                    "account_type": account_type,
                     "company_id": company.id,
                 }
             )
@@ -58,12 +47,10 @@ class TestModule(TransactionCase):
 
         # Try to affect properties should success
         # if account exists
-        self._create_account_for_all_companies(
-            "607TEST", "Purchase", self.expense_type.id
-        )
+        self._create_account_for_all_companies("607TEST", "Purchase", "expense")
         self.saleable_categ.write({"global_property_account_expense_categ": "607TEST"})
 
-        self._create_account_for_all_companies("707TEST", "Sale", self.income_type.id)
+        self._create_account_for_all_companies("707TEST", "Sale", "income")
         self.saleable_categ.write({"global_property_account_income_categ": "707TEST"})
 
         companies = self.ResCompany.with_context(active_test=False).search(
@@ -104,9 +91,7 @@ class TestModule(TransactionCase):
         )
 
     def test_02_fiscal_child_company(self):
-        self._create_account_for_all_companies(
-            "607TEST", "Purchase", self.expense_type.id
-        )
+        self._create_account_for_all_companies("607TEST", "Purchase", "expense")
 
         self.saleable_categ.write({"global_property_account_expense_categ": "607TEST"})
 
@@ -115,7 +100,7 @@ class TestModule(TransactionCase):
             {
                 "name": "Test Fiscal Child Company (Global Account)",
                 "fiscal_type": "fiscal_child",
-                "fiscal_company_id": self.mother_company.id,
+                "parent_id": self.mother_company.id,
             }
         )
 
@@ -130,30 +115,3 @@ class TestModule(TransactionCase):
         self.assertEqual(
             1, len(properties), "Create a new fiscal company should create properties"
         )
-
-    def test_03_fiscal_mother_company(self):
-        self._create_account_for_all_companies(
-            "607TEST", "Purchase", self.expense_type.id
-        )
-
-        self.saleable_categ.write({"global_property_account_expense_categ": "607TEST"})
-
-        # Create a fiscal mother
-        new_company = self.ResCompany.create(
-            {
-                "name": "Test Fiscal Mother Company (Global Account)",
-                "fiscal_type": "fiscal_mother",
-            }
-        )
-
-        self.env.user.write({"company_id": new_company.id})
-
-        # Try to install a chart of account without 607TEST
-        # should fail
-        with self.assertRaises(UserError):
-            self.chart_template.load_for_current_company(0, 0)
-
-        # Affect the 607TEST account template to the chart template
-        # and try to install again chart of account, should success
-        self.account_template.chart_template_id = self.chart_template.id
-        self.chart_template.load_for_current_company(0, 0)

@@ -11,10 +11,13 @@ Copyright (C) 2020-Today GRAP (http://www.grap.coop)
         <field name="model">product.category</field>
         <field name="inherit_id" ref="product.product_category_list_view"/>
         <field name="arch" type="xml">
-                <field name="display_name" position="after">
-                    <field name="global_property_account_expense_categ"/>
-                    <field name="global_property_account_income_categ"/>
-                </field>
+            <xpath expr="//tree" position="attributes">
+                <attribute name="multi_edit">1</attribute>
+            </xpath>
+            <field name="display_name" position="after">
+                <field name="global_property_account_expense_categ" optional="show"/>
+                <field name="global_property_account_income_categ" optional="show"/>
+            </field>
         </field>
     </record>
 
@@ -22,13 +25,12 @@ Copyright (C) 2020-Today GRAP (http://www.grap.coop)
         <field name="model">product.category</field>
         <field name="inherit_id" ref="account.view_category_property_form"/>
         <field name="arch" type="xml">
-            <group name="account_property" position="inside">
-
-                <group name="global_account_property" string="Global Account Properties" groups="account.group_account_manager" col="3">
+            <xpath expr="//group[@name='account_property']/group" position="before">
+                <group name="global_account_property" string="Global Account Properties" groups="account.group_account_manager">
                     <field name="global_property_account_income_categ"/>
                     <field name="global_property_account_expense_categ"/>
                 </group>
-            </group>
+            </xpath>
         </field>
     </record>
 

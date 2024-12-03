@@ -17,19 +17,19 @@ class ProductCategory(models.Model):
 
     global_property_account_income_categ = fields.Char(string="Income Account Code")
 
-    @api.model
-    def create(self, vals):
-        category = super().create(vals)
-        field_names = []
-        if vals.get("global_property_account_expense_categ"):
-            field_names.append("global_property_account_expense_categ")
-        if vals.get("global_property_account_income_categ"):
-            field_names.append("global_property_account_income_categ")
+    @api.model_create_multi
+    def create(self, vals_list):
+        categories = super().create(vals_list)
+        for category, vals in zip(categories, vals_list, strict=True):
+            field_names = []
+            if vals.get("global_property_account_expense_categ"):
+                field_names.append("global_property_account_expense_categ")
+            if vals.get("global_property_account_income_categ"):
+                field_names.append("global_property_account_income_categ")
 
-        category.propagate_global_account_properties_recursive(field_names)
-        return category
+            category.propagate_global_account_properties_recursive(field_names)
+        return categories
 
-    @api.multi
     def write(self, vals):
         res = super().write(vals)
         field_names = []
@@ -55,7 +55,6 @@ class ProductCategory(models.Model):
                 childs = category.mapped("child_id")
                 childs.write({field_name: getattr(category, field_name)})
 
-    @api.multi
     def _apply_global_account_property(self, company, field_name):
         self.ensure_one()
         IrProperty = self.env["ir.property"].sudo()
