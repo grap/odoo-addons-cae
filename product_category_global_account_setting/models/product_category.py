@@ -62,9 +62,7 @@ class ProductCategory(models.Model):
         AccountAccount = self.env["account.account"].sudo()
         IrModelFields = self.env["ir.model.fields"]
 
-        base_message = "Company {} - Category {}".format(
-            company.name, self.complete_name
-        )
+        base_message = f"Company {company.name} - Category {self.complete_name}"
 
         account_code = getattr(self, field_name)
 
@@ -77,7 +75,7 @@ class ProductCategory(models.Model):
             )
             if not account:
                 raise UserError(
-                    _("{} - Account {} not found.".format(base_message, account_code))
+                    _(f"{base_message} - Account {account_code} not found.")
                 )
 
         field = IrModelFields.search(
@@ -103,9 +101,7 @@ class ProductCategory(models.Model):
                     {"value_reference": "account.account,%d" % (account.id)}
                 )
                 _logger.debug(
-                    "{} - Account {} : Property updated.".format(
-                        base_message, account_code
-                    )
+                    f"{base_message} - Account {account_code} : Property updated."
                 )
             else:
                 # Create a new property
@@ -120,9 +116,7 @@ class ProductCategory(models.Model):
                     }
                 )
                 _logger.debug(
-                    "{} - Account {} : Property created.".format(
-                        base_message, account_code
-                    )
+                    f"{base_message} - Account {account_code} : Property created."
                 )
 
         elif current_property:
