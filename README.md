@@ -25,11 +25,11 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[fiscal_company_account](fiscal_company_account/) | 16.0.2.0.0 |  | Glue Module between CAE and Account modules
+[fiscal_company_account](fiscal_company_account/) | 16.0.2.1.0 |  | Glue Module between CAE and Account modules
 [fiscal_company_account_fiscal_year](fiscal_company_account_fiscal_year/) | 16.0.2.0.0 |  | Glue Module between CAE and Account Fiscal year module
 [fiscal_company_base](fiscal_company_base/) | 16.0.2.0.0 |  | Manage CAE (Cooperatives of Activities and Employment)
-[fiscal_company_point_of_sale](fiscal_company_point_of_sale/) | 16.0.1.0.0 |  | Glue Module between CAE and Point of Sale modules
-[fiscal_company_sale](fiscal_company_sale/) | 16.0.1.0.1 |  | Glue Module between CAE and Sale modules
+[fiscal_company_point_of_sale](fiscal_company_point_of_sale/) | 16.0.1.1.0 |  | Glue Module between CAE and Point of Sale modules
+[fiscal_company_sale](fiscal_company_sale/) | 16.0.1.1.0 |  | Glue Module between CAE and Sale modules
 
 [//]: # (end addons)
 
