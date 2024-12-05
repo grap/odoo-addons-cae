@@ -9,4 +9,4 @@ class SaleOrder(models.Model):
     _name = "sale.order"
     _inherit = ["sale.order", "fiscal.company.check.company.mixin"]
 
-    _fiscal_company_forbid_fiscal_type = ["fiscal_mother"]
+    _fiscal_company_forbid_fiscal_type = ["group", "fiscal_mother"]

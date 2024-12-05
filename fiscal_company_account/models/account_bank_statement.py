@@ -9,6 +9,6 @@ class AccountBankStatement(models.Model):
     _name = "account.bank.statement"
     _inherit = ["account.bank.statement", "fiscal.company.check.company.mixin"]
 
-    _fiscal_company_forbid_fiscal_type = ["fiscal_mother"]
+    _fiscal_company_forbid_fiscal_type = ["group", "fiscal_mother"]
 
     company_id = fields.Many2one(related=False)

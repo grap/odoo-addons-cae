@@ -11,7 +11,10 @@ class AccountJournal(models.Model):
     _inherit = [
         "account.journal",
         "fiscal.company.change.search.domain.mixin",
+        "fiscal.company.check.company.mixin",
     ]
+
+    _fiscal_company_forbid_fiscal_type = ["group"]
 
     def _get_journal_dashboard_data_batched(self):
         # Modify Context to add domain based on allowed companies

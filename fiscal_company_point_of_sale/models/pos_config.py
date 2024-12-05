@@ -7,7 +7,13 @@ from odoo.exceptions import ValidationError
 
 
 class PosConfig(models.Model):
-    _inherit = "pos.config"
+    _name = "pos.config"
+    _inherit = [
+        "pos.config",
+        "fiscal.company.check.company.mixin",
+    ]
+
+    _fiscal_company_forbid_fiscal_type = ["group", "fiscal_mother"]
 
     # Overwrite company constrains
     @api.constrains("company_id", "invoice_journal_id")
