@@ -8,7 +8,7 @@ from odoo.exceptions import ValidationError
 
 _RES_COMPANY_FISCAL_TYPE = [
     ("group", "Group"),
-    ("normal", "Normal"),
+    ("normal", "Associate Company"),
     ("fiscal_mother", "CAE"),
     ("fiscal_child", "Integrated Company"),
 ]
