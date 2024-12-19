@@ -37,6 +37,31 @@ class ResCompany(models.Model):
         readonly=True,
     )
 
+    def _get_fiscal_propagated_fields(self):
+        return ["vat"]
+
+    def write(self, vals):
+        res = super().write(vals)
+        cae_companies = self.filtered(lambda x: x.fiscal_type == "fiscal_mother")
+        new_vals = {}
+
+        for field in self._get_fiscal_propagated_fields():
+            if field in vals.keys():
+                new_vals[field] = vals[field]
+
+        if new_vals and cae_companies:
+            super(ResCompany, cae_companies.mapped("child_ids")).write(new_vals)
+
+        return res
+
+    @api.onchange("parent_id")
+    def _onchange_parent_id_fiscal_propagated_fields(self):
+        if self.parent_id.fiscal_type == "fiscal_mother":
+            for field in self._get_fiscal_propagated_fields():
+                parent_value = getattr(self.parent_id, field)
+                if parent_value:
+                    setattr(self, field, parent_value)
+
     @api.depends("fiscal_type", "parent_id")
     def _compute_fiscal_company_id(self):
         for company in self:
