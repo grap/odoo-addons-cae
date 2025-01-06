@@ -6,14 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-08 12:33+0000\n"
-"PO-Revision-Date: 2024-08-08 12:33+0000\n"
+"POT-Creation-Date: 2024-12-19 13:40+0000\n"
+"PO-Revision-Date: 2024-12-19 13:40+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: fiscal_company_base
+#: model:ir.model.fields.selection,name:fiscal_company_base.selection__res_company__fiscal_type__normal
+msgid "Associate Company"
+msgstr "Activité associée"
 
 #. module: fiscal_company_base
 #: model:ir.model.fields.selection,name:fiscal_company_base.selection__res_company__fiscal_type__fiscal_mother
