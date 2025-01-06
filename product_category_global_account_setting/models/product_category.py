@@ -46,7 +46,7 @@ class ProductCategory(models.Model):
 
         for field_name in field_names:
             for category in self:
-                companies = ResCompany.with_context(active_test=False).search(
+                companies = ResCompany.with_context().search(
                     [("fiscal_type", "in", ["normal", "fiscal_mother", "fiscal_child"])]
                 )
                 for company in companies:
