@@ -38,11 +38,32 @@ class ResCompany(models.Model):
     )
 
     def _get_fiscal_propagated_fields(self):
+        """Return list of company fields that should be propagated to the
+        child companies"""
         return ["vat"]
+
+    def _get_model_from_properties_propagation(self):
+        """Return list of models that inherit from
+        fiscal.company.propagate.child.company.mixin
+        and that should propagate properties to child companies.
+        """
+        return ["res.partner"]
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        companies = super().create(vals_list)
+        for company, vals in zip(companies, vals_list, strict=True):
+            if vals.get("fiscal_type") == "fiscal_child":
+                company._propagate_properties_to_new_fiscal_child()
+        return companies
 
     def write(self, vals):
         res = super().write(vals)
         cae_companies = self.filtered(lambda x: x.fiscal_type == "fiscal_mother")
+
+        if vals.get("fiscal_type") == "fiscal_child":
+            self._propagate_properties_to_new_fiscal_child()
+
         new_vals = {}
 
         for field in self._get_fiscal_propagated_fields():
@@ -141,3 +162,28 @@ class ResCompany(models.Model):
                         error_types=error_types,
                     )
                 )
+
+    def _propagate_properties_to_new_fiscal_child(self):
+        """
+        Propagate all properties of some models for a new child company
+        """
+        IrModelFields = self.env["ir.model.fields"]
+        IrProperty = self.env["ir.property"]
+        for company in self:
+            for model_name in self._get_model_from_properties_propagation():
+                CurrentModel = self.env[model_name]
+                property_name_list = CurrentModel._fiscal_property_creation_list()
+                for property_name in property_name_list:
+                    field = IrModelFields.search(
+                        [("model", "=", model_name), ("name", "=", property_name)]
+                    )[0]
+                    # Get existing properties
+                    existing_properties = IrProperty.sudo().search(
+                        [
+                            ("fields_id", "=", field.id),
+                            ("company_id", "=", company.fiscal_company_id.id),
+                        ]
+                    )
+                    # Duplicate properties for the new fiscal child company
+                    for existing_property in existing_properties:
+                        existing_property.copy(default={"company_id": company.id})

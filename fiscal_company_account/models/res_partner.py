@@ -3,11 +3,16 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
-from odoo import fields, models
+from odoo import models
 
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    # Display all accessible fiscal position
-    property_account_position_id = fields.Many2one(domain=[])
+    def _fiscal_property_creation_list(self):
+        res = super()._fiscal_property_creation_list()
+        res += [
+            "property_account_payable_id",
+            "property_account_receivable_id",
+        ]
+        return res

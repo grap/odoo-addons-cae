@@ -27,6 +27,27 @@ class ModelFiscalCompanyCheckCompanyMixinFiscalMother(models.Model):
     company_id = fields.Many2one(comodel_name="res.company")
 
 
+class ModelFiscalCompanyPropagateChildCompanyMixin(models.Model):
+    _name = "model.fiscal.company.propagate.child.company.mixin"
+    _description = "fiscal.company.propagate.child.company.mixin"
+    _inherit = ["fiscal.company.propagate.child.company.mixin"]
+
+    company_dependent_field = fields.Char(company_dependent=True)
+
+    def _fiscal_property_creation_list(self):
+        return ["company_dependent_field"]
+
+
+# pylint: disable=R8180
+class ModelFiscalCompanyPropagateChildCompanyMixinResCompany(models.Model):
+    _inherit = "res.company"
+
+    def _get_model_from_properties_propagation(self):
+        res = super()._get_model_from_properties_propagation()
+        res += ["model.fiscal.company.propagate.child.company.mixin"]
+        return res
+
+
 class ModelWithCompany(models.Model):
     _name = "model.with.company"
     _description = "model.with.company"
