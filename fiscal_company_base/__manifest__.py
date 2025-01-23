@@ -19,6 +19,7 @@
     ],
     "data": [
         "security/ir_rule.xml",
+        "security/res_groups.xml",
         "views/view_res_company.xml",
     ],
     "demo": [
