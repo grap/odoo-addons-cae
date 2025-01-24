@@ -26,7 +26,7 @@ with the following syntax.
             AccountMove, self.with_context(fiscal_company_disable_switch_company=True)
         )._onchange_partner_id()
 
-This module also introduces 2 mixin:
+This module also introduces many mixin:
 
 ``fiscal.company.change.search.domain.mixin``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -60,3 +60,33 @@ fiscal_type of the company.
       _inherit = ["fiscal.company.check.company.mixin"]
 
       _fiscal_company_forbid_fiscal_type = ["fiscal_mother"]
+
+``fiscal.company.propagate.child.company.mixin``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The model that inherits this abstract will see some properties
+set at mother level propagated at child level, when creating
+a new child company.
+
+
+**Usage**
+
+.. code-block:: python
+
+  class MyModel(models.Model):
+      _name = "my.model"
+      _inherit = ["fiscal.company.propagate.child.company.mixin"]
+
+        def _fiscal_property_creation_list(self):
+            res = super()._fiscal_property_creation_list()
+            res += ["property_field_1", "property_field_2"]
+            return res
+
+  class ResCompany(models.Model):
+      _inherit = "res.company"
+
+    def _get_model_from_properties_propagation(self):
+        res = super()._get_model_from_properties_propagation()
+        res += ["my.model"]
+        return res
+
