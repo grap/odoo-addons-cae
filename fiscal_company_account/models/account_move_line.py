@@ -18,3 +18,5 @@ class AccountMoveLine(models.Model):
     account_id = fields.Many2one(check_company=False)
 
     tax_ids = fields.Many2many(check_company=False)
+
+    tax_repartition_line_id = fields.Many2one(check_company=False)
