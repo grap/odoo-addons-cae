@@ -9,7 +9,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <!--
     Disable account journal kanban view because the function get_line_graph_datas
     and get_journal_dashboard_datas are hard coded with SQL request. So security
-    is not ensured
+    is not ensured and data are wrong.
     -->
     <record id="account.menu_board_journal_1" model="ir.ui.menu">
         <field name="groups_id" eval="[(6, 0, [ref('fiscal_company_base.fiscal_company_disabled_feature')])]"/>
