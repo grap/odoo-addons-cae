@@ -41,6 +41,18 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
         </field>
     </record>
 
+
+    <!-- account.tax.repartition.line -->
+    <!-- See the tax repartition lines of the fiscal mother company -->
+    <!-- Odoo DEFAULT: [('company_id', 'in', company_ids)] -->
+    <record id="rule_account_tax_repartition_line" model="ir.rule">
+        <field name="name">account.tax.repartition.line (fiscal_company_account)</field>
+        <field name="model_id" ref="account.model_account_tax_repartition_line"/>
+        <field name="domain_force">
+            [('company_id', 'in', user._include_fiscal_company_ids(company_ids))]
+        </field>
+    </record>
+
     <!-- account.journal -->
     <!-- See the journals of the fiscal mother company -->
     <!-- Odoo DEFAULT: [('company_id', 'in', company_ids)] -->
