@@ -15,6 +15,19 @@ class PosConfig(models.Model):
 
     _fiscal_company_forbid_fiscal_type = ["group", "fiscal_mother"]
 
+    @api.depends("company_id")
+    def _compute_company_has_template(self):
+        for config in self.filtered(lambda x: x.company_id.fiscal_type == "child"):
+            config.company_has_template = (
+                self.env["account.chart.template"].existing_accounting(
+                    config.company_id.fiscal_company_id
+                )
+                or config.company_id.fiscal_company_id.chart_template_id
+            )
+        return super(
+            PosConfig, self.filtered(lambda x: x.company_id.fiscal_type != "child")
+        )._compute_company_has_template()
+
     # Overwrite company constrains
     @api.constrains("company_id", "invoice_journal_id")
     def _check_company_invoice_journal(self):
