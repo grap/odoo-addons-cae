@@ -14,3 +14,5 @@ status for french companies.
         * product_category / property_account_expense_categ_id;
 
 * Hide the Account Dashboard menu.
+
+* Allow to create journals that belong to child company and account to CAE.
