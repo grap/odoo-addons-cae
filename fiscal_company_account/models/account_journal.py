@@ -3,7 +3,7 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import models
+from odoo import fields, models
 
 
 class AccountJournal(models.Model):
@@ -15,6 +15,14 @@ class AccountJournal(models.Model):
     ]
 
     _fiscal_company_forbid_fiscal_type = ["group"]
+
+    default_account_id = fields.Many2one(check_company=False)
+
+    suspense_account_id = fields.Many2one(check_company=False)
+
+    profit_account_id = fields.Many2one(check_company=False)
+
+    loss_account_id = fields.Many2one(check_company=False)
 
     def _get_journal_dashboard_data_batched(self):
         # Modify Context to add domain based on allowed companies
