@@ -20,6 +20,10 @@ class AccountJournal(models.Model):
 
     suspense_account_id = fields.Many2one(check_company=False)
 
+    profit_account_id = fields.Many2one(check_company=False)
+
+    loss_account_id = fields.Many2one(check_company=False)
+
     def _get_journal_dashboard_data_batched(self):
         # Modify Context to add domain based on allowed companies
         # when making request on account.move
