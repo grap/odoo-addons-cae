@@ -25,7 +25,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[fiscal_company_account](fiscal_company_account/) | 16.0.4.0.0 |  | Glue Module between CAE and Account modules
+[fiscal_company_account](fiscal_company_account/) | 16.0.4.0.1 |  | Glue Module between CAE and Account modules
 [fiscal_company_account_fiscal_year](fiscal_company_account_fiscal_year/) | 16.0.2.0.0 |  | Glue Module between CAE and Account Fiscal year module
 [fiscal_company_base](fiscal_company_base/) | 16.0.3.0.0 |  | Manage CAE (Cooperatives of Activities and Employment)
 [fiscal_company_hr](fiscal_company_hr/) | 16.0.1.0.1 |  | Glue Module between CAE and Human Resources modules
