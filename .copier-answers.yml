@@ -1,9 +1,10 @@
 # Do NOT update manually; changes here will be overwritten by Copier
-_commit: 1588e18
+_commit: b23859c
 _src_path: https://github.com/grap/oca-addons-repo-template-v16
 additional_ruff_rules: []
 ci: GitHub
 convert_readme_fragments_to_markdown: true
+enable_checklog_odoo: false
 generate_requirements_txt: true
 github_check_license: true
 github_ci_extra_env: {}
@@ -32,3 +33,4 @@ repo_slug: odoo-addons-cae
 repo_website: https://github.com/grap/odoo-addons-cae
 use_pyproject_toml: false
 use_ruff: true
+
