@@ -29,6 +29,7 @@ addon | version | maintainers | summary
 [fiscal_company_account_fiscal_year](fiscal_company_account_fiscal_year/) | 16.0.2.0.0 |  | Glue Module between CAE and Account Fiscal year module
 [fiscal_company_base](fiscal_company_base/) | 16.0.3.0.0 |  | Manage CAE (Cooperatives of Activities and Employment)
 [fiscal_company_hr](fiscal_company_hr/) | 16.0.1.0.1 |  | Glue Module between CAE and Human Resources modules
+[fiscal_company_hr_expense](fiscal_company_hr_expense/) | 16.0.1.0.1 |  | Glue Module between CAE and Human Resources Expense module
 [fiscal_company_l10n_fr_siret](fiscal_company_l10n_fr_siret/) | 16.0.1.2.0 |  | Glue Module between CAE and L10 French SIRET modules
 [fiscal_company_point_of_sale](fiscal_company_point_of_sale/) | 16.0.1.1.2 |  | Glue Module between CAE and Point of Sale modules
 [fiscal_company_product](fiscal_company_product/) | 16.0.1.0.0 |  | Glue Module between CAE and Product modules
