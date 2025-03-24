@@ -7,3 +7,6 @@ This module is a glue module for the Odoo Point of Sale module.
 **Features**
 
 - Remove bad checks regarding company journals of ``pos.config`` models.
+
+- Prevent to create ``pos.config`` and ``pos.payment.method`` at Group
+  or CAE level.
