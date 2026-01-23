@@ -33,7 +33,7 @@ addon | version | maintainers | summary
 [fiscal_company_l10n_fr_siret](fiscal_company_l10n_fr_siret/) | 16.0.1.2.0 |  | Glue Module between CAE and L10 French SIRET modules
 [fiscal_company_point_of_sale](fiscal_company_point_of_sale/) | 16.0.1.1.2 |  | Glue Module between CAE and Point of Sale modules
 [fiscal_company_product](fiscal_company_product/) | 16.0.1.0.0 |  | Glue Module between CAE and Product modules
-[fiscal_company_sale](fiscal_company_sale/) | 16.0.1.1.1 |  | Glue Module between CAE and Sale modules
+[fiscal_company_sale](fiscal_company_sale/) | 16.0.1.1.2 |  | Glue Module between CAE and Sale modules
 [product_category_global_account_setting](product_category_global_account_setting/) | 16.0.1.0.1 |  | Propagate Accouting settings of product categories for all the companies
 
 [//]: # (end addons)
