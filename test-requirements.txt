@@ -1,1 +1,2 @@
 odoo-test-helper
+git+https://github.com/grap/grap-odoo-business@16.0#subdirectory=setup/recurring_consignment
