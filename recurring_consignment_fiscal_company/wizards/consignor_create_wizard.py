@@ -9,7 +9,6 @@ from odoo import api, models
 class ConsignorCreateWizard(models.TransientModel):
     _inherit = "consignor.create.wizard"
 
-    @api.multi
     def _prepare_account(self):
         res = super()._prepare_account()
         res.update(
@@ -19,7 +18,6 @@ class ConsignorCreateWizard(models.TransientModel):
         )
         return res
 
-    @api.multi
     def _prepare_tax(self, sequence, account, partner, commission_product):
         res = super()._prepare_tax(sequence, account, partner, commission_product)
         res.update(

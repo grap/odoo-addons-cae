@@ -4,7 +4,7 @@
 
 {
     "name": "Recurring Consignment - Fiscal Company",
-    "version": "12.0.1.1.1",
+    "version": "16.0.1.0.0",
     "summary": "Glue module for Recurring Consignment" " and fiscal company modules",
     "category": "Sale",
     "author": "GRAP",
