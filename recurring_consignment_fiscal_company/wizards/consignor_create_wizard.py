@@ -2,8 +2,7 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-
-from odoo import api, models
+from odoo import models
 
 
 class ConsignorCreateWizard(models.TransientModel):
@@ -11,18 +10,10 @@ class ConsignorCreateWizard(models.TransientModel):
 
     def _prepare_account(self):
         res = super()._prepare_account()
-        res.update(
-            {
-                "company_id": self.env.user.company_id.fiscal_company_id.id,
-            }
-        )
+        res.update({"company_id": self.env.company.fiscal_company_id.id})
         return res
 
     def _prepare_tax(self, sequence, account, partner, commission_product):
         res = super()._prepare_tax(sequence, account, partner, commission_product)
-        res.update(
-            {
-                "company_id": self.env.user.company_id.fiscal_company_id.id,
-            }
-        )
+        res.update({"company_id": self.env.company.fiscal_company_id.id})
         return res
