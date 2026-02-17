@@ -14,8 +14,6 @@ exclude: |
   /static/(src/)?lib/|
   # Repos using Sphinx to generate docs don't need prettying
   ^docs/_templates/.*\.html$|
-  # Don't bother non-technical authors with formatting issues in docs
-  readme/.*\.(rst|md)$|
   # Ignore build and dist directories in addons
   /build/|/dist/|
   # Ignore test files in addons
@@ -47,6 +45,16 @@ repos:
       - id: oca-update-pre-commit-excluded-addons
       - id: oca-fix-manifest-website
         args: ["https://github.com/grap/odoo-addons-cae"]
+      - id: oca-gen-addon-readme
+        args:
+          - --addons-dir=.
+          - --branch=16.0
+          - --org-name=grap
+          - --repo-name=odoo-addons-cae
+          - --if-source-changed
+          - --no-gen-html
+          - --keep-source-digest
+          - --convert-fragments-to-markdown
   - repo: https://github.com/OCA/odoo-pre-commit-hooks
     rev: v0.0.25
     hooks:
@@ -54,21 +62,6 @@ repos:
       - id: oca-checks-po
         args:
           - --disable=po-pretty-format
-  - repo: local
-    hooks:
-      - id: eslint
-        name: eslint
-        entry: eslint
-        args:
-          - --color
-          - --fix
-        verbose: true
-        types: [javascript]
-        language: node
-        additional_dependencies:
-          - "eslint@8.24.0"
-          - "eslint-plugin-jsdoc@"
-          - "globals@"
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.3.0
     hooks:
@@ -92,7 +85,7 @@ repos:
       - id: mixed-line-ending
         args: ["--fix=lf"]
   - repo: https://github.com/acsone/setuptools-odoo
-    rev: 3.1.8
+    rev: 3.3.2
     hooks:
       - id: setuptools-odoo-make-default
       - id: setuptools-odoo-get-requirements
@@ -119,3 +112,7 @@ repos:
       - id: pylint_odoo
         args:
           - --rcfile=.pylintrc-mandatory
+  - repo: https://github.com/jackdewinter/pymarkdown
+    rev: v0.9.32
+    hooks:
+      - id: pymarkdown
