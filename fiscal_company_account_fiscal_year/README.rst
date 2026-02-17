@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 =========================
 CAE - Account Fiscal Year
 =========================
@@ -13,7 +17,7 @@ CAE - Account Fiscal Year
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-grap%2Fodoo--addons--cae-lightgray.png?logo=github
@@ -22,14 +26,14 @@ CAE - Account Fiscal Year
 
 |badge1| |badge2| |badge3|
 
-This module extend Odoo functionnalities, regarding companies features to
-manage CAE (Coopearatives of Activities and Employment) that is a special
-status for french companies.
+This module extend Odoo functionnalities, regarding companies features
+to manage CAE (Coopearatives of Activities and Employment) that is a
+special status for french companies.
 
 **Features**
 
-* Add constrains on ``account.fiscal.year`` model
-  that prevent to create such items on a fiscal mother company.
+- Add constrains on ``account.fiscal.year`` model that prevent to create
+  such items on a fiscal mother company.
 
 **Table of contents**
 
@@ -50,17 +54,18 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * GRAP
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Sylvain LE GAL <https://twitter.com/legalsylvain>
+- Sylvain LE GAL
+  <`https://twitter.com/legalsylvain\\> <https://twitter.com/legalsylvain\>>`__
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is part of the `grap/odoo-addons-cae <https://github.com/grap/odoo-addons-cae/tree/16.0/fiscal_company_account_fiscal_year>`_ project on GitHub.
 

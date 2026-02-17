@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 =============
 CAE - Account
 =============
@@ -13,7 +17,7 @@ CAE - Account
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-grap%2Fodoo--addons--cae-lightgray.png?logo=github
@@ -22,24 +26,28 @@ CAE - Account
 
 |badge1| |badge2| |badge3|
 
-This module extend Odoo functionnalities, regarding companies features to
-manage CAE (Coopearatives of Activities and Employment) that is a special
-status for french companies.
+This module extend Odoo functionnalities, regarding companies features
+to manage CAE (Coopearatives of Activities and Employment) that is a
+special status for french companies.
 
 **Features**
 
-* Add constrains on ``account.bank.statement``, ``account.invoice``
+- Add constrains on ``account.bank.statement``, ``account.invoice``
   ``account.move``, ``account.move.line``, ``account.payment`` models
   that prevent to create such items on a fiscal mother company.
 
-* Account property propagation:
-    * Following fields property are propagated in all the fiscal child company:
-        * product_category / property_account_income_categ_id;
-        * product_category / property_account_expense_categ_id;
+- Account property propagation:
 
-* Hide the Account Dashboard menu.
+  - Following fields property are propagated in all the fiscal child
+    company:
 
-* Allow to create journals that belong to child company and account to CAE.
+    - product_category / property_account_income_categ_id;
+    - product_category / property_account_expense_categ_id;
+
+- Hide the Account Dashboard menu.
+
+- Allow to create journals that belong to child company and account to
+  CAE.
 
 **Table of contents**
 
@@ -49,21 +57,21 @@ status for french companies.
 Development
 ===========
 
-For the migration, take care of the tax.filtered occurences in Odoo and OCA modules.
-There are a lot of ``filtered(lambda x: x.company_id == current_company)``
-in Odoo. The module ``fiscal_company_account`` alter the behaviour of the function
-``filtered`` of the ``account.tax`` module, to filter on the mother fiscal company.
-However, the changes is imperfect, and multiple filters (company and not company filters)
-will fail.
+For the migration, take care of the tax.filtered occurences in Odoo and
+OCA modules. There are a lot of
+``filtered(lambda x: x.company_id == current_company)`` in Odoo. The
+module ``fiscal_company_account`` alter the behaviour of the function
+``filtered`` of the ``account.tax`` module, to filter on the mother
+fiscal company. However, the changes is imperfect, and multiple filters
+(company and not company filters) will fail.
 
-During migration, please run:
-``rgrep "tax.*filtered.*company_id"``
+During migration, please run: ``rgrep "tax.*filtered.*company_id"``
 
 Known issues / Roadmap
 ======================
 
-* the odoo accounting dashboard is disabled, because all the data are bad
-  computed. (by SQL request), so security access is not possible.
+- the odoo accounting dashboard is disabled, because all the data are
+  bad computed. (by SQL request), so security access is not possible.
 
 Bug Tracker
 ===========
@@ -79,18 +87,19 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * GRAP
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Julien WESTE
-* Sylvain LE GAL <https://twitter.com/legalsylvain>
+- Julien WESTE
+- Sylvain LE GAL
+  <`https://twitter.com/legalsylvain\\> <https://twitter.com/legalsylvain\>>`__
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is part of the `grap/odoo-addons-cae <https://github.com/grap/odoo-addons-cae/tree/16.0/fiscal_company_account>`_ project on GitHub.
 
