@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 ==========
 CAE - Base
 ==========
@@ -13,7 +17,7 @@ CAE - Base
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-grap%2Fodoo--addons--cae-lightgray.png?logo=github
@@ -22,37 +26,40 @@ CAE - Base
 
 |badge1| |badge2| |badge3|
 
-This module extend Odoo functionnalities, regarding companies features to
-manage CAE (Coopearatives of Activities and Employment) that is a special
-status for french companies.
+This module extend Odoo functionnalities, regarding companies features
+to manage CAE (Coopearatives of Activities and Employment) that is a
+special status for french companies.
 
 (see above, links that describes what is CAE).
 
 Basically, in a CAE, there is a 'parent' company that hosts many 'child'
-companies. People in a child company should have access only to their activity.
-(account moves, customers, suppliers, products, etc...)
+companies. People in a child company should have access only to their
+activity. (account moves, customers, suppliers, products, etc...)
 
-In a fiscal and legal point of view, there is only one company (the parent one)
-so there is only on chart of accounts. Accounting moves of the child
-companies are written in the child company, but associated to the account of
-the parent company.
+In a fiscal and legal point of view, there is only one company (the
+parent one) so there is only on chart of accounts. Accounting moves of
+the child companies are written in the child company, but associated to
+the account of the parent company.
 
 **Companies feature**
 
-* Add a new field on company `fiscal_type`:
-    * `group` : Container company: can only contains 'Normal'
-      or 'CAE' Companies.
-    * `normal` : Classical company, (by default)
-    * `fiscal_mother`: CAE company, that can host many child companies
-    * `fiscal_child`: child company, hosted by the CAE
+- Add a new field on company \`fiscal_type\`:
 
-.. figure:: https://raw.githubusercontent.com/grap/odoo-addons-cae/16.0/fiscal_company_base/static/description/res_company_form.png
+  - group : Container company: can only contains 'Normal' or 'CAE'
+    Companies.
+  - normal : Classical company, (by default)
+  - \`fiscal_mother\`: CAE company, that can host many child companies
+  - \`fiscal_child\`: child company, hosted by the CAE
+
+|image1|
 
 **More information about CAE [FR]**
 
-* https://fr.wikipedia.org/wiki/Coopérative_d'activités_et_d'emploi
-* http://www.cooperer.coop/
-* http://www.copea.fr/
+- https://fr.wikipedia.org/wiki/Coopérative_d'activités_et_d'emploi
+- http://www.cooperer.coop/
+- http://www.copea.fr/
+
+.. |image1| image:: https://raw.githubusercontent.com/grap/odoo-addons-cae/16.0/fiscal_company_base/static/description/res_company_form.png
 
 **Table of contents**
 
@@ -62,98 +69,96 @@ the parent company.
 Development
 ===========
 
-This module introduce a contextual key to change the behaviour of with_company.
+This module introduce a contextual key to change the behaviour of
+with_company.
 
-For exemple, in odoo/addons/account/models/account_move.py file, the following
-code is present
+For exemple, in odoo/addons/account/models/account_move.py file, the
+following code is present
 
-.. code-block:: python
+.. code:: python
 
-    @api.onchange('partner_id')
-    def _onchange_partner_id(self):
-        self = self.with_company(self.journal_id.company_id)
-        ...
+   @api.onchange('partner_id')
+   def _onchange_partner_id(self):
+       self = self.with_company(self.journal_id.company_id)
+       ...
 
 That's annoying, because the company of the journal is not the same as
-the company of the account move. So, in a CAE context, the company of the move
-will be the integrated company, and the company of the journal will be the CAE.
+the company of the account move. So, in a CAE context, the company of
+the move will be the integrated company, and the company of the journal
+will be the CAE.
 
-So, it's possible to write the following code, to disable locally the with_company call
-with the following syntax.
+So, it's possible to write the following code, to disable locally the
+with_company call with the following syntax.
 
+.. code:: python
 
-.. code-block:: python
-
-    @api.onchange("partner_id")
-    def _onchange_partner_id(self):
-        return super(
-            AccountMove, self.with_context(fiscal_company_disable_switch_company=True)
-        )._onchange_partner_id()
+   @api.onchange("partner_id")
+   def _onchange_partner_id(self):
+       return super(
+           AccountMove, self.with_context(fiscal_company_disable_switch_company=True)
+       )._onchange_partner_id()
 
 This module also introduces many mixin:
 
 ``fiscal.company.change.search.domain.mixin``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------
 
-the model that inherits this abstract will change the domain
-in the search feature. If a domain contains ('company_id', '=', X)
-it will be changed into ('company_id', 'in', [X, A, B])
-if X is a CAE and A and B are the integrated related companies.
+the model that inherits this abstract will change the domain in the
+search feature. If a domain contains ('company_id', '=', X) it will be
+changed into ('company_id', 'in', [X, A, B]) if X is a CAE and A and B
+are the integrated related companies.
 
 **Usage**
 
-.. code-block:: python
+.. code:: python
 
-  class MyModel(models.Model):
-      _name = "my.model"
-      _inherit = ["fiscal.company.change.search.domain.mixin"]
+   class MyModel(models.Model):
+       _name = "my.model"
+       _inherit = ["fiscal.company.change.search.domain.mixin"]
 
 ``fiscal.company.check.company.mixin``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------------
 
-The model that inherits this abstract will prevent to
-create items with companies, depending on the
-fiscal_type of the company.
+The model that inherits this abstract will prevent to create items with
+companies, depending on the fiscal_type of the company.
 
 **Usage**
 
-.. code-block:: python
+.. code:: python
 
-  class MyModel(models.Model):
-      _name = "my.model"
-      _inherit = ["fiscal.company.check.company.mixin"]
+   class MyModel(models.Model):
+       _name = "my.model"
+       _inherit = ["fiscal.company.check.company.mixin"]
 
-      _fiscal_company_forbid_fiscal_type = ["fiscal_mother"]
+       _fiscal_company_forbid_fiscal_type = ["fiscal_mother"]
 
 ``fiscal.company.propagate.child.company.mixin``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------------------
 
-The model that inherits this abstract will see some properties
-set at mother level propagated at child level, when creating
-a new child company.
-
+The model that inherits this abstract will see some properties set at
+mother level propagated at child level, when creating a new child
+company.
 
 **Usage**
 
-.. code-block:: python
+.. code:: python
 
-  class MyModel(models.Model):
-      _name = "my.model"
-      _inherit = ["fiscal.company.propagate.child.company.mixin"]
+   class MyModel(models.Model):
+       _name = "my.model"
+       _inherit = ["fiscal.company.propagate.child.company.mixin"]
 
-        def _fiscal_property_creation_list(self):
-            res = super()._fiscal_property_creation_list()
-            res += ["property_field_1", "property_field_2"]
-            return res
+         def _fiscal_property_creation_list(self):
+             res = super()._fiscal_property_creation_list()
+             res += ["property_field_1", "property_field_2"]
+             return res
 
-  class ResCompany(models.Model):
-      _inherit = "res.company"
+   class ResCompany(models.Model):
+       _inherit = "res.company"
 
-    def _get_model_from_properties_propagation(self):
-        res = super()._get_model_from_properties_propagation()
-        res += ["my.model"]
-        return res
-
+     def _get_model_from_properties_propagation(self):
+         res = super()._get_model_from_properties_propagation()
+         res += ["my.model"]
+         return res
 
 Bug Tracker
 ===========
@@ -169,18 +174,19 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * GRAP
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Julien WESTE
-* Sylvain LE GAL <https://twitter.com/legalsylvain>
+- Julien WESTE
+- Sylvain LE GAL
+  <`https://twitter.com/legalsylvain\\> <https://twitter.com/legalsylvain\>>`__
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is part of the `grap/odoo-addons-cae <https://github.com/grap/odoo-addons-cae/tree/16.0/fiscal_company_base>`_ project on GitHub.
 

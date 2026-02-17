@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 ===================
 CAE - Point Of Sale
 ===================
@@ -13,7 +17,7 @@ CAE - Point Of Sale
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-grap%2Fodoo--addons--cae-lightgray.png?logo=github
@@ -22,16 +26,15 @@ CAE - Point Of Sale
 
 |badge1| |badge2| |badge3|
 
-This module extend Odoo functionnalities, regarding companies features to
-manage CAE (Coopearatives of Activities and Employment) that is a special
-status for french companies.
+This module extend Odoo functionnalities, regarding companies features
+to manage CAE (Coopearatives of Activities and Employment) that is a
+special status for french companies.
 
 This module is a glue module for the Odoo Point of Sale module.
 
 **Features**
 
 - Remove bad checks regarding company journals of ``pos.config`` models.
-
 - Prevent to create ``pos.config`` and ``pos.payment.method`` at Group
   or CAE level.
 
@@ -54,17 +57,18 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * GRAP
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Sylvain LE GAL <https://twitter.com/legalsylvain>
+- Sylvain LE GAL
+  <`https://twitter.com/legalsylvain\\> <https://twitter.com/legalsylvain\>>`__
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is part of the `grap/odoo-addons-cae <https://github.com/grap/odoo-addons-cae/tree/16.0/fiscal_company_point_of_sale>`_ project on GitHub.
 

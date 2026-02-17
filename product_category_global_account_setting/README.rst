@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 ==========================================
 Product Category - Global Account Settings
 ==========================================
@@ -13,7 +17,7 @@ Product Category - Global Account Settings
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-grap%2Fodoo--addons--cae-lightgray.png?logo=github
@@ -22,20 +26,8 @@ Product Category - Global Account Settings
 
 |badge1| |badge2| |badge3|
 
-* deprecates ``product_category_recursive_property``
-* deprecates features in ``fiscal_company_account``
-
-
-
-
-
-
-
-
-
-
-
-
+- deprecates ``product_category_recursive_property``
+- deprecates features in ``fiscal_company_account``
 
 ################### DEPRECATED
 
@@ -44,11 +36,10 @@ Add inheritance mechanism in product categories properties.
 Features
 --------
 
-* When an user set an accounting property to a product category, the
+- When an user set an accounting property to a product category, the
   parameter will be set to all childs
-
-* When a user create a product category, by default all the settings will
-  come from parent category
+- When a user create a product category, by default all the settings
+  will come from parent category
 
 **Table of contents**
 
@@ -58,10 +49,10 @@ Features
 Known issues / Roadmap
 ======================
 
-* To avoid bad UX, the global configuration is not set on disabled company.
-  So if you disable a company, set configuration and enable again the company
-  the accounting configuration will be bad on that company.
-  It's a quite theoritical problem, though.
+- To avoid bad UX, the global configuration is not set on disabled
+  company. So if you disable a company, set configuration and enable
+  again the company the accounting configuration will be bad on that
+  company. It's a quite theoritical problem, though.
 
 Bug Tracker
 ===========
@@ -77,17 +68,17 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * GRAP
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Sylvain LE GAL (https://www.twitter.com/legalsylvain)
+- Sylvain LE GAL (https://www.twitter.com/legalsylvain)
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is part of the `grap/odoo-addons-cae <https://github.com/grap/odoo-addons-cae/tree/16.0/product_category_global_account_setting>`_ project on GitHub.
 

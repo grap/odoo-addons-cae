@@ -26,15 +26,15 @@ CAE - Sale
 
 |badge1| |badge2| |badge3|
 
-This module extend Odoo functionnalities, regarding companies features to
-manage CAE (Coopearatives of Activities and Employment) that is a special
-status for french companies.
+This module extend Odoo functionnalities, regarding companies features
+to manage CAE (Coopearatives of Activities and Employment) that is a
+special status for french companies.
 
 This module is a glue module for the Odoo Sale module.
 
 **Features**
 
-* Add constrain on ``sale.order`` model that prevent to create a sale
+- Add constrain on ``sale.order`` model that prevent to create a sale
   order on a fiscal mother company.
 
 **Table of contents**
@@ -63,28 +63,32 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * GRAP
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Julien WESTE
-* Sylvain LE GAL <https://twitter.com/legalsylvain>
+- Julien WESTE
+- Sylvain LE GAL
+  <`https://twitter.com/legalsylvain\\> <https://twitter.com/legalsylvain\>>`__
 
 Other credits
-~~~~~~~~~~~~~
+-------------
 
 The development of this module has been financially supported by:
 
-* GRAP, Groupement Régional Alimentaire de Proximité (http://www.grap.coop)
+- GRAP, Groupement Régional Alimentaire de Proximité
+  (http://www.grap.coop)
 
 Porting from odoo V8 to odoo V10 has been funded by :
-   * BABEL.COOP, leverage cooperation through the digital age (<http://babel.coop>)
+
+- BABEL.COOP, leverage cooperation through the digital age
+  (<`http://babel.coop\\> <http://babel.coop\>>`__)
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is part of the `grap/odoo-addons-cae <https://github.com/grap/odoo-addons-cae/tree/16.0/fiscal_company_sale>`_ project on GitHub.
 
