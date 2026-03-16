@@ -64,3 +64,12 @@ class AccountJournal(models.Model):
             for k, _v in res.items():
                 res[k][0]["values"] = []
         return res
+
+    def _prepare_liquidity_account_vals(self, company, code, vals):
+        """
+        Creating a journal for an integrated company is possible.
+        However, the related account can only be related to a CAE.
+        """
+        res = super()._prepare_liquidity_account_vals(company, code, vals)
+        res["company_id"] = company.fiscal_company_id.id
+        return res
