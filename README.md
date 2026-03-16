@@ -35,6 +35,7 @@ addon | version | maintainers | summary
 [fiscal_company_product](fiscal_company_product/) | 16.0.1.0.1 |  | Glue Module between CAE and Product modules
 [fiscal_company_sale](fiscal_company_sale/) | 16.0.1.1.3 |  | Glue Module between CAE and Sale modules
 [product_category_global_account_setting](product_category_global_account_setting/) | 16.0.1.0.2 |  | Propagate Accouting settings of product categories for all the companies
+[recurring_consignment_fiscal_company](recurring_consignment_fiscal_company/) | 16.0.1.0.1 |  | Glue module for Recurring Consignment and fiscal company modules
 
 [//]: # (end addons)
 
