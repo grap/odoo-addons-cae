@@ -29,9 +29,10 @@ Recurring Consignment - Fiscal Company
 This module is a glue module between ``recurring_consignement`` module
 and ``fiscal_company_base`` module.
 
-* When creating a new consignor, the recurring_consignment module
-  create a new ``account.account``. by default, the company_id is the current
-  company of the user. This module select the fiscal company of the current user.
+- When creating a new consignor, the recurring_consignment module create
+  a new ``account.account``. by default, the company_id is the current
+  company of the user. This module select the fiscal company of the
+  current user.
 
 **Table of contents**
 
@@ -52,17 +53,17 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * GRAP
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Sylvain LE GAL (https://www.twitter.com/legalsylvain)
+- Sylvain LE GAL (https://www.twitter.com/legalsylvain)
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is part of the `grap/odoo-addons-cae <https://github.com/grap/odoo-addons-cae/tree/16.0/recurring_consignment_fiscal_company>`_ project on GitHub.
 
