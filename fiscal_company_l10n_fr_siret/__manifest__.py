@@ -4,7 +4,7 @@
 
 {
     "name": "CAE - L10n French SIRET",
-    "version": "16.0.1.2.1",
+    "version": "16.0.1.2.2",
     "category": "CAE",
     "summary": "Glue Module between CAE and L10 French SIRET modules",
     "author": "GRAP",

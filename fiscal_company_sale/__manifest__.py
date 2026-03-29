@@ -4,7 +4,7 @@
 
 {
     "name": "CAE - Sale",
-    "version": "16.0.1.1.3",
+    "version": "16.0.1.1.4",
     "category": "CAE",
     "summary": "Glue Module between CAE and Sale modules",
     "author": "GRAP",
