@@ -21,4 +21,16 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
         </field>
     </record>
 
+    <!-- res.partner -->
+    <!-- See the partners of the fiscal mother company -->
+    <!-- Odoo DEFAULT: ['|', ('partner_share', '=', False), ('company_id', 'in', company_ids + [False])] -->
+    <record id="rule_res_partner" model="ir.rule">
+        <field name="name">res.partner (fiscal_company_base)</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="domain_force">
+            ['|', ('partner_share', '=', False), ('company_id', 'in', user._include_fiscal_company_ids(company_ids) + [False])]
+        </field>
+    </record>
+
+
 </odoo>

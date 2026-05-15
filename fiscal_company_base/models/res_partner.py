@@ -8,4 +8,8 @@ from odoo import models
 
 class ResPartner(models.Model):
     _name = "res.partner"
-    _inherit = ["res.partner", "fiscal.company.propagate.child.company.mixin"]
+    _inherit = [
+        "res.partner",
+        "fiscal.company.change.search.domain.mixin",
+        "fiscal.company.propagate.child.company.mixin",
+    ]
