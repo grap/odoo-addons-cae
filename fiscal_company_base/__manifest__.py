@@ -25,7 +25,6 @@
     "demo": [
         "demo/res_partner_company.xml",
         "demo/res_partner_users.xml",
-        "demo/res_partner.xml",
         "demo/res_groups.xml",
     ],
     "installable": True,
