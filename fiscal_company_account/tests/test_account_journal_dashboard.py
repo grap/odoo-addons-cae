@@ -47,10 +47,7 @@ class TestAccountJournalDashboard(TestAbstract):
         self.user_accountant.company_id = self.child_company
         res = json.loads(self.sale_journal_accountant_context.kanban_dashboard)
         self.assertEqual(res.get("number_draft"), 1, f"Child company context : {res}")
-        # number_waiting looks to have been disabled recently.
-        # this test is now failing.
-        # TODO : investigate. (should be 2, and not 0)
-        self.assertEqual(res.get("number_waiting"), 0, f"Child company context : {res}")
+        self.assertEqual(res.get("number_waiting"), 2, f"Child company context : {res}")
         self.assertEqual(res.get("entries_count"), 3, f"Child company context : {res}")
 
         res = json.loads(self.sale_journal_accountant_context.kanban_dashboard_graph)
