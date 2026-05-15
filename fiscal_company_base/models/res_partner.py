@@ -25,5 +25,11 @@ class ResPartner(models.Model):
             .search([])
             .mapped("partner_id")
         )
+        # handle very weird case, where the partner of a user
+        # has a children. base module will try in that case to
+        # change the company of the children.
+        # this case occures because a "fp" partner in hr_expense
+        # is related to OdooBot ...
+        partner_users |= partner_users.mapped("child_ids")
         res = res.filtered(lambda x: x not in partner_users)
         return res
