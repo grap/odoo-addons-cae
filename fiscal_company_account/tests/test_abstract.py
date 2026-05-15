@@ -13,3 +13,4 @@ class TestAbstract(test_abstract.TestAbstract):
         cls.ProductProduct = cls.env["product.product"]
         cls.AccountMove = cls.env["account.move"]
         cls.AccountJournal = cls.env["account.journal"]
+        cls.sale_journal = cls.env.ref("fiscal_company_account.journal_sale")
