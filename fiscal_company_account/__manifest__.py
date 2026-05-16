@@ -27,6 +27,7 @@
         "demo/res_groups.xml",
         "demo/account_account.xml",
         "demo/account_journal.xml",
+        "demo/account_fiscal_position.xml",
         "demo/account_tax.xml",
         "demo/res_partner.xml",
         "demo/ir_property.xml",
