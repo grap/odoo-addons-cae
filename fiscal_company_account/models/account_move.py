@@ -17,6 +17,8 @@ class AccountMove(models.Model):
 
     journal_id = fields.Many2one(check_company=False)
 
+    fiscal_position_id = fields.Many2one(check_company=False)
+
     @api.onchange("partner_id")
     def _onchange_partner_id(self):
         return super(
