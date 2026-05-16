@@ -23,4 +23,6 @@ def _toggle_standard_rules(cr, enabled):
     env = api.Environment(cr, SUPERUSER_ID, {})
     for xml_id in _CORE_RULES:
         rule = env.ref(xml_id)
-        rule.active = enabled
+        if rule.active != enabled:
+            _logger.info(f"Default rule {xml_id}. Active set to {enabled}.")
+            rule.active = enabled

@@ -27,5 +27,7 @@
         "demo/res_partner_users.xml",
         "demo/res_groups.xml",
     ],
+    "post_init_hook": "post_init_hook",
+    "uninstall_hook": "uninstall_hook",
     "installable": True,
 }
