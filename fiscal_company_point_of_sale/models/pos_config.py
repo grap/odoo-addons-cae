@@ -38,10 +38,14 @@ class PosConfig(models.Model):
         ):
             raise ValidationError(
                 _(
-                    "The company of the invoice journal and"
-                    " the company of the point of sale"
-                    " must have the same fiscal company."
-                )
+                    "The Fiscal company of the invoice journal"
+                    " %(journal_name)s"
+                    " and the fiscal company of the point of sale"
+                    " %(pos_config_name)s"
+                    " should bie the same.",
+                    journal_name=self.invoice_journal_id.name,
+                    pos_config_name=self.name,
+                ),
             )
 
     @api.constrains("company_id", "journal_id")
