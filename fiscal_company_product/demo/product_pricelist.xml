@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2026 - Today GRAP (http://www.grap.coop)
+@author Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="pricelist_child_1" model="product.pricelist">
+        <field name="name">Pricelist Child 1</field>
+        <field name="sequence">1</field>
+        <field name="currency_id" ref="base.EUR" />
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_child_1" />
+    </record>
+
+    <record id="pricelist_child_2" model="product.pricelist">
+        <field name="name">Pricelist Child 2</field>
+        <field name="sequence">1</field>
+        <field name="currency_id" ref="base.EUR" />
+        <field name="company_id" ref="fiscal_company_base.company_fiscal_child_2" />
+    </record>
+
+</odoo>

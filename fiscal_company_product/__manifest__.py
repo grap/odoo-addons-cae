@@ -11,6 +11,7 @@
     "website": "https://github.com/grap/odoo-addons-cae",
     "license": "AGPL-3",
     "depends": ["fiscal_company_base", "product"],
+    "demo": ["demo/product_pricelist.xml"],
     "installable": True,
     "auto_install": True,
 }
