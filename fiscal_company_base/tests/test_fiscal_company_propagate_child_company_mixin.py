@@ -34,20 +34,44 @@ class TestFiscalCompanyPropagateChildCompanyMixin(TestAbstract):
         cls.loader.restore_registry()
         return super().tearDownClass()
 
-    def test_check_propagation_ok(self):
+    def _test_01_check_propagation_create_mother_to_child(self):
         item = self.model_propagate_child_company.with_company(
             self.mother_company
-        ).create({"company_dependent_field": "BOB"})
+        ).create({"company_dependent_field": "T01"})
         new_child_company = self.env["res.company"].create(
             {
-                "name": "NEW FISCAL CHILD",
+                "name": "NEW FISCAL CHILD T01",
                 "parent_id": self.mother_company.id,
                 "fiscal_type": "fiscal_child",
             }
         )
         self.assertEqual(
-            item.with_company(new_child_company).company_dependent_field, "BOB"
+            item.with_company(new_child_company).company_dependent_field, "T01"
         )
+        self.assertEqual(
+            item.with_company(self.normal_company).company_dependent_field, False
+        )
+
+    def test_02_check_propagation_write_mother_to_child(self):
+        item = self.model_propagate_child_company.with_company(
+            self.mother_company
+        ).create({"company_dependent_field": "T02"})
+        new_company = self.env["res.company"].create(
+            {
+                "name": "NEW COMPANY T02",
+            }
+        )
+        self.assertEqual(item.with_company(new_company).company_dependent_field, False)
+        new_company.write(
+            {
+                "parent_id": self.mother_company.id,
+                "fiscal_type": "fiscal_child",
+            }
+        )
+        # SLG: for reason I don't get, the property value looks cached
+        # since the last assert. invalidating cache solve the issue.
+        self.env.invalidate_all()
+        self.assertEqual(item.with_company(new_company).company_dependent_field, "T02")
         self.assertEqual(
             item.with_company(self.normal_company).company_dependent_field, False
         )

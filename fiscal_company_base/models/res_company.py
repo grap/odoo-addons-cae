@@ -54,7 +54,7 @@ class ResCompany(models.Model):
         companies = super().create(vals_list)
         for company, vals in zip(companies, vals_list, strict=True):
             if vals.get("fiscal_type") == "fiscal_child":
-                company._propagate_properties_to_new_fiscal_child()
+                company._propagate_properties_to_new_fiscal_child_company()
         return companies
 
     def write(self, vals):
@@ -62,7 +62,7 @@ class ResCompany(models.Model):
         cae_companies = self.filtered(lambda x: x.fiscal_type == "fiscal_mother")
 
         if vals.get("fiscal_type") == "fiscal_child":
-            self._propagate_properties_to_new_fiscal_child()
+            self._propagate_properties_to_new_fiscal_child_company()
 
         new_vals = {}
 
@@ -163,7 +163,7 @@ class ResCompany(models.Model):
                     )
                 )
 
-    def _propagate_properties_to_new_fiscal_child(self):
+    def _propagate_properties_to_new_fiscal_child_company(self):
         """
         Propagate all properties of some models for a new child company
         """
