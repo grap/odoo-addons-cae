@@ -32,6 +32,8 @@ class ModelFiscalCompanyPropagateChildCompanyMixin(models.Model):
     _description = "fiscal.company.propagate.child.company.mixin"
     _inherit = ["fiscal.company.propagate.child.company.mixin"]
 
+    company_id = fields.Many2one(comodel_name="res.company")
+
     company_dependent_field = fields.Char(company_dependent=True)
 
     def _fiscal_property_creation_list(self):

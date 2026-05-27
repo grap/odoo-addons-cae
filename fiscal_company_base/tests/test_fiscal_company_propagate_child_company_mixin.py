@@ -34,7 +34,7 @@ class TestFiscalCompanyPropagateChildCompanyMixin(TestAbstract):
         cls.loader.restore_registry()
         return super().tearDownClass()
 
-    def _test_01_check_propagation_create_mother_to_child(self):
+    def test_01_check_propagation_create_mother_to_child(self):
         item = self.model_propagate_child_company.with_company(
             self.mother_company
         ).create({"company_dependent_field": "T01"})
@@ -74,4 +74,56 @@ class TestFiscalCompanyPropagateChildCompanyMixin(TestAbstract):
         self.assertEqual(item.with_company(new_company).company_dependent_field, "T02")
         self.assertEqual(
             item.with_company(self.normal_company).company_dependent_field, False
+        )
+
+    def test_03_check_propagation_item_in_mother_company(self):
+        mother_item = self.model_propagate_child_company.with_company(
+            self.mother_company
+        ).create(
+            {"company_dependent_field": "T03", "company_id": self.mother_company.id}
+        )
+
+        self.assertEqual(
+            mother_item.with_company(self.mother_company).company_dependent_field, "T03"
+        )
+        self.assertEqual(
+            mother_item.with_company(self.child_company).company_dependent_field, "T03"
+        )
+        mother_item.with_company(self.mother_company).write(
+            {"company_dependent_field": "T03 - WRITED"}
+        )
+
+        self.assertEqual(
+            mother_item.with_company(self.mother_company).company_dependent_field,
+            "T03 - WRITED",
+        )
+        self.assertEqual(
+            mother_item.with_company(self.child_company).company_dependent_field,
+            "T03 - WRITED",
+        )
+
+    def test_04_check_propagation_item_in_child_company(self):
+        child_item = self.model_propagate_child_company.with_company(
+            self.child_company
+        ).create(
+            {"company_dependent_field": "T04", "company_id": self.child_company.id}
+        )
+
+        self.assertEqual(
+            child_item.with_company(self.mother_company).company_dependent_field, False
+        )
+        self.assertEqual(
+            child_item.with_company(self.child_company).company_dependent_field, "T04"
+        )
+
+        child_item.with_company(self.child_company).write(
+            {"company_dependent_field": "T04 - WRITED"}
+        )
+
+        self.assertEqual(
+            child_item.with_company(self.mother_company).company_dependent_field, False
+        )
+        self.assertEqual(
+            child_item.with_company(self.child_company).company_dependent_field,
+            "T04 - WRITED",
         )
