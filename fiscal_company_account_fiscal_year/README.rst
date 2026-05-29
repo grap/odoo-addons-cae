@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 =========================
 CAE - Account Fiscal Year
 =========================
@@ -62,7 +58,6 @@ Contributors
 ------------
 
 - Sylvain LE GAL
-  <`https://twitter.com/legalsylvain\\> <https://twitter.com/legalsylvain\>>`__
 
 Maintainers
 -----------

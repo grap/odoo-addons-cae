@@ -92,7 +92,6 @@ Contributors
 
 - Julien WESTE
 - Sylvain LE GAL
-  <`https://twitter.com/legalsylvain\\> <https://twitter.com/legalsylvain\>>`__
 
 Maintainers
 -----------
