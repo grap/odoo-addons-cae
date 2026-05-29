@@ -16,6 +16,7 @@ class ResPartner(models.Model):
         res += [
             "property_account_payable_id",
             "property_account_receivable_id",
+            "property_account_position_id",
         ]
         return res
 
