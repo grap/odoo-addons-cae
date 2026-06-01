@@ -15,6 +15,12 @@
         "point_of_sale",
         # GRAP
         "fiscal_company_base",
+        "fiscal_company_product",
+        "fiscal_company_account",
+    ],
+    "demo": [
+        "demo/pos_payment_method.xml",
+        "demo/pos_config.xml",
     ],
     "installable": True,
     "auto_install": True,
