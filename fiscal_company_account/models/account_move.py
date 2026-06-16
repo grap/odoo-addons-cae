@@ -1,6 +1,6 @@
 # Copyright (C) 2013-Today: GRAP (http://www.grap.coop)
 # @author: Julien WESTE
-# @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+# @author: Sylvain LE GAL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
@@ -16,6 +16,8 @@ class AccountMove(models.Model):
     _fiscal_company_forbid_fiscal_type = ["group", "fiscal_mother"]
 
     journal_id = fields.Many2one(check_company=False)
+
+    fiscal_position_id = fields.Many2one(check_company=False)
 
     @api.onchange("partner_id")
     def _onchange_partner_id(self):

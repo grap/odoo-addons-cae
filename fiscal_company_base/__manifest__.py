@@ -1,11 +1,11 @@
 # Copyright (C) 2013-Today: GRAP (http://www.grap.coop)
 # @author: Julien WESTE
-# @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+# @author: Sylvain LE GAL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
     "name": "CAE - Base",
-    "version": "16.0.3.0.2",
+    "version": "16.0.4.0.0",
     "category": "CAE",
     "summary": "Manage CAE (Cooperatives of Activities and Employment)",
     "author": "GRAP",
@@ -25,8 +25,9 @@
     "demo": [
         "demo/res_partner_company.xml",
         "demo/res_partner_users.xml",
-        "demo/res_partner.xml",
         "demo/res_groups.xml",
     ],
+    "post_init_hook": "post_init_hook",
+    "uninstall_hook": "uninstall_hook",
     "installable": True,
 }

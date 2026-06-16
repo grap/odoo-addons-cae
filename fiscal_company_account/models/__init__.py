@@ -1,5 +1,5 @@
-# Accounting Part
 from . import account_account
+from . import account_fiscal_position
 from . import account_bank_statement
 from . import account_journal
 from . import account_move

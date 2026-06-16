@@ -1,5 +1,5 @@
 # Copyright (C) 2024 - Today: GRAP (http://www.grap.coop)
-# @author Sylvain LE GAL (https://twitter.com/legalsylvain)
+# @author Sylvain LE GAL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo.addons.fiscal_company_base.tests import test_abstract
@@ -13,3 +13,4 @@ class TestAbstract(test_abstract.TestAbstract):
         cls.ProductProduct = cls.env["product.product"]
         cls.AccountMove = cls.env["account.move"]
         cls.AccountJournal = cls.env["account.journal"]
+        cls.sale_journal = cls.env.ref("fiscal_company_account.journal_sale")

@@ -32,9 +32,9 @@ This module also introduces many mixin:
 ## `fiscal.company.change.search.domain.mixin`
 
 the model that inherits this abstract will change the domain in the
-search feature. If a domain contains ('company_id', '=', X) it will be
-changed into ('company_id', 'in', \[X, A, B\]) if X is a CAE and A and B
-are the integrated related companies.
+search feature. If a domain contains `('company_id', '=', child_company)`
+it will be changed into `('company_id', 'in', [child_company, parent_company])`
+if child_company is an integrated company of a CAE and parent_company is the CAE.
 
 **Usage**
 

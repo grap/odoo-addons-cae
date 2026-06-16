@@ -1,5 +1,5 @@
 # Copyright (C) 2020-Today: GRAP (http://www.grap.coop)
-# @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+# @author: Sylvain LE GAL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import _, api, models
@@ -38,10 +38,14 @@ class PosConfig(models.Model):
         ):
             raise ValidationError(
                 _(
-                    "The company of the invoice journal and"
-                    " the company of the point of sale"
-                    " must have the same fiscal company."
-                )
+                    "The Fiscal company of the invoice journal"
+                    " %(journal_name)s"
+                    " and the fiscal company of the point of sale"
+                    " %(pos_config_name)s"
+                    " should bie the same.",
+                    journal_name=self.invoice_journal_id.name,
+                    pos_config_name=self.name,
+                ),
             )
 
     @api.constrains("company_id", "journal_id")

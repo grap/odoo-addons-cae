@@ -1,5 +1,5 @@
 # Copyright (C) 2014-Today: GRAP (http://www.grap.coop)
-# @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+# @author: Sylvain LE GAL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
@@ -15,6 +15,12 @@
         "point_of_sale",
         # GRAP
         "fiscal_company_base",
+        "fiscal_company_product",
+        "fiscal_company_account",
+    ],
+    "demo": [
+        "demo/pos_payment_method.xml",
+        "demo/pos_config.xml",
     ],
     "installable": True,
     "auto_install": True,

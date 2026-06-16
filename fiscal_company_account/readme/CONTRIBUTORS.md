@@ -1,2 +1,2 @@
 - Julien WESTE
-- Sylvain LE GAL \<https://twitter.com/legalsylvain\>
+- Sylvain LE GAL

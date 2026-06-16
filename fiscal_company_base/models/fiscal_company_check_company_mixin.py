@@ -1,5 +1,5 @@
 # Copyright (C) 2021 - Today: GRAP (http://www.grap.coop)
-# @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+# @author: Sylvain LE GAL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
@@ -19,13 +19,16 @@ class FiscalCompanyCheckCompanyMixin(models.AbstractModel):
 
     _fiscal_company_forbid_fiscal_type = []
 
+    def _fiscal_company_forbid_fiscal_type_allow_exceptions(self):
+        return self
+
     @api.constrains("company_id")
     def _fiscal_company_check_company_id(self):
         bad_items = self.with_context(dont_change_filter=True).filtered(
             lambda x: x.company_id.fiscal_type
             in self._fiscal_company_forbid_fiscal_type
         )
-        if bad_items:
+        if bad_items._fiscal_company_forbid_fiscal_type_allow_exceptions():
             raise ValidationError(
                 _(
                     "You can't affect the %(items_qty)s item(s) to company"

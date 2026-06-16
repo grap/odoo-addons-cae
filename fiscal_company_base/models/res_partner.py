@@ -1,5 +1,5 @@
 # Copyright (C) 2018 - Today: GRAP (http://www.grap.coop)
-# @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+# @author: Sylvain LE GAL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
@@ -8,4 +8,28 @@ from odoo import models
 
 class ResPartner(models.Model):
     _name = "res.partner"
-    _inherit = ["res.partner", "fiscal.company.propagate.child.company.mixin"]
+    _inherit = [
+        "res.partner",
+        "fiscal.company.check.company.mixin",
+        "fiscal.company.change.search.domain.mixin",
+        "fiscal.company.propagate.child.company.mixin",
+    ]
+
+    _fiscal_company_forbid_fiscal_type = ["group", "fiscal_mother"]
+
+    def _fiscal_company_forbid_fiscal_type_allow_exceptions(self):
+        res = super()._fiscal_company_forbid_fiscal_type_allow_exceptions()
+        partner_users = (
+            self.env["res.users"]
+            .with_context(active_test=False)
+            .search([])
+            .mapped("partner_id")
+        )
+        # handle very weird case, where the partner of a user
+        # has a children. base module will try in that case to
+        # change the company of the children.
+        # this case occures because a "fp" partner in hr_expense
+        # is related to OdooBot ...
+        partner_users |= partner_users.mapped("child_ids")
+        res = res.filtered(lambda x: x not in partner_users)
+        return res

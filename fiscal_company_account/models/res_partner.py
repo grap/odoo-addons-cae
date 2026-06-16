@@ -1,5 +1,5 @@
 # Copyright (C) 2018 - Today: GRAP (http://www.grap.coop)
-# @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+# @author: Sylvain LE GAL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
@@ -16,6 +16,7 @@ class ResPartner(models.Model):
         res += [
             "property_account_payable_id",
             "property_account_receivable_id",
+            "property_account_position_id",
         ]
         return res
 
