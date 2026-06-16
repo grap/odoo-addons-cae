@@ -25,17 +25,17 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[fiscal_company_account](fiscal_company_account/) | 16.0.4.0.5 |  | Glue Module between CAE and Account modules
-[fiscal_company_account_fiscal_year](fiscal_company_account_fiscal_year/) | 16.0.2.0.2 |  | Glue Module between CAE and Account Fiscal year module
-[fiscal_company_base](fiscal_company_base/) | 16.0.3.0.2 |  | Manage CAE (Cooperatives of Activities and Employment)
-[fiscal_company_hr](fiscal_company_hr/) | 16.0.1.0.3 |  | Glue Module between CAE and Human Resources modules
-[fiscal_company_hr_expense](fiscal_company_hr_expense/) | 16.0.1.0.3 |  | Glue Module between CAE and Human Resources Expense module
-[fiscal_company_l10n_fr_siret](fiscal_company_l10n_fr_siret/) | 16.0.1.2.2 |  | Glue Module between CAE and L10 French SIRET modules
-[fiscal_company_point_of_sale](fiscal_company_point_of_sale/) | 16.0.1.1.4 |  | Glue Module between CAE and Point of Sale modules
-[fiscal_company_product](fiscal_company_product/) | 16.0.1.0.2 |  | Glue Module between CAE and Product modules
-[fiscal_company_sale](fiscal_company_sale/) | 16.0.1.1.4 |  | Glue Module between CAE and Sale modules
-[product_category_global_account_setting](product_category_global_account_setting/) | 16.0.1.0.3 |  | Propagate Accouting settings of product categories for all the companies
-[recurring_consignment_fiscal_company](recurring_consignment_fiscal_company/) | 16.0.1.0.2 |  | Glue module for Recurring Consignment and fiscal company modules
+[fiscal_company_account](fiscal_company_account/) | 16.0.5.0.0 |  | Glue Module between CAE and Account modules
+[fiscal_company_account_fiscal_year](fiscal_company_account_fiscal_year/) | 16.0.3.0.0 |  | Glue Module between CAE and Account Fiscal year module
+[fiscal_company_base](fiscal_company_base/) | 16.0.5.0.0 |  | Manage CAE (Cooperatives of Activities and Employment)
+[fiscal_company_hr](fiscal_company_hr/) | 16.0.2.0.0 |  | Glue Module between CAE and Human Resources modules
+[fiscal_company_hr_expense](fiscal_company_hr_expense/) | 16.0.2.0.0 |  | Glue Module between CAE and Human Resources Expense module
+[fiscal_company_l10n_fr_siret](fiscal_company_l10n_fr_siret/) | 16.0.2.0.0 |  | Glue Module between CAE and L10 French SIRET modules
+[fiscal_company_point_of_sale](fiscal_company_point_of_sale/) | 16.0.2.0.0 |  | Glue Module between CAE and Point of Sale modules
+[fiscal_company_product](fiscal_company_product/) | 16.0.2.0.0 |  | Glue Module between CAE and Product modules
+[fiscal_company_sale](fiscal_company_sale/) | 16.0.2.0.0 |  | Glue Module between CAE and Sale modules
+[product_category_global_account_setting](product_category_global_account_setting/) | 16.0.2.0.0 |  | Propagate Accouting settings of product categories for all the companies
+[recurring_consignment_fiscal_company](recurring_consignment_fiscal_company/) | 16.0.2.0.0 |  | Glue module for Recurring Consignment and fiscal company modules
 
 [//]: # (end addons)
 

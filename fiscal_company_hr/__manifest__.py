@@ -4,7 +4,7 @@
 
 {
     "name": "CAE - Human Resources",
-    "version": "16.0.1.0.3",
+    "version": "16.0.2.0.0",
     "category": "CAE",
     "summary": "Glue Module between CAE and Human Resources modules",
     "author": "GRAP",

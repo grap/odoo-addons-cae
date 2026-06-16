@@ -4,7 +4,7 @@
 
 {
     "name": "Product Category - Global Account Settings",
-    "version": "16.0.1.0.3",
+    "version": "16.0.2.0.0",
     "summary": "Propagate Accouting settings of product categories"
     " for all the companies",
     "category": "Accounting",
