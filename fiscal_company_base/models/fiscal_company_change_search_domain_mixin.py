@@ -31,26 +31,37 @@ class FiscalCompanyChangeSearchDomainMixin(models.AbstractModel):
                     old_company_ids = [item[2]]
 
                 has_false = False in old_company_ids
-                if has_false:
-                    if len(old_company_ids) == 1:
-                        # if the domain is ('company_id', 'OP', False)
-                        # We have nothing to change
-                        new_domain.append(item)
-                        continue
-                    else:
-                        old_company_ids.pop(False)
+                if has_false and len(old_company_ids) == 1:
+                    # if the domain is ('company_id', 'OP', False)
+                    # We have nothing to change
+                    new_domain.append(item)
+                    continue
 
-                old_companies = ResCompany.browse(old_company_ids)
+                # 1) we change the company (or companies) ids
+                old_companies = ResCompany.browse([x for x in old_company_ids if x])
                 new_company_ids = (
                     old_companies | old_companies.mapped("fiscal_company_id")
                 ).ids
 
-                if item[1] in ["=", "in"]:
-                    new_operator = "in"
-                elif item[1] in ["!=", "not in"]:
-                    new_operator = "not in"
-                elif item[1] in ["child_of"]:
-                    new_operator = "child_of"
+                if has_false:
+                    new_company_ids.append(False)
+
+                # 2) we change the operator, if required :
+                # If altering domain add company and operator was '=' (or '!=')
+                # we change operator to be 'in' (or 'not in')
+                new_operator = item[1]
+                if item[1] == "=":
+                    if len(new_company_ids) == 1:
+                        new_company_ids = new_company_ids[0]
+                    elif len(new_company_ids) > 1:
+                        new_operator = "in"
+                elif item[1] == "!=":
+                    if len(new_company_ids) == 1:
+                        new_company_ids = new_company_ids[0]
+                    elif len(new_company_ids) > 1:
+                        new_operator = "not in"
+                elif item[1] in ["in", "not in", "child_of"]:
+                    pass
                 else:
                     raise NotImplementedError(
                         "fiscal.company.change.search.domain.mixin:"
@@ -58,9 +69,6 @@ class FiscalCompanyChangeSearchDomainMixin(models.AbstractModel):
                         f" ({self._name}).\n"
                         f" Full Domain: {domain}"
                     )
-
-                if has_false:
-                    new_company_ids.append(False)
 
                 new_domain.append(("company_id", new_operator, new_company_ids))
             else:

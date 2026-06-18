@@ -33,7 +33,11 @@ class TestFiscalCompanyChangeSearchDomainMixin(TestAbstract):
         cls.loader.restore_registry()
         return super().tearDownClass()
 
-    def test_search(self):
+    def _check_domain(self, domain, expected_new_domain):
+        new_domain = self.model._fiscal_company_change_domain(domain)
+        self.assertEqual(new_domain, expected_new_domain)
+
+    def test_01_search(self):
         self.assertEqual(
             len(self.model.search([("company_id", "=", False)])),
             1,
@@ -53,4 +57,39 @@ class TestFiscalCompanyChangeSearchDomainMixin(TestAbstract):
         self.assertEqual(
             len(self.model.search([("company_id", "=", self.child_company.id)])),
             2,
+        )
+
+    def test_10_fiscal_company_change_domain_no_changes(self):
+        self._check_domain(
+            [("company_id", "=", False)],
+            [("company_id", "=", False)],
+        )
+        self._check_domain(
+            [("company_id", "=", self.group_company.id)],
+            [("company_id", "=", self.group_company.id)],
+        )
+        self._check_domain(
+            [("company_id", "=", self.normal_company.id)],
+            [("company_id", "=", self.normal_company.id)],
+        )
+        self._check_domain(
+            [("company_id", "=", self.mother_company.id)],
+            [("company_id", "=", self.mother_company.id)],
+        )
+
+    def test_11_fiscal_company_change_domain_with_changes(self):
+        self._check_domain(
+            [("company_id", "=", self.child_company.id)],
+            [("company_id", "in", [self.child_company.id, self.mother_company.id])],
+        )
+
+        self._check_domain(
+            [("company_id", "in", [self.child_company.id, False])],
+            [
+                (
+                    "company_id",
+                    "in",
+                    [self.child_company.id, self.mother_company.id, False],
+                )
+            ],
         )
