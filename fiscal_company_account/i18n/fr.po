@@ -7,13 +7,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-08-08 12:31+0000\n"
-"PO-Revision-Date: 2024-08-08 12:31+0000\n"
+"PO-Revision-Date: 2026-08-07 13:42+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. module: fiscal_company_account
 #: model:ir.model,name:fiscal_company_account.model_account_account
@@ -22,9 +24,24 @@ msgid "Account"
 msgstr "Compte"
 
 #. module: fiscal_company_account
+#: model:ir.model,name:fiscal_company_account.model_account_move_reversal
+msgid "Account Move Reversal"
+msgstr "Renversement de l'écriture comptable"
+
+#. module: fiscal_company_account
 #: model:ir.model,name:fiscal_company_account.model_account_bank_statement
 msgid "Bank Statement"
 msgstr "Relevé bancaire"
+
+#. module: fiscal_company_account
+#: model:ir.model.fields,help:fiscal_company_account.field_account_journal__suspense_account_id
+msgid ""
+"Bank statements transactions will be posted on the suspense account until "
+"the final reconciliation allowing finding the right account."
+msgstr ""
+"Les mouvements bancaires seront comptabilisés sur le compte d'attente "
+"jusqu'au rapprochement définitif qui permettra de lettrer le mouvement sur "
+"le compte définitif."
 
 #. module: fiscal_company_account
 #: model:ir.model,name:fiscal_company_account.model_res_company
@@ -40,7 +57,12 @@ msgstr "Société"
 #. module: fiscal_company_account
 #: model:ir.model,name:fiscal_company_account.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
+
+#. module: fiscal_company_account
+#: model:ir.model.fields,field_description:fiscal_company_account.field_account_journal__default_account_id
+msgid "Default Account"
+msgstr "Compte par défaut"
 
 #. module: fiscal_company_account
 #: model:ir.model.fields,field_description:fiscal_company_account.field_account_payment__destination_account_id
@@ -48,10 +70,36 @@ msgid "Destination Account"
 msgstr "Compte de destination"
 
 #. module: fiscal_company_account
-#: model:ir.model.fields,field_description:fiscal_company_account.field_res_partner__property_account_position_id
-#: model:ir.model.fields,field_description:fiscal_company_account.field_res_users__property_account_position_id
+#: model:ir.model,name:fiscal_company_account.model_account_fiscal_position
+#: model:ir.model.fields,field_description:fiscal_company_account.field_account_bank_statement_line__fiscal_position_id
+#: model:ir.model.fields,field_description:fiscal_company_account.field_account_move__fiscal_position_id
+#: model:ir.model.fields,field_description:fiscal_company_account.field_account_payment__fiscal_position_id
 msgid "Fiscal Position"
 msgstr "Position fiscale"
+
+#. module: fiscal_company_account
+#: model:ir.model.fields,help:fiscal_company_account.field_account_bank_statement_line__fiscal_position_id
+#: model:ir.model.fields,help:fiscal_company_account.field_account_move__fiscal_position_id
+#: model:ir.model.fields,help:fiscal_company_account.field_account_payment__fiscal_position_id
+msgid ""
+"Fiscal positions are used to adapt taxes and accounts for particular "
+"customers or sales orders/invoices. The default value comes from the "
+"customer."
+msgstr ""
+"Les positions fiscales sont utilisées pour adapter les taxes et les comptes "
+"à des clients particuliers ou à des bons de commande/factures. La valeur par "
+"défaut provient du client."
+
+#. module: fiscal_company_account
+#: model:ir.model.fields,help:fiscal_company_account.field_account_move_reversal__journal_id
+msgid "If empty, uses the journal of the journal entry to be reversed."
+msgstr "Si vide, utilise le journal de la pièce comptable à renverser."
+
+#. module: fiscal_company_account
+#: model:ir.model.fields,field_description:fiscal_company_account.field_res_partner__is_coa_installed
+#: model:ir.model.fields,field_description:fiscal_company_account.field_res_users__is_coa_installed
+msgid "Is Coa Installed"
+msgstr "Coa Installé"
 
 #. module: fiscal_company_account
 #: model:ir.model,name:fiscal_company_account.model_account_journal
@@ -59,7 +107,7 @@ msgstr "Position fiscale"
 #: model:ir.model.fields,field_description:fiscal_company_account.field_account_move__journal_id
 #: model:ir.model.fields,field_description:fiscal_company_account.field_account_payment__journal_id
 msgid "Journal"
-msgstr ""
+msgstr "Journal"
 
 #. module: fiscal_company_account
 #: model:ir.model,name:fiscal_company_account.model_account_move
@@ -72,6 +120,16 @@ msgid "Journal Item"
 msgstr "Écriture comptable"
 
 #. module: fiscal_company_account
+#: model:ir.model.fields,field_description:fiscal_company_account.field_account_journal__loss_account_id
+msgid "Loss Account"
+msgstr "Compte des pertes"
+
+#. module: fiscal_company_account
+#: model:ir.model.fields,field_description:fiscal_company_account.field_account_move_line__tax_repartition_line_id
+msgid "Originator Tax Distribution Line"
+msgstr "Ligne de répartition de la taxe d'origine"
+
+#. module: fiscal_company_account
 #: model:ir.model.fields,field_description:fiscal_company_account.field_account_payment__outstanding_account_id
 msgid "Outstanding Account"
 msgstr "Compte en suspens"
@@ -82,19 +140,52 @@ msgid "Payments"
 msgstr "Paiements"
 
 #. module: fiscal_company_account
+#: model:ir.model.fields,field_description:fiscal_company_account.field_account_journal__profit_account_id
+msgid "Profit Account"
+msgstr "Compte de profit"
+
+#. module: fiscal_company_account
+#: model:ir.model.fields,field_description:fiscal_company_account.field_account_journal__suspense_account_id
+msgid "Suspense Account"
+msgstr "Compte d'attente"
+
+#. module: fiscal_company_account
 #: model:ir.model,name:fiscal_company_account.model_account_tax
 msgid "Tax"
 msgstr "Taxe"
 
 #. module: fiscal_company_account
-#: model:ir.model.fields,field_description:fiscal_company_account.field_account_move_line__tax_ids
-msgid "Taxes"
+#: model:ir.model.fields,help:fiscal_company_account.field_account_move_line__tax_repartition_line_id
+msgid ""
+"Tax distribution line that caused the creation of this move line, if any"
 msgstr ""
+"Ligne de répartition de taxe qui a provoqué la création de ce mouvement "
+"comptable, si applicable"
 
 #. module: fiscal_company_account
-#: model:ir.model.fields,help:fiscal_company_account.field_res_partner__property_account_position_id
-#: model:ir.model.fields,help:fiscal_company_account.field_res_users__property_account_position_id
+#: model:ir.model.fields,field_description:fiscal_company_account.field_account_move_line__tax_ids
+msgid "Taxes"
+msgstr "Taxes"
+
+#. module: fiscal_company_account
+#: model:ir.model.fields,field_description:fiscal_company_account.field_account_move_reversal__journal_id
+msgid "Use Specific Journal"
+msgstr "Utiliser un journal spécifique"
+
+#. module: fiscal_company_account
+#: model:ir.model.fields,help:fiscal_company_account.field_account_journal__loss_account_id
 msgid ""
-"The fiscal position determines the taxes/accounts used for this contact."
+"Used to register a loss when the ending balance of a cash register differs "
+"from what the system computes"
 msgstr ""
-"La position fiscale détermine les taxes/comptes utilisés pour ce contact."
+"Utilisé pour enregistrer une perte lorsque le solde final de la caisse est "
+"différent de ce qui a été calculé par le système"
+
+#. module: fiscal_company_account
+#: model:ir.model.fields,help:fiscal_company_account.field_account_journal__profit_account_id
+msgid ""
+"Used to register a profit when the ending balance of a cash register differs "
+"from what the system computes"
+msgstr ""
+"Utilisé pour enregistrer un profit lorsque le solde final de la caisse est "
+"différent de ce qui a été calculé par le système"
