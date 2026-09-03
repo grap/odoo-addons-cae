@@ -13,6 +13,8 @@ class SaleOrder(models.Model):
 
     payment_term_id = fields.Many2one(check_company=False)
 
+    fiscal_position_id = fields.Many2one(check_company=False)
+
     # For pos_order_to_sale_order module to avoid AccessError
     # during _recompute_taxes launch with sale order creation
     #
