@@ -4,7 +4,7 @@
 
 {
     "name": "CAE - Account Fiscal Year",
-    "version": "16.0.3.0.0",
+    "version": "16.0.3.1.0",
     "category": "CAE",
     "summary": "Glue Module between CAE and Account Fiscal year module",
     "author": "GRAP",
