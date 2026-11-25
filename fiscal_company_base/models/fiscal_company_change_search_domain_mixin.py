@@ -31,8 +31,10 @@ class FiscalCompanyChangeSearchDomainMixin(models.AbstractModel):
                     old_company_ids = [item[2]]
 
                 has_false = False in old_company_ids
-                if has_false and len(old_company_ids) == 1:
+                has_new_id = any([type(x) is models.NewId for x in old_company_ids])
+                if (has_false or has_new_id) and len(old_company_ids) == 1:
                     # if the domain is ('company_id', 'OP', False)
+                    # or if the domain is ('company_id', '=', <NewId 0x7280e76f1030>)
                     # We have nothing to change
                     new_domain.append(item)
                     continue
@@ -73,6 +75,7 @@ class FiscalCompanyChangeSearchDomainMixin(models.AbstractModel):
                 new_domain.append(("company_id", new_operator, new_company_ids))
             else:
                 new_domain.append(item)
+
         return new_domain
 
     @api.model

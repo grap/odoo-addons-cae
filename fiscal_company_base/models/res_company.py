@@ -37,6 +37,12 @@ class ResCompany(models.Model):
         readonly=True,
     )
 
+    parent_id_domain = fields.Binary(
+        string="Parent Company Domain",
+        help="Dynamic domain used for the tag that can be set on tax",
+        compute="_compute_parent_id_domain",
+    )
+
     def _get_fiscal_propagated_fields(self):
         """Return list of company fields that should be propagated to the
         child companies"""
@@ -49,6 +55,9 @@ class ResCompany(models.Model):
         """
         return ["res.partner"]
 
+    # #########################
+    # Overload Section
+    # #########################
     @api.model_create_multi
     def create(self, vals_list):
         companies = super().create(vals_list)
@@ -75,6 +84,17 @@ class ResCompany(models.Model):
 
         return res
 
+    # #########################
+    # OnChange Section
+    # #########################
+    @api.onchange("parent_id_domain")
+    def _onchange_fiscal_type(self):
+        correct_companies = self.search(self.parent_id_domain)
+        if len(correct_companies) == 1:
+            self.parent_id = correct_companies.id
+        elif self.parent_id not in correct_companies:
+            self.parent_id = False
+
     @api.onchange("parent_id")
     def _onchange_parent_id_fiscal_propagated_fields(self):
         if self.parent_id.fiscal_type == "fiscal_mother":
@@ -82,6 +102,23 @@ class ResCompany(models.Model):
                 parent_value = getattr(self.parent_id, field)
                 if parent_value:
                     setattr(self, field, parent_value)
+
+    # #########################
+    # Compute Section
+    # #########################
+    @api.depends("fiscal_type")
+    def _compute_parent_id_domain(self):
+        for company in self:
+            if company.fiscal_type in ("group", "normal", "fiscal_mother"):
+                company.parent_id_domain = [("fiscal_type", "=", "group")]
+            elif company.fiscal_type == "fiscal_child":
+                company.parent_id_domain = [("fiscal_type", "=", "fiscal_mother")]
+            else:
+                company.parent_id_domain = [("id", "=", False)]
+            if type(company.id) is models.NewId:
+                company.parent_id_domain += [("id", "!=", company.id.origin)]
+            else:
+                company.parent_id_domain += [("id", "!=", company.id)]
 
     @api.depends("fiscal_type", "parent_id")
     def _compute_fiscal_company_id(self):
@@ -93,7 +130,9 @@ class ResCompany(models.Model):
             elif company.fiscal_type == "group":
                 company.fiscal_company_id = False
 
+    # #########################
     # Constrains Section
+    # #########################
     @api.constrains("parent_id", "fiscal_type")
     def _check_fiscal_type_with_parent_type(self):
         for company in self.filtered(
@@ -163,6 +202,9 @@ class ResCompany(models.Model):
                     )
                 )
 
+    # #########################
+    # Private Section
+    # #########################
     def _propagate_properties_to_new_fiscal_child_company(self):
         """
         Propagate all properties of some models for a new child company
