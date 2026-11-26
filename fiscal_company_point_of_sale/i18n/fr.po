@@ -26,7 +26,7 @@ msgstr "Banque"
 #. module: fiscal_company_point_of_sale
 #: model:ir.model.fields,field_description:fiscal_company_point_of_sale.field_account_payment__force_outstanding_account_id
 msgid "Forced Outstanding Account"
-msgstr "Compte en suspens prioritaire"
+msgstr "Forcer le compte en suspens"
 
 #. module: fiscal_company_point_of_sale
 #: model:ir.model,name:fiscal_company_point_of_sale.model_account_payment
@@ -36,7 +36,7 @@ msgstr "Paiements"
 #. module: fiscal_company_point_of_sale
 #: model:ir.model,name:fiscal_company_point_of_sale.model_pos_config
 msgid "Point of Sale Configuration"
-msgstr "Paramétrage du point de vente"
+msgstr "Configuration du point de vente"
 
 #. module: fiscal_company_point_of_sale
 #: model:ir.model,name:fiscal_company_point_of_sale.model_pos_payment_method
@@ -51,8 +51,8 @@ msgid ""
 "The Fiscal company of the invoice journal %(journal_name)s and the fiscal "
 "company of the point of sale %(pos_config_name)s should bie the same."
 msgstr ""
-"La société CAE du journal de facturation %(journal_name)s  et la société CAE "
-"du point de vente %(pos_config_name)s doivent être les mêmes."
+"La société CAE du journal de facturation %(journal_name)s  et la société CAE"
+" du point de vente %(pos_config_name)s doivent être les mêmes."
 
 #. module: fiscal_company_point_of_sale
 #. odoo-python
