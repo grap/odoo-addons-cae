@@ -20,4 +20,4 @@ msgstr ""
 #. module: fiscal_company_account_fiscal_year
 #: model:ir.model,name:fiscal_company_account_fiscal_year.model_account_fiscal_year
 msgid "Fiscal Year"
-msgstr "Année fiscale"
+msgstr "Exercice"

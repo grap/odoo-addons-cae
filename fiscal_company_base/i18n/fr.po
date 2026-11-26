@@ -43,6 +43,12 @@ msgid "Disabled Features (Fiscal Company)"
 msgstr "Fonctionnalité désactivée (CAE)"
 
 #. module: fiscal_company_base
+#: model:ir.model.fields,help:fiscal_company_base.field_res_company__parent_id_domain
+msgid "Dynamic domain used for the tag that can be set on tax"
+msgstr ""
+"Domaine dynamique utilisé pour l'étiquette qui peut être apposée sur la taxe"
+
+#. module: fiscal_company_base
 #: model:ir.model.fields,field_description:fiscal_company_base.field_res_company__fiscal_company_id
 msgid "Fiscal Company"
 msgstr "CAE"
@@ -83,6 +89,11 @@ msgid "Integrated Company"
 msgstr "Activité intégrée"
 
 #. module: fiscal_company_base
+#: model:ir.model.fields,field_description:fiscal_company_base.field_res_company__parent_id_domain
+msgid "Parent Company Domain"
+msgstr ""
+
+#. module: fiscal_company_base
 #: model:ir.model.fields,field_description:fiscal_company_base.field_res_company__fiscal_child_ids
 msgid "Technical Integrated Companies"
 msgstr "Activités intégrées (champ techniques)"
@@ -117,8 +128,8 @@ msgid ""
 "The company '%(company_name)s' can not be '%(fiscal_type)s' because it "
 "contains companies."
 msgstr ""
-"La société '%(company_name)s' ne peut pas être de type '%(fiscal_type)s' car "
-"elle contient des sociétés filles."
+"La société '%(company_name)s' ne peut pas être de type '%(fiscal_type)s' car"
+" elle contient des sociétés filles."
 
 #. module: fiscal_company_base
 #. odoo-python
@@ -145,19 +156,17 @@ msgstr ""
 #. module: fiscal_company_base
 #: model:ir.model,name:fiscal_company_base.model_res_users
 msgid "User"
-msgstr "Utilisateur"
+msgstr "Utilisateur·rice"
 
 #. module: fiscal_company_base
 #. odoo-python
 #: code:addons/fiscal_company_base/models/fiscal_company_check_company_mixin.py:0
 #, python-format
 msgid ""
-"You can't affect the %(items_qty)s item(s) to company with such fiscal "
-"type.\n"
+"You can't affect the %(items_qty)s item(s) to company with such fiscal type.\n"
 "\n"
 " (model '%(model_name)s')"
 msgstr ""
-"Vous ne pouvez pas affecter le(s) %(items_qty)s élément(s) à cette société "
-"avec ce type de société fiscale.\n"
+"Vous ne pouvez pas affecter le(s) %(items_qty)s élément(s) à cette société avec ce type de société fiscale.\n"
 "\n"
 " (Modèle '%(model_name)s')"

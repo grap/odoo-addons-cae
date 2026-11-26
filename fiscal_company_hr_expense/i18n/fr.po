@@ -1,6 +1,8 @@
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
@@ -14,12 +16,12 @@ msgstr ""
 #. module: fiscal_company_hr_expense
 #: model:ir.model.fields,field_description:fiscal_company_hr_expense.field_hr_expense_sheet__bank_journal_id
 msgid "Bank Journal"
-msgstr "Journal bancaire"
+msgstr "Journal de banque"
 
 #. module: fiscal_company_hr_expense
 #: model:ir.model.fields,field_description:fiscal_company_hr_expense.field_hr_expense_sheet__journal_id
 msgid "Expense Journal"
-msgstr "Journal de dépense"
+msgstr "Journal des dépenses"
 
 #. module: fiscal_company_hr_expense
 #: model:ir.model,name:fiscal_company_hr_expense.model_hr_expense_sheet
@@ -29,9 +31,10 @@ msgstr "Rapport de dépense"
 #. module: fiscal_company_hr_expense
 #: model:ir.model.fields,help:fiscal_company_hr_expense.field_hr_expense_sheet__journal_id
 msgid "The journal used when the expense is done."
-msgstr "Le journal comptable utilisé quand la note de frais est confirmé."
+msgstr "Le journal utilisé lorsque la dépense est terminée."
 
 #. module: fiscal_company_hr_expense
 #: model:ir.model.fields,help:fiscal_company_hr_expense.field_hr_expense_sheet__bank_journal_id
 msgid "The payment method used when the expense is paid by the company."
-msgstr "La méthode de paiement utilisé quand la note de frais est payé par la société."
+msgstr ""
+"Le mode de paiement utilisé lorsque la dépense est payée par la société."

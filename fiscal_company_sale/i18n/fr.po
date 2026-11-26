@@ -18,6 +18,22 @@ msgstr ""
 "X-Generator: Poedit 3.4.2\n"
 
 #. module: fiscal_company_sale
+#: model:ir.model.fields,field_description:fiscal_company_sale.field_sale_order__fiscal_position_id
+msgid "Fiscal Position"
+msgstr "Position fiscale"
+
+#. module: fiscal_company_sale
+#: model:ir.model.fields,help:fiscal_company_sale.field_sale_order__fiscal_position_id
+msgid ""
+"Fiscal positions are used to adapt taxes and accounts for particular "
+"customers or sales orders/invoices.The default value comes from the "
+"customer."
+msgstr ""
+"Les positions fiscales sont utilisées pour adapter les taxes et les comptes "
+"comptables par clients ou par bons de commande/factures. La valeur par "
+"défaut sera celle renseignée sur le client."
+
+#. module: fiscal_company_sale
 #: model:ir.model.fields,field_description:fiscal_company_sale.field_sale_order__payment_term_id
 msgid "Payment Terms"
 msgstr "Conditions de paiement"
@@ -30,7 +46,7 @@ msgstr "Bon de commande"
 #. module: fiscal_company_sale
 #: model:ir.model,name:fiscal_company_sale.model_sale_order_line
 msgid "Sales Order Line"
-msgstr "Ligne de bon de commande"
+msgstr "Ligne de commande"
 
 #. module: fiscal_company_sale
 #: model:ir.model.fields,field_description:fiscal_company_sale.field_sale_order_line__tax_id
