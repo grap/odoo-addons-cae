@@ -8,9 +8,10 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
 
 <odoo>
 
-    <!-- res.company -->
+    <!-- [UPDATE] res.company -->
     <!-- See all the res.company -->
     <!-- Odoo DEFAULT: [('id','in', company_ids)] -->
+    <!-- base.res_company_rule_employee is DISABLED -->
     <record id="rule_res_company" model="ir.rule">
         <field name="name">res.company (fiscal_company_base)</field>
         <field name="model_id" ref="base.model_res_company"/>
@@ -21,15 +22,30 @@ Copyright (C) 2013-Today GRAP (http://www.grap.coop)
         </field>
     </record>
 
-    <!-- res.partner -->
+    <!-- [UPDATE] res.partner -->
     <!-- See the partners of the fiscal mother company -->
     <!-- Odoo DEFAULT: ['|', ('partner_share', '=', False), ('company_id', 'in', company_ids + [False])] -->
+    <!-- base.res_partner_rule is DISABLED -->
     <record id="rule_res_partner" model="ir.rule">
         <field name="name">res.partner (fiscal_company_base)</field>
         <field name="model_id" ref="base.model_res_partner"/>
         <field name="domain_force">
             ['|', ('partner_share', '=', False), ('company_id', 'in', user._include_fiscal_company_ids(company_ids) + [False])]
         </field>
+    </record>
+
+    <!-- [ADD] res.partner.bank -->
+    <!-- See the bank partners of the fiscal mother company -->
+    <record id="rule_res_partner_bank" model="ir.rule">
+        <field name="name">res.partner.bank (fiscal_company_base)</field>
+        <field name="model_id" ref="base.model_res_partner_bank"/>
+        <field name="domain_force">
+            [('company_id', 'in', user._include_fiscal_company_ids(company_ids) + [False])]
+        </field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
     </record>
 
 

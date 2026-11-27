@@ -8,6 +8,7 @@ _logger = logging.getLogger(__name__)
 _CORE_RULES = [
     "base.res_company_rule_employee",  # res.company
     "base.res_partner_rule",  # res.partner
+    "base.res_partner_bank_rule",  # res.partner.bank
 ]
 
 
